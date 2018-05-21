@@ -1,0 +1,121 @@
+"","Stock.ID","Species","Stock","Date.data.obtained","Date.data.incorporated","Ocean.Region","Region","Sub.Region","Jurisdiction","Lat","Lon","Source.ID","Comment..we.will.update.this.later."
+"1",101,"Sockeye","Washington","2017-03-01","2017-09-12","WC","WA","WA","WA",47.48,-122.42,1,"Hatchery component of the run was removed; FW age assumed to be 1.X.  These sockeye grow fast in the lake."
+"2",102,"Sockeye","Early Stuart","2017-07-01","2017-09-12","WC","Fraser River","Fraser Early Stuart","BC",49.12,-123.06,4,NA
+"3",103,"Sockeye","Bowron","2017-07-01","2017-09-12","WC","Fraser River","Fraser Early Summer","BC",49.12,-123.06,4,NA
+"4",104,"Sockeye","Fennell","2017-07-01","2017-09-12","WC","Fraser River","Fraser Early Summer","BC",49.12,-123.06,4,NA
+"5",105,"Sockeye","Gates","2017-07-01","2017-09-12","WC","Fraser River","Fraser Early Summer","BC",49.12,-123.06,4,"Spawning channel"
+"6",106,"Sockeye","Nadina","2017-07-01","2017-09-12","WC","Fraser River","Fraser Early Summer","BC",49.12,-123.06,4,"Spawning channel"
+"7",107,"Sockeye","Pitt","2017-07-01","2017-09-12","WC","Fraser River","Fraser Early Summer","BC",49.12,-123.06,4,"Large hatchery influence that could not be separated out"
+"8",108,"Sockeye","Raft","2017-07-01","2017-09-12","WC","Fraser River","Fraser Early Summer","BC",49.12,-123.06,4,NA
+"9",109,"Sockeye","Scotch","2017-07-01","2017-09-12","WC","Fraser River","Fraser Early Summer","BC",49.12,-123.06,4,NA
+"10",110,"Sockeye","Seymour","2017-07-01","2017-09-12","WC","Fraser River","Fraser Early Summer","BC",49.12,-123.06,4,NA
+"11",111,"Sockeye","Chilko","2017-07-01","2017-09-12","WC","Fraser River","Fraser Summer","BC",49.12,-123.06,4,"Lake fertilization occurred in 1987 and 1989-1992"
+"12",112,"Sockeye","Late Stuart","2017-07-01","2017-09-12","WC","Fraser River","Fraser Summer","BC",49.12,-123.06,4,NA
+"13",113,"Sockeye","Quesnel","2017-07-01","2017-09-12","WC","Fraser River","Fraser Summer","BC",49.12,-123.06,4,NA
+"14",114,"Sockeye","Stellako","2017-07-01","2017-09-12","WC","Fraser River","Fraser Summer","BC",49.12,-123.06,4,NA
+"15",115,"Sockeye","Birkenhead","2017-07-01","2017-09-12","WC","Fraser River","Fraser Late","BC",49.12,-123.06,4,NA
+"16",116,"Sockeye","Cultus","2017-07-01","2017-09-12","WC","Fraser River","Fraser Late","BC",49.12,-123.06,4,"Hatchery fish released starting in 2000"
+"17",117,"Sockeye","Harrison","2017-07-01","2017-09-12","WC","Fraser River","Fraser Late","BC",49.12,-123.06,4,"Fry go to sea at BY+1"
+"18",118,"Sockeye","Late Shuswap","2017-07-01","2017-09-12","WC","Fraser River","Fraser Late","BC",49.12,-123.06,4,NA
+"19",119,"Sockeye","Portage","2017-07-01","2017-09-12","WC","Fraser River","Fraser Late","BC",49.12,-123.06,4,NA
+"20",120,"Sockeye","Weaver","2017-07-01","2017-09-12","WC","Fraser River","Fraser Late","BC",49.12,-123.06,4,"Spawning channel present"
+"21",121,"Sockeye","Great Central","2017-09-01","2017-09-13","WC","BC South","Barkley Sound","BC",49.24,-124.82,9,NA
+"22",122,"Sockeye","Sproat","2017-09-01","2017-09-13","WC","BC South","Barkley Sound","BC",49.24,-124.82,9,NA
+"23",123,"Sockeye","Long Lake","2017-09-01","2017-09-13","WC","BC Central","BC Central","BC",51.29,-127.68,8,NA
+"24",124,"Sockeye","Owikeno Lake","2017-09-01","2017-09-13","WC","BC Central","BC Central","BC",51.68,-127.25,8,NA
+"25",125,"Sockeye","Atnarko",NA,NA,"WC","BC Central","BC Central","BC",52.38,-126.78,NA,NA
+"26",126,"Sockeye","Skeena",NA,NA,"WC","BC North","BC North","BC",54.01,-130.11,NA,NA
+"27",127,"Sockeye","Nass",NA,NA,"WC","BC North","BC North","BC",54.96,-129.9,NA,NA
+"28",128,"Sockeye","McDonald",NA,NA,"WC","SEAK","SEAK","AK",55.85,-131.75,NA,"Stock Recruit Analysis, 1979 - 2002 brood years."
+"29",129,"Sockeye","Redoubt","2017-08-22","2017-09-13","WC","SEAK","SEAK","AK",56.9,-135.33,2,"Dominant age classes estimated from escapement age; Used RR 1 sheet."
+"30",130,"Sockeye","Speel","2017-08-22","2017-09-13","WC","SEAK","SEAK","AK",57.97,-133.87,2,"Dominant age classes estimated from escapement age; missing values present. Sockeye hatchery nearby.  Some hatchery fry stocked.  Therefore excluded Speel"
+"31",131,"Sockeye","Chilkoot","2017-08-02","2017-09-13","WC","SEAK","SEAK","AK",58.92,-135.23,2,NA
+"32",132,"Sockeye","Chilkat",NA,NA,"WC","SEAK","SEAK","AK",58.92,-135.23,NA,"Chilkat has has periodic fry stocking, so excluded.  Brood table is being updated but not available."
+"33",133,"Sockeye","Klukshu",NA,NA,"WC","Yakutat","Yakutat","AK",59.12,-138.66,NA,NA
+"34",134,"Sockeye","East Alsek",NA,NA,"WC","Yakutat","Yakutat","AK",59.12,-138.66,NA,"Stock-recruit analysis for brood years 1972 to 1990; separate stock-recruit analysis for brood years 1991 to 1997."
+"35",135,"Sockeye","Alsek",NA,NA,"WC","Yakutat","Yakutat","AK",59.12,-138.66,NA,"Stock-recruit analysis, using brood years 1976 to 1992"
+"36",136,"Sockeye","Italio",NA,NA,"WC","Yakutat","Yakutat","AK",59.28,-139.11,NA,NA
+"37",137,"Sockeye","Situk",NA,NA,"WC","Yakutat","Yakutat","AK",59.45,-139.62,NA,"Stock-recruit analysis using brood years 1976 to 1997"
+"38",138,"Sockeye","Copper","2017-08-23","2017-08-23","GOA","PWS","PWS","AK",60.46,-144.96,2,"Used the ""Wild_BY_Return"" worksheet.  Hatchery component of the run was removed by subtracting hatchery salmon post season and assuming age composition matches that of hatchery fish; upper and lower river values combined because runs not identified in harvests. With wild vs. hatchery, and delta vs. upriver components, the Copper River can get really complicated. Also, the Miles Lake sonar cannot distinguish between various species. Thus, Chinook salmon are subtracted from the sonar counts post-season, as are estimates of fish harvest upriver in personal use and subsistence fisheries."
+"39",139,"Sockeye","Coghill","2017-08-22","2017-08-22","GOA","PWS","PWS","AK",61.06,-147.94,2,"Returns are harvested in various districts prior to the Coghill District. Stock-of-origin is estimated based on the timing and location of harvest and, sometimes, from available scale pattern analysis."
+"40",140,"Sockeye","Eshamy","2017-08-22","2017-08-22","GOA","PWS","PWS","AK",60.47,-147.94,2,"the weir was replaced in ~2012 with a video system that has not been entirely successful. Thus, only data until 2012 should be used for brood-year returns."
+"41",141,"Sockeye","Kenai","2017-08-22","2017-09-07","GOA","Cook Inlet","Upper Cook Inlet","AK",60.54,-151.28,6,"Age 7 fish starting in 1999 through Age 3 in 2011 use genetic estimates of stock-specific harvests. Age 7 fish starting in 2008 through Age 3 in 2013 use preliminary age composition catch allocation model estimates of stock-specific harvest (see original excel doc for color coding)"
+"42",142,"Sockeye","Kasilof","2017-08-22","2017-09-07","GOA","Cook Inlet","Upper Cook Inlet","AK",60.39,-151.3,6,"Age 7 fish starting in 1999 through Age 3 in 2011 use genetic estimates of stock-specific harvests. Age 7 fish starting in 2008 through Age 3 in 2013 use preliminary age composition catch allocation model estimates of stock-specific harvest (see original excel doc for color coding)"
+"43",143,"Sockeye","Crescent",NA,NA,"GOA","Cook Inlet","Upper Cook Inlet","AK",60.19,-152.66,NA,NA
+"44",144,"Sockeye","Frazer","2017-08-26","2017-09-07","GOA","Kodiak","Kodiak","AK",57.13,-154.04,5,NA
+"45",145,"Sockeye","Ayakulik","2017-08-26","2017-09-07","GOA","Kodiak","Kodiak","AK",57.2,-154.54,5,NA
+"46",146,"Sockeye","Early Upper Station","2017-08-26","2017-09-07","GOA","Kodiak","Kodiak","AK",57.06,-154.36,5,"Early run"
+"47",147,"Sockeye","Late Upper Station","2017-08-26","2017-09-07","GOA","Kodiak","Kodiak","AK",57.06,-154.36,5,"Late run"
+"48",148,"Sockeye","Afognak",NA,NA,"GOA","Kodiak","Kodiak","AK",58.07,-152.78,NA,NA
+"49",149,"Sockeye","Early Karluk","2017-08-26","2017-09-07","GOA","Kodiak","Kodiak","AK",57.57,-154.45,5,"Smolts enter ocean at BY+3 or BY+4"
+"50",150,"Sockeye","Late Karluk","2017-08-26","2017-09-07","GOA","Kodiak","Kodiak","AK",57.57,-154.45,5,"Smolts enter ocean at BY+3 or BY+4"
+"51",151,"Sockeye","Black Lake","2017-08-26","2017-09-06","GOA","Chignik","Chignik","AK",56.28,-158.64,5,"Chignik River Early Run"
+"52",152,"Sockeye","Chignik Lake","2017-08-26","2017-09-12","GOA","Chignik","Chignik","AK",56.28,-158.64,5,"Chignik River Late Run"
+"53",153,"Sockeye","Nelson","2017-08-26","2017-09-06","BS","AK Peninsula","AK Peninsula","AK",55.96,-161.28,5,NA
+"54",154,"Sockeye","Bear","2017-08-26","2017-09-06","BS","AK Peninsula","AK Peninsula","AK",56.16,-160.45,5,"Late run"
+"55",155,"Sockeye","Ugashik","2016-12-01","2017-09-12","BS","Bristol Bay","Bristol Bay South","AK",57.5,-157.6,3,"All BB tables except Togiak completely redone ~2012 after new genetic analyses on interceptions"
+"56",156,"Sockeye","Egegik","2016-12-01","2017-09-12","BS","Bristol Bay","Bristol Bay South","AK",58.25,-157.38,3,"All BB tables except Togiak completely redone ~2012 after new genetic analyses on interceptions"
+"57",157,"Sockeye","Naknek","2016-12-01","2017-09-12","BS","Bristol Bay","Bristol Bay South","AK",58.78,-157.08,3,"All BB tables except Togiak completely redone ~2012 after new genetic analyses on interceptions"
+"58",158,"Sockeye","Alagnak","2016-12-01","2017-09-12","BS","Bristol Bay","Bristol Bay South","AK",58.85,-158.5,3,"Poor quality data, suggest do not use"
+"59",159,"Sockeye","Kvichak","2016-12-01","2017-09-12","BS","Bristol Bay","Bristol Bay South","AK",58.85,-157.03,3,"1980 escapement reduced by 5 million because they died in high water at the falls (G. Ruggerone)"
+"60",160,"Sockeye","Nushagak","2016-12-01","2017-09-12","BS","Bristol Bay","Bristol Bay North","AK",58.82,-158.49,3,"Excluded Nushagak before 1985 because escapement based on aerial surveys rather than sonar.  Sonar chnaged from Bendix to Didson in recenct years but some standardization."
+"61",161,"Sockeye","Wood","2016-12-01","2017-09-12","BS","Bristol Bay","Bristol Bay North","AK",58.82,-158.62,3,"All BB tables except Togiak completely redone ~2012 after new genetic analyses on interceptions"
+"62",162,"Sockeye","Igushik","2016-12-01","2017-09-12","BS","Bristol Bay","Bristol Bay North","AK",58.68,-158.8,3,"All BB tables except Togiak completely redone ~2012 after new genetic analyses on interceptions"
+"63",163,"Sockeye","Togiak","2016-12-01","2017-09-13","BS","Bristol Bay","Bristol Bay North","AK",58.95,-160.45,11,NA
+"64",164,"Sockeye","Goodnews","2017-08-22","2017-09-06","BS","AYK","AYK","AK",59.11,-161.62,7,"Middle Fork of Goodnews River was provided to Rich Brenner by Zachary Liller, ADF&G Research Coordinator for AYK (Division of Commercial Fisheries), on 22 August 2017."
+"65",165,"Sockeye","Early Russian River","2017-09-06",NA,"GOA","Cook Inlet","Upper Cook Inlet","AK",60.54,-151.28,NA,"Early component within Kenai River. Age classes not broken out into freshwater and ocean ages - not sure how to incorporate into database"
+"66",166,"Sockeye","Osoyoos","2017-09-01",NA,"WC","Columbia R","Columbia R","BC",NA,NA,10,"Excluded because hatchery stocking in recent years and changing water and hydropower management likely influenced productivity.  See Kim Hyatt note to Jim Irvine"
+"67",167,"Sockeye","Alastair","2017-09-01",NA,"WC","BC North","BC North","BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"68",168,"Sockeye","Awun","2017-09-01",NA,"WC","BC North","BC North","BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"69",169,"Sockeye","Babine-Early-Wild","2017-09-01",NA,"WC","BC North","BC North","BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"70",170,"Sockeye","Babine-Fulton","2017-09-01",NA,"WC","BC North","BC North","BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"71",171,"Sockeye","Babine-Late-Wild","2017-09-01",NA,"WC","BC North","BC North","BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"72",172,"Sockeye","Babine-Mid-Wild","2017-09-01",NA,"WC","BC North","BC North","BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"73",173,"Sockeye","Babine-Pinkut","2017-09-01",NA,"WC","BC North","BC North","BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"74",174,"Sockeye","Bloomfield","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"75",175,"Sockeye","Canoona","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"76",176,"Sockeye","Devon","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"77",177,"Sockeye","Evelyn","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"78",178,"Sockeye","Damshilgwit","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"79",179,"Sockeye","Damdochax","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"80",180,"Sockeye","Curtis Inlet","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"81",181,"Sockeye","Bear- BC","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"82",182,"Sockeye","Fred Wright","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"83",183,"Sockeye","Freeda","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"84",184,"Sockeye","Hartley Bay","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"85",185,"Sockeye","Johnston","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"86",186,"Sockeye","Kadjusdis River","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"87",187,"Sockeye","Kainet Creek","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"88",188,"Sockeye","Keecha","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"89",189,"Sockeye","Kitlope","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"90",190,"Sockeye","Kitsumkalum","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"91",191,"Sockeye","Kitwancool","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"92",192,"Sockeye","Koeye","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"93",193,"Sockeye","Kooryet","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"94",194,"Sockeye","Kwakwa Creek","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"95",195,"Sockeye","Lakelse","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"96",196,"Sockeye","Lowe/Simpson/Weir","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"97",197,"Sockeye","Lower Nass - Portland","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"98",198,"Sockeye","Marian","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"99",199,"Sockeye","Mary Cove Creek","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"100",200,"Sockeye","Mathers","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"101",201,"Sockeye","Mcdonell","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"102",202,"Sockeye","Mercer","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"103",203,"Sockeye","Meziadin","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"104",204,"Sockeye","Mikado","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"105",205,"Sockeye","Morice","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"106",206,"Sockeye","Motase","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"107",207,"Sockeye","Namu","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"108",208,"Sockeye","Northern Coastal Fjords","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"109",209,"Sockeye","Port John","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"110",210,"Sockeye","Prudhomme","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"111",211,"Sockeye","Roderick","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"112",212,"Sockeye","Shawatlan","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"113",213,"Sockeye","Skidegate","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"114",214,"Sockeye","Stephens","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"115",215,"Sockeye","Swan","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"116",216,"Sockeye","Tahlo/Morrison","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"117",217,"Sockeye","Tankeeah River","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"118",218,"Sockeye","Tsimtack/Moore/Roger","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"119",219,"Sockeye","Yakoun","2017-09-01",NA,"WC",NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
+"120",220,"Sockeye","Azuklotz","2017-09-01",NA,NA,NA,NA,"BC",NA,NA,8,"Brendan suggests do not use data: assumed fixed age; wit for new data"
