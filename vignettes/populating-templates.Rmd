@@ -28,14 +28,14 @@ Once these are created, the user needs to open each and fill in the missing data
 
 ### Metadata Files
 
+- `creators.csv`: one row for each creator, and gives their affiliation and contact email
+
 - `attributes.csv`: this is where most of the user data entry will take place, and will be where the measured variable, its units and a written description are provided for every measured variable
+
+- `biblio.csv`: citation information about the project, as much or as little data as possible can be included, but if things like bounding box coordinates are not included, then when the website is generated there will not be a bounding box map generated
 
 - `access.csv`: includes a row for each file that was read in, and documents the name of each file and its format
   
-- `biblio.csv`: citation information about the project, as much or as little data as possible can be included, but if things like bounding box coordinates are not included, then when the website is generated there will not be a bounding box map generated
-  
-- `creators.csv`: one row for each creator, and gives their affiliation and contact email
-
 ![](https://user-images.githubusercontent.com/6106733/40335756-444642e0-5d1a-11e8-8c33-0d3053441a79.png)
 
 ## Step 3 - Save metadata in JSON 
