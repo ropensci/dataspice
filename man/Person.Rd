@@ -51,7 +51,15 @@ Person(id = NULL, worksFor = NULL, workLocation = NULL, weight = NULL,
 
 \item{relatedTo}{(Person type.) The most generic familial relation.}
 
-\item{publishingPrinciples}{(URL or CreativeWork or URL or CreativeWork or URL or CreativeWork type.) The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.}
+\item{publishingPrinciples}{(URL or CreativeWork or URL or CreativeWork or URL or CreativeWork type.) The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.
+
+[[URL]: R:[URL
+[[Organization]: R:[Organization
+[[Person]: R:[Person
+[[CreativeWork]: R:[CreativeWork
+[[NewsArticle]: R:[NewsArticle
+[[CreativeWork]: R:[CreativeWork
+[[funder]: R:[funder}
 
 \item{performerIn}{(Event type.) Event that this person is a performer or participant in.}
 
@@ -89,7 +97,7 @@ Person(id = NULL, worksFor = NULL, workLocation = NULL, weight = NULL,
 
 \item{hasOfferCatalog}{(OfferCatalog or OfferCatalog or OfferCatalog type.) Indicates an OfferCatalog listing for this Organization, Person, or Service.}
 
-\item{globalLocationNumber}{(Text or Text or Text type.) The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.}
+\item{globalLocationNumber}{(Text or Text or Text type.) The \href{http://www.gs1.org/gln}{Global Location Number} (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.}
 
 \item{givenName}{(Text type.) Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.}
 
@@ -147,11 +155,17 @@ Person(id = NULL, worksFor = NULL, workLocation = NULL, weight = NULL,
 
 \item{name}{(Text type.) The name of the item.}
 
-\item{mainEntityOfPage}{(URL or CreativeWork type.) Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.}
+\item{mainEntityOfPage}{(URL or CreativeWork type.) Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See \href{/docs/datamodel.html#mainEntityBackground}{background notes} for details.}
 
-\item{image}{(URL or ImageObject type.) An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].}
+\item{image}{(URL or ImageObject type.) An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
 
-\item{identifier}{(URL or Text or PropertyValue type.) The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.}
+[[URL]: R:[URL
+[[ImageObject]: R:[ImageObject}
+
+\item{identifier}{(URL or Text or PropertyValue type.) The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \href{/docs/datamodel.html#identifierBg}{background notes} for more details.
+
+[[Thing]: R:[Thing
+[background notes]: R:background%20notes}
 
 \item{disambiguatingDescription}{(Text type.) A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.}
 
