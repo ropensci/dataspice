@@ -1,65 +1,54 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "Creating JSON Metadata and README website with `dataspice`"
+author: "runconf18 metadatagroup"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Creating JSON Metadata and README website with `dataspice`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+The goal of the `dataspice` package is to make it easier for researchers to create basic, lightweight and concise metadata files for their datasets. These basic files can then be used to:
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+ -   make useful information available during analysis.
+ -   Create a helpful dataset README webpage.
+ -   Produce more complex metadata formats to aid dataset discovery. [future goal]
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+Our metadata fields are based on schema.org and other metadata standards.
 
-## Vignette Info
+## Step 1 - Start with one or more files
+To start the user will have one or more datafiles in a common directory. We currently support rectagular data with headers in a .csv file or spatial data with attributes. 
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+## Step 2 - Fill in Templates
 
-## Styles
+`create_spice()` reads in the files from that directory and creates a set of template metadata files for the user to populate. These metadata templates will include some data extracted from the users datafiles, including things like file names and measured variable names to aid the user in populating the metadata files. 
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+Once these are created, the user needs to open each and fill in the missing data, as completely as possible and read the files back into R.
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+### Metadata Files
 
-## Figures
+- `creators.csv`: one row for each creator, and gives their affiliation and contact email
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+- `attributes.csv`: this is where most of the user data entry will take place, and will be where the measured variable, its units and a written description are provided for every measured variable
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
+- `biblio.csv`: citation information about the project, as much or as little data as possible can be included, but if things like bounding box coordinates are not included, then when the website is generated there will not be a bounding box map generated
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+- `access.csv`: includes a row for each file that was read in, and documents the name of each file and its format
+  
+![](https://user-images.githubusercontent.com/6106733/40335756-444642e0-5d1a-11e8-8c33-0d3053441a79.png)
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+## Step 3 - Save metadata in JSON 
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+Once the populated the metadata files are read back R they can then be fed into `write_JSON()`, which converts those tabular metadata files into JSON files. 
 
-## More Examples
+## Step 4 - Create a datadown website
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+A dataset README website is an interactive representation of the JSON information about the data. Assuming sufficient information is provided in the JSON it will include a map of the points and a bounding box of the area of study. 
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
+The output from `write_JSON()` is fed into `build_site()` to create the website.
 
-Also a quote using `>`:
+`serve_site()` ?
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+[example JSON website image]
+
