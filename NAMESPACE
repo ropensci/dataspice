@@ -2,4 +2,5 @@
 
 export(build_site)
 export(create_spice)
+export(prep_attributes)
 export(serve_site)
