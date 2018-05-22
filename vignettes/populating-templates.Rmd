@@ -1,6 +1,6 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "Creating JSON Metadata and README website with `dataspice`"
+author: "runconf18 metadatagroup"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -45,7 +45,9 @@ Once the user has populated the metadata files, they need to be read back into R
 
 ## Creating dataset README webpage
 
-Then `build_site()` is used to convert the JSON code into a website that clearly communicates the metadata in an interactive form. 
+A dataset README website is an interactive representation of the JSON information about the data. Assuming sufficient information is provided in the JSON it will include a map of the points and a bounding box of the area of study. 
+
+The output from `write_JSON()` is fed into `build_site()` to create the website.
 
 `serve_site()`
 
