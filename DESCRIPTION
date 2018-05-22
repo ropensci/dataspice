@@ -14,7 +14,8 @@ Imports:
     whisker,
     readr,
     here,
-    tools
+    tools,
+    tibble
 Suggests: 
     testthat,
     knitr,
