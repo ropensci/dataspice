@@ -14,11 +14,11 @@ prep_attributes <- function(data_path,
                                                          "attributes.csv"),  
                             ...){
     
-    if(!file.exists(data_path)){stop("data file does not exist")}
+    if(!file.exists(data_path)){stop("invalid path to data file")}
     if(!file.exists(attributes_path)){
         stop("attribute file does not exist. Check path or run create_spice?")}
     
-    attributes <- readr::read_csv(attributes_path)
+    attributes <- readr::read_csv(attributes_path, col_types = readr::cols())
     fileName <- basename(data_path)
     ext <- tools::file_ext(fileName)
     
@@ -29,8 +29,8 @@ prep_attributes <- function(data_path,
     
     # read data
     x <- switch(ext,
-                csv = readr::read_csv(data_path, n_max = 1, ...),
-                tsv =  readr::read_tsv(data_path, n_max = 1, ...))
+                csv = readr::read_csv(data_path, n_max = 1, col_types = readr::cols(), ...),
+                tsv =  readr::read_tsv(data_path, n_max = 1, col_types = readr::cols(), ...))
     
     attributes <- tibble::add_row(attributes, 
                                   variableName = names(x), 
