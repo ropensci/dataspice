@@ -15,12 +15,9 @@
 build_site <- function(path = "data/metadata/dataspice.json",
                        template_path = system.file("template.html5",
                                                    package = "dataspice")) {
-  data <- jsonlite::read_json(path)
+  data <- jsonld_to_mustache(path)
 
-  # Append the raw JSON+LD to the data so we can insert it into the <head> tag
-  data$jsonld <- readChar(path, nchars = file.size(path))
-
-  # Make docs dir if not present
+    # Make docs dir if not present
   if (!file.exists("docs")) {
     dir.create("docs")
   }
