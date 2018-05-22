@@ -17,6 +17,8 @@ Imports:
     here,
     tools,
     tibble
+    shiny,
+    rhandsontable,
 Suggests: 
     testthat,
     knitr,

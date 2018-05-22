@@ -27,5 +27,10 @@ Example
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-## basic example code
+create_spice(dir = "data")
+prep_attributes()
+write_spice()
+build_site()
 ```
+
+![worfklow](man/figures/dataspice_workflow.png)
