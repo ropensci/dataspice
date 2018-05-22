@@ -9,10 +9,13 @@ LazyData: true
 ByteCompile: true
 RoxygenNote: 6.0.1
 Imports:
-    fs
+    fs,
+    jsonlite,
+    whisker
 Suggests: 
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    servr
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <script type="application/json+ld">{{ jsonld }}</script>
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
+
+    <h2>Bibliographic</h2>
+    <h2>Coverage</h2>
+
+    <h2>Attributes</h2>
+
+    <h2>Debug</h2>
+    <pre>
+      <code>{{ jsonld }}</code>
+    </pre>
+  </body>
+</html>
