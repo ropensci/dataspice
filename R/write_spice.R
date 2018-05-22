@@ -7,6 +7,7 @@
 #' @export
 #' @importFrom readr read_csv
 #' @importFrom purrr pmap
+#' @importFrom dplyr rename
 write_spice <- function(path = "data/metadata", ...) {
 
   biblio <- readr::read_csv(file.path(path, "biblio.csv"))
@@ -17,7 +18,7 @@ write_spice <- function(path = "data/metadata", ...) {
   #fileName,name,contentUrl,fileFormat
   access <- access[ !names(access)=="fileName" ]
 
-  distribution <- purrr::map(access,
+  distribution <- purrr::pmap(access,
     function(name = NULL, contentUrl = NULL, fileFormat = NULL){
     list(type = "DataDownload",
          name = name,
@@ -25,8 +26,10 @@ write_spice <- function(path = "data/metadata", ...) {
          fileFormat = fileFormat)
   })
 
+  attributes <- attributes[ !names(attributes)=="fileName" ]
+  attributes <- dplyr::rename(attributes, value = variableName)
   variableMeasured <-
-    purrr::pmap(attributes[ !names(attributes)=="fileName" ],
+    purrr::pmap(attributes,
                 PropertyValue)
 
   authors <- purrr::pmap(creators, Person)
