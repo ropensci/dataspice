@@ -16,36 +16,38 @@ knitr::opts_chunk$set(
 )
 ```
 
-The goal of `dataspice` is to make it easier for researchers to create basic, lightweight and concise metadata files for their datasets. These basic files can then be used to:
+The goal of the `dataspice` package is to make it easier for researchers to create basic, lightweight and concise metadata files for their datasets. These basic files can then be used to:
 
  -   make useful information available during analysis.
  -   create a helpful dataset README webpage.
  -   produce more complex metadata formats to aid dataset discovery.
 
-Metadata fields are based on schema.org and other metadata standards.
+Our metadata fields are based on schema.org and other metadata standards.
 
-`create_spice()` takes the users data file(s) and creates a set of template metadata files.
-
-- attributes
-  Three columns 
-    fileName
-    name
-    uniText
-    Description
-
-- access
-
-- biblio
-
-- creators
-
-Which the user will then populate with appropriate information. 
+To start the user will have one or more datafiles [define what a datafiles will work, what wont] in a common directory. 
+The `create_spice()` function will read in the files from that directory and create a set of template metadata files for the user to populate. These templates will include some data extracted from the users datafiles, including things like file names and column names to aid the user in populating the metadatafiles. 
 
 ![](https://user-images.githubusercontent.com/6106733/40335756-444642e0-5d1a-11e8-8c33-0d3053441a79.png)
 
-Then the populated metadata files are fed into `write_JSON()` which converts those tabular metadata files into json. 
+## Metadata Files
 
-Then `build_function()` is used to convert the JSON code into a website that clearly communicates the metadata in an interactive form. 
+- attributes [this is where most of the user data entry will take place, and will be where the measured variable, its units and a written description are provided for every measured variable]
+
+- access [includes a row for each file that was read in, and documents the name of each file and its format]
+  
+- biblio [citation information about the project, as much or as little data as possible can be included, but if things like bounding box coordinates are not included, then when the website is generated there will not be a bounding box map generated]
+  
+- creators [one row for each creator, and gives their affiliation and contact email]
+
+## Creating JSON 
+
+Once the user has populated the metadata files, they need to be read back into R and then fed into `write_JSON()`. `write_JSON` will converts those tabular metadata files into JSON files. 
+
+## Creating dataset README webpage
+
+Then `build_site()` is used to convert the JSON code into a website that clearly communicates the metadata in an interactive form. 
+
+`serve_site()`
 
 [example JSON website]
 
