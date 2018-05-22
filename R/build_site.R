@@ -12,8 +12,9 @@
 #' json <- write_json(biblio, access, attributes, creators)
 #' build_site(json)
 #' }
-build_site <- function(path,
-                       template_path = "inst/template.html5") {
+build_site <- function(path = "data/metadata/dataspice.json",
+                       template_path = system.file("template.html5",
+                                                   package = "dataspice")) {
   data <- jsonlite::read_json(path)
 
   # Append the raw JSON+LD to the data so we can insert it into the <head> tag

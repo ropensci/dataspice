@@ -4,7 +4,8 @@
 \alias{build_site}
 \title{Build a dataspice site}
 \usage{
-build_site(path, template_path = "inst/template.html5")
+build_site(path = "data/metadata/dataspice.json",
+  template_path = system.file("template.html5", package = "dataspice"))
 }
 \arguments{
 \item{path}{(character) Path to a JSON+LD file with dataspice metadata}
