@@ -16,7 +16,11 @@ PropertyValue(id = NULL, valueReference = NULL, value = NULL,
 
 \item{valueReference}{(StructuredValue or QuantitativeValue or QualitativeValue or PropertyValue or Enumeration or StructuredValue or QuantitativeValue or QualitativeValue or PropertyValue or Enumeration or StructuredValue or QuantitativeValue or QualitativeValue or PropertyValue or Enumeration type.) A pointer to a secondary value that provides additional information on the original value, e.g. a reference temperature.}
 
-\item{value}{(Text or StructuredValue or Number or Boolean or Text or StructuredValue or Number or Boolean or Text or StructuredValue or Number or Boolean type.) The value of the quantitative value or property value node.* For [[QuantitativeValue]] and [[MonetaryAmount]], the recommended type for values is 'Number'.* For [[PropertyValue]], it can be 'Text;', 'Number', 'Boolean', or 'StructuredValue'.}
+\item{value}{(Text or StructuredValue or Number or Boolean or Text or StructuredValue or Number or Boolean or Text or StructuredValue or Number or Boolean type.) The value of the quantitative value or property value node.* For [[QuantitativeValue]] and [[MonetaryAmount]], the recommended type for values is 'Number'.* For [[PropertyValue]], it can be 'Text;', 'Number', 'Boolean', or 'StructuredValue'.
+
+[[QuantitativeValue]: R:[QuantitativeValue
+[[MonetaryAmount]: R:[MonetaryAmount
+[[PropertyValue]: R:[PropertyValue}
 
 \item{unitText}{(Text or Text or Text or Text type.) A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for<a href='unitCode'>unitCode</a>.}
 
@@ -36,11 +40,17 @@ PropertyValue(id = NULL, valueReference = NULL, value = NULL,
 
 \item{name}{(Text type.) The name of the item.}
 
-\item{mainEntityOfPage}{(URL or CreativeWork type.) Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.}
+\item{mainEntityOfPage}{(URL or CreativeWork type.) Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See \href{/docs/datamodel.html#mainEntityBackground}{background notes} for details.}
 
-\item{image}{(URL or ImageObject type.) An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].}
+\item{image}{(URL or ImageObject type.) An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].
 
-\item{identifier}{(URL or Text or PropertyValue type.) The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.}
+[[URL]: R:[URL
+[[ImageObject]: R:[ImageObject}
+
+\item{identifier}{(URL or Text or PropertyValue type.) The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See \href{/docs/datamodel.html#identifierBg}{background notes} for more details.
+
+[[Thing]: R:[Thing
+[background notes]: R:background%20notes}
 
 \item{disambiguatingDescription}{(Text type.) A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.}
 
