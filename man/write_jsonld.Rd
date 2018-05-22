@@ -24,9 +24,3 @@ An exception is that objects of class \code{AsIs} (i.e. wrapped in \code{I()}) a
 \description{
 Write a list out as object to JSON-LD
 }
-\examples{
-x <- Thing(url = "http://schema.org")
-tmp <- tempfile()
-write_jsonld(x, tmp)
-
-}

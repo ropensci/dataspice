@@ -22,9 +22,3 @@ An exception is that objects of class \code{AsIs} (i.e. wrapped in \code{I()}) a
 \description{
 Convert a list object to JSON-LD
 }
-\examples{
-
-x <- Thing(url = "http://schema.org")
-as_jsonld(x)
-
-}
