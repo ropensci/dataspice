@@ -35,7 +35,7 @@ write_spice()
 build_site()
 ```
 
-![worfklow](man/figures/dataspice_workflow.png)
+![worfklowdiagram](man/figures/dataspice_workflow.png)
 
 ### Create spice
 
