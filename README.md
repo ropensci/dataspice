@@ -27,7 +27,7 @@ Example
 Generate metadata in 3 lines of code!
 
 ``` r
-create_spice(dir = "data")
+create_spice()
 write_spice() 
 build_site()
 ```
@@ -38,7 +38,9 @@ This diagram shows an example workflow to create metadata for data files.
 
 ### Create spice
 
--   `create_spice()` creates template metadata spreadsheets in a folder.
+-   `create_spice()` creates template metadata spreadsheets in a folder (by default created in the `data` folder)
+
+The template files are:
 
 -   **attributes.csv** - explains each of the variables in the dataset
 -   **biblio.csv** - for spatial and temporal coverage, dataset name, keywords, etc.
@@ -47,7 +49,7 @@ This diagram shows an example workflow to create metadata for data files.
 
 ### Fill in templates
 
-The 4 template files created in the metadata folder then need to be filled in. The spreadsheets can be directly modified, edited using helper functions, and/or edited using a shiny app.
+The user needs to fill in the details of the 4 template files. These csv files can be directly modified, or they can be edited using some helper functions and/or a shiny app.
 
 -   `prep_attributes()` populates the **fileName** and **variableName** columns of the attributes.csv file using the header row of the data files.
 
@@ -55,9 +57,15 @@ The 4 template files created in the metadata folder then need to be filled in. T
 
 ### Save json-ld file
 
+-   `write_spice()` generates a json-ld file
+
 ### Build website
+
+-   `build_site()` generates an index.html file in the repository `docs` folder, so if the repository has the github pages setting turned on then it will create a website that shows a simple view of the dataset with the metadata and an interactive map.
 
 Contributors
 ------------
 
-Carl Boettiger Auriel Fournier Kelly Hondula Bryce Mecum Maelle Salmon Kate Webbink Kara Woo
+This package was developed at rOpenSci's 2018 unconf by (in alphabetical order):
+
+[Carl Boettiger](https://github.com/cboettig) [Auriel Fournier](https://github.com/aurielfournier) [Kelly Hondula](https://github.com/khondula) [Anna Krystalli](https://github.com/annakrystalli) [Bryce Mecum](https://github.com/amoeba) [Maëlle Salmon](https://github.com/maelle) [Kate Webbink](https://github.com/magpiedin) [Kara Woo](https://github.com/karawoo)
