@@ -8,10 +8,13 @@ Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 RoxygenNote: 6.0.1
-Imports:
+Imports: 
     fs,
     jsonlite,
-    whisker
+    whisker,
+    readr,
+    here,
+    tools
 Suggests: 
     testthat,
     knitr,
