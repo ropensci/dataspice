@@ -7,7 +7,6 @@
 #' @export
 #' @importFrom readr read_csv
 #' @importFrom purrr pmap
-
 write_spice <- function(path = "data/metadata", ...) {
 
   biblio <- readr::read_csv(file.path(path, "biblio.csv"))
