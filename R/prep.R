@@ -29,8 +29,8 @@ prep_attributes <- function(data_path,
     
     # read data
     x <- switch(ext,
-                csv = readr::read_csv(path, n_max = 1, ...),
-                tsv =  readr::read_tsv(path, n_max = 1, ...))
+                csv = readr::read_csv(data_path, n_max = 1, ...),
+                tsv =  readr::read_tsv(data_path, n_max = 1, ...))
     
     attributes <- tibble::add_row(attributes, 
                                   variableName = names(x), 
@@ -39,3 +39,4 @@ prep_attributes <- function(data_path,
     message("The following variableNames have been added to the attributes file for fileName: ", 
             fileName, "\n \n", paste(names(x), collapse = ", "))
 }
+
