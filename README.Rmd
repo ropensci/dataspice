@@ -1,5 +1,7 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -12,6 +14,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 library(knitr)
+library(kableExtra)
 library(magrittr)
 ```
 # dataspice
@@ -24,6 +27,8 @@ The goal of dataspice is to make it easier for researchers to create basic, ligh
 
 Metadata fields are based on [schema.org](http://schema.org/Dataset) and other metadata standards. 
 
+A fully worked example can be found [here](https://github.com/amoeba/dataspice-example) and a live preview of the output [here](https://amoeba.github.io/dataspice-example/). An example of how Google sees this can be found [here](https://search.google.com/structured-data/testing-tool/u/0/#url=https%3A%2F%2Famoeba.github.io%2Fdataspice-example%2F).
+
 ## Installation
 
 You can install the development version from [GitHub](https://github.com/) with:
@@ -33,8 +38,6 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("ropenscilabs/dataspice")
 ```
 ## Example
-
-
 
 ```{r example, eval=FALSE}
 create_spice()
@@ -104,20 +107,30 @@ gif of shiny app in use
 
 Completed metadata tables in this example will look like this:
 
+`access.csv` has one row for each file
+
 ```{r, echo=FALSE, message=FALSE}
 readr::read_csv(system.file("metadata-tables/access.csv", package = "dataspice")) %>% head() %>% kable()
 ```
 
-```{r, echo=FALSE, message=FALSE}
-readr::read_csv(system.file("metadata-tables/attributes.csv", package = "dataspice")) %>% kable()
-```
+`attributes.csv` has one row for each variable in each file
 
 ```{r, echo=FALSE, message=FALSE}
-readr::read_csv(system.file("metadata-tables/biblio.csv", package = "dataspice")) %>% kable()
+readr::read_csv(system.file("metadata-tables/attributes.csv", package = "dataspice")) %>% head() %>% kable()
 ```
 
+`biblio.csv` is one row containing descriptors including spatial and temporal coverage
+
 ```{r, echo=FALSE, message=FALSE}
-readr::read_csv(system.file("metadata-tables/creators.csv", package = "dataspice")) %>% kable()
+readr::read_csv(system.file("metadata-tables/biblio.csv", package = "dataspice")) %>% 
+  kable()
+```
+
+`creators.csv` has one row for each of the dataset authors
+
+```{r, echo=FALSE, message=FALSE}
+readr::read_csv(system.file("metadata-tables/creators.csv", package = "dataspice")) %>% kable() 
+
 ```
 
 
@@ -127,7 +140,7 @@ readr::read_csv(system.file("metadata-tables/creators.csv", package = "dataspice
 
 ### Build website
 
-* `build_site()` generates an index.html file in the repository `docs` folder, to create a website that shows a simple view of the dataset with the metadata and an interactive map. 
+* `build_site()` generates an index.html file in the repository `docs` folder, to create a website that shows a simple view of the dataset with the metadata and an interactive map. For example, this [repository](https://github.com/amoeba/dataspice-example) results in a [website](https://amoeba.github.io/dataspice-example/) 
 
 ![dataspice-website](man/figures/screenshot.png)
 
