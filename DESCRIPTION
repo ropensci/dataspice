@@ -10,4 +10,14 @@ ByteCompile: true
 RoxygenNote: 6.0.1
 Imports: 
     readr,
-    purrr
+    purrr,
+    fs,
+    jsonlite,
+    whisker
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown,
+    servr
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)

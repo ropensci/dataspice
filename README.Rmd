@@ -14,17 +14,19 @@ knitr::opts_chunk$set(
 ```
 # dataspice
 
-The goal of dataspice is to ...
+The goal of dataspice is to make it easier for researchers to create basic, lightweight and concise metadata files for their datasets. These basic files can then be used to:
+
+- make useful information available during analysis.
+- create a helpful dataset README webpage.
+- produce more complex metadata formats to aid dataset discovery.
+
+Metadata fields are based on [schema.org](http://schema.org/Dataset) and other metadata standards. 
+
+
 
 ## Installation
 
-You can install the released version of dataspice from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("dataspice")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -38,18 +40,3 @@ This is a basic example which shows you how to solve a common problem:
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
