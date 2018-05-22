@@ -15,6 +15,7 @@ Imports:
     whisker,
     readr,
     here,
+    stringr,
     tools,
     tibble,
     shiny,
