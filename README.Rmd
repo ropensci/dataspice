@@ -86,7 +86,7 @@ gif of shiny app in use
 
 * `build_site()` generates an index.html file in the repository `docs` folder, to create a website that shows a simple view of the dataset with the metadata and an interactive map. 
 
-screenshot of example website
+![dataspice-website](man/figures/screenshot.png)
 
 ## Contributors
 
