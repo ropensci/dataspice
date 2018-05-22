@@ -14,6 +14,17 @@ write_spice <- function(path = "data/metadata", ...) {
   access <- readr::read_csv(file.path(path, "access.csv"))
   creators <- readr::read_csv(file.path(path, "creators.csv"))
 
+  #fileName,name,contentUrl,fileFormat
+  access <- access[ !names(access)=="fileName" ]
+
+  distribution <- purrr::map(access,
+    function(name = NULL, contentUrl = NULL, fileFormat = NULL){
+    list(type = "DataDownload",
+         name = name,
+         contentUrl = contentUrl,
+         fileFormat = fileFormat)
+  })
+
   variableMeasured <-
     purrr::pmap(attributes[ !names(attributes)=="fileName" ],
                 PropertyValue)
@@ -40,7 +51,8 @@ write_spice <- function(path = "data/metadata", ...) {
                     biblio$southBoundCoord, biblio$westBoundCoord)
       )
     ),
-    variableMeasured = variableMeasured)
+    variableMeasured = variableMeasured,
+    distribution = distribution)
 
   write_jsonld(Dataset, file.path(path, "dataspice.json"))
 
