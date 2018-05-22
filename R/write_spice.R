@@ -21,6 +21,7 @@ write_spice <- function(path = "data/metadata", ...) {
 
   authors <- purrr::pmap(creators, Person)
 
+
   Dataset <- list(
     type = "Dataset",
     name = biblio$title,
@@ -43,5 +44,6 @@ write_spice <- function(path = "data/metadata", ...) {
     variableMeasured = variableMeasured)
 
   write_jsonld(Dataset, file.path(path, "dataspice.json"))
+
 
 }
