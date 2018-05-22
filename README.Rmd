@@ -80,7 +80,7 @@ attributes_path <- here::here("data", "metadata",
 
 Using `purrr::map()`, this function can be applied over multiple files to populate the header names
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, message=FALSE}
 data_files %>% purrr::map(~prep_attributes(.x, attributes_path),
                          attributes_path = attributes_path)
 ```
@@ -101,6 +101,25 @@ Each of the metadata templates can be edited interactively using a shiny app
 * `editBiblio()`
 
 gif of shiny app in use
+
+Completed metadata tables in this example will look like this:
+
+```{r, echo=FALSE, message=FALSE}
+readr::read_csv(system.file("metadata-tables/access.csv", package = "dataspice")) %>% head() %>% kable()
+```
+
+```{r, echo=FALSE, message=FALSE}
+readr::read_csv(system.file("metadata-tables/attributes.csv", package = "dataspice")) %>% kable()
+```
+
+```{r, echo=FALSE, message=FALSE}
+readr::read_csv(system.file("metadata-tables/biblio.csv", package = "dataspice")) %>% kable()
+```
+
+```{r, echo=FALSE, message=FALSE}
+readr::read_csv(system.file("metadata-tables/creators.csv", package = "dataspice")) %>% kable()
+```
+
 
 ### Save json-ld file
 
