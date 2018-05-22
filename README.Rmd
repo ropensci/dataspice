@@ -27,6 +27,8 @@ The goal of dataspice is to make it easier for researchers to create basic, ligh
 
 Metadata fields are based on [schema.org](http://schema.org/Dataset) and other metadata standards. 
 
+## Example
+
 A fully worked example can be found [here](https://github.com/amoeba/dataspice-example) and a live preview of the output [here](https://amoeba.github.io/dataspice-example/). An example of how Google sees this can be found [here](https://search.google.com/structured-data/testing-tool/u/0/#url=https%3A%2F%2Famoeba.github.io%2Fdataspice-example%2F).
 
 ## Installation
@@ -37,7 +39,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/dataspice")
 ```
-## Example
+## Workflow
 
 ```{r example, eval=FALSE}
 create_spice()
@@ -90,8 +92,8 @@ data_files %>% purrr::map(~prep_attributes(.x, attributes_path),
 
 The output of `prep_attributes()` has the first two columns filled out:
 
-```{r, echo=FALSE}
-readr::read_csv(system.file("metadata-tables/attributes_prepped.csv", package = "dataspice")) %>% kable()
+```{r, echo=FALSE, message=FALSE}
+readr::read_csv(system.file("metadata-tables/attributes_prepped.csv", package = "dataspice")) %>% head() %>% kable()
 ```
 
 **Shiny apps**
@@ -130,7 +132,6 @@ readr::read_csv(system.file("metadata-tables/biblio.csv", package = "dataspice")
 
 ```{r, echo=FALSE, message=FALSE}
 readr::read_csv(system.file("metadata-tables/creators.csv", package = "dataspice")) %>% kable() 
-
 ```
 
 
