@@ -13,7 +13,9 @@ Imports:
     purrr,
     fs,
     jsonlite,
-    whisker
+    whisker,
+    shiny,
+    rhandsontable,
 Suggests: 
     testthat,
     knitr,
