@@ -9,11 +9,16 @@ LazyData: true
 ByteCompile: true
 RoxygenNote: 6.0.1.9000
 Imports: 
-    readr,
     purrr,
     fs,
     jsonlite,
-    whisker
+    whisker,
+    readr,
+    here,
+    tools,
+    tibble
+    shiny,
+    rhandsontable,
 Suggests: 
     testthat,
     knitr,
