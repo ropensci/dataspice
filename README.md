@@ -813,7 +813,7 @@ Each of the metadata templates can be edited interactively using a shiny app
 -   `editCreators()`
 -   `editBiblio()`
 
-gif of shiny app in use
+![shinygif](man/figures/before123.gif)
 
 Completed metadata tables in this example will look like this:
 
@@ -1045,7 +1045,7 @@ endDate
 Compiled annual statewide Alaskan salmon escapement counts, 1921-2017
 </td>
 <td style="text-align:left;">
-The number of mature salmon migrating from the marine environment to freshwater streams is defined as escapement. Escapement data are the enumeration of these migrating fish as they pass upstream, and are a widely used index of spawning salmon abundance. These data are important for fisheries management, since most salmon harvest occurs near the mouths of rivers where salmon spawn during this migration. Escapement data are collected in a variety of ways. Stationary projects utilize observers stationed along freshwater corridors who count salmon as they pass upriver through weirs or past elevated towers. Sonar equipment placed in the river can also give a stationary escapement count. These counts usually represent a sample, and are expanded to represent a 24h period. Escapement data can also be collected using aerial surveys, where observers in an aircraft provide an index to estimate escapement. In general, escapement counts do not represent total abundance, but instead an index of abundance. Surveys are usually timed to coincide with peak spawning activity, generally in the summer, but in the case of Coho salmon in the fall as well. Some data about non-salmon species are also included. This dataset contains compiled annual data from multiple sources. The .Rmd merges all datasets, identifies and flags duplicate records, and performs quality assurance checks by filtering and graphing results.
+The number of mature salmon migrating from the marine environment to freshwater streams is defined as escapement.
 </td>
 <td style="text-align:left;">
 2018-02-12 08:00:00

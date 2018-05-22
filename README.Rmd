@@ -103,7 +103,7 @@ Each of the metadata templates can be edited interactively using a shiny app
 * `editCreators()`
 * `editBiblio()`
 
-gif of shiny app in use
+![shinygif](man/figures/before123.gif)
 
 Completed metadata tables in this example will look like this:
 
