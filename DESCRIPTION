@@ -19,6 +19,7 @@ Imports:
     tibble,
     shiny,
     rhandsontable,
+    dplyr
 Suggests: 
     testthat,
     knitr,
