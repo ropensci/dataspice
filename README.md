@@ -68,4 +68,11 @@ Contributors
 
 This package was developed at rOpenSci's 2018 unconf by (in alphabetical order):
 
-[Carl Boettiger](https://github.com/cboettig) [Auriel Fournier](https://github.com/aurielfournier) [Kelly Hondula](https://github.com/khondula) [Anna Krystalli](https://github.com/annakrystalli) [Bryce Mecum](https://github.com/amoeba) [Maëlle Salmon](https://github.com/maelle) [Kate Webbink](https://github.com/magpiedin) [Kara Woo](https://github.com/karawoo)
+-   [Carl Boettiger](https://github.com/cboettig)
+-   [Auriel Fournier](https://github.com/aurielfournier)
+-   [Kelly Hondula](https://github.com/khondula)
+-   [Anna Krystalli](https://github.com/annakrystalli)
+-   [Bryce Mecum](https://github.com/amoeba)
+-   [Maëlle Salmon](https://github.com/maelle)
+-   [Kate Webbink](https://github.com/magpiedin)
+-   [Kara Woo](https://github.com/karawoo)
