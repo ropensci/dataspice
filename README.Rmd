@@ -40,8 +40,6 @@ write_spice()
 build_site()
 ```
 
-This diagram shows an example workflow to create metadata for data files.  
-
 ![worfklow](man/figures/dataspice_workflow.png)
 
 ### Create spice
@@ -59,17 +57,36 @@ The template files are:
 
 The user needs to fill in the details of the 4 template files. These csv files can be directly modified, or they can be edited using some helper functions and/or a shiny app. 
 
+**Helper functions**
+
 * `prep_attributes()` populates the **fileName** and **variableName** columns of the attributes.csv file using the header row of the data files. 
 
+Using `purrr::map()`, this function can be applied over multiple files to populate the header names
+
+```{r}
+# example code here
+```
+
+**Shiny apps**
+
+Each of the metadata templates can be edited interactively using a shiny app
+
 * `editAttritubes()` opens a shiny app that can be used to edit `attributes.csv`. The shiny app dispalys the attributes table and lets the user fill in an informative description and units (e.g. meters, hectares, etc.) for each variable. 
+* `editAccess()`
+* `editCreators()`
+* `editBiblio()`
+
+gif of shiny app in use
 
 ### Save json-ld file
 
-* `write_spice()` generates a json-ld file
+* `write_spice()` generates a json-ld file ("linked data") to aid in [dataset discovery](https://developers.google.com/search/docs/data-types/dataset), creation of more extensive metadata (e.g. [EML](https://knb.ecoinformatics.org/#api)), and creating a website. 
 
 ### Build website
 
-* `build_site()` generates an index.html file in the repository `docs` folder, so if the repository has the github pages setting turned on then it will create a website that shows a simple view of the dataset with the metadata and an interactive map. 
+* `build_site()` generates an index.html file in the repository `docs` folder, to create a website that shows a simple view of the dataset with the metadata and an interactive map. 
+
+screenshot of example website
 
 ## Contributors
 
