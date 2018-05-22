@@ -42,6 +42,6 @@ write_spice <- function(path = "data/metadata", ...) {
     ),
     variableMeasured = variableMeasured)
   
-write_jsonld(Dataset, file.name(path, "dataspice.json"))
+write_jsonld(Dataset, file.path(path, "dataspice.json"))
 
 }
