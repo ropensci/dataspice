@@ -12,19 +12,19 @@ vignette: >
 The goal of the `dataspice` package is to make it easier for researchers to create basic, lightweight and concise metadata files for their datasets. These basic files can then be used to:
 
  -   make useful information available during analysis.
- -   create a helpful dataset README webpage.
- -   produce more complex metadata formats to aid dataset discovery.
+ -   Create a helpful dataset README webpage.
+ -   Produce more complex metadata formats to aid dataset discovery. [future goal]
 
 Our metadata fields are based on schema.org and other metadata standards.
 
 ## Step 1 - Start with one or more files
-To start the user will have one or more datafiles [either rectangular data or spatial data] in a common directory. 
+To start the user will have one or more datafiles in a common directory. We currently support rectagular data with headers in a .csv file or spatial data with attributes. 
 
 ## Step 2 - Fill in Templates
 
-The `create_spice()` function will read in the files from that directory and create a set of template metadata files for the user to populate. These templates will include some data extracted from the users datafiles, including things like file names and column names to aid the user in populating the metadatafiles. 
+`create_spice()` reads in the files from that directory and creates a set of template metadata files for the user to populate. These metadata templates will include some data extracted from the users datafiles, including things like file names and measured variable names to aid the user in populating the metadata files. 
 
-![](https://user-images.githubusercontent.com/6106733/40335756-444642e0-5d1a-11e8-8c33-0d3053441a79.png)
+Once these are created, the user needs to open each and fill in the missing data, as completely as possible and read the files back into R.
 
 ### Metadata Files
 
@@ -36,9 +36,11 @@ The `create_spice()` function will read in the files from that directory and cre
   
 - `creators.csv`: one row for each creator, and gives their affiliation and contact email
 
+![](https://user-images.githubusercontent.com/6106733/40335756-444642e0-5d1a-11e8-8c33-0d3053441a79.png)
+
 ## Step 3 - Save metadata in JSON 
 
-Once the user has populated the metadata files, they need to be read back into R and then fed into `write_JSON()`. `write_JSON` will converts those tabular metadata files into JSON files. 
+Once the populated the metadata files are read back R they can then be fed into `write_JSON()`, which converts those tabular metadata files into JSON files. 
 
 ## Step 4 - Create a datadown website
 
@@ -46,7 +48,7 @@ A dataset README website is an interactive representation of the JSON informatio
 
 The output from `write_JSON()` is fed into `build_site()` to create the website.
 
-`serve_site()`
+`serve_site()` ?
 
-[example JSON website]
+[example JSON website image]
 
