@@ -6,7 +6,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' editAttributes(DF = attributes)
+#' editTable(DF = attributes)
 #'
 #'}
 
@@ -31,11 +31,7 @@ editAttributes <- function(DF,
           h3("Save table"), 
           div(class='row', 
               div(class="col-sm-6", 
-                  actionButton("save", "Save")),
-              div(class="col-sm-6",
-                  radioButtons("fileType", 
-                               "File type", 
-                               c("ASCII", "RDS")))
+                  actionButton("save", "Save"))
           )
         )
         
@@ -45,8 +41,6 @@ editAttributes <- function(DF,
         wellPanel(
           uiOutput("message", inline=TRUE)
         ),
-        
-        
         rHandsontableOutput("hot"),
          br()
         
@@ -57,52 +51,34 @@ editAttributes <- function(DF,
   server <- shinyServer(function(input, output) {
     
     values <- reactiveValues()
-    
-    ## Handsontable
-    observe({
-      if (!is.null(input$hot)) {
-        values[["previous"]] <- isolate(values[["DF"]])
-        DF = hot_to_r(input$hot)
-      } else {
-        if (is.null(values[["DF"]]))
-          DF <- DF
-        else
-          DF <- values[["DF"]]
-      }
-      values[["DF"]] <- DF
-    })
-    
+
     output$hot <- renderRHandsontable({
-      DF <- values[["DF"]]
-      if (!is.null(DF))
+        DF$description <- as.character(DF$description)
+        DF$unitText <- as.character(DF$unitText)
         rhandsontable(DF, 
-                      useTypes = FALSE, 
+                      useTypes = TRUE, 
                       stretchH = "all")
     })
     
     ## Save 
     observeEvent(input$save, {
-      fileType <- isolate(input$fileType)
-      finalDF <- isolate(values[["DF"]])
-      if(fileType == "ASCII"){
-        dput(finalDF, file=file.path(outdir, sprintf("%s.txt", outfilename)))
-      }
-      else{
-        saveRDS(finalDF, file=file.path(outdir, sprintf("%s.rds", outfilename)))
-      }
-    }
-    )
+      finalDF <- hot_to_r(input$hot)
+      write.csv(finalDF, file=file.path(outdir, 
+                        sprintf("%s.csv", outfilename)),
+                row.names = FALSE)
+    })
     
     ## Message
     output$message <- renderUI({
       if(input$save==0){
         helpText(sprintf("This table will be saved in folder \"%s\" once you press the Save button.", outdir))
       }else{
-        outfile <- ifelse(isolate(input$fileType)=="ASCII", 
-                          "attributes.txt", "attributes.rds")
-        fun <- ifelse(isolate(input$fileType)=="ASCII", "dget", "readRDS")
-        list(helpText(sprintf("File saved: \"%s\".", file.path(outdir, outfile))),
-             helpText(sprintf("Type %s(\"%s\") to get it.", fun, outfile)))
+        outfile <- "attributes.csv"
+        fun <- 'read.csv'
+        list(helpText(sprintf("File saved: \"%s\".",
+                              file.path(outdir, outfile))),
+             helpText(sprintf("Type %s(\"%s\") to get it.",
+                              fun, outfile)))
       }
     })
     
