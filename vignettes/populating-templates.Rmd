@@ -24,9 +24,14 @@ The goal of `dataspice` is to make it easier for researchers to create basic, li
 
 Metadata fields are based on schema.org and other metadata standards.
 
-`create_spice` takes the users data file(s) and creates a set of template metadata files.
+`create_spice()` takes the users data file(s) and creates a set of template metadata files.
 
 - attributes
+  Three columns 
+    fileName
+    name
+    uniText
+    Description
 
 - access
 
@@ -36,9 +41,11 @@ Metadata fields are based on schema.org and other metadata standards.
 
 Which the user will then populate with appropriate information. 
 
-[image that Kelly made]
+![](https://user-images.githubusercontent.com/6106733/40335756-444642e0-5d1a-11e8-8c33-0d3053441a79.png)
 
-Then the populated metadata files are fed into a function which converts those tabular metadata files into json. 
+Then the populated metadata files are fed into `write_JSON()` which converts those tabular metadata files into json. 
 
-Then the html function is used to convert the json code into a website that clearly communicates the metadata in an interactive form. 
+Then `build_function()` is used to convert the JSON code into a website that clearly communicates the metadata in an interactive form. 
+
+[example JSON website]
 
