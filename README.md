@@ -69,6 +69,7 @@ Contributors
 This package was developed at rOpenSci's 2018 unconf by (in alphabetical order):
 
 -   [Carl Boettiger](https://github.com/cboettig)
+-   [Scott Chamberlain](https://github.com/sckott)
 -   [Auriel Fournier](https://github.com/aurielfournier)
 -   [Kelly Hondula](https://github.com/khondula)
 -   [Anna Krystalli](https://github.com/annakrystalli)
