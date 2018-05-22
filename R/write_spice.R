@@ -17,7 +17,8 @@ write_spice <- function(path = "data/metadata", ...) {
   #fileName,name,contentUrl,fileFormat
   access <- access[ !names(access)=="fileName" ]
 
-  distrubtion <- purrr::map(access, function(name, contentUrl, fileFormat){
+  distribution <- purrr::map(access,
+    function(name = NULL, contentUrl = NULL, fileFormat = NULL){
     list(type = "DataDownload",
          name = name,
          contentUrl = contentUrl,
@@ -51,7 +52,7 @@ write_spice <- function(path = "data/metadata", ...) {
       )
     ),
     variableMeasured = variableMeasured,
-    distribution = )
+    distribution = distribution)
 
   write_jsonld(Dataset, file.path(path, "dataspice.json"))
 

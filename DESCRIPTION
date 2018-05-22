@@ -16,7 +16,7 @@ Imports:
     readr,
     here,
     tools,
-    tibble
+    tibble,
     shiny,
     rhandsontable,
 Suggests: 
