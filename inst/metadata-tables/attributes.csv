@@ -1,50 +1,50 @@
-fileName,name,value,description,unitText
-StockInfo.csv,Stock.ID,Unique stock identifier,Unique stock identifier,NA
-StockInfo.csv,Species,species of stock,species of stock,NA
-StockInfo.csv,Stock,"Stock name, generally river where stock is found","Stock name, generally river where stock is found",NA
-StockInfo.csv,Date.data.obtained,Date.data.obtained,"Date data was obtained; if original data did not specify the day, the day is recorded as 01",NA
-StockInfo.csv,Date.data.incorporated,Date.data.incorporated,"Date data was incorporated into database; if original data did not specify the day, the day is recorded as 01",NA
-StockInfo.csv,Ocean.Region,"WC = West Coast, GOA = Gulf of Alaska, BS = Bering Sea",Ocean region,NA
-StockInfo.csv,Region,Region of stock,Region of stock,NA
-StockInfo.csv,Sub.Region,Sub.Region of stock,Sub.Region of stock,NA
-StockInfo.csv,Jurisdiction,Management jurisdiction,Management jurisdiction,NA
-StockInfo.csv,Lat,Lat,Latitude,degree
-StockInfo.csv,Lon,Lon,Longitude,degree
-StockInfo.csv,Source.ID,"Source.ID, matches source.ID in source info file","Source.ID, matches source.ID in source info file",NA
-StockInfo.csv,Comment..we.will.update.this.later.,stock comments,stock comments,NA
-SourceInfo.csv,Source.ID,Source.ID,Source.ID as seen in stock info table,
-SourceInfo.csv,Source,Source,Source description,
-BroodTables.csv,Stock.ID,Stock.ID,Unique stock identifier,NA
-BroodTables.csv,Species,Species,species of stock,NA
-BroodTables.csv,Stock,Stock,"Stock name, generally river where stock is found",NA
-BroodTables.csv,Ocean.Region,Ocean.Region,Ocean region,NA
-BroodTables.csv,Region,Region,Region of stock,NA
-BroodTables.csv,Sub.Region,Sub.Region,Sub.Region of stock,NA
-BroodTables.csv,Jurisdiction,Jurisdiction,Management jurisdiction,NA
-BroodTables.csv,Lat,Lat,Latitude,degree
-BroodTables.csv,Lon,Lon,Longitude,degree
-BroodTables.csv,UseFlag,UseFlag,Indicates if data should be used in analysis,NA
-BroodTables.csv,BroodYear,BroodYear,Brood Year,NA
-BroodTables.csv,TotalEscapement,TotalEscapement,Total escapement value,number
-BroodTables.csv,R0.1,R0.1,number of recruits in 0.1 age class,number
-BroodTables.csv,R0.2,R0.2,number of recruits in 0.2 age class,number
-BroodTables.csv,R0.3,R0.3,number of recruits in 0.3 age class,number
-BroodTables.csv,R0.4,R0.4,number of recruits in 0.4 age class,number
-BroodTables.csv,R0.5,R0.5,number of recruits in 0.5 age class,number
-BroodTables.csv,R1.1,R1.1,number of recruits in 1.1 age class,number
-BroodTables.csv,R1.2,R1.2,number of recruits in 1.2 age class,number
-BroodTables.csv,R1.3,R1.3,number of recruits in 1.3 age class,number
-BroodTables.csv,R1.4,R1.4,number of recruits in 1.4 age class,number
-BroodTables.csv,R1.5,R1.5,number of recruits in 1.5 age class,number
-BroodTables.csv,R2.1,R2.1,number of recruits in 2.1 age class,number
-BroodTables.csv,R2.2,R2.2,number of recruits in 2.2 age class,number
-BroodTables.csv,R2.3,R2.3,number of recruits in 2.3 age class,number
-BroodTables.csv,R2.4,R2.4,number of recruits in 2.4 age class,number
-BroodTables.csv,R3.1,R3.1,number of recruits in 3.1 age class,number
-BroodTables.csv,R3.2,R3.2,number of recruits in 3.2 age class,number
-BroodTables.csv,R3.3,R3.3,number of recruits in 3.3 age class,number
-BroodTables.csv,R3.4,R3.4,number of recruits in 3.4 age class,number
-BroodTables.csv,R4.1,R4.1,number of recruits in 4.1 age class,number
-BroodTables.csv,R4.2,R4.2,number of recruits in 4.2 age class,number
-BroodTables.csv,R4.3,R4.3,number of recruits in 4.3 age class,number
-BroodTables.csv,TotalRecruits,TotalRecruits,number of total recruits,number
+fileName,variableName,description,unitText
+BroodTables.csv,Stock.ID,Unique stock identifier,NA
+BroodTables.csv,Species,species of stock,NA
+BroodTables.csv,Stock,"Stock name, generally river where stock is found",NA
+BroodTables.csv,Ocean.Region,Ocean region,NA
+BroodTables.csv,Region,Region of stock,NA
+BroodTables.csv,Sub.Region,Sub.Region of stock,NA
+BroodTables.csv,Jurisdiction,Management jurisdiction,NA
+BroodTables.csv,Lat,Latitude,degree
+BroodTables.csv,Lon,Longitude,degree
+BroodTables.csv,UseFlag,Indicates if data should be used in analysis,NA
+BroodTables.csv,BroodYear,Brood Year,NA
+BroodTables.csv,TotalEscapement,Total escapement value,number
+BroodTables.csv,R0.1,number of recruits in 0.1 age class,number
+BroodTables.csv,R0.2,number of recruits in 0.2 age class,number
+BroodTables.csv,R0.3,number of recruits in 0.3 age class,number
+BroodTables.csv,R0.4,number of recruits in 0.4 age class,number
+BroodTables.csv,R0.5,number of recruits in 0.5 age class,number
+BroodTables.csv,R1.1,number of recruits in 1.1 age class,number
+BroodTables.csv,R1.2,number of recruits in 1.2 age class,number
+BroodTables.csv,R1.3,number of recruits in 1.3 age class,number
+BroodTables.csv,R1.4,number of recruits in 1.4 age class,number
+BroodTables.csv,R1.5,number of recruits in 1.5 age class,number
+BroodTables.csv,R2.1,number of recruits in 2.1 age class,number
+BroodTables.csv,R2.2,number of recruits in 2.2 age class,number
+BroodTables.csv,R2.3,number of recruits in 2.3 age class,number
+BroodTables.csv,R2.4,number of recruits in 2.4 age class,number
+BroodTables.csv,R3.1,number of recruits in 3.1 age class,number
+BroodTables.csv,R3.2,number of recruits in 3.2 age class,number
+BroodTables.csv,R3.3,number of recruits in 3.3 age class,number
+BroodTables.csv,R3.4,number of recruits in 3.4 age class,number
+BroodTables.csv,R4.1,number of recruits in 4.1 age class,number
+BroodTables.csv,R4.2,number of recruits in 4.2 age class,number
+BroodTables.csv,R4.3,number of recruits in 4.3 age class,number
+BroodTables.csv,TotalRecruits,number of total recruits,number
+SourceInfo.csv,Source.ID,Source.ID as seen in stock info table,NA
+SourceInfo.csv,Source,Source description,NA
+StockInfo.csv,Stock.ID,Unique stock identifier,NA
+StockInfo.csv,Species,species of stock,NA
+StockInfo.csv,Stock,"Stock name, generally river where stock is found",NA
+StockInfo.csv,Date.data.obtained,"Date data was obtained; if original data did not specify the day, the day is recorded as 01",NA
+StockInfo.csv,Date.data.incorporated,"Date data was incorporated into database; if original data did not specify the day, the day is recorded as 01",NA
+StockInfo.csv,Ocean.Region,Ocean region,NA
+StockInfo.csv,Region,Region of stock,NA
+StockInfo.csv,Sub.Region,Sub.Region of stock,NA
+StockInfo.csv,Jurisdiction,Management jurisdiction,NA
+StockInfo.csv,Lat,Latitude,degree
+StockInfo.csv,Lon,Longitude,degree
+StockInfo.csv,Source.ID,"Source.ID, matches source.ID in source info file",NA
+StockInfo.csv,Comment..we.will.update.this.later.,stock comments,NA
