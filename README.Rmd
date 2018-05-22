@@ -11,6 +11,8 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+library(knitr)
+library(magrittr)
 ```
 # dataspice
 
@@ -32,7 +34,7 @@ devtools::install_github("ropenscilabs/dataspice")
 ```
 ## Example
 
-Generate metadata in 3 lines of code! 
+
 
 ```{r example, eval=FALSE}
 create_spice()
@@ -56,15 +58,37 @@ The template files are:
 ### Fill in templates
 
 The user needs to fill in the details of the 4 template files. These csv files can be directly modified, or they can be edited using some helper functions and/or a shiny app. 
-
 **Helper functions**
 
 * `prep_attributes()` populates the **fileName** and **variableName** columns of the attributes.csv file using the header row of the data files. 
 
+To see an example of how this works, load the data files that ship with the package:
+
+```{r, eval=FALSE}
+data_files <- list.files(system.file("example-dataset/", 
+                                     package = "dataspice"), 
+                         pattern = ".csv",
+                        full.names = TRUE)
+```
+
+This function assumes that the metadata templates are in a folder called `metadata` within a `data` folder.
+
+```{r, eval = FALSE}
+attributes_path <- here::here("data", "metadata",
+ "attributes.csv")
+```
+
 Using `purrr::map()`, this function can be applied over multiple files to populate the header names
 
-```{r}
-# example code here
+```{r, eval=FALSE}
+data_files %>% purrr::map(~prep_attributes(.x, attributes_path),
+                         attributes_path = attributes_path)
+```
+
+The output of `prep_attributes()` has the first two columns filled out:
+
+```{r, echo=FALSE}
+readr::read_csv(system.file("metadata-tables/attributes_prepped.csv", package = "dataspice")) %>% kable()
 ```
 
 **Shiny apps**

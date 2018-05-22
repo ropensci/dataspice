@@ -24,8 +24,6 @@ devtools::install_github("ropenscilabs/dataspice")
 Example
 -------
 
-Generate metadata in 3 lines of code!
-
 ``` r
 create_spice()
 write_spice() 
@@ -47,17 +45,95 @@ The template files are:
 
 ### Fill in templates
 
-The user needs to fill in the details of the 4 template files. These csv files can be directly modified, or they can be edited using some helper functions and/or a shiny app.
-
-**Helper functions**
+The user needs to fill in the details of the 4 template files. These csv files can be directly modified, or they can be edited using some helper functions and/or a shiny app. **Helper functions**
 
 -   `prep_attributes()` populates the **fileName** and **variableName** columns of the attributes.csv file using the header row of the data files.
+
+To see an example of how this works, load the data files that ship with the package:
+
+``` r
+data_files <- list.files(system.file("example-dataset/", 
+                                     package = "dataspice"), 
+                         pattern = ".csv",
+                        full.names = TRUE)
+```
+
+This function assumes that the metadata templates are in a folder called `metadata` within a `data` folder.
+
+``` r
+attributes_path <- here::here("data", "metadata",
+ "attributes.csv")
+```
 
 Using `purrr::map()`, this function can be applied over multiple files to populate the header names
 
 ``` r
-# example code here
+data_files %>% purrr::map(~prep_attributes(.x, attributes_path),
+                         attributes_path = attributes_path)
 ```
+
+The output of `prep_attributes()` has the first two columns filled out:
+
+    #> Parsed with column specification:
+    #> cols(
+    #>   fileName = col_character(),
+    #>   variableName = col_character(),
+    #>   description = col_character(),
+    #>   unitText = col_character()
+    #> )
+
+| fileName        | variableName                        | description | unitText |
+|:----------------|:------------------------------------|:------------|:---------|
+| BroodTables.csv | Stock.ID                            | NA          | NA       |
+| BroodTables.csv | Species                             | NA          | NA       |
+| BroodTables.csv | Stock                               | NA          | NA       |
+| BroodTables.csv | Ocean.Region                        | NA          | NA       |
+| BroodTables.csv | Region                              | NA          | NA       |
+| BroodTables.csv | Sub.Region                          | NA          | NA       |
+| BroodTables.csv | Jurisdiction                        | NA          | NA       |
+| BroodTables.csv | Lat                                 | NA          | NA       |
+| BroodTables.csv | Lon                                 | NA          | NA       |
+| BroodTables.csv | UseFlag                             | NA          | NA       |
+| BroodTables.csv | BroodYear                           | NA          | NA       |
+| BroodTables.csv | TotalEscapement                     | NA          | NA       |
+| BroodTables.csv | R0.1                                | NA          | NA       |
+| BroodTables.csv | R0.2                                | NA          | NA       |
+| BroodTables.csv | R0.3                                | NA          | NA       |
+| BroodTables.csv | R0.4                                | NA          | NA       |
+| BroodTables.csv | R0.5                                | NA          | NA       |
+| BroodTables.csv | R1.1                                | NA          | NA       |
+| BroodTables.csv | R1.2                                | NA          | NA       |
+| BroodTables.csv | R1.3                                | NA          | NA       |
+| BroodTables.csv | R1.4                                | NA          | NA       |
+| BroodTables.csv | R1.5                                | NA          | NA       |
+| BroodTables.csv | R2.1                                | NA          | NA       |
+| BroodTables.csv | R2.2                                | NA          | NA       |
+| BroodTables.csv | R2.3                                | NA          | NA       |
+| BroodTables.csv | R2.4                                | NA          | NA       |
+| BroodTables.csv | R3.1                                | NA          | NA       |
+| BroodTables.csv | R3.2                                | NA          | NA       |
+| BroodTables.csv | R3.3                                | NA          | NA       |
+| BroodTables.csv | R3.4                                | NA          | NA       |
+| BroodTables.csv | R4.1                                | NA          | NA       |
+| BroodTables.csv | R4.2                                | NA          | NA       |
+| BroodTables.csv | R4.3                                | NA          | NA       |
+| BroodTables.csv | TotalRecruits                       | NA          | NA       |
+| SourceInfo.csv  | Source.ID                           | NA          | NA       |
+| SourceInfo.csv  | Source                              | NA          | NA       |
+| StockInfo.csv   | X1                                  | NA          | NA       |
+| StockInfo.csv   | Stock.ID                            | NA          | NA       |
+| StockInfo.csv   | Species                             | NA          | NA       |
+| StockInfo.csv   | Stock                               | NA          | NA       |
+| StockInfo.csv   | Date.data.obtained                  | NA          | NA       |
+| StockInfo.csv   | Date.data.incorporated              | NA          | NA       |
+| StockInfo.csv   | Ocean.Region                        | NA          | NA       |
+| StockInfo.csv   | Region                              | NA          | NA       |
+| StockInfo.csv   | Sub.Region                          | NA          | NA       |
+| StockInfo.csv   | Jurisdiction                        | NA          | NA       |
+| StockInfo.csv   | Lat                                 | NA          | NA       |
+| StockInfo.csv   | Lon                                 | NA          | NA       |
+| StockInfo.csv   | Source.ID                           | NA          | NA       |
+| StockInfo.csv   | Comment..we.will.update.this.later. | NA          | NA       |
 
 **Shiny apps**
 
