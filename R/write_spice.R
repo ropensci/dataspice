@@ -2,25 +2,25 @@
 #'
 #' @param path location of metadata files
 #' @param ... additional arguments to write json\code{\link{jsonlite::toJSON}}
-#' 
+#'
 #' @return a json-ld file at the path specified
 #' @export
 #' @importFrom readr read_csv
 #' @importFrom purrr pmap
 
 write_spice <- function(path = "data/metadata", ...) {
-    
+
   biblio <- readr::read_csv(file.path(path, "biblio.csv"))
   attributes <- readr::read_csv(file.path(path, "attributes.csv"))
   access <- readr::read_csv(file.path(path, "access.csv"))
   creators <- readr::read_csv(file.path(path, "creators.csv"))
-  
-  variableMeasured <- 
+
+  variableMeasured <-
     purrr::pmap(attributes[ !names(attributes)=="fileName" ],
                 dataspice:::PropertyValue)
-  
+
   authors <- purrr::pmap(creators, dataspice:::Person)
-  
+
   Dataset <- list(
     type = "Dataset",
     name = biblio$title,
@@ -36,12 +36,12 @@ write_spice <- function(path = "data/metadata", ...) {
       name = biblio$geographicDescription,
       geo = list(
         type = "GeoShape",
-        box = paste(biblio$northBoundCoord, biblio$eastBoundCoord, 
+        box = paste(biblio$northBoundCoord, biblio$eastBoundCoord,
                     biblio$southBoundCoord, biblio$westBoundCoord)
       )
     ),
     variableMeasured = variableMeasured)
-  
-write_jsonld(Dataset, file.name(path, "dataspice.json"))
+
+write_jsonld(Dataset, file.path(path, "dataspice.json"))
 
 }
