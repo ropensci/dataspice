@@ -1,20 +1,109 @@
 <html>
   <head>
-    <title>{{ title }}</title>
-    <script type="application/json+ld">{{ jsonld }}</script>
+    <title>Compiled annual statewide Alaskan salmon escapement counts, 1921-2017</title>
+    <script type="application/json+ld">
+      {{{ jsonld }}}
+    </script>
+    <link rel="stylesheet" href="./Compiled annual statewide Alaskan salmon escapement counts, 1921-2017_files/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="">
+ <script src="./Compiled annual statewide Alaskan salmon escapement counts, 1921-2017_files/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+    <style>
+      body {
+        font-size: 16px;
+        font-family: sans-serif;
+      }
+
+      #map {
+        width: 600px;
+        height: 300px;
+      }
+
+      #attributes-wrapper {
+        height: 300px;
+        overflow-y: scroll;
+      }
+
+      #jsonld-wrapper {
+        height: 300px;
+        overflow-y: scroll;
+      }
+    </style>
   </head>
   <body>
-    <h1>{{ title }}</h1>
-    <p>{{ description }}</p>
+    <h1>{{title}}</h1>
+    <p>{{description}}</p>
 
     <h2>Bibliographic</h2>
+
+    <ul>
+      <li>datePublished: {{datePublished}}</li>
+      <li>keywords
+      <ul>
+        {{#keywords}}
+        <li>{{.}}</li>
+      </ul>
+      </li>
+      <li>funder: {{ funder }}</li>
+      <li>license: {{ license }}</li>
+    </ul>
+
     <h2>Coverage</h2>
+
+    <h3>Temporal</h3>
+    <ul>
+      <li>beginDate: {{ beginDate }}</li>
+      <li>endDate: {{ endDate }}</li>
+    </ul>
+
+    <h3>Spatial</h3>
+    <pre><code>{{ geographicCoverage }}</code></pre>
+    <div id="map" </div>
 
     <h2>Attributes</h2>
 
+    <div id="attributes-wrapper">
+      <table id="attributes">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Description</th>
+            <th>Unit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#attributes}}
+          <tr>
+            <td>{{ name }}</td>
+            <td>{{{ value }}</td>
+            <td>{{ description }}</td>
+            <td>{{ codeText }}</td>
+          </tr>
+          {{/attributes}}
+        </tbody>
+      </table>
+    </div>
+
     <h2>Debug</h2>
-    <pre>
-      <code>{{ jsonld }}</code>
-    </pre>
+    <div id="jsonld-wrapper">
+      <pre id="jsonld">
+        <code>{{jsonld}}</code>
+      </pre>
+    </div>
+    {{#showmap}}
+    <script>
+      var mymap = L.map('map').setView({{mapcenterstring]]}}, 1);
+
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoiYnJ5Y2VtIiwiYSI6ImxXeXloYWMifQ.-WnjEqej0kbv101nt6b_KQ'
+      }).addTo(mymap);
+
+      {{#isgeoshape}}
+      var polygon = L.polygon({{mappolystring]].addTo(mymap);
+      {{//isgeoshape}}
+    </script>
+    {{/showmap}}
   </body>
 </html>
