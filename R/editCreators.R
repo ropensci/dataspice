@@ -62,7 +62,7 @@ editCreators <- function(DF,
       
       colnames(rows_to_add) <- colnames(DF)
       DF <- rows_to_add
-      DF$ï..name <- as.character(DF$ï..name)
+      DF[,1] <- as.character(DF[,1])
       DF$type <- as.character(DF$type)
       DF$id <- as.character(DF$id)
       DF$givenName <- as.character(DF$givenName)

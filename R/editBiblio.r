@@ -58,7 +58,7 @@ editBiblio <- function(DF,
       
       colnames(rows_to_add) <- colnames(DF)
       DF <- rows_to_add
-      DF$ï..title <- as.character(DF$ï..title)
+      DF[,1] <- as.character(DF[,1])
       DF$description <- as.character(DF$description)
       DF$datePublished <- as.character(DF$datePublished)
       DF$citation <- as.character(DF$citation)
