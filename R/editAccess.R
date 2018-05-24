@@ -1,7 +1,7 @@
 #' Shiny App for editing the metadata access table
 #'
 #' @param DF the imported access.csv dataframe
-
+#' @import shiny
 #' @export
 #'
 #' @examples
@@ -10,11 +10,11 @@
 #'
 #'}
 
-editAccess <- function(DF, 
-                         outdir=getwd(), 
+editAccess <- function(DF,
+                         outdir=getwd(),
                          outfilename="access"){
   ui <- shinyUI(fluidPage(
-    
+
     titlePanel("Populate the Access Metadata Table"),
     sidebarLayout(
       sidebarPanel(
@@ -25,49 +25,49 @@ editAccess <- function(DF,
         h6("variableName = the human readable name of the measured variable."),
         h6('contentUrl = a url from where that data came, if applicable'),
         h6("fileFormat = the file format. Do Not. Change"),
-        
-        br(), 
-        
+
+        br(),
+
         wellPanel(
-          h3("Save table"), 
-          div(class='row', 
-              div(class="col-sm-6", 
+          h3("Save table"),
+          div(class='row',
+              div(class="col-sm-6",
                   actionButton("save", "Save"))
           )
         )
-        
+
       ),
-      
+
       mainPanel(
         wellPanel(
           uiOutput("message", inline=TRUE)
         ),
         rHandsontableOutput("hot"),
         br()
-        
+
       )
     )
   ))
-  
+
   server <- shinyServer(function(input, output) {
-    
+
     values <- reactiveValues()
-    
+
     output$hot <- renderRHandsontable({
       DF$contentUrl <- as.character(DF$contentUrl)
-      rhandsontable(DF, 
-                    useTypes = FALSE, 
+      rhandsontable(DF,
+                    useTypes = FALSE,
                     stretchH = "all")
     })
-    
-    ## Save 
+
+    ## Save
     observeEvent(input$save, {
       finalDF <- hot_to_r(input$hot)
-      write.csv(finalDF, file=file.path(outdir, 
+      write.csv(finalDF, file=file.path(outdir,
                                         sprintf("%s.csv", outfilename)),
                 row.names = FALSE)
     })
-    
+
     ## Message
     output$message <- renderUI({
       if(input$save==0){
@@ -81,10 +81,10 @@ editAccess <- function(DF,
                               fun, outfile)))
       }
     })
-    
+
   })
-  
-  ## run app 
+
+  ## run app
   runApp(list(ui=ui, server=server))
   return(invisible())
 }
