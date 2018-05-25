@@ -8,6 +8,10 @@ editAccess(DF, outdir = getwd(), outfilename = "access")
 }
 \arguments{
 \item{DF}{the imported access.csv dataframe}
+
+\item{outdir}{The directory to save the edited access info to}
+
+\item{outfilename}{The filename to save with. Defaults to access.csv.}
 }
 \description{
 Shiny App for editing the metadata access table

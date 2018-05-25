@@ -1,6 +1,8 @@
 #' Shiny App for editing the metadata creator table
 #'
 #' @param DF the imported creator.csv dataframe
+#' @param outdir The directory to save the edited creator info to
+#' @param outfilename The filename to save with. Defaults to creator.csv.
 #' @param numCreators the number of creators that need to be included, defauls to 10
 #' @import shiny
 #' @import rhandsontable

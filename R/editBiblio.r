@@ -1,6 +1,9 @@
 #' Shiny App for editing the metadata biblio table
 #'
 #' @param DF the imported biblio.csv dataframe
+#' @param outdir The directory to save the edited biblio info to
+#' @param outfilename The filename to save with. Defaults to biblio.csv.
+#'
 #' @import shiny
 #' @import rhandsontable
 

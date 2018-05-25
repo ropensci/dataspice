@@ -8,6 +8,10 @@ editBiblio(DF, outdir = getwd(), outfilename = "biblio")
 }
 \arguments{
 \item{DF}{the imported biblio.csv dataframe}
+
+\item{outdir}{The directory to save the edited biblio info to}
+
+\item{outfilename}{The filename to save with. Defaults to biblio.csv.}
 }
 \description{
 Shiny App for editing the metadata biblio table

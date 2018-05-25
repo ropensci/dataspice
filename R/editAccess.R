@@ -1,6 +1,9 @@
 #' Shiny App for editing the metadata access table
-#'
+
 #' @param DF the imported access.csv dataframe
+#' @param outdir The directory to save the edited access info to
+#' @param outfilename The filename to save with. Defaults to access.csv.
+#'
 #' @import shiny
 #' @import rhandsontable
 #' @export

@@ -1,7 +1,9 @@
 #' Shiny App for editing the metadata attributes table
 #'
 #' @param DF the imported attributes.csv dataframe
-
+#' @param outdir The directory to save the edited attributes info to
+#' @param outfilename The filename to save with. Defaults to attributes.csv.
+#'
 #' @export
 #' @import shiny
 #' @import rhandsontable
