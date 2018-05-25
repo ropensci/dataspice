@@ -15,6 +15,13 @@ write_spice <- function(path = "data/metadata", ...) {
   access <- readr::read_csv(file.path(path, "access.csv"))
   creators <- readr::read_csv(file.path(path, "creators.csv"))
 
+  # Validate the CSVs
+  validate_biblio(biblio)
+  validate_attributes(attributes)
+  validate_access(access)
+  validate_creators(creators)
+
+
   #fileName,name,contentUrl,fileFormat
   access <- access[ !names(access)=="fileName" ]
 
@@ -61,3 +68,4 @@ write_spice <- function(path = "data/metadata", ...) {
 
 
 }
+

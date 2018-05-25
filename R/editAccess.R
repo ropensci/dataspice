@@ -1,7 +1,11 @@
 #' Shiny App for editing the metadata access table
-#'
+
 #' @param DF the imported access.csv dataframe
+#' @param outdir The directory to save the edited access info to
+#' @param outfilename The filename to save with. Defaults to access.csv.
+#'
 #' @import shiny
+#' @import rhandsontable
 #' @export
 #'
 #' @examples
@@ -63,7 +67,7 @@ editAccess <- function(DF,
     ## Save
     observeEvent(input$save, {
       finalDF <- hot_to_r(input$hot)
-      write.csv(finalDF, file=file.path(outdir,
+      utils::write.csv(finalDF, file=file.path(outdir,
                                         sprintf("%s.csv", outfilename)),
                 row.names = FALSE)
     })

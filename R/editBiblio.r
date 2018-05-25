@@ -1,7 +1,12 @@
 #' Shiny App for editing the metadata biblio table
 #'
 #' @param DF the imported biblio.csv dataframe
+#' @param outdir The directory to save the edited biblio info to
+#' @param outfilename The filename to save with. Defaults to biblio.csv.
+#'
 #' @import shiny
+#' @import rhandsontable
+
 #' @export
 #'
 #' @examples
@@ -82,7 +87,7 @@ editBiblio <- function(DF,
     ## Save
     observeEvent(input$save, {
       finalDF <- hot_to_r(input$hot)
-      write.csv(finalDF, file=file.path(outdir,
+      utils::write.csv(finalDF, file=file.path(outdir,
                                         sprintf("%s.csv", outfilename)),
                 row.names = FALSE)
     })

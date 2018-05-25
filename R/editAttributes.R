@@ -1,9 +1,13 @@
 #' Shiny App for editing the metadata attributes table
 #'
 #' @param DF the imported attributes.csv dataframe
-
+#' @param outdir The directory to save the edited attributes info to
+#' @param outfilename The filename to save with. Defaults to attributes.csv.
+#'
 #' @export
 #' @import shiny
+#' @import rhandsontable
+
 #'
 #' @examples
 #' \dontrun{
@@ -64,7 +68,7 @@ editAttributes <- function(DF,
     ## Save
     observeEvent(input$save, {
       finalDF <- hot_to_r(input$hot)
-      write.csv(finalDF, file=file.path(outdir,
+      utils::write.csv(finalDF, file=file.path(outdir,
                         sprintf("%s.csv", outfilename)),
                 row.names = FALSE)
     })

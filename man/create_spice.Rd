@@ -4,17 +4,20 @@
 \alias{create_spice}
 \title{Put metadata templates within a \code{metadata} subdirectory}
 \usage{
-create_spice(dir)
+create_spice(dir = "data")
 }
 \arguments{
 \item{dir}{Directory containing data, within which a \code{metadata} subdirectory
-will be created}
+will be created. Defaults to \code{data}.}
 }
 \description{
 Put metadata templates within a \code{metadata} subdirectory
 }
 \examples{
 \dontrun{
-create_spice(dir = "data")
+create_spice()
+
+# Create templates from the data in a folder other than `data`
+create_spice("my_data")
 }
 }

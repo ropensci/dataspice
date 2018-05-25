@@ -10,6 +10,10 @@ editCreators(DF, outdir = getwd(), outfilename = "creator",
 \arguments{
 \item{DF}{the imported creator.csv dataframe}
 
+\item{outdir}{The directory to save the edited creator info to}
+
+\item{outfilename}{The filename to save with. Defaults to creator.csv.}
+
 \item{numCreators}{the number of creators that need to be included, defauls to 10}
 }
 \description{

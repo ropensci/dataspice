@@ -8,6 +8,10 @@ editAttributes(DF, outdir = getwd(), outfilename = "attributes")
 }
 \arguments{
 \item{DF}{the imported attributes.csv dataframe}
+
+\item{outdir}{The directory to save the edited attributes info to}
+
+\item{outfilename}{The filename to save with. Defaults to attributes.csv.}
 }
 \description{
 Shiny App for editing the metadata attributes table

@@ -15,3 +15,10 @@ jsonld_to_mustache(path)
 \description{
 Convert JSONLD to a list suitable for Mustache templating
 }
+\examples{
+\dontrun{
+json_path <- "myjson.json"
+data <- jsonld_to_mustache(json_path)
+whisker::whisker_render("{{ keywords }}", data)
+}
+}

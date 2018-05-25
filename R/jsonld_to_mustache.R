@@ -60,7 +60,7 @@ parse_GeoShape_points <- function(points) {
 #'
 #' @examples
 #' \dontrun{
-#' json_path <- "myjson.json
+#' json_path <- "myjson.json"
 #' data <- jsonld_to_mustache(json_path)
 #' whisker::whisker_render("{{ keywords }}", data)
 #' }
