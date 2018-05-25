@@ -2,6 +2,7 @@
 #'
 #' @param DF the imported access.csv dataframe
 #' @import shiny
+#' @import rhandsontable
 #' @export
 #'
 #' @examples

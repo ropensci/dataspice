@@ -3,6 +3,7 @@
 #' @param DF the imported creator.csv dataframe
 #' @param numCreators the number of creators that need to be included, defauls to 10
 #' @import shiny
+#' @import rhandsontable
 #' @export
 #'
 #' @examples

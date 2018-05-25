@@ -4,6 +4,8 @@
 
 #' @export
 #' @import shiny
+#' @import rhandsontable
+
 #'
 #' @examples
 #' \dontrun{

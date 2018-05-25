@@ -2,6 +2,8 @@
 #'
 #' @param DF the imported biblio.csv dataframe
 #' @import shiny
+#' @import rhandsontable
+
 #' @export
 #'
 #' @examples
