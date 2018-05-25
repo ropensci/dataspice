@@ -128,7 +128,7 @@ readr::read_csv(system.file("metadata-tables/attributes.csv", package = "dataspi
 
 ```{r, echo=FALSE, message=FALSE}
 readr::read_csv(system.file("metadata-tables/biblio.csv", package = "dataspice")) %>% 
-  dplyr::mutate(description = str_trunc(description, 200, side = "left")) %>%
+  dplyr::mutate(description = str_trunc(description, 200, side = "right")) %>%
   kable()
 ```
 

@@ -426,7 +426,7 @@ endDate
 Compiled annual statewide Alaskan salmon escapement counts, 1921-2017
 </td>
 <td style="text-align:left;">
-The number of mature salmon migrating from the marine environment to freshwater streams is defined as escapement.
+The number of mature salmon migrating from the marine environment to freshwater streams is defined as escapement. Escapement data are the enumeration of these migrating fish as they pass upstream, ...
 </td>
 <td style="text-align:left;">
 2018-02-12 08:00:00
