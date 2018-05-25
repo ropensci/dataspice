@@ -68,7 +68,7 @@ editAttributes <- function(DF,
     ## Save
     observeEvent(input$save, {
       finalDF <- hot_to_r(input$hot)
-      write.csv(finalDF, file=file.path(outdir,
+      utils::write.csv(finalDF, file=file.path(outdir,
                         sprintf("%s.csv", outfilename)),
                 row.names = FALSE)
     })
