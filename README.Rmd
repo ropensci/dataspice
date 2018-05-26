@@ -115,27 +115,28 @@ Completed metadata tables in this example will look like this:
 `access.csv` has one row for each file
 
 ```{r, echo=FALSE, message=FALSE}
-readr::read_csv(system.file("metadata-tables/access.csv", package = "dataspice")) %>% head() %>% kable()
+readr::read_csv(system.file("metadata-tables/access.csv", package = "dataspice")) %>% head() %>% kable(format = "markdown")
 ```
 
 `attributes.csv` has one row for each variable in each file
 
 ```{r, echo=FALSE, message=FALSE}
-readr::read_csv(system.file("metadata-tables/attributes.csv", package = "dataspice")) %>% head() %>% kable()
+readr::read_csv(system.file("metadata-tables/attributes.csv", package = "dataspice")) %>% head() %>% kable(format = "markdown")
 ```
 
 `biblio.csv` is one row containing descriptors including spatial and temporal coverage
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 readr::read_csv(system.file("metadata-tables/biblio.csv", package = "dataspice")) %>% 
   dplyr::mutate(description = str_trunc(description, 200, side = "right")) %>%
-  kable()
+  kable(format = "markdown")
 ```
 
 `creators.csv` has one row for each of the dataset authors
 
 ```{r, echo=FALSE, message=FALSE}
-readr::read_csv(system.file("metadata-tables/creators.csv", package = "dataspice")) %>% kable() 
+readr::read_csv(system.file("metadata-tables/creators.csv", package = "dataspice")) %>% 
+  kable(format = "markdown") 
 ```
 
 
