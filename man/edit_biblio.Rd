@@ -4,10 +4,11 @@
 \alias{edit_biblio}
 \title{Shiny App for editing the metadata biblio table}
 \usage{
-edit_biblio(DF, outdir = getwd(), outfilename = "biblio")
+edit_biblio(filepath = "metadata-tables/biblio.csv", outdir = getwd(),
+  outfilename = "biblio")
 }
 \arguments{
-\item{DF}{the imported biblio.csv dataframe}
+\item{filepath}{the filepath leading to the biblio.csv file}
 
 \item{outdir}{The directory to save the edited biblio info to}
 

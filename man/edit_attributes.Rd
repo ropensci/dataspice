@@ -4,10 +4,11 @@
 \alias{edit_attributes}
 \title{Shiny App for editing the metadata attributes table}
 \usage{
-edit_attributes(DF, outdir = getwd(), outfilename = "attributes")
+edit_attributes(filepath = "metadata-tables/attributes.csv",
+  outdir = getwd(), outfilename = "attributes")
 }
 \arguments{
-\item{DF}{the imported attributes.csv dataframe}
+\item{filepath}{the filepath leading to the attributes.csv file}
 
 \item{outdir}{The directory to save the edited attributes info to}
 
