@@ -25,6 +25,5 @@ p.1 <- sticker(plot1,
                p_color = "#000000", # font colour
                h_size = 7, # hexagon border size
                h_fill = "white", # hexagon fill colour
-               h_color = "red") # hexagon border colour
-
-
+               h_color = "red",
+               filename = "inst/hex/hex.jpg") # hexagon border colour
