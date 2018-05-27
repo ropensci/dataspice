@@ -14,7 +14,7 @@
 #'
 #'}
 
-editAccess <- function(DF,
+edit_access <- function(DF,
                          outdir=getwd(),
                          outfilename="access"){
   ui <- shinyUI(fluidPage(

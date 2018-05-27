@@ -1,13 +1,13 @@
-#' Shiny App for editing the metadata biblio table
+#' Shiny App for editing the metadata attributes table
 #'
-#' @param DF the imported biblio.csv dataframe
-#' @param outdir The directory to save the edited biblio info to
-#' @param outfilename The filename to save with. Defaults to biblio.csv.
+#' @param DF the imported attributes.csv dataframe
+#' @param outdir The directory to save the edited attributes info to
+#' @param outfilename The filename to save with. Defaults to attributes.csv.
 #'
+#' @export
 #' @import shiny
 #' @import rhandsontable
 
-#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -15,12 +15,12 @@
 #'
 #'}
 
-editBiblio <- function(DF,
-                         outdir=getwd(),
-                         outfilename="biblio"){
+edit_attributes <- function(DF,
+                      outdir=getwd(),
+                      outfilename="attributes"){
   ui <- shinyUI(fluidPage(
 
-    titlePanel("Populate the Biblio Metadata Table"),
+    titlePanel("Populate the Attributes Metadata Table"),
     sidebarLayout(
       sidebarPanel(
         helpText("Shiny app to read in the dataspice metadata templates and populate with usersupplied data"),
@@ -47,7 +47,7 @@ editBiblio <- function(DF,
           uiOutput("message", inline=TRUE)
         ),
         rHandsontableOutput("hot"),
-        br()
+         br()
 
       )
     )
@@ -58,37 +58,18 @@ editBiblio <- function(DF,
     values <- reactiveValues()
 
     output$hot <- renderRHandsontable({
-      rows_to_add <- as.data.frame(matrix(nrow=1,
-                                          ncol=ncol(DF)))
-
-      colnames(rows_to_add) <- colnames(DF)
-      DF <- rows_to_add
-      DF[,1] <- as.character(DF[,1])
-      DF$description <- as.character(DF$description)
-      DF$datePublished <- as.character(DF$datePublished)
-      DF$citation <- as.character(DF$citation)
-      DF$keywords <- as.character(DF$keywords)
-      DF$license <- as.character(DF$license)
-      DF$funder <- as.character(DF$funder)
-      DF$geographicDescription <- as.character(DF$geographicDescription)
-      DF$northBoundCoord <- as.character(DF$northBoundCoord)
-      DF$eastBoundCoord <- as.character(DF$eastBoundCoord)
-      DF$southBoundCoord <- as.character(DF$southBoundCoord)
-      DF$westBoundCoord <- as.character(DF$westBoundCoord)
-        DF$wktString <- as.character(DF$wktString)
-      DF$startDate <- as.character(DF$startDate)
-      DF$endDate <- as.character(DF$endDate)
-
-      rhandsontable(DF,
-                    useTypes = TRUE,
-                    stretchH = "all")
+        DF$description <- as.character(DF$description)
+        DF$unitText <- as.character(DF$unitText)
+        rhandsontable(DF,
+                      useTypes = TRUE,
+                      stretchH = "all")
     })
 
     ## Save
     observeEvent(input$save, {
       finalDF <- hot_to_r(input$hot)
       utils::write.csv(finalDF, file=file.path(outdir,
-                                        sprintf("%s.csv", outfilename)),
+                        sprintf("%s.csv", outfilename)),
                 row.names = FALSE)
     })
 
@@ -97,7 +78,7 @@ editBiblio <- function(DF,
       if(input$save==0){
         helpText(sprintf("This table will be saved in folder \"%s\" once you press the Save button.", outdir))
       }else{
-        outfile <- "biblio.csv"
+        outfile <- "attributes.csv"
         fun <- 'read.csv'
         list(helpText(sprintf("File saved: \"%s\".",
                               file.path(outdir, outfile))),
