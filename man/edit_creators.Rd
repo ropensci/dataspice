@@ -4,11 +4,11 @@
 \alias{edit_creators}
 \title{Shiny App for editing the metadata creator table}
 \usage{
-edit_creators(DF, outdir = getwd(), outfilename = "creator",
-  numCreators = 10)
+edit_creators(filepath = "metadata-tables/creators.csv", outdir = getwd(),
+  outfilename = "creator", numCreators = 10)
 }
 \arguments{
-\item{DF}{the imported creator.csv dataframe}
+\item{filepath}{the filepath leading to the creators.csv file}
 
 \item{outdir}{The directory to save the edited creator info to}
 
