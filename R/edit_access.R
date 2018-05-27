@@ -1,6 +1,6 @@
 #' Shiny App for editing the metadata access table
 
-#' @param DF the imported access.csv dataframe
+#' @param filepath the filepath leading to the access.csv file
 #' @param outdir The directory to save the edited access info to
 #' @param outfilename The filename to save with. Defaults to access.csv.
 #'
@@ -14,7 +14,7 @@
 #'
 #'}
 
-edit_access <- function(DF,
+edit_access <- function(filepath="metadata-tables/access.csv",
                          outdir=getwd(),
                          outfilename="access"){
   ui <- shinyUI(fluidPage(
@@ -56,10 +56,13 @@ edit_access <- function(DF,
   server <- shinyServer(function(input, output) {
 
     values <- reactiveValues()
+    
+    dat <- read_csv(file = filepath,
+                    col_types = "cccc")
 
     output$hot <- renderRHandsontable({
-      DF$contentUrl <- as.character(DF$contentUrl)
-      rhandsontable(DF,
+
+      rhandsontable(dat,
                     useTypes = FALSE,
                     stretchH = "all")
     })
