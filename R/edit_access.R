@@ -1,34 +1,34 @@
-#' Shiny App for editing the metadata creator table
+#' Shiny App for editing the metadata access table
+
+#' @param filepath the filepath leading to the access.csv file
+#' @param outdir The directory to save the edited access info to
+#' @param outfilename The filename to save with. Defaults to access.csv.
 #'
-#' @param DF the imported creator.csv dataframe
-#' @param outdir The directory to save the edited creator info to
-#' @param outfilename The filename to save with. Defaults to creator.csv.
-#' @param numCreators the number of creators that need to be included, defauls to 10
 #' @import shiny
 #' @import rhandsontable
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' editTable(DF = creator)
+#' editTable(DF = access)
 #'
 #'}
 
-editCreators <- function(DF,
-                           outdir=getwd(),
-                           outfilename="creator",
-                         numCreators=10){
+edit_access <- function(filepath="metadata-tables/access.csv",
+                         outdir=getwd(),
+                         outfilename="access"){
   ui <- shinyUI(fluidPage(
 
-    titlePanel("Populate the Creators Metadata Table"),
+    titlePanel("Populate the Access Metadata Table"),
     sidebarLayout(
       sidebarPanel(
         helpText("Shiny app to read in the dataspice metadata templates and populate with usersupplied data"),
+        # fileName	name	contentUrl	fileFormat
 
-        h6('fileName = the name of the input data file(s). Do Not Change.'),
-        h6("variableName = the name of the measured variable. Do Not Change."),
-        h6('Description = a written description of what that measured variable is'),
-        h6("unitText = the units the variable was measured in"),
+        h6('fileName = the filename of the input data file(s). Do Not Change.'),
+        h6("variableName = the human readable name of the measured variable."),
+        h6('contentUrl = a url from where that data came, if applicable'),
+        h6("fileFormat = the file format. Do Not. Change"),
 
         br(),
 
@@ -56,25 +56,14 @@ editCreators <- function(DF,
   server <- shinyServer(function(input, output) {
 
     values <- reactiveValues()
-
-
+    
+    dat <- read_csv(file = filepath,
+                    col_types = "cccc")
 
     output$hot <- renderRHandsontable({
 
-      rows_to_add <- as.data.frame(matrix(nrow=numCreators,
-                                          ncol=ncol(DF)))
-
-      colnames(rows_to_add) <- colnames(DF)
-      DF <- rows_to_add
-      DF[,1] <- as.character(DF[,1])
-      DF$type <- as.character(DF$type)
-      DF$id <- as.character(DF$id)
-      DF$givenName <- as.character(DF$givenName)
-      DF$familyName <- as.character(DF$familyName)
-      DF$affilitation <- as.character(DF$affilitation)
-      DF$email <- as.character(DF$email)
-      rhandsontable(DF,
-                    useTypes = TRUE,
+      rhandsontable(dat,
+                    useTypes = FALSE,
                     stretchH = "all")
     })
 
@@ -91,7 +80,7 @@ editCreators <- function(DF,
       if(input$save==0){
         helpText(sprintf("This table will be saved in folder \"%s\" once you press the Save button.", outdir))
       }else{
-        outfile <- "creator.csv"
+        outfile <- "access.csv"
         fun <- 'read.csv'
         list(helpText(sprintf("File saved: \"%s\".",
                               file.path(outdir, outfile))),

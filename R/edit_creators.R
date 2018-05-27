@@ -1,26 +1,26 @@
-#' Shiny App for editing the metadata biblio table
+#' Shiny App for editing the metadata creator table
 #'
-#' @param DF the imported biblio.csv dataframe
-#' @param outdir The directory to save the edited biblio info to
-#' @param outfilename The filename to save with. Defaults to biblio.csv.
-#'
+#' @param filepath the filepath leading to the creators.csv file
+#' @param outdir The directory to save the edited creator info to
+#' @param outfilename The filename to save with. Defaults to creator.csv.
+#' @param numCreators the number of creators that need to be included, defauls to 10
 #' @import shiny
 #' @import rhandsontable
-
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' editTable(DF = attributes)
+#' editTable(DF = creator)
 #'
 #'}
 
-editBiblio <- function(DF,
-                         outdir=getwd(),
-                         outfilename="biblio"){
-  ui <- shinyUI(fluidPage(
+edit_creators <- function(filepath="metadata-tables/creators.csv",
+                           outdir=getwd(),
+                           outfilename="creator",
+                         numCreators=10){
 
-    titlePanel("Populate the Biblio Metadata Table"),
+ui <- shinyUI(fluidPage(
+    titlePanel("Populate the Creators Metadata Table"),
     sidebarLayout(
       sidebarPanel(
         helpText("Shiny app to read in the dataspice metadata templates and populate with usersupplied data"),
@@ -53,33 +53,20 @@ editBiblio <- function(DF,
     )
   ))
 
-  server <- shinyServer(function(input, output) {
+server <- shinyServer(function(input, output) {
 
-    values <- reactiveValues()
+  values <- reactiveValues()
 
-    output$hot <- renderRHandsontable({
-      rows_to_add <- as.data.frame(matrix(nrow=1,
-                                          ncol=ncol(DF)))
+  dat <- read_csv(file = filepath,
+                  col_types = "ccccc")
+  
+  output$hot <- renderRHandsontable({
+      rows_to_add <- as.data.frame(matrix(nrow=numCreators,
+                                          ncol=ncol(dat)))
 
-      colnames(rows_to_add) <- colnames(DF)
-      DF <- rows_to_add
-      DF[,1] <- as.character(DF[,1])
-      DF$description <- as.character(DF$description)
-      DF$datePublished <- as.character(DF$datePublished)
-      DF$citation <- as.character(DF$citation)
-      DF$keywords <- as.character(DF$keywords)
-      DF$license <- as.character(DF$license)
-      DF$funder <- as.character(DF$funder)
-      DF$geographicDescription <- as.character(DF$geographicDescription)
-      DF$northBoundCoord <- as.character(DF$northBoundCoord)
-      DF$eastBoundCoord <- as.character(DF$eastBoundCoord)
-      DF$southBoundCoord <- as.character(DF$southBoundCoord)
-      DF$westBoundCoord <- as.character(DF$westBoundCoord)
-        DF$wktString <- as.character(DF$wktString)
-      DF$startDate <- as.character(DF$startDate)
-      DF$endDate <- as.character(DF$endDate)
-
-      rhandsontable(DF,
+      colnames(rows_to_add) <- colnames(dat)
+      dat <- bind_rows(dat, rows_to_add)
+      rhandsontable(dat,
                     useTypes = TRUE,
                     stretchH = "all")
     })
@@ -97,7 +84,7 @@ editBiblio <- function(DF,
       if(input$save==0){
         helpText(sprintf("This table will be saved in folder \"%s\" once you press the Save button.", outdir))
       }else{
-        outfile <- "biblio.csv"
+        outfile <- "creator.csv"
         fun <- 'read.csv'
         list(helpText(sprintf("File saved: \"%s\".",
                               file.path(outdir, outfile))),

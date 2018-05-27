@@ -1,13 +1,13 @@
-#' Shiny App for editing the metadata attributes table
+#' Shiny App for editing the metadata biblio table
 #'
-#' @param DF the imported attributes.csv dataframe
-#' @param outdir The directory to save the edited attributes info to
-#' @param outfilename The filename to save with. Defaults to attributes.csv.
+#' @param filepath the filepath leading to the biblio.csv file
+#' @param outdir The directory to save the edited biblio info to
+#' @param outfilename The filename to save with. Defaults to biblio.csv.
 #'
-#' @export
 #' @import shiny
 #' @import rhandsontable
 
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -15,12 +15,12 @@
 #'
 #'}
 
-editAttributes <- function(DF,
-                      outdir=getwd(),
-                      outfilename="attributes"){
+edit_biblio <- function(filepath="metadata-tables/biblio.csv",
+                         outdir=getwd(),
+                         outfilename="biblio"){
   ui <- shinyUI(fluidPage(
 
-    titlePanel("Populate the Attributes Metadata Table"),
+    titlePanel("Populate the Biblio Metadata Table"),
     sidebarLayout(
       sidebarPanel(
         helpText("Shiny app to read in the dataspice metadata templates and populate with usersupplied data"),
@@ -47,7 +47,7 @@ editAttributes <- function(DF,
           uiOutput("message", inline=TRUE)
         ),
         rHandsontableOutput("hot"),
-         br()
+        br()
 
       )
     )
@@ -57,19 +57,26 @@ editAttributes <- function(DF,
 
     values <- reactiveValues()
 
+    dat <- read_csv(file = filepath,
+                    col_types = "ccccccccccccccc")
+    
     output$hot <- renderRHandsontable({
-        DF$description <- as.character(DF$description)
-        DF$unitText <- as.character(DF$unitText)
-        rhandsontable(DF,
-                      useTypes = TRUE,
-                      stretchH = "all")
+      rows_to_add <- as.data.frame(matrix(nrow=1,
+                                          ncol=ncol(dat)))
+
+      colnames(rows_to_add) <- colnames(dat)
+      DF <- bind_rows(dat, rows_to_add)
+
+      rhandsontable(DF,
+                    useTypes = TRUE,
+                    stretchH = "all")
     })
 
     ## Save
     observeEvent(input$save, {
       finalDF <- hot_to_r(input$hot)
       utils::write.csv(finalDF, file=file.path(outdir,
-                        sprintf("%s.csv", outfilename)),
+                                        sprintf("%s.csv", outfilename)),
                 row.names = FALSE)
     })
 
@@ -78,7 +85,7 @@ editAttributes <- function(DF,
       if(input$save==0){
         helpText(sprintf("This table will be saved in folder \"%s\" once you press the Save button.", outdir))
       }else{
-        outfile <- "attributes.csv"
+        outfile <- "biblio.csv"
         fun <- 'read.csv'
         list(helpText(sprintf("File saved: \"%s\".",
                               file.path(outdir, outfile))),
