@@ -1,6 +1,6 @@
 #' Shiny App for editing the metadata creator table
 #'
-#' @param DF the imported creator.csv dataframe
+#' @param filepath the filepath leading to the creators.csv file
 #' @param outdir The directory to save the edited creator info to
 #' @param outfilename The filename to save with. Defaults to creator.csv.
 #' @param numCreators the number of creators that need to be included, defauls to 10
@@ -14,12 +14,12 @@
 #'
 #'}
 
-edit_creators <- function(DF,
+edit_creators <- function(filepath="metadata-tables/creators.csv",
                            outdir=getwd(),
                            outfilename="creator",
                          numCreators=10){
-  ui <- shinyUI(fluidPage(
 
+ui <- shinyUI(fluidPage(
     titlePanel("Populate the Creators Metadata Table"),
     sidebarLayout(
       sidebarPanel(
@@ -53,27 +53,20 @@ edit_creators <- function(DF,
     )
   ))
 
-  server <- shinyServer(function(input, output) {
+server <- shinyServer(function(input, output) {
 
-    values <- reactiveValues()
+  values <- reactiveValues()
 
-
-
-    output$hot <- renderRHandsontable({
-
+  dat <- read_csv(file = filepath,
+                  col_types = "ccccc")
+  
+  output$hot <- renderRHandsontable({
       rows_to_add <- as.data.frame(matrix(nrow=numCreators,
-                                          ncol=ncol(DF)))
+                                          ncol=ncol(dat)))
 
-      colnames(rows_to_add) <- colnames(DF)
-      DF <- rows_to_add
-      DF[,1] <- as.character(DF[,1])
-      DF$type <- as.character(DF$type)
-      DF$id <- as.character(DF$id)
-      DF$givenName <- as.character(DF$givenName)
-      DF$familyName <- as.character(DF$familyName)
-      DF$affilitation <- as.character(DF$affilitation)
-      DF$email <- as.character(DF$email)
-      rhandsontable(DF,
+      colnames(rows_to_add) <- colnames(dat)
+      dat <- bind_rows(dat, rows_to_add)
+      rhandsontable(dat,
                     useTypes = TRUE,
                     stretchH = "all")
     })
