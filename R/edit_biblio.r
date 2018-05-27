@@ -1,6 +1,6 @@
 #' Shiny App for editing the metadata biblio table
 #'
-#' @param DF the imported biblio.csv dataframe
+#' @param filepath the filepath leading to the biblio.csv file
 #' @param outdir The directory to save the edited biblio info to
 #' @param outfilename The filename to save with. Defaults to biblio.csv.
 #'
@@ -15,7 +15,7 @@
 #'
 #'}
 
-edit_biblio <- function(DF,
+edit_biblio <- function(filepath="metadata-tables/biblio.csv",
                          outdir=getwd(),
                          outfilename="biblio"){
   ui <- shinyUI(fluidPage(
@@ -57,27 +57,15 @@ edit_biblio <- function(DF,
 
     values <- reactiveValues()
 
+    dat <- read_csv(file = filepath,
+                    col_types = "ccccccccccccccc")
+    
     output$hot <- renderRHandsontable({
       rows_to_add <- as.data.frame(matrix(nrow=1,
-                                          ncol=ncol(DF)))
+                                          ncol=ncol(dat)))
 
-      colnames(rows_to_add) <- colnames(DF)
-      DF <- rows_to_add
-      DF[,1] <- as.character(DF[,1])
-      DF$description <- as.character(DF$description)
-      DF$datePublished <- as.character(DF$datePublished)
-      DF$citation <- as.character(DF$citation)
-      DF$keywords <- as.character(DF$keywords)
-      DF$license <- as.character(DF$license)
-      DF$funder <- as.character(DF$funder)
-      DF$geographicDescription <- as.character(DF$geographicDescription)
-      DF$northBoundCoord <- as.character(DF$northBoundCoord)
-      DF$eastBoundCoord <- as.character(DF$eastBoundCoord)
-      DF$southBoundCoord <- as.character(DF$southBoundCoord)
-      DF$westBoundCoord <- as.character(DF$westBoundCoord)
-        DF$wktString <- as.character(DF$wktString)
-      DF$startDate <- as.character(DF$startDate)
-      DF$endDate <- as.character(DF$endDate)
+      colnames(rows_to_add) <- colnames(dat)
+      DF <- bind_rows(dat, rows_to_add)
 
       rhandsontable(DF,
                     useTypes = TRUE,

@@ -1,6 +1,6 @@
 #' Shiny App for editing the metadata attributes table
 #'
-#' @param DF the imported attributes.csv dataframe
+#' @param filepath the filepath leading to the attributes.csv file
 #' @param outdir The directory to save the edited attributes info to
 #' @param outfilename The filename to save with. Defaults to attributes.csv.
 #'
@@ -15,7 +15,7 @@
 #'
 #'}
 
-edit_attributes <- function(DF,
+edit_attributes <- function(filepath="metadata-tables/attributes.csv",
                       outdir=getwd(),
                       outfilename="attributes"){
   ui <- shinyUI(fluidPage(
@@ -57,10 +57,11 @@ edit_attributes <- function(DF,
 
     values <- reactiveValues()
 
+    dat <- read_csv(file = filepath,
+                    col_types = "cccc")
+    
     output$hot <- renderRHandsontable({
-        DF$description <- as.character(DF$description)
-        DF$unitText <- as.character(DF$unitText)
-        rhandsontable(DF,
+        rhandsontable(dat,
                       useTypes = TRUE,
                       stretchH = "all")
     })

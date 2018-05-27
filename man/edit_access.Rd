@@ -4,10 +4,11 @@
 \alias{edit_access}
 \title{Shiny App for editing the metadata access table}
 \usage{
-edit_access(DF, outdir = getwd(), outfilename = "access")
+edit_access(filepath = "metadata-tables/access.csv", outdir = getwd(),
+  outfilename = "access")
 }
 \arguments{
-\item{DF}{the imported access.csv dataframe}
+\item{filepath}{the filepath leading to the access.csv file}
 
 \item{outdir}{The directory to save the edited access info to}
 
