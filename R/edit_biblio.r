@@ -59,7 +59,7 @@ edit_biblio <- function(filepath="metadata-tables/biblio.csv",
 
     dat <- read_csv(file = filepath,
                     col_types = "ccccccccccccccc")
-    
+
     output$hot <- renderRHandsontable({
       rows_to_add <- as.data.frame(matrix(nrow=1,
                                           ncol=ncol(dat)))
