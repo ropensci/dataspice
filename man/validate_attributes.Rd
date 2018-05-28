@@ -7,8 +7,8 @@
 validate_attributes(attributes)
 }
 \arguments{
-\item{attributes.csv}{(data.frame) A \code{data.frame} read in from
-\code{attributes.csv.csv}}
+\item{attributes}{(data.frame) A \code{data.frame} read in from
+\code{attributes.csv}}
 }
 \value{
 Nothing. Side-effect: Can \code{stop} execution if validation fails.
