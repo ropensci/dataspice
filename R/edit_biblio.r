@@ -65,7 +65,7 @@ edit_biblio <- function(filepath="metadata-tables/biblio.csv",
                                           ncol=ncol(dat)))
 
       colnames(rows_to_add) <- colnames(dat)
-      DF <- bind_rows(dat, rows_to_add)
+      DF <- dplyr::bind_rows(dat, rows_to_add)
 
       rhandsontable(DF,
                     useTypes = TRUE,

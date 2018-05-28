@@ -65,7 +65,7 @@ server <- shinyServer(function(input, output) {
                                           ncol=ncol(dat)))
 
       colnames(rows_to_add) <- colnames(dat)
-      dat <- bind_rows(dat, rows_to_add)
+      dat <- dplyr::bind_rows(dat, rows_to_add)
       rhandsontable(dat,
                     useTypes = TRUE,
                     stretchH = "all")
