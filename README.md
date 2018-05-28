@@ -542,14 +542,15 @@ richard.brenner.alaska.gov
 Resources
 ---------
 
-A few existing tools & data standards to help users follow existing data standards for specific domains:
+A few existing tools & data standards to help users in specific domains:
 
--   [Ecological Markup Language](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html) (EML) (& [`eml2`](https://github.com/cboettig/eml2))
+-   [Darwin Core](http://rs.tdwg.org/dwc/)
+-   [Ecological Metadata Language](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html) (EML) (& [`eml2`](https://github.com/cboettig/eml2))
 -   [ISO 19115](https://www.iso.org/standard/53798.html) - Geographic Information Metadata
 -   [ISO 19139](https://www.iso.org/standard/32557.html) - Geographic Info Metadata XML schema
 -   [Minimum Information for Biological and Biomedical Investigations](https://fairsharing.org/collection/MIBBI) (MIBBI)
 
-...And other standards indexed in [Fairsharing.org](https://fairsharing.org) & the [RDA metadata directory](http://rd-alliance.github.io/metadata-directory/standards/).
+...And others indexed in [Fairsharing.org](https://fairsharing.org) & the [RDA metadata directory](http://rd-alliance.github.io/metadata-directory/standards/).
 
 Contributors
 ------------
