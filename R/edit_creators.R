@@ -59,13 +59,13 @@ server <- shinyServer(function(input, output) {
 
   dat <- read_csv(file = filepath,
                   col_types = "ccccc")
-  
+
   output$hot <- renderRHandsontable({
       rows_to_add <- as.data.frame(matrix(nrow=numCreators,
                                           ncol=ncol(dat)))
 
       colnames(rows_to_add) <- colnames(dat)
-      dat <- bind_rows(dat, rows_to_add)
+      dat <- dplyr::bind_rows(dat, rows_to_add)
       rhandsontable(dat,
                     useTypes = TRUE,
                     stretchH = "all")

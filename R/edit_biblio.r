@@ -59,13 +59,13 @@ edit_biblio <- function(filepath="metadata-tables/biblio.csv",
 
     dat <- read_csv(file = filepath,
                     col_types = "ccccccccccccccc")
-    
+
     output$hot <- renderRHandsontable({
       rows_to_add <- as.data.frame(matrix(nrow=1,
                                           ncol=ncol(dat)))
 
       colnames(rows_to_add) <- colnames(dat)
-      DF <- bind_rows(dat, rows_to_add)
+      DF <- dplyr::bind_rows(dat, rows_to_add)
 
       rhandsontable(DF,
                     useTypes = TRUE,

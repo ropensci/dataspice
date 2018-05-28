@@ -15,8 +15,8 @@ validate_biblio <- function(biblio) {
 
 #' Validate attributes.csv
 #'
-#' @param attributes.csv (data.frame) A \code{data.frame} read in from
-#' \code{attributes.csv.csv}
+#' @param attributes (data.frame) A \code{data.frame} read in from
+#' \code{attributes.csv}
 #'
 #' @return Nothing. Side-effect: Can \code{stop} execution if validation fails.
 validate_attributes <- function(attributes) {
