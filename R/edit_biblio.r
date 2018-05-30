@@ -11,11 +11,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' editTable(DF = attributes)
+#' editTable()
 #'
 #'}
 
-edit_biblio <- function(filepath="metadata-tables/biblio.csv",
+edit_biblio <- function(filepath="./inst/metadata-tables/biblio.csv",
                          outdir=getwd(),
                          outfilename="biblio"){
   ui <- shinyUI(fluidPage(
@@ -38,7 +38,9 @@ edit_biblio <- function(filepath="metadata-tables/biblio.csv",
               div(class="col-sm-6",
                   actionButton("save", "Save"))
           )
-        )
+        ),
+        
+        plotOutput("bbmap")
 
       ),
 
@@ -57,17 +59,17 @@ edit_biblio <- function(filepath="metadata-tables/biblio.csv",
 
     values <- reactiveValues()
 
-    dat <- read_csv(file = filepath,
+    dat <- readr::read_csv(file = filepath,
                     col_types = "ccccccccccccccc")
     
-    output$hot <- renderRHandsontable({
+    output$hot <- rhandsontable::renderRHandsontable({
       rows_to_add <- as.data.frame(matrix(nrow=1,
                                           ncol=ncol(dat)))
 
       colnames(rows_to_add) <- colnames(dat)
-      DF <- bind_rows(dat, rows_to_add)
+      DF <- dplyr::bind_rows(dat, rows_to_add)
 
-      rhandsontable(DF,
+      rhandsontable::rhandsontable(DF,
                     useTypes = TRUE,
                     stretchH = "all")
     })
@@ -76,10 +78,22 @@ edit_biblio <- function(filepath="metadata-tables/biblio.csv",
     observeEvent(input$save, {
       finalDF <- hot_to_r(input$hot)
       utils::write.csv(finalDF, file=file.path(outdir,
-                                        sprintf("%s.csv", outfilename)),
+                sprintf("%s.csv", outfilename)),
                 row.names = FALSE)
     })
 
+    
+    ## bounding box map
+    
+    output$bbmap <- renderPlot({
+      world <- ggplot2::map_data("world")
+      ggplot2::ggplot()+
+        ggplot2::geom_map(data=world, map=world,
+                          aes(x=long, y=lat, map_id=region),
+                          color="black",fill="#7f7f7f")
+    })
+    
+    
     ## Message
     output$message <- renderUI({
       if(input$save==0){
