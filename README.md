@@ -11,7 +11,7 @@ The goal of dataspice is to make it easier for researchers to create basic, ligh
 -   create a helpful dataset README webpage.
 -   produce more complex metadata formats to aid dataset discovery.
 
-Metadata fields are based on [schema.org](http://schema.org/Dataset) and other metadata standards.
+Metadata fields are based on [schema.org](http://schema.org/Dataset) and other [metadata standards](https://github.com/ropenscilabs/dataspice#resources).
 
 Example
 -------
@@ -538,6 +538,19 @@ richard.brenner.alaska.gov
 -   `build_site()` generates an index.html file in the repository `docs` folder, to create a website that shows a simple view of the dataset with the metadata and an interactive map. For example, this [repository](https://github.com/amoeba/dataspice-example) results in a [website](https://amoeba.github.io/dataspice-example/)
 
 ![dataspice-website](man/figures/screenshot.png)
+
+Resources
+---------
+
+A few existing tools & data standards to help users in specific domains:
+
+-   [Darwin Core](http://rs.tdwg.org/dwc/)
+-   [Ecological Metadata Language](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html) (EML) (& [`eml2`](https://github.com/cboettig/eml2))
+-   [ISO 19115](https://www.iso.org/standard/53798.html) - Geographic Information Metadata
+-   [ISO 19139](https://www.iso.org/standard/32557.html) - Geographic Info Metadata XML schema
+-   [Minimum Information for Biological and Biomedical Investigations](https://fairsharing.org/collection/MIBBI) (MIBBI)
+
+...And others indexed in [Fairsharing.org](https://fairsharing.org) & the [RDA metadata directory](http://rd-alliance.github.io/metadata-directory/standards/).
 
 Contributors
 ------------
