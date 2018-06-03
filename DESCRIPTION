@@ -20,7 +20,8 @@ Imports:
     tibble,
     shiny,
     rhandsontable,
-    dplyr
+    dplyr,
+    ggplot2
 Suggests: 
     testthat,
     knitr,
