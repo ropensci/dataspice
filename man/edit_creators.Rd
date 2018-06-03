@@ -4,15 +4,12 @@
 \alias{edit_creators}
 \title{Shiny App for editing the metadata creator table}
 \usage{
-edit_creators(filepath = "metadata-tables/creators.csv", outdir = getwd(),
-  outfilename = "creator", numCreators = 10)
+edit_creators(filepath = here::here("data", "metadata", "creators.csv"),
+  numCreators = 10)
 }
 \arguments{
-\item{filepath}{the filepath leading to the creators.csv file}
-
-\item{outdir}{The directory to save the edited creator info to}
-
-\item{outfilename}{The filename to save with. Defaults to creator.csv.}
+\item{filepath}{the filepath to the dataspice access.csv file. Defaults to current
+<project_root>/data/metadata/access.csv.}
 
 \item{numCreators}{the number of creators that need to be included, defauls to 10}
 }
@@ -21,7 +18,7 @@ Shiny App for editing the metadata creator table
 }
 \examples{
 \dontrun{
-editTable(DF = creator)
+edit_creators()
 
 }
 }

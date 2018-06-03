@@ -4,22 +4,18 @@
 \alias{edit_attributes}
 \title{Shiny App for editing the metadata attributes table}
 \usage{
-edit_attributes(filepath = "metadata-tables/attributes.csv",
-  outdir = getwd(), outfilename = "attributes")
+edit_attributes(filepath = here::here("data", "metadata", "attributes.csv"))
 }
 \arguments{
-\item{filepath}{the filepath leading to the attributes.csv file}
-
-\item{outdir}{The directory to save the edited attributes info to}
-
-\item{outfilename}{The filename to save with. Defaults to attributes.csv.}
+\item{filepath}{the filepath to the dataspice attributes.csv file. Defaults to current
+<project_root>/data/metadata/attributes.csv,}
 }
 \description{
 Shiny App for editing the metadata attributes table
 }
 \examples{
 \dontrun{
-editTable(DF = attributes)
+edit_attributes()
 
 }
 }

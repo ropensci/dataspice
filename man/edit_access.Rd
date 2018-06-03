@@ -4,22 +4,18 @@
 \alias{edit_access}
 \title{Shiny App for editing the metadata access table}
 \usage{
-edit_access(filepath = "metadata-tables/access.csv", outdir = getwd(),
-  outfilename = "access")
+edit_access(filepath = here::here("data", "metadata", "access.csv"))
 }
 \arguments{
-\item{filepath}{the filepath leading to the access.csv file}
-
-\item{outdir}{The directory to save the edited access info to}
-
-\item{outfilename}{The filename to save with. Defaults to access.csv.}
+\item{filepath}{the filepath to the dataspice access.csv file. Defaults to current
+<project_root>/data/metadata/access.csv.}
 }
 \description{
 Shiny App for editing the metadata access table
 }
 \examples{
 \dontrun{
-editTable(DF = access)
+edit_access()
 
 }
 }

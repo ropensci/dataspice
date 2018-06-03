@@ -61,6 +61,8 @@ edit_biblio <- function(filepath = here::here("data", "metadata", "biblio.csv"))
                    actionButton("save", "Save Changes"))
           )
         ),
+        helpText("Right-click on the table to delete/insert rows.",
+                 "Double-click on a cell to edit"),
         rHandsontableOutput("hot"),
         br()
 
@@ -74,14 +76,14 @@ edit_biblio <- function(filepath = here::here("data", "metadata", "biblio.csv"))
 
     dat <- readr::read_csv(file = filepath,
                     col_types = "ccccccccccccccc")
+
+    # pad if no data
+    if(nrow(dat) == 0){
+      dat <- dplyr::add_row(dat)
+    }
+
     output$hot <- rhandsontable::renderRHandsontable({
-      rows_to_add <- as.data.frame(matrix(nrow=1,
-                                          ncol=ncol(dat)))
-
-      colnames(rows_to_add) <- colnames(dat)
-      DF <- dplyr::bind_rows(dat, rows_to_add)
-
-      rhandsontable::rhandsontable(DF,
+      rhandsontable(dat,
                     useTypes = TRUE,
                     stretchH = "all")
     })
@@ -89,7 +91,10 @@ edit_biblio <- function(filepath = here::here("data", "metadata", "biblio.csv"))
     ## Save
     observeEvent(input$save, {
       finalDF <- hot_to_r(input$hot)
-      readr::write_csv(finalDF, path = filepath)
+      readr::write_csv(
+        # remove padding if none edited
+        dplyr::filter_all(finalDF, dplyr::any_vars(!is.na(.))),
+        path = filepath)
     })
 
 
@@ -115,12 +120,9 @@ edit_biblio <- function(filepath = here::here("data", "metadata", "biblio.csv"))
                  strong("Save Changes"),
                  "button.")
       }else{
-
-        fun <- 'readr::read_csv'
-        list(helpText(sprintf("File saved at path: \'%s\'.",
-                              filepath)),
-             helpText(sprintf("Use %s(\'%s\') to read it.",
-                              fun, filepath)))
+        list(helpText("File saved at path:", code(filepath)),
+             helpText("Use", code(paste0("readr::read_csv('",filepath,"')")) ,
+                      "to read it."))
       }
     })
 

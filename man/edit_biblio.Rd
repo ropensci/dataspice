@@ -4,22 +4,18 @@
 \alias{edit_biblio}
 \title{Shiny App for editing the metadata biblio table}
 \usage{
-edit_biblio(filepath = "metadata-tables/biblio.csv", outdir = getwd(),
-  outfilename = "biblio")
+edit_biblio(filepath = here::here("data", "metadata", "biblio.csv"))
 }
 \arguments{
-\item{filepath}{the filepath leading to the biblio.csv file}
-
-\item{outdir}{The directory to save the edited biblio info to}
-
-\item{outfilename}{The filename to save with. Defaults to biblio.csv.}
+\item{filepath}{the filepath to the dataspice biblio.csv file. Defaults to current
+<project_root>/data/metadata/biblio.csv.}
 }
 \description{
 Shiny App for editing the metadata biblio table
 }
 \examples{
 \dontrun{
-editTable(DF = attributes)
+edit_biblio()
 
 }
 }

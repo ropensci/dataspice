@@ -1,29 +1,26 @@
 #' Shiny App for editing the metadata attributes table
 #'
-#' @param filepath the filepath leading to the attributes.csv file
-#' @param outdir The directory to save the edited attributes info to
-#' @param outfilename The filename to save with. Defaults to attributes.csv.
+#' @param filepath the filepath to the dataspice attributes.csv file. Defaults to current
+#'   <project_root>/data/metadata/attributes.csv,
 #'
-#' @export
 #' @import shiny
 #' @import rhandsontable
-
+#' @import ggplot2
+#' @export
 #'
 #' @examples
 #' \dontrun{
-#' editTable(DF = attributes)
+#' edit_attributes()
 #'
 #'}
 
-edit_attributes <- function(filepath="metadata-tables/attributes.csv",
-                      outdir=getwd(),
-                      outfilename="attributes"){
+edit_attributes <- function(filepath = here::here("data", "metadata", "attributes.csv")){
   ui <- shinyUI(fluidPage(
 
     titlePanel("Populate the Attributes Metadata Table"),
+    helpText("Shiny app to read in the", code("dataspice"), "metadata templates and populate with user supplied metadata"),
     sidebarLayout(
       sidebarPanel(
-        helpText("Shiny app to read in the dataspice metadata templates and populate with usersupplied data"),
 
         h6('fileName = the name of the input data file(s). Do Not Change.'),
         h6("variableName = the name of the measured variable. Do Not Change."),
@@ -36,7 +33,7 @@ edit_attributes <- function(filepath="metadata-tables/attributes.csv",
           h3("Save table"),
           div(class='row',
               div(class="col-sm-6",
-                  actionButton("save", "Save"))
+                  actionButton("save", "Save Changes"))
           )
         )
 
@@ -46,6 +43,8 @@ edit_attributes <- function(filepath="metadata-tables/attributes.csv",
         wellPanel(
           uiOutput("message", inline=TRUE)
         ),
+        helpText("Right-click on the table to delete/insert rows.",
+                 "Double-click on a cell to edit"),
         rHandsontableOutput("hot"),
          br()
 
@@ -57,9 +56,13 @@ edit_attributes <- function(filepath="metadata-tables/attributes.csv",
 
     values <- reactiveValues()
 
-    dat <- read_csv(file = filepath,
+    dat <- readr::read_csv(file = filepath,
                     col_types = "cccc")
-    
+    # pad if no data
+    if(nrow(dat) == 0){
+      dat <- dplyr::add_row(dat)
+    }
+
     output$hot <- renderRHandsontable({
         rhandsontable(dat,
                       useTypes = TRUE,
@@ -69,22 +72,27 @@ edit_attributes <- function(filepath="metadata-tables/attributes.csv",
     ## Save
     observeEvent(input$save, {
       finalDF <- hot_to_r(input$hot)
-      utils::write.csv(finalDF, file=file.path(outdir,
-                        sprintf("%s.csv", outfilename)),
-                row.names = FALSE)
+      readr::write_csv(
+        # remove padding if none edited
+        dplyr::filter_all(finalDF, dplyr::any_vars(!is.na(.))),
+        path = filepath)
     })
+
 
     ## Message
     output$message <- renderUI({
+      outfile <- basename(filepath)
+      outdir <- gsub(outfile, "", filepath)
       if(input$save==0){
-        helpText(sprintf("This table will be saved in folder \"%s\" once you press the Save button.", outdir))
+        helpText("This table will be saved as file: ", code(outfile),
+                 "in directory:", code(outdir),
+                 " once you press the ",
+                 strong("Save Changes"),
+                 "button.")
       }else{
-        outfile <- "attributes.csv"
-        fun <- 'read.csv'
-        list(helpText(sprintf("File saved: \"%s\".",
-                              file.path(outdir, outfile))),
-             helpText(sprintf("Type %s(\"%s\") to get it.",
-                              fun, outfile)))
+        list(helpText("File saved at path:", code(filepath)),
+             helpText("Use", code(paste0("readr::read_csv('",filepath,"')")) ,
+                      "to read it."))
       }
     })
 
