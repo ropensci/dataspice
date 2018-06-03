@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' editTable()
+#' edit_biblio()
 #'
 #'}
 
@@ -22,13 +22,6 @@ edit_biblio <- function(filepath = here::here("data", "metadata", "biblio.csv"))
 
     sidebarLayout(
       sidebarPanel(
-        wellPanel(
-          h3("Save table"),
-          div(class='row',
-              div(class="col-sm-6",
-                  actionButton("save", "Save Changes"))
-          )
-        ),
         h4("Bibliographic metadata"),
         h6('title = text: Title of the dataset(s) described.'),
         h6("description = text: Description of the dataset(s) described"),
@@ -58,7 +51,15 @@ edit_biblio <- function(filepath = here::here("data", "metadata", "biblio.csv"))
 
       mainPanel(
         wellPanel(
-          uiOutput("message", inline=TRUE)
+          uiOutput("message", inline=TRUE)),
+        fluidRow(
+          column(8,
+                 h3("biblio.csv", style = "vertical-align: text-bottom;")),
+          column(4,
+                 wellPanel(
+                  # h3("Save table"),
+                   actionButton("save", "Save Changes"))
+          )
         ),
         rHandsontableOutput("hot"),
         br()
@@ -105,10 +106,16 @@ edit_biblio <- function(filepath = here::here("data", "metadata", "biblio.csv"))
 
     ## Message
     output$message <- renderUI({
+      outfile <- basename(filepath)
+      outdir <- gsub(outfile, "", filepath)
       if(input$save==0){
-        helpText(sprintf("This table will be saved at path \'%s\' once you press the Save button.", filepath))
+        helpText("This table will be saved as file: ", code(outfile),
+                 "in directory:", code(outdir),
+                 " once you press the ",
+                 strong("Save Changes"),
+                 "button.")
       }else{
-        outfile <- "biblio.csv"
+
         fun <- 'readr::read_csv'
         list(helpText(sprintf("File saved at path: \'%s\'.",
                               filepath)),
