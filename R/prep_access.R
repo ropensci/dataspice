@@ -15,11 +15,13 @@ prep_access <- function(data_path = here::here("data"),
   if(!file.exists(access_path)){
     stop("access file does not exist. Check path or run create_spice?")}
 
-  access <- readr::read_csv(access_path, col_types = readr::cols())
+  access <- readr::read_csv(access_path)
 
   # read file info
-  fileNames <- tools::list_files_with_type(data_path, "data", full.names = TRUE)
-  fileTypes <- sapply(fileNames, tools::file_ext)
+  fileNames <- tools::list_files_with_exts(data_path,
+                                           exts = c("csv", "tsv"),
+                                           full.names = TRUE)
+  fileTypes <- vapply(fileNames, tools::file_ext)
 
   if(all(basename(fileNames) %in% unique(access$fileName))){
     stop("Entries already exist in access.csv for fileNames: ",
