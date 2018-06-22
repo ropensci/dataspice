@@ -4,8 +4,8 @@
 \alias{edit_biblio}
 \title{Shiny App for editing the metadata biblio table}
 \usage{
-edit_biblio(filepath = "metadata-tables/biblio.csv", outdir = getwd(),
-  outfilename = "biblio")
+edit_biblio(filepath = "./inst/metadata-tables/biblio.csv",
+  outdir = getwd(), outfilename = "biblio")
 }
 \arguments{
 \item{filepath}{the filepath leading to the biblio.csv file}
@@ -19,7 +19,7 @@ Shiny App for editing the metadata biblio table
 }
 \examples{
 \dontrun{
-editTable(DF = attributes)
+editTable()
 
 }
 }

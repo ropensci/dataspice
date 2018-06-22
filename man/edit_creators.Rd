@@ -14,7 +14,7 @@ edit_creators(filepath = "metadata-tables/creators.csv", outdir = getwd(),
 
 \item{outfilename}{The filename to save with. Defaults to creator.csv.}
 
-\item{numCreators}{the number of creators that need to be included, defauls to 10}
+\item{numCreators}{the number of creators that need to be included, defaults to 10}
 }
 \description{
 Shiny App for editing the metadata creator table
