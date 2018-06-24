@@ -3,7 +3,7 @@
 #' @param filepath the filepath leading to the creators.csv file
 #' @param outdir The directory to save the edited creator info to
 #' @param outfilename The filename to save with. Defaults to creator.csv.
-#' @param numCreators the number of creators that need to be included, defauls to 10
+#' @param numCreators the number of creators that need to be included, defaults to 10
 #' @import shiny
 #' @import rhandsontable
 #' @export
