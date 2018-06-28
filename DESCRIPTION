@@ -20,7 +20,10 @@ Imports:
     tibble,
     shiny,
     rhandsontable,
-    dplyr
+    dplyr,
+    eml2,
+    tidyr,
+    ggplot2
 Suggests: 
     testthat,
     knitr,
@@ -28,3 +31,4 @@ Suggests:
     servr
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
+Remotes: cboettig/eml2
