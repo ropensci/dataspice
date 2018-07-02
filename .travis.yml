@@ -6,3 +6,14 @@ r:
   - oldrel
   - release
   - devel
+
+# needed for eml2:
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:opencpu/jq'
+    packages:
+      - librdf0-dev
+      - libv8-dev
+      - libjq-dev
+      - libudunits2-dev
