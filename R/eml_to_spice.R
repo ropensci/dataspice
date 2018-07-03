@@ -68,12 +68,12 @@ get_attributes_spice <- function(x) {
   #reformat attributes to tabular format specified in dataspice
   #input a dataTable or otherEntity
 
-  objName <- tryCatch(eml2::eml_get(x, "objectName")[[1]],
-                      error = function(e){NA})
+  objName <- eml2::eml_get(x, "objectName")
+  objName <- ifelse(length(objName) == 2, objName[[1]], NA)
 
   attrList <- eml2::eml_get(x, "attributeList")
 
-  if(length(attrList) == 0){
+  if(length(attrList) <= 1){
     out <- dplyr::tibble(fileName = objName,
                          variableName = NA,
                          description = NA,
