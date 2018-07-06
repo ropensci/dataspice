@@ -6,6 +6,7 @@
 #'
 #' @import shiny
 #' @import rhandsontable
+#' @import ggplot2
 
 #' @export
 #'
@@ -39,7 +40,7 @@ edit_biblio <- function(filepath="./inst/metadata-tables/biblio.csv",
                   actionButton("save", "Save"))
           )
         ),
-        
+
         plotOutput("bbmap")
 
       ),
@@ -81,18 +82,18 @@ edit_biblio <- function(filepath="./inst/metadata-tables/biblio.csv",
                 row.names = FALSE)
     })
 
-    
+
     ## bounding box map
-    
+
     output$bbmap <- renderPlot({
       world <- ggplot2::map_data("world")
       ggplot2::ggplot()+
         ggplot2::geom_map(data=world, map=world,
-                          aes(x=long, y=lat, map_id=region),
+                          ggplot2::aes(x=long, y=lat, map_id=region),
                           color="black",fill="#7f7f7f")
     })
-    
-    
+
+
     ## Message
     output$message <- renderUI({
       if(input$save==0){
