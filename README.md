@@ -200,335 +200,120 @@ Completed metadata tables in this example will look like this:
 
 `access.csv` has one row for each file
 
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-fileName
-</th>
-<th style="text-align:left;">
-name
-</th>
-<th style="text-align:left;">
-contentUrl
-</th>
-<th style="text-align:left;">
-fileFormat
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-StockInfo.csv
-</td>
-<td style="text-align:left;">
-StockInfo.csv
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-CSV
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-CSV
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SourceInfo.csv
-</td>
-<td style="text-align:left;">
-SourceInfo.csv
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-CSV
-</td>
-</tr>
-</tbody>
-</table>
+| fileName        | name            | contentUrl | fileFormat |
+|:----------------|:----------------|:-----------|:-----------|
+| StockInfo.csv   | StockInfo.csv   | NA         | CSV        |
+| BroodTables.csv | BroodTables.csv | NA         | CSV        |
+| SourceInfo.csv  | SourceInfo.csv  | NA         | CSV        |
+
 `attributes.csv` has one row for each variable in each file
 
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-fileName
-</th>
-<th style="text-align:left;">
-variableName
-</th>
-<th style="text-align:left;">
-description
-</th>
-<th style="text-align:left;">
-unitText
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Stock.ID
-</td>
-<td style="text-align:left;">
-Unique stock identifier
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Species
-</td>
-<td style="text-align:left;">
-species of stock
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Stock
-</td>
-<td style="text-align:left;">
-Stock name, generally river where stock is found
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Ocean.Region
-</td>
-<td style="text-align:left;">
-Ocean region
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Region
-</td>
-<td style="text-align:left;">
-Region of stock
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Sub.Region
-</td>
-<td style="text-align:left;">
-Sub.Region of stock
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-</tbody>
-</table>
+| fileName        | variableName | description                                      | unitText |
+|:----------------|:-------------|:-------------------------------------------------|:---------|
+| BroodTables.csv | Stock.ID     | Unique stock identifier                          | NA       |
+| BroodTables.csv | Species      | species of stock                                 | NA       |
+| BroodTables.csv | Stock        | Stock name, generally river where stock is found | NA       |
+| BroodTables.csv | Ocean.Region | Ocean region                                     | NA       |
+| BroodTables.csv | Region       | Region of stock                                  | NA       |
+| BroodTables.csv | Sub.Region   | Sub.Region of stock                              | NA       |
+
 `biblio.csv` is one row containing descriptors including spatial and temporal coverage
 
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="14%" />
+<col width="41%" />
+<col width="4%" />
+<col width="2%" />
+<col width="5%" />
+<col width="1%" />
+<col width="1%" />
+<col width="4%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="2%" />
+<col width="4%" />
+<col width="4%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-title
-</th>
-<th style="text-align:left;">
-description
-</th>
-<th style="text-align:left;">
-datePublished
-</th>
-<th style="text-align:left;">
-citation
-</th>
-<th style="text-align:left;">
-keywords
-</th>
-<th style="text-align:left;">
-license
-</th>
-<th style="text-align:left;">
-funder
-</th>
-<th style="text-align:left;">
-geographicDescription
-</th>
-<th style="text-align:right;">
-northBoundCoord
-</th>
-<th style="text-align:right;">
-eastBoundCoord
-</th>
-<th style="text-align:right;">
-southBoundCoord
-</th>
-<th style="text-align:right;">
-westBoundCoord
-</th>
-<th style="text-align:left;">
-wktString
-</th>
-<th style="text-align:left;">
-startDate
-</th>
-<th style="text-align:left;">
-endDate
-</th>
+<tr class="header">
+<th align="left">title</th>
+<th align="left">description</th>
+<th align="left">datePublished</th>
+<th align="left">citation</th>
+<th align="left">keywords</th>
+<th align="left">license</th>
+<th align="left">funder</th>
+<th align="left">geographicDescription</th>
+<th align="right">northBoundCoord</th>
+<th align="right">eastBoundCoord</th>
+<th align="right">southBoundCoord</th>
+<th align="right">westBoundCoord</th>
+<th align="left">wktString</th>
+<th align="left">startDate</th>
+<th align="left">endDate</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Compiled annual statewide Alaskan salmon escapement counts, 1921-2017
-</td>
-<td style="text-align:left;">
-The number of mature salmon migrating from the marine environment to freshwater streams is defined as escapement. Escapement data are the enumeration of these migrating fish as they pass upstream, ...
-</td>
-<td style="text-align:left;">
-2018-02-12 08:00:00
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-salmon, alaska, escapement
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-78
-</td>
-<td style="text-align:right;">
--131
-</td>
-<td style="text-align:right;">
-47
-</td>
-<td style="text-align:right;">
--171
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-1921-01-01 08:00:00
-</td>
-<td style="text-align:left;">
-2017-01-01 08:00:00
-</td>
+<tr class="odd">
+<td align="left">Compiled annual statewide Alaskan salmon escapement counts, 1921-2017</td>
+<td align="left">The number of mature salmon migrating from the marine environment to freshwater streams is defined as escapement. Escapement data are the enumeration of these migrating fish as they pass upstream, ...</td>
+<td align="left">2018-02-12 08:00:00</td>
+<td align="left">NA</td>
+<td align="left">salmon, alaska, escapement</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">78</td>
+<td align="right">-131</td>
+<td align="right">47</td>
+<td align="right">-171</td>
+<td align="left">NA</td>
+<td align="left">1921-01-01 08:00:00</td>
+<td align="left">2017-01-01 08:00:00</td>
 </tr>
 </tbody>
 </table>
+
 `creators.csv` has one row for each of the dataset authors
 
 <table>
+<colgroup>
+<col width="3%" />
+<col width="10%" />
+<col width="10%" />
+<col width="50%" />
+<col width="25%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-id
-</th>
-<th style="text-align:left;">
-givenName
-</th>
-<th style="text-align:left;">
-familyName
-</th>
-<th style="text-align:left;">
-affiliation
-</th>
-<th style="text-align:left;">
-email
-</th>
+<tr class="header">
+<th align="left">id</th>
+<th align="left">givenName</th>
+<th align="left">familyName</th>
+<th align="left">affiliation</th>
+<th align="left">email</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-Jeanette
-</td>
-<td style="text-align:left;">
-Clark
-</td>
-<td style="text-align:left;">
-National Center for Ecological Analysis and Synthesis
-</td>
-<td style="text-align:left;">
-<jclark@nceas.ucsb.edu>
-</td>
+<tr class="odd">
+<td align="left">NA</td>
+<td align="left">Jeanette</td>
+<td align="left">Clark</td>
+<td align="left">National Center for Ecological Analysis and Synthesis</td>
+<td align="left"><a href="mailto:jclark@nceas.ucsb.edu">jclark@nceas.ucsb.edu</a></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-Rich
-</td>
-<td style="text-align:left;">
-Brenner
-</td>
-<td style="text-align:left;">
-Alaska Department of Fish and Game
-</td>
-<td style="text-align:left;">
-richard.brenner.alaska.gov
-</td>
+<tr class="even">
+<td align="left">NA</td>
+<td align="left">Rich</td>
+<td align="left">Brenner</td>
+<td align="left">Alaska Department of Fish and Game</td>
+<td align="left">richard.brenner.alaska.gov</td>
 </tr>
 </tbody>
 </table>
+
 ### Save json-ld file
 
 -   `write_spice()` generates a json-ld file ("linked data") to aid in [dataset discovery](https://developers.google.com/search/docs/data-types/dataset), creation of more extensive metadata (e.g. [EML](https://knb.ecoinformatics.org/#api)), and creating a website.
