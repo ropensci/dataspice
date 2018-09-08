@@ -21,7 +21,7 @@ prep_access <- function(data_path = here::here("data"),
   fileNames <- tools::list_files_with_exts(data_path,
                                            exts = c("csv", "tsv"),
                                            full.names = TRUE)
-  fileTypes <- vapply(fileNames, tools::file_ext)
+  fileTypes <- purrr::map_chr(fileNames, ~tools::file_ext(.x))
 
   if(all(basename(fileNames) %in% unique(access$fileName))){
     stop("Entries already exist in access.csv for fileNames: ",
@@ -30,7 +30,7 @@ prep_access <- function(data_path = here::here("data"),
 
   access <- tibble::add_row(access,
                             fileName = basename(fileNames),
-                            name = basename(fileNames),
+                            name = basename(tools::file_path_sans_ext(fileNames)),
                             contentUrl = NA,
                             fileFormat = fileTypes)
 
