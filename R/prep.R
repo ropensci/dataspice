@@ -35,6 +35,6 @@ prep_attributes <- function(data_path,
                                   fileName = fileName)
     readr::write_csv(attributes, path = attributes_path)
     message("The following variableNames have been added to the attributes file for fileName: ",
-            fileName, "\n \n", paste(names(x), collapse = ", "))
+            fileName, "\n", paste(names(x), collapse = ", "), "\n \n")
 }
 
