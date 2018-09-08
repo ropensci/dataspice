@@ -4,11 +4,11 @@
 \alias{prep_attributes}
 \title{Prepare attributes}
 \usage{
-prep_attributes(data_path, attributes_path = here::here("data", "metadata",
-  "attributes.csv"), ...)
+prep_attributes(data_path = here::here("data"),
+  attributes_path = here::here("data", "metadata", "attributes.csv"), ...)
 }
 \arguments{
-\item{data_path}{path to the data file. Currently only tabular csv and tsv files are supported.}
+\item{data_path}{path to the data file. Defaults to `here::here("data"), Currently only tabular csv and tsv files are supported.}
 
 \item{attributes_path}{path to the attributes.csv file. Defaults to "data/metadata/attributes.csv".}
 
