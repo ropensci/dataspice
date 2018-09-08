@@ -1,13 +1,13 @@
 #' Prepare attributes
 #'
 #' Extract variableNames for a given data file and add them to the attributes.csv
-#' @param data_path path to the data file. Defaults to `here::here("data"), Currently only tabular csv and tsv files are supported.
+#' @param data_path path to the data file. Currently only tabular csv and tsv files are supported.
 #' @param attributes_path path to the attributes.csv file. Defaults to "data/metadata/attributes.csv".
 #' @param ... parameters passed to readr::read_*() functions
 #'
 #' @return the functions writes out the updated attributes.csv file to attributes_path.
 #' @export
-prep_attributes <- function(data_path = here::here("data"),
+prep_attributes <- function(data_path,
                             attributes_path = here::here("data", "metadata",
                                                          "attributes.csv"),
                             ...){
