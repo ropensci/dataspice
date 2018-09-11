@@ -37,7 +37,9 @@ write_spice <- function(path = "data/metadata", ...) {
   })
 
   attributes <- attributes[ !names(attributes)=="fileName" ]
-  attributes <- dplyr::rename(attributes, value = variableName)
+  attributes <- dplyr::rename(attributes, name = variableName)
+  attributes <- dplyr::distinct(attributes)
+
   variableMeasured <-
     purrr::pmap(attributes,
                 PropertyValue)
