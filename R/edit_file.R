@@ -118,7 +118,7 @@ edit_file <- function(metadata_dir = here::here("data", "metadata"),
             )},
           if (file == "creators.csv"){
             list(
-              h6('ID = text: ORCHID ID'),
+              h6('ID = text: ORCID ID'),
               h6("givenName = text: the given name(s) of the creator."),
               h6('familyName = text: the family name(s) of the creator.'),
               h6("unitText = text: affiliation of the creator.'")
