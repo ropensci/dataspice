@@ -52,11 +52,17 @@ The template files are:
 
 ### Fill in templates
 
-The user needs to fill in the details of the 4 template files. These csv files can be directly modified, or they can be edited using some helper functions and/or a shiny app. **Helper functions**
+The user needs to fill in the details of the 4 template files. These csv files can be directly modified, or they can be edited using some helper functions and/or a shiny app.
 
--   `prep_attributes()` populates the **fileName** and **variableName** columns of the attributes.csv file using the header row of the data files.
+#### Helper functions
 
-To see an example of how this works, load the data files that ship with the package:
+-   `prep_attributes()` populates the **`fileName`** and **`variableName`** columns of the `attributes.csv` file using the header row of the data files.
+
+-   `prep_access()` populates the **`fileName`**, **`name`** and **`fileFormat`** columns of the `access.csv` file from the files in the folder containing the data.
+
+<br>
+
+To see an example of how `prep_attributes()` works, load the data files that ship with the package:
 
 ``` r
 data_files <- list.files(system.file("example-dataset/", 
@@ -81,122 +87,35 @@ data_files %>% purrr::map(~prep_attributes(.x, attributes_path),
 
 The output of `prep_attributes()` has the first two columns filled out:
 
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-fileName
-</th>
-<th style="text-align:left;">
-variableName
-</th>
-<th style="text-align:left;">
-description
-</th>
-<th style="text-align:left;">
-unitText
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Stock.ID
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Species
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Stock
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Ocean.Region
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Region
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BroodTables.csv
-</td>
-<td style="text-align:left;">
-Sub.Region
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-</tbody>
-</table>
-**Shiny apps**
+| fileName        | variableName | description | unitText |
+|:----------------|:-------------|:------------|:---------|
+| BroodTables.csv | Stock.ID     | NA          | NA       |
+| BroodTables.csv | Species      | NA          | NA       |
+| BroodTables.csv | Stock        | NA          | NA       |
+| BroodTables.csv | Ocean.Region | NA          | NA       |
+| BroodTables.csv | Region       | NA          | NA       |
+| BroodTables.csv | Sub.Region   | NA          | NA       |
+
+<br>
+
+#### editable shiny apps
 
 Each of the metadata templates can be edited interactively using a shiny app
 
--   `editAttritubes()` opens a shiny app that can be used to edit `attributes.csv`. The shiny app dispalys the attributes table and lets the user fill in an informative description and units (e.g. meters, hectares, etc.) for each variable.
--   `editAccess()`
--   `editCreators()`
--   `editBiblio()`
+-   `edit_attributes()` opens a shiny app that can be used to edit `attributes.csv`. The shiny app displays the current `attributes` table and lets the user fill in an informative description and units (e.g. meters, hectares, etc.) for each variable.
+-   `edit_access()`: opens an editable version of `access.csv`
+-   `edit_creators()`: opens an editable version of `creators.csv`
+-   `edit_biblio()`: opens an editable version of `biblio.csv`
 
-![shinygif](man/figures/before123.gif)
+![edit\_attributes shiny app](man/figures/edit_attributes.png)
 
-Completed metadata tables in this example will look like this:
+Remember to click on **Save** when finished editing.
+
+<br>
+
+#### completed metadata files
+
+The first few rows of the completed metadata tables in this example will look like this:
 
 `access.csv` has one row for each file
 
@@ -205,6 +124,8 @@ Completed metadata tables in this example will look like this:
 | StockInfo.csv   | StockInfo.csv   | NA         | CSV        |
 | BroodTables.csv | BroodTables.csv | NA         | CSV        |
 | SourceInfo.csv  | SourceInfo.csv  | NA         | CSV        |
+
+<br>
 
 `attributes.csv` has one row for each variable in each file
 
@@ -216,6 +137,8 @@ Completed metadata tables in this example will look like this:
 | BroodTables.csv | Ocean.Region | Ocean region                                     | NA       |
 | BroodTables.csv | Region       | Region of stock                                  | NA       |
 | BroodTables.csv | Sub.Region   | Sub.Region of stock                              | NA       |
+
+<br>
 
 `biblio.csv` is one row containing descriptors including spatial and temporal coverage
 
@@ -277,6 +200,8 @@ Completed metadata tables in this example will look like this:
 </tbody>
 </table>
 
+<br>
+
 `creators.csv` has one row for each of the dataset authors
 
 <table>
@@ -314,15 +239,31 @@ Completed metadata tables in this example will look like this:
 </tbody>
 </table>
 
+<br>
+
+------------------------------------------------------------------------
+
 ### Save json-ld file
 
 -   `write_spice()` generates a json-ld file ("linked data") to aid in [dataset discovery](https://developers.google.com/search/docs/data-types/dataset), creation of more extensive metadata (e.g. [EML](https://knb.ecoinformatics.org/#api)), and creating a website.
 
+Here's a view of the `dataspice.json` file of the example data:
+
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
+
+<br>
+
+------------------------------------------------------------------------
+
 ### Build website
 
--   `build_site()` generates an index.html file in the repository `docs` folder, to create a website that shows a simple view of the dataset with the metadata and an interactive map. For example, this [repository](https://github.com/amoeba/dataspice-example) results in a [website](https://amoeba.github.io/dataspice-example/)
+-   `build_site()` generates an index.html file in the repository `docs` folder, to create a website that shows a simple view of the dataset with the metadata and an interactive map. For example, this [repository](https://github.com/amoeba/dataspice-example) results in this [website](https://amoeba.github.io/dataspice-example/)
 
-![dataspice-website](man/figures/screenshot.png)
+![dataspice-website](man/figures/index_webshot.png)
+
+<br>
+
+------------------------------------------------------------------------
 
 Resources
 ---------
