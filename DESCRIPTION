@@ -31,7 +31,8 @@ Suggests:
     testthat,
     knitr,
     rmarkdown,
-    servr
+    servr,
+    listviewer
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 Remotes: cboettig/eml2
