@@ -9,15 +9,23 @@ prep_attributes(data_path = here::here("data"),
   ...)
 }
 \arguments{
-\item{data_path}{path to the data file. Currently only tabular csv and tsv files are supported.}
+\item{data_path}{character vector of either:
+\enumerate{
+\item path(s) to the data file(s).
+\item single path to directory containing data file(s).
+}
 
-\item{attributes_path}{path to the attributes.csv file. Defaults to "data/metadata/attributes.csv".}
+Currently only tabular csv and tsv files are supported. Alternatively attributes
+returned using \code{names()} can be extracted from an r object, stored as an \code{.rds} file.}
 
-\item{...}{parameters passed to readr::read_*() functions}
+\item{attributes_path}{path to the `attributes.csv`` file. Defaults to "data/metadata/attributes.csv".}
+
+\item{...}{parameters passed to \code{list.files()}. For example, use \code{recursive = TRUE}
+to list files in a folder recursively or use \code{pattern} to filter files for patterns.}
 }
 \value{
 the functions writes out the updated attributes.csv file to attributes_path.
 }
 \description{
-Extract variableNames for a given data file and add them to the attributes.csv
+Extract `variableNames`` from data file(s) and add them to the attributes.csv
 }

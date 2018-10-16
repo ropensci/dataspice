@@ -1,9 +1,16 @@
 #' Prepare attributes
 #'
-#' Extract variableNames for a given data file and add them to the attributes.csv
-#' @param data_path path to the data file. Currently only tabular csv and tsv files are supported.
-#' @param attributes_path path to the attributes.csv file. Defaults to "data/metadata/attributes.csv".
-#' @param ... parameters passed to readr::read_*() functions
+#' Extract `variableNames`` from data file(s) and add them to the attributes.csv
+#' @param data_path character vector of either:
+#'
+#' 1. path(s) to the data file(s).
+#' 2. single path to directory containing data file(s).
+#'
+#' Currently only tabular csv and tsv files are supported. Alternatively attributes
+#' returned using `names()` can be extracted from an r object, stored as an `.rds` file.
+#' @param attributes_path path to the `attributes.csv`` file. Defaults to "data/metadata/attributes.csv".
+#' @param ... parameters passed to `list.files()`. For example, use `recursive = TRUE`
+#' to list files in a folder recursively or use `pattern` to filter files for patterns.
 #'
 #' @return the functions writes out the updated attributes.csv file to attributes_path.
 #' @export
@@ -20,7 +27,7 @@ prep_attributes <- function(data_path = here::here("data"),
 
   attributes <- dplyr::bind_rows(attributes,
                                  purrr::map_df(file_paths,
-    ~extract_attributes(.x, attributes)))
+                                               ~extract_attributes(.x, attributes)))
 
   readr::write_csv(attributes, path = attributes_path)
 }
@@ -35,7 +42,7 @@ validate_file_paths <- function(data_path, ...){
                                include.dirs = FALSE,
                                full.names = T,
                                ...)
-      file_paths <- grep("metadata/*", file_paths, invert = T, value = T)
+      file_paths <- grep("*metadata/*", file_paths, invert = T, value = T)
       file_paths <- file_paths[!is_dir(file_paths)]
     }else{
       file_paths <- data_path
@@ -58,7 +65,11 @@ validate_file_paths <- function(data_path, ...){
 extract_attributes <- function(file_path, attributes){
   fileName <- basename(file_path)
   ext <- tools::file_ext(fileName)
-
+  if(!ext %in% c("csv", "tsv", "rds")){
+    warning("cannot handle extension", ext," for fileName:",
+            fileName, ", \n prep skipped")
+    return()
+  }
   if(fileName %in% unique(attributes$fileName)){
     warning("entries already exist in attributes.csv for fileName:",
             fileName, ", \n prep skipped")
