@@ -47,4 +47,4 @@ StockInfo.csv,Jurisdiction,Management jurisdiction,NA
 StockInfo.csv,Lat,Latitude,degree
 StockInfo.csv,Lon,Longitude,degree
 StockInfo.csv,Source.ID,"Source.ID, matches source.ID in source info file",NA
-StockInfo.csv,Comment..we.will.update.this.later.,stock comments,NA
+StockInfo.csv,Comment,stock comments,NA
