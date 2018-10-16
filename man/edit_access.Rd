@@ -14,3 +14,14 @@ edit_access(metadata_dir = here::here("data", "metadata"))
 Launch shinyapp for editing individual \code{dataspice} metadata tables. Use \code{edit_*()} where \code{*}
 is one of the four \code{dataspice} metadata tables \strong{\code{attributes}, \code{biblio}, \code{access} or \code{creators}}.
 }
+\examples{
+\dontrun{
+edit_attributes()
+edit_biblio()
+edit_access()
+edit_creators()
+
+# Specifying a different dataspice metadata directory
+edit_attributes(metadata_dir = "analysis/data/metadata/"))
+}
+}
