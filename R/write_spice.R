@@ -22,8 +22,8 @@ write_spice <- function(path = "data/metadata", ...) {
   validate_creators(creators)
 
   # harmonise affiliation with schema.org field if it exists
-  if("affilitation" %in% names(creators)){
-  creators <-  rename(creators, worksFor = affilitation)}
+  if("affiliation" %in% names(creators)){
+  names(creators)[names(creators) == "affiliation"] <-  "worksFor"}
 
   #fileName,name,contentUrl,fileFormat
   access <- access[ !names(access)=="fileName" ]
