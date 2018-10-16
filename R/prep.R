@@ -7,34 +7,81 @@
 #'
 #' @return the functions writes out the updated attributes.csv file to attributes_path.
 #' @export
-prep_attributes <- function(data_path,
+prep_attributes <- function(data_path = here::here("data"),
                             attributes_path = here::here("data", "metadata",
                                                          "attributes.csv"),
                             ...){
+  # list and validate file paths
+  file_paths <- validate_file_paths(data_path, ...)
+  # check and load attributes
+  if(!file.exists(attributes_path)){
+    stop("attribute file does not exist. Check path or run create_spice?")}
+  attributes <- readr::read_csv(attributes_path, col_types = readr::cols())
 
-    if(!file.exists(data_path)){stop("invalid path to data file")}
-    if(!file.exists(attributes_path)){
-        stop("attribute file does not exist. Check path or run create_spice?")}
+  attributes <- dplyr::bind_rows(attributes,
+                                 purrr::map_df(file_paths,
+    ~extract_attributes(.x, attributes)))
 
-    attributes <- readr::read_csv(attributes_path, col_types = readr::cols())
-    fileName <- basename(data_path)
-    ext <- tools::file_ext(fileName)
-
-    if(fileName %in% unique(attributes$fileName)){
-        stop("entries already exist in attributes.csv for fileName:",
-             fileName)
-    }
-
-    # read data
-    x <- switch(ext,
-                csv = readr::read_csv(data_path, n_max = 1, col_types = readr::cols(), ...),
-                tsv =  readr::read_tsv(data_path, n_max = 1, col_types = readr::cols(), ...))
-
-    attributes <- tibble::add_row(attributes,
-                                  variableName = names(x),
-                                  fileName = fileName)
-    readr::write_csv(attributes, path = attributes_path)
-    message("The following variableNames have been added to the attributes file for fileName: ",
-            fileName, "\n", paste(names(x), collapse = ", "), "\n \n")
+  readr::write_csv(attributes, path = attributes_path)
 }
 
+
+is_dir <- function(path){tools::file_ext(path) == ""}
+
+validate_file_paths <- function(data_path, ...){
+  if(length(data_path) == 1){
+    if(is_dir(data_path)){
+      file_paths <- list.files(data_path,
+                               include.dirs = FALSE,
+                               full.names = T,
+                               ...)
+      file_paths <- grep("metadata/*", file_paths, invert = T, value = T)
+      file_paths <- file_paths[!is_dir(file_paths)]
+    }else{
+      file_paths <- data_path
+    }
+    check_files <- file.exists(file_paths)
+    if(any(!check_files)){
+      warning("Invalid data_paths \n",
+              paste0(file_paths[!check_files], "\n"),
+              "files ignored")
+      file_paths <- file_paths[check_files]
+    }
+    if(length(file_paths) == 0) {
+      stop("no valid paths to data files detected.")
+    }
+  }
+  file_paths
+}
+
+
+extract_attributes <- function(file_path, attributes){
+  fileName <- basename(file_path)
+  ext <- tools::file_ext(fileName)
+
+  if(fileName %in% unique(attributes$fileName)){
+    warning("entries already exist in attributes.csv for fileName:",
+            fileName, ", \n prep skipped")
+    return()
+  }
+
+  # read data
+  x <- switch(ext,
+              csv = readr::read_csv(file_path, n_max = 1, col_types = readr::cols()),
+              tsv =  readr::read_tsv(file_path, n_max = 1, col_types = readr::cols()),
+              rds = readRDS(file_path))
+
+  if(is.null(names(x))){
+    warning("no attributes to extract attributes from fileName:",
+            fileName, ", \n prep skipped")
+    return()
+  }
+
+  message("The following variableNames have been added to the attributes file for fileName: ",
+          fileName, "\n", paste(names(x), collapse = ", "), "\n \n")
+
+  tibble::add_row(attributes[0,],
+                  variableName = names(x),
+                  fileName = fileName)
+
+}
