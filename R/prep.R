@@ -1,19 +1,39 @@
 #' Prepare attributes
 #'
-#' Extract `variableNames`` from data file(s) and add them to the attributes.csv
+#' Extract `variableNames` from data file(s) and add them to `attributes.csv`. The
+#' helper `validate_file_paths()` can be used to create vectors of valid file paths
+#' that can be checked and then passed as `data_path` argument to `prep_attributes()`.
 #' @param data_path character vector of either:
 #'
 #' 1. path(s) to the data file(s).
 #' 2. single path to directory containing data file(s).
-#'
-#' Currently only tabular csv and tsv files are supported. Alternatively attributes
-#' returned using `names()` can be extracted from an r object, stored as an `.rds` file.
+#' Currently only tabular `.csv` and `.tsv` files are supported. Alternatively attributes
+#' returned using `names()` can be extracted from r object, stored as `.rds` files.
 #' @param attributes_path path to the `attributes.csv`` file. Defaults to "data/metadata/attributes.csv".
 #' @param ... parameters passed to `list.files()`. For example, use `recursive = TRUE`
 #' to list files in a folder recursively or use `pattern` to filter files for patterns.
-#'
-#' @return the functions writes out the updated attributes.csv file to attributes_path.
+#' @return `prep_attributes()` updates the `attributes.csv` and writes to `attributes_path`.
+#' `validate_file_paths()` returns a vector of valid file_paths detected from `data_path`.
 #' @export
+#' @examples
+#' \dontrun{
+#' create_spice()
+#' # extract attributes from all `csv`, `tsv`, `rds` files in the data folder (non recursive)
+#' prep_attributes()
+#' # recursive
+#' prep_attributes(recursive = T)
+#' # extract attributes from a single file using file path
+#' data_path <- system.file("example-dataset","BroodTables.csv", package = "dataspice")
+#' prep_attributes(data_path)
+#' # extract attributes from a single file by file path pattern matching
+#' data_path <- system.file("example-dataset", package = "dataspice")
+#' prep_attributes(data_path, pattern = "StockInfo")
+#' # extract from a folder using folder path
+#' data_path <- system.file("example-dataset", package = "dataspice")
+#' prep_attributes(data_path)
+#' # get vector of valid (existing) file paths
+#' validate_file_paths(data_path)
+#' }
 prep_attributes <- function(data_path = here::here("data"),
                             attributes_path = here::here("data", "metadata",
                                                          "attributes.csv"),
@@ -32,9 +52,8 @@ prep_attributes <- function(data_path = here::here("data"),
   readr::write_csv(attributes, path = attributes_path)
 }
 
-
-is_dir <- function(path){tools::file_ext(path) == ""}
-
+#' @inherit prep_attributes
+#' @export
 validate_file_paths <- function(data_path, ...){
   if(length(data_path) == 1){
     if(is_dir(data_path)){
@@ -61,7 +80,7 @@ validate_file_paths <- function(data_path, ...){
   file_paths
 }
 
-
+# check and extract variables from single file
 extract_attributes <- function(file_path, attributes){
   fileName <- basename(file_path)
   ext <- tools::file_ext(fileName)
@@ -96,3 +115,6 @@ extract_attributes <- function(file_path, attributes){
                   fileName = fileName)
 
 }
+
+# checker whether a path is to a directory
+is_dir <- function(path){tools::file_ext(path) == ""}
