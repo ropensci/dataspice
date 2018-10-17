@@ -1,4 +1,4 @@
-"","Stock.ID","Species","Stock","Date.data.obtained","Date.data.incorporated","Ocean.Region","Region","Sub.Region","Jurisdiction","Lat","Lon","Source.ID","Comment..we.will.update.this.later."
+"","Stock.ID","Species","Stock","Date.data.obtained","Date.data.incorporated","Ocean.Region","Region","Sub.Region","Jurisdiction","Lat","Lon","Source.ID","Comment"
 "1",101,"Sockeye","Washington","2017-03-01","2017-09-12","WC","WA","WA","WA",47.48,-122.42,1,"Hatchery component of the run was removed; FW age assumed to be 1.X.  These sockeye grow fast in the lake."
 "2",102,"Sockeye","Early Stuart","2017-07-01","2017-09-12","WC","Fraser River","Fraser Early Stuart","BC",49.12,-123.06,4,NA
 "3",103,"Sockeye","Bowron","2017-07-01","2017-09-12","WC","Fraser River","Fraser Early Summer","BC",49.12,-123.06,4,NA
