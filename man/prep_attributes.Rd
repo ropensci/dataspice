@@ -2,7 +2,7 @@
 % Please edit documentation in R/prep.R
 \name{prep_attributes}
 \alias{prep_attributes}
-\title{Prepare attributes or access file}
+\title{Prepare attributes}
 \usage{
 prep_attributes(data_path = here::here("data"),
   attributes_path = here::here("data", "metadata", "attributes.csv"),
@@ -27,12 +27,9 @@ to list files in a folder recursively or use \code{pattern} to filter files for 
 \code{validate_file_paths()} returns a vector of valid file_paths detected from \code{data_path}.
 }
 \description{
-Extract metadata from data file(s). \code{prep_attributes()} extracts \code{variableNames}
-from data files and adds them to \code{attributes.csv}. \code{prep_access()} extracts data
-\code{fileNames} and adds them to \code{access.csv}.
-helper \code{validate_file_paths()} can be used to create vectors of valid file paths
-that can be checked and then passed as \code{data_path} argument to \code{prep_attributes()} or
-\code{prep_access()}.
+Extract \code{variableNames} from data file(s) and add them to \code{attributes.csv}. The
+helper \code{\link{validate_file_paths}} can be used to create vectors of valid file paths
+that can be checked and then passed as \code{data_path} argument to \code{\link{prep_attributes}}.
 }
 \examples{
 \dontrun{
@@ -40,7 +37,7 @@ create_spice()
 # extract attributes from all `csv`, `tsv`, `rds` files in the data folder (non recursive)
 prep_attributes()
 # recursive
-prep_attributes(recursive = T)
+prep_attributes(recursive = TRUE)
 # extract attributes from a single file using file path
 data_path <- system.file("example-dataset","BroodTables.csv", package = "dataspice")
 prep_attributes(data_path)

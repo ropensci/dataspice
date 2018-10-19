@@ -1,5 +1,17 @@
-#' @inherit prep_attributes
+#' Prepare access
+#'
+#' Extract `fileNames` from data file(s) and add them to `access.csv`. The
+#' helper \code{\link{validate_file_paths}} can be used to create vectors of valid file paths
+#' that can be checked and then passed as `data_path` argument to \code{\link{prep_access}}.
+#' @param data_path character vector of either:
+#'
+#' 1. path(s) to the data file(s).
+#' 2. single path to directory containing data file(s).
+#' Currently only tabular `.csv` and `.tsv` or `.rds` files are supported.
 #' @param access_path path to the `access.csv` file. Defaults to "data/metadata/access.csv".
+#' @param ... parameters passed to `list.files()`. For example, use `recursive = TRUE`
+#' to list files in a folder recursively or use `pattern` to filter files for patterns.
+#' @return Updates `access.csv` and writes to `access_path`.
 #' @export
 prep_access <- function(data_path = here::here("data"),
                         access_path = here::here("data", "metadata",

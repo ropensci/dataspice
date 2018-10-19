@@ -2,7 +2,7 @@
 % Please edit documentation in R/prep_access.R
 \name{prep_access}
 \alias{prep_access}
-\title{Prepare attributes or access file}
+\title{Prepare access}
 \usage{
 prep_access(data_path = here::here("data"),
   access_path = here::here("data", "metadata", "access.csv"), ...)
@@ -12,8 +12,7 @@ prep_access(data_path = here::here("data"),
 \enumerate{
 \item path(s) to the data file(s).
 \item single path to directory containing data file(s).
-Currently only tabular \code{.csv} and \code{.tsv} files are supported. Alternatively attributes
-returned using \code{names()} can be extracted from r object, stored as \code{.rds} files.
+Currently only tabular \code{.csv} and \code{.tsv} or \code{.rds} files are supported.
 }}
 
 \item{access_path}{path to the \code{access.csv} file. Defaults to "data/metadata/access.csv".}
@@ -22,34 +21,10 @@ returned using \code{names()} can be extracted from r object, stored as \code{.r
 to list files in a folder recursively or use \code{pattern} to filter files for patterns.}
 }
 \value{
-\code{prep_attributes()} updates the \code{attributes.csv} and writes to \code{attributes_path}.
-\code{validate_file_paths()} returns a vector of valid file_paths detected from \code{data_path}.
+Updates \code{access.csv} and writes to \code{access_path}.
 }
 \description{
-Extract metadata from data file(s). \code{prep_attributes()} extracts \code{variableNames}
-from data files and adds them to \code{attributes.csv}. \code{prep_access()} extracts data
-\code{fileNames} and adds them to \code{access.csv}.
-helper \code{validate_file_paths()} can be used to create vectors of valid file paths
-that can be checked and then passed as \code{data_path} argument to \code{prep_attributes()} or
-\code{prep_access()}.
-}
-\examples{
-\dontrun{
-create_spice()
-# extract attributes from all `csv`, `tsv`, `rds` files in the data folder (non recursive)
-prep_attributes()
-# recursive
-prep_attributes(recursive = T)
-# extract attributes from a single file using file path
-data_path <- system.file("example-dataset","BroodTables.csv", package = "dataspice")
-prep_attributes(data_path)
-# extract attributes from a single file by file path pattern matching
-data_path <- system.file("example-dataset", package = "dataspice")
-prep_attributes(data_path, pattern = "StockInfo")
-# extract from a folder using folder path
-data_path <- system.file("example-dataset", package = "dataspice")
-prep_attributes(data_path)
-# get vector of valid (existing) file paths
-validate_file_paths(data_path)
-}
+Extract \code{fileNames} from data file(s) and add them to \code{access.csv}. The
+helper \code{\link{validate_file_paths}} can be used to create vectors of valid file paths
+that can be checked and then passed as \code{data_path} argument to \code{\link{prep_access}}.
 }

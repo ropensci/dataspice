@@ -1,11 +1,8 @@
-#' Prepare attributes or access file
+#' Prepare attributes
 #'
-#' Extract metadata from data file(s). `prep_attributes()` extracts `variableNames`
-#' from data files and adds them to `attributes.csv`. `prep_access()` extracts data
-#' `fileNames` and adds them to `access.csv`.
-#' helper `validate_file_paths()` can be used to create vectors of valid file paths
-#' that can be checked and then passed as `data_path` argument to `prep_attributes()` or
-#' `prep_access()`.
+#' Extract `variableNames` from data file(s) and add them to `attributes.csv`. The
+#' helper \code{\link{validate_file_paths}} can be used to create vectors of valid file paths
+#' that can be checked and then passed as `data_path` argument to \code{\link{prep_attributes}}.
 #' @param data_path character vector of either:
 #'
 #' 1. path(s) to the data file(s).
@@ -24,7 +21,7 @@
 #' # extract attributes from all `csv`, `tsv`, `rds` files in the data folder (non recursive)
 #' prep_attributes()
 #' # recursive
-#' prep_attributes(recursive = T)
+#' prep_attributes(recursive = TRUE)
 #' # extract attributes from a single file using file path
 #' data_path <- system.file("example-dataset","BroodTables.csv", package = "dataspice")
 #' prep_attributes(data_path)

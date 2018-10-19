@@ -10,10 +10,10 @@
 #' @importFrom dplyr rename
 write_spice <- function(path = "data/metadata", ...) {
 
-  biblio <- readr::read_csv(file.path(path, "biblio.csv"))
-  attributes <- readr::read_csv(file.path(path, "attributes.csv"))
-  access <- readr::read_csv(file.path(path, "access.csv"))
-  creators <- readr::read_csv(file.path(path, "creators.csv"))
+  biblio <- readr::read_csv(file.path(path, "biblio.csv"), col_types = readr::cols())
+  attributes <- readr::read_csv(file.path(path, "attributes.csv"), col_types = readr::cols())
+  access <- readr::read_csv(file.path(path, "access.csv"), col_types = readr::cols())
+  creators <- readr::read_csv(file.path(path, "creators.csv"), col_types = readr::cols())
 
   # Validate the CSVs
   validate_biblio(biblio)
