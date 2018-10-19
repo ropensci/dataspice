@@ -1,8 +1,8 @@
 #' Prepare attributes
 #'
 #' Extract `variableNames` from data file(s) and add them to `attributes.csv`. The
-#' helper `validate_file_paths()` can be used to create vectors of valid file paths
-#' that can be checked and then passed as `data_path` argument to `prep_attributes()`.
+#' helper \code{\link{validate_file_paths}} can be used to create vectors of valid file paths
+#' that can be checked and then passed as `data_path` argument to \code{\link{prep_attributes}}.
 #' @param data_path character vector of either:
 #'
 #' 1. path(s) to the data file(s).

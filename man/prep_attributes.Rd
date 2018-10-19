@@ -28,8 +28,8 @@ to list files in a folder recursively or use \code{pattern} to filter files for 
 }
 \description{
 Extract \code{variableNames} from data file(s) and add them to \code{attributes.csv}. The
-helper \code{validate_file_paths()} can be used to create vectors of valid file paths
-that can be checked and then passed as \code{data_path} argument to \code{prep_attributes()}.
+helper \code{\link{validate_file_paths}} can be used to create vectors of valid file paths
+that can be checked and then passed as \code{data_path} argument to \code{\link{prep_attributes}}.
 }
 \examples{
 \dontrun{
