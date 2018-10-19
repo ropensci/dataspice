@@ -172,8 +172,7 @@ edit_file <- function(metadata_dir = here::here("data", "metadata"),
     observeEvent(input$save, {
       finalDF <- hot_to_r(input$hot)
       # remove padding if none edited
-      finalDF %>%
-        tidyr::drop_na() %>%
+      finalDF[!apply(is.na(finalDF) | finalDF == "", 1, all),] %>%
         readr::write_csv(path = filepath)
     })
 
