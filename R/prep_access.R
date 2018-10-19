@@ -15,7 +15,7 @@ prep_access <- function(data_path = here::here("data"),
   if(!file.exists(access_path)){
     stop("access file does not exist. Check path or run create_spice?")}
 
-  access <- readr::read_csv(access_path)
+  access <- readr::read_csv(access_path, col_types = readr::cols())
 
   # read file info
   fileNames <- tools::list_files_with_exts(data_path,
