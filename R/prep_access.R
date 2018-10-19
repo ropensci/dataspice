@@ -1,35 +1,27 @@
-#' Prepare access
-#'
-#' Extract variableNames for a given data file and add them to the attributes.csv
-#' @param data_path path to the data folder. Defaults to "data" and R 'data' file types
-#' @param access_path path to the access.csv file. Defaults to "data/metadata/access.csv".
-#'
-#' @return the functions writes out the updated access.csv file to access_path.
+#' @inherit prep_attributes
+#' @param access_path path to the `access.csv` file. Defaults to "data/metadata/access.csv".
 #' @export
 prep_access <- function(data_path = here::here("data"),
                         access_path = here::here("data", "metadata",
-                                                 "access.csv")
-                        ){
-
-  if(!file.exists(data_path)){stop("invalid path to data folder")}
+                                                 "access.csv"),
+                                                 ...){
+  # check and load attributes
   if(!file.exists(access_path)){
     stop("access file does not exist. Check path or run create_spice?")}
+  access <- readr::read_csv(access_path, col_types = readr::cols())
 
-  access <- readr::read_csv(access_path)
+  # list and validate file paths
+  file_paths <- validate_file_paths(data_path, ...)
+  fileNames <- basename(file_paths) %>%
+    check_fileNames(table = access)
 
-  # read file info
-  fileNames <- tools::list_files_with_exts(data_path,
-                                           exts = c("csv", "tsv"),
-                                           full.names = TRUE)
-  fileTypes <- purrr::map_chr(fileNames, ~tools::file_ext(.x))
-
-  if(all(basename(fileNames) %in% unique(access$fileName))){
-    stop("Entries already exist in access.csv for fileNames: ",
-         paste(basename(fileNames), collapse = ", "))
+  if(length(fileNames) == 0){
+    return()
   }
+  fileTypes <- tools::file_ext(fileNames)
 
   access <- tibble::add_row(access,
-                            fileName = basename(fileNames),
+                            fileName = fileNames,
                             name = basename(tools::file_path_sans_ext(fileNames)),
                             contentUrl = NA,
                             fileFormat = fileTypes)
