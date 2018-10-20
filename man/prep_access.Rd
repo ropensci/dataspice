@@ -5,16 +5,26 @@
 \title{Prepare access}
 \usage{
 prep_access(data_path = here::here("data"),
-  access_path = here::here("data", "metadata", "access.csv"))
+  access_path = here::here("data", "metadata", "access.csv"), ...)
 }
 \arguments{
-\item{data_path}{path to the data folder. Defaults to "data" and R 'data' file types}
+\item{data_path}{character vector of either:
+\enumerate{
+\item path(s) to the data file(s).
+\item single path to directory containing data file(s).
+Currently only tabular \code{.csv} and \code{.tsv} or \code{.rds} files are supported.
+}}
 
-\item{access_path}{path to the access.csv file. Defaults to "data/metadata/access.csv".}
+\item{access_path}{path to the \code{access.csv} file. Defaults to "data/metadata/access.csv".}
+
+\item{...}{parameters passed to \code{list.files()}. For example, use \code{recursive = TRUE}
+to list files in a folder recursively or use \code{pattern} to filter files for patterns.}
 }
 \value{
-the functions writes out the updated access.csv file to access_path.
+Updates \code{access.csv} and writes to \code{access_path}.
 }
 \description{
-Extract variableNames for a given data file and add them to the attributes.csv
+Extract \code{fileNames} from data file(s) and add them to \code{access.csv}. The
+helper \code{\link{validate_file_paths}} can be used to create vectors of valid file paths
+that can be checked and then passed as \code{data_path} argument to \code{\link{prep_access}}.
 }

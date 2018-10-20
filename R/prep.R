@@ -54,46 +54,36 @@ prep_attributes <- function(data_path = here::here("data"),
 
 #' @inherit prep_attributes
 #' @export
-validate_file_paths <- function(data_path, ...){
+validate_file_paths <- function(data_path = here::here("data"), ...){
   if(length(data_path) == 1){
     if(is_dir(data_path)){
       file_paths <- list.files(data_path,
                                include.dirs = FALSE,
                                full.names = T,
                                ...)
-      file_paths <- grep("*metadata/*", file_paths, invert = T, value = T)
-      file_paths <- file_paths[!is_dir(file_paths)]
     }else{
       file_paths <- data_path
-    }
-    check_files <- file.exists(file_paths)
-    if(any(!check_files)){
-      warning("Invalid data_paths \n",
-              paste0(file_paths[!check_files], "\n"),
-              "files ignored")
-      file_paths <- file_paths[check_files]
-    }
+    }}
+    # remove any metadata folder files
+    file_paths <- grep("*metadata/*", file_paths, invert = T, value = T)
+    file_paths <- file_paths[!is_dir(file_paths)] %>%
+      check_files_exist() %>%
+      check_extensions()
     if(length(file_paths) == 0) {
       stop("no valid paths to data files detected.")
     }
-  }
   file_paths
 }
 
 # check and extract variables from single file
 extract_attributes <- function(file_path, attributes){
-  fileName <- basename(file_path)
+  fileName <- file_path %>%
+    check_extensions() %>%
+    basename() %>%
+    check_fileNames(table = attributes)
+  if(length(fileName) == 0){return()}
+
   ext <- tools::file_ext(fileName)
-  if(!ext %in% c("csv", "tsv", "rds")){
-    warning("cannot handle extension", ext," for fileName:",
-            fileName, ", \n prep skipped")
-    return()
-  }
-  if(fileName %in% unique(attributes$fileName)){
-    warning("entries already exist in attributes.csv for fileName:",
-            fileName, ", \n prep skipped")
-    return()
-  }
 
   # read data
   x <- switch(ext,
@@ -118,3 +108,34 @@ extract_attributes <- function(file_path, attributes){
 
 # checker whether a path is to a directory
 is_dir <- function(path){tools::file_ext(path) == ""}
+
+
+check_extensions <- function(file_paths){
+  check_ext <- tools::file_ext(file_paths) %in% c("csv", "tsv", "rds")
+  if(any(!check_ext)){
+    warning("cannot handle extension for fileName(s):",
+            file_paths[!check_ext], ", \n file(s) ignored")
+  }
+    file_paths[check_ext]
+}
+
+check_files_exist <- function(file_paths){
+  check_files <- file.exists(file_paths)
+  if(any(!check_files)){
+    warning("Invalid data_path(s) \n",
+            paste0(file_paths[!check_files], "\n"),
+            "file(s) ignored")
+  }
+  file_paths[check_files]
+}
+
+check_fileNames <- function(fileNames, table){
+  table_name <- substitute(table)
+  check_fileNames <- fileNames %in% unique(table$fileName)
+  if(any(check_fileNames)){
+    warning("Entries already exist in ", table_name,".csv for fileNames: ",
+            paste(fileNames[check_fileNames], collapse = ", "),
+            "\n files ignored")
+    }
+    fileNames[!check_fileNames]
+}

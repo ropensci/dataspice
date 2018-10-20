@@ -1,35 +1,39 @@
 #' Prepare access
 #'
-#' Extract variableNames for a given data file and add them to the attributes.csv
-#' @param data_path path to the data folder. Defaults to "data" and R 'data' file types
-#' @param access_path path to the access.csv file. Defaults to "data/metadata/access.csv".
+#' Extract `fileNames` from data file(s) and add them to `access.csv`. The
+#' helper \code{\link{validate_file_paths}} can be used to create vectors of valid file paths
+#' that can be checked and then passed as `data_path` argument to \code{\link{prep_access}}.
+#' @param data_path character vector of either:
 #'
-#' @return the functions writes out the updated access.csv file to access_path.
+#' 1. path(s) to the data file(s).
+#' 2. single path to directory containing data file(s).
+#' Currently only tabular `.csv` and `.tsv` or `.rds` files are supported.
+#' @param access_path path to the `access.csv` file. Defaults to "data/metadata/access.csv".
+#' @param ... parameters passed to `list.files()`. For example, use `recursive = TRUE`
+#' to list files in a folder recursively or use `pattern` to filter files for patterns.
+#' @return Updates `access.csv` and writes to `access_path`.
 #' @export
 prep_access <- function(data_path = here::here("data"),
                         access_path = here::here("data", "metadata",
-                                                 "access.csv")
-                        ){
-
-  if(!file.exists(data_path)){stop("invalid path to data folder")}
+                                                 "access.csv"),
+                                                 ...){
+  # check and load attributes
   if(!file.exists(access_path)){
     stop("access file does not exist. Check path or run create_spice?")}
-
   access <- readr::read_csv(access_path, col_types = readr::cols())
 
-  # read file info
-  fileNames <- tools::list_files_with_exts(data_path,
-                                           exts = c("csv", "tsv"),
-                                           full.names = TRUE)
-  fileTypes <- purrr::map_chr(fileNames, ~tools::file_ext(.x))
+  # list and validate file paths
+  file_paths <- validate_file_paths(data_path, ...)
+  fileNames <- basename(file_paths) %>%
+    check_fileNames(table = access)
 
-  if(all(basename(fileNames) %in% unique(access$fileName))){
-    stop("Entries already exist in access.csv for fileNames: ",
-         paste(basename(fileNames), collapse = ", "))
+  if(length(fileNames) == 0){
+    return()
   }
+  fileTypes <- tools::file_ext(fileNames)
 
   access <- tibble::add_row(access,
-                            fileName = basename(fileNames),
+                            fileName = fileNames,
                             name = basename(tools::file_path_sans_ext(fileNames)),
                             contentUrl = NA,
                             fileFormat = fileTypes)

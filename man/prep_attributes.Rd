@@ -37,7 +37,7 @@ create_spice()
 # extract attributes from all `csv`, `tsv`, `rds` files in the data folder (non recursive)
 prep_attributes()
 # recursive
-prep_attributes(recursive = T)
+prep_attributes(recursive = TRUE)
 # extract attributes from a single file using file path
 data_path <- system.file("example-dataset","BroodTables.csv", package = "dataspice")
 prep_attributes(data_path)

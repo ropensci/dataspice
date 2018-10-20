@@ -30,7 +30,7 @@ test_that("attributes-extracted-correctly", {
 
 test_that("attributes-not-overwritten-for-same-file", {
     expect_warning(prep_attributes(data_path, attributes_path),
-                   "entries already exist in attributes.csv for fileName:BroodTables.csv, \n prep skipped")
+                   "Entries already exist in attributes.csv for fileNames: BroodTables.csv\n files ignored")
 })
 
 
