@@ -19,7 +19,7 @@ write_jsonld(x, path, context = "http://schema.org", pretty = TRUE,
 \item{auto_unbox}{automatically \code{\link{unbox}} all atomic vectors of length 1. It is usually safer to avoid this and instead use the \code{\link{unbox}} function to unbox individual elements.
 An exception is that objects of class \code{AsIs} (i.e. wrapped in \code{I()}) are not automatically unboxed. This is a way to mark single values as length-1 arrays.}
 
-\item{...}{additional arguments passed to \link{toJSON} or \link{fromJSON}}
+\item{...}{additional conversion arguments, see also \link{toJSON} or \link{fromJSON}}
 }
 \description{
 Write a list out as object to JSON-LD
