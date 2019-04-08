@@ -10,7 +10,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Imports: 
     purrr,
     fs,
@@ -24,10 +24,10 @@ Imports:
     shiny,
     rhandsontable,
     dplyr,
-    eml2,
     tidyr,
     ggplot2,
-    magrittr
+    magrittr,
+    EML (>= 1.99.0)
 Suggests: 
     testthat,
     knitr,
@@ -36,4 +36,5 @@ Suggests:
     listviewer
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-Remotes: cboettig/eml2
+Remotes:  
+    ropensci/EML

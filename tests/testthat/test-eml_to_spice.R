@@ -2,14 +2,14 @@ context("test-eml_to_spice")
 library(dplyr)
 
 eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
-eml <- eml2::read_eml(eml_path)
+eml <- EML::read_eml(eml_path)
 
 test_that("Access tabular format matches EML", {
   eml_access <- es_access(eml)
 
-  objectNames <- eml2::eml_get(eml, "objectName") %>% paste(collapse = " ")
-  urls <- eml2::eml_get(eml, "url") %>% paste(collapse = " ")
-  formatNames <- eml2::eml_get(eml, "formatName") %>% paste(collapse = " ")
+  objectNames <- EML::eml_get(eml, "objectName") %>% paste(collapse = " ")
+  urls <- EML::eml_get(eml, "url") %>% paste(collapse = " ")
+  formatNames <- EML::eml_get(eml, "formatName") %>% paste(collapse = " ")
 
   expect_true(all(stringr::str_detect(objectNames, eml_access$fileName),
                   na.rm = TRUE))
@@ -23,17 +23,17 @@ test_that("Access tabular format matches EML", {
 test_that("Attributes tabular format matches EML", {
   eml_attributes <- es_attributes(eml)
 
-  objectNames <- eml2::eml_get(eml, "objectName") %>% paste(collapse = " ")
-  attributeNames <- eml2::eml_get(eml, "attributeName") %>% paste(collapse = " ")
+  objectNames <- EML::eml_get(eml, "objectName") %>% paste(collapse = " ")
+  attributeNames <- EML::eml_get(eml, "attributeName") %>% paste(collapse = " ")
 
   expect_true(all(stringr::str_detect(objectNames, eml_attributes$fileName),
                   na.rm = TRUE))
   expect_true(all(stringr::str_detect(attributeNames, eml_attributes$variableName),
                   na.rm = TRUE))
 
-  standardUnits <- eml2::eml_get(eml, "standardUnit")
-  customUnits <- eml2::eml_get(eml, "customUnit")
-  formatStrings <- eml2::eml_get(eml, "formatString")
+  standardUnits <- EML::eml_get(eml, "standardUnit")
+  customUnits <- EML::eml_get(eml, "customUnit")
+  formatStrings <- EML::eml_get(eml, "formatString")
   unitText <- paste(standardUnits, customUnits, formatStrings, collapse = " ")
 
   expect_true(all(stringr::str_detect(unitText, eml_attributes$unitText),
@@ -89,11 +89,11 @@ test_that("Biblio tabular format matches EML", {
 test_that("Creators tabular format matches EML", {
   eml_creators <- es_creators(eml)
 
-  orcids <-  eml2::eml_get(eml, "userId") %>% paste(collapse = " ")
-  givenNames <- eml2::eml_get(eml, "givenName") %>% paste(collapse = " ")
-  surNames <- eml2::eml_get(eml, "surName") %>% paste(collapse = " ")
-  affiliations <- eml2::eml_get(eml, "organizationName") %>% paste(collapse = " ")
-  emails <- eml2::eml_get(eml, "electronicMailAddress") %>% paste(collapse = " ")
+  orcids <-  EML::eml_get(eml, "userId") %>% paste(collapse = " ")
+  givenNames <- EML::eml_get(eml, "givenName") %>% paste(collapse = " ")
+  surNames <- EML::eml_get(eml, "surName") %>% paste(collapse = " ")
+  affiliations <- EML::eml_get(eml, "organizationName") %>% paste(collapse = " ")
+  emails <- EML::eml_get(eml, "electronicMailAddress") %>% paste(collapse = " ")
 
   # expect_true(all(stringr::str_detect(orcids, eml_creators$id),
   #                 na.rm = TRUE))

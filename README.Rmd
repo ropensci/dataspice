@@ -194,7 +194,7 @@ jsonlite::read_json(system.file("metadata-tables/dataspice.json",
 A few existing tools & data standards to help users in specific domains:
 
 * [Darwin Core](http://rs.tdwg.org/dwc/)
-* [Ecological Metadata Language](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html) (EML) (& [`eml2`](https://github.com/cboettig/eml2))
+* [Ecological Metadata Language](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html) (EML) (& [`EML`](https://github.com/ropensci/EML))
 * [ISO 19115](https://www.iso.org/standard/53798.html) - Geographic Information Metadata
 * [ISO 19139](https://www.iso.org/standard/32557.html) - Geographic Info Metadata XML schema
 * [Minimum Information for Biological and Biomedical Investigations](https://fairsharing.org/collection/MIBBI) (MIBBI)

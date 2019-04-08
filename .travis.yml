@@ -7,7 +7,7 @@ r:
   - release
   - devel
 
-# needed for eml2:
+# needed for EML:
 addons:
   apt:
     sources:

@@ -5,7 +5,7 @@ get_entities <- function(eml,
 
     #look for specific fields to determine if the entity needs to be listed ("boxed") or not
     level_cond <- paste0("~", paste(sprintf("!is.null(.x$%s)", level_id), collapse = " | "))
-    purrr::map(entities, ~eml2::eml_get(eml, .x)) %>%
+    purrr::map(entities, ~EML::eml_get(eml, .x)) %>%
         # restructure so that all entities are at the same level
         # use level id to determine if .x should be listed or not
         purrr::map_if(eval(parse(text = level_cond)), list) %>%
@@ -35,7 +35,7 @@ get_access_spice <- function(x){
 #' @param path (character) folder path for saving the table to disk
 #'
 #' @export
-#' @import eml2
+#' @import EML
 #'
 #' @examples
 #' \dontrun{
@@ -68,10 +68,10 @@ get_attributes_spice <- function(x) {
   #reformat attributes to tabular format specified in dataspice
   #input a dataTable or otherEntity
 
-  objName <- eml2::eml_get(x, "objectName")
+  objName <- EML::eml_get(x, "objectName")
   objName <- ifelse(length(objName) == 2, objName[[1]], NA)
 
-  attrList <- eml2::eml_get(x, "attributeList")
+  attrList <- EML::eml_get(x, "attributeList")
 
   if(length(attrList) <= 1){
     out <- dplyr::tibble(fileName = objName,
@@ -79,7 +79,7 @@ get_attributes_spice <- function(x) {
                          description = NA,
                          unitText = NA)
   } else {
-    attr <- eml2::get_attributes(attrList)
+    attr <- EML::get_attributes(attrList)
 
     if(is.null(attr$attributes$unit)){
       attr$attributes$unit <- NA
