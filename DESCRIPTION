@@ -27,7 +27,7 @@ Imports:
     tidyr,
     ggplot2,
     magrittr,
-    EML (>= 1.99.0)
+    EML (>= 2.0.0)
 Suggests: 
     testthat,
     knitr,
@@ -36,5 +36,3 @@ Suggests:
     listviewer
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-Remotes:  
-    ropensci/EML
