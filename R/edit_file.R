@@ -155,7 +155,9 @@ edit_file <- function(metadata_dir = here::here("data", "metadata"),
     values <- reactiveValues()
 
     dat <- readr::read_csv(file = filepath,
-                           col_types = readr::cols())
+                           col_types = readr::cols(
+                             .default = readr::col_character()
+                           ))
     # pad if no data
     if(nrow(dat) == 0){
       dat <- dplyr::add_row(dat)
