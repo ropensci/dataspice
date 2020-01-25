@@ -4,9 +4,11 @@
 \alias{prep_attributes}
 \title{Prepare attributes}
 \usage{
-prep_attributes(data_path = here::here("data"),
+prep_attributes(
+  data_path = here::here("data"),
   attributes_path = here::here("data", "metadata", "attributes.csv"),
-  ...)
+  ...
+)
 }
 \arguments{
 \item{data_path}{character vector of either:

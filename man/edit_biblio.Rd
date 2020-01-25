@@ -8,10 +8,10 @@ edit_biblio(metadata_dir = here::here("data", "metadata"))
 }
 \arguments{
 \item{metadata_dir}{the directory containing the \code{dataspice} metadata \code{.csv} files. Defaults to
-\code{data/metadata/} directory in \strong{current project root}.}
+\verb{data/metadata/} directory in \strong{current project root}.}
 }
 \description{
-Launch shinyapp for editing individual \code{dataspice} metadata tables. Use \code{edit_*()} where \code{*}
+Launch shinyapp for editing individual \code{dataspice} metadata tables. Use \verb{edit_*()} where \code{*}
 is one of the four \code{dataspice} metadata tables \strong{\code{attributes}, \code{biblio}, \code{access} or \code{creators}}.
 }
 \examples{
