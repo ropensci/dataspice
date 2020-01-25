@@ -88,6 +88,26 @@
       </table>
     </div>
 
+    <h2>Distribution</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Format</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#distribution}}
+        <tr>
+          <td>{{ name }}</td>
+          <td>{{ fileFormat }}</td>
+          <td><a href="{{ contentUrl }}">Download</a></td>
+        </tr>
+        {{/distribution}}
+      </tbody>
+    </table>
+
     <h2>Debug</h2>
     <div id="jsonld-wrapper">
       <pre id="jsonld">
