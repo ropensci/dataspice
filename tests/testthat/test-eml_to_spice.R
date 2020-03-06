@@ -15,7 +15,7 @@ test_that("Access tabular format matches EML", {
                   na.rm = TRUE))
   expect_true(all(stringr::str_detect(urls, eml_access$contentUrl),
                   na.rm = TRUE))
-  expect_true(all(stringr::str_detect(formatNames, eml_access$fileFormat),
+  expect_true(all(stringr::str_detect(formatNames, eml_access$encodingFormat),
                   na.rm = TRUE))
 })
 

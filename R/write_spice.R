@@ -21,15 +21,15 @@ write_spice <- function(path = "data/metadata", ...) {
   validate_access(access)
   validate_creators(creators)
 
-  #fileName,name,contentUrl,fileFormat
+  #fileName,name,contentUrl,encodingFormat
   access <- access[ !names(access)=="fileName" ]
 
   distribution <- purrr::pmap(access,
-    function(name = NULL, contentUrl = NULL, fileFormat = NULL){
+    function(name = NULL, contentUrl = NULL, encodingFormat = NULL){
     list(type = "DataDownload",
          name = name,
          contentUrl = contentUrl,
-         fileFormat = fileFormat)
+         encodingFormat = encodingFormat)
   })
 
   attributes <- attributes[ !names(attributes)=="fileName" ]

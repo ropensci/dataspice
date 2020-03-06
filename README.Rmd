@@ -71,7 +71,7 @@ The user needs to fill in the details of the 4 template files. These csv files c
 
 * `prep_attributes()` populates the **`fileName`** and **`variableName`** columns of the `attributes.csv` file using the header row of the data files. 
 
-* `prep_access()` populates the **`fileName`**, **`name`** and **`fileFormat`** columns of the `access.csv` file from the files in the folder containing the data. 
+* `prep_access()` populates the **`fileName`**, **`name`** and **`encodingFormat`** columns of the `access.csv` file from the files in the folder containing the data.
 
 
 <br>

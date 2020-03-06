@@ -101,7 +101,7 @@
         {{#distribution}}
         <tr>
           <td>{{ name }}</td>
-          <td>{{ fileFormat }}</td>
+          <td>{{ encodingFormat }}</td>
           <td><a href="{{ contentUrl }}">Download</a></td>
         </tr>
         {{/distribution}}

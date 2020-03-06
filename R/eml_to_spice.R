@@ -21,6 +21,7 @@ get_access_spice <- function(x){
             grepl("entityName", name) ~ "name",
             grepl("url", name) ~ "contentUrl",
             grepl("formatName", name) ~ "fileFormat"
+            grepl("formatName", name) ~ "encodingFormat"
         )) %>%
         stats::na.omit() %>%
         filter(value != "download") %>% #often also included as url
@@ -51,7 +52,7 @@ es_access <- function(eml, path = NULL) {
     out <- dplyr::bind_rows(access_entities)
 
     #reorder
-    fields <- c("fileName", "name", "contentUrl", "fileFormat")
+    fields <- c("fileName", "name", "contentUrl", "encodingFormat")
     out <- out[, fields[fields %in% colnames(out)]]
 
     if(!is.null(path)){

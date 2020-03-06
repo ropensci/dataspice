@@ -36,7 +36,7 @@ prep_access <- function(data_path = here::here("data"),
                             fileName = fileNames,
                             name = basename(tools::file_path_sans_ext(fileNames)),
                             contentUrl = NA,
-                            fileFormat = fileTypes)
+                            encodingFormat = fileTypes)
 
 
   readr::write_csv(access, path = access_path)

@@ -114,7 +114,7 @@ edit_file <- function(metadata_dir = here::here("data", "metadata"),
               h6('fileName = the filename of the input data file(s).'),
               h6("name = the human readable name for the file."),
               h6('contentUrl = a url to where the data is hosted, if applicable'),
-              h6("fileFormat = the file format.")
+              h6("encodingFormat = the file format.")
             )},
           if (file == "creators.csv"){
             list(

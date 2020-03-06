@@ -281,19 +281,19 @@
       "type": "DataDownload",
       "name": "StockInfo.csv",
       "contentUrl": null,
-      "fileFormat": "CSV"
+      "encodingFormat": "text/csv"
     },
     {
       "type": "DataDownload",
       "name": "BroodTables.csv",
       "contentUrl": null,
-      "fileFormat": "CSV"
+      "encodingFormat": "text/csv"
     },
     {
       "type": "DataDownload",
       "name": "SourceInfo.csv",
       "contentUrl": null,
-      "fileFormat": "CSV"
+      "encodingFormat": "text/csv"
     }
   ]
 }

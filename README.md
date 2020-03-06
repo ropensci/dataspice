@@ -72,8 +72,8 @@ functions and/or a shiny app.
     header row of the data files.
 
   - `prep_access()` populates the **`fileName`**, **`name`** and
-    **`fileFormat`** columns of the `access.csv` file from the files in
-    the folder containing the data.
+    **`encodingFormat`** columns of the `access.csv` file from the files
+    in the folder containing the data.
 
 <br>
 
@@ -341,11 +341,11 @@ look like this:
 
 `access.csv` has one row for each file
 
-| fileName        | name            | contentUrl | fileFormat |
-| :-------------- | :-------------- | :--------- | :--------- |
-| StockInfo.csv   | StockInfo.csv   | NA         | CSV        |
-| BroodTables.csv | BroodTables.csv | NA         | CSV        |
-| SourceInfo.csv  | SourceInfo.csv  | NA         | CSV        |
+| fileName        | name            | contentUrl | encodingFormat |
+| :-------------- | :-------------- | :--------- | :------------- |
+| StockInfo.csv   | StockInfo.csv   | NA         | CSV            |
+| BroodTables.csv | BroodTables.csv | NA         | CSV            |
+| SourceInfo.csv  | SourceInfo.csv  | NA         | CSV            |
 
 <br>
 
