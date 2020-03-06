@@ -56,7 +56,6 @@ parse_GeoShape_points <- function(points) {
 #' @param path (character) Path to file on disk to convert
 #'
 #' @return (list) Mustache-appropriate list
-#' @export
 #'
 #' @examples
 #' \dontrun{
