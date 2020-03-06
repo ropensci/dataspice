@@ -43,13 +43,20 @@ write_spice <- function(path = "data/metadata", ...) {
   authors <- purrr::pmap(creators, Person)
 
 
+  # Pre-process keywords
+  biblio_keywords <- if (is.na(biblio$keywords)) {
+    NULL
+  } else {
+    strsplit(biblio$keywords, ", ")[[1]]
+  }
+
   Dataset <- list(
     type = "Dataset",
     name = biblio$title,
     creator = authors,
     description = biblio$description,
     datePublished = biblio$datePublished,
-    keywords = strsplit(biblio$keywords, ", ")[[1]],
+    keywords = biblio_keywords,
     funder = biblio$funder,
     temporalCoverage = paste(biblio$startDate, biblio$endDate, sep="/"),
     license = biblio$license,
