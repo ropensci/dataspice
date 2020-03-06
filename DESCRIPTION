@@ -1,11 +1,20 @@
 Package: dataspice
 Version: 0.0.0.9000
-Title: Create lightweight schema.org descriptions of dataset
-Description: The goal of dataspice is to make it easier for researchers to create basic, 
-   lightweight and concise metadata files for their datasets. These basic files can 
-   then be used to make useful information available during analysis, create a helpful 
-   dataset README webpage and produce more complex metadata formats to aid dataset discovery. Metadata fields are based on schema.org and other metadata standards..
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Title: Create Lightweight Schema.org Descriptions of Data
+Description: The goal of dataspice is to make it easier for researchers to create basic,
+   lightweight and concise metadata files for their datasets. These basic files can
+   then be used to make useful information available during analysis, create a helpful
+   dataset README webpage and produce more complex metadata formats to aid dataset discovery. Metadata fields are based on schema.org and other metadata standards.
+Authors@R: c(
+    person("Carl", "Boettiger", role = c("aut"), comment = "https://github.com/cboettig"),
+    person("Scott", "Chamberlain", role = c("aut"), comment = "https://github.com/sckott"),
+    person("Auriel", "Fournier", role = c("aut"), comment = "https://github.com/aurielfournier"),
+    person("Kelly", "Hondula", role = c("aut"), comment = "https://github.com/khondula"),
+    person("Anna", "Krystalli", role = c("aut"), comment = "https://github.com/annakrystalli"),
+    person("Bryce", "Mecum", role = c("aut", "cre"), email = "brycemecum@gmail.com", comment = "https://github.com/amoeba"),
+    person("Maëlle", "Salmon", role = c("aut"), comment = "https://github.com/maelle"),
+    person("Kate", "Webbink", role = c("aut"), comment = "https://github.com/magpiedin"),
+    person("Kara", "Woo", role = c("aut"), comment = "https://github.com/karawoo"))
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
