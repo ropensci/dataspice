@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Compiled annual statewide Alaskan salmon escapement counts, 1921-2017</title>
+    <title>{{title}}</title>
     <script type="application/ld+json">
       {{{ jsonld }}}
     </script>
