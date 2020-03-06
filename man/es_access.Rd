@@ -16,6 +16,8 @@ Return EML access in the dataspice access.csv format.
 }
 \examples{
 \dontrun{
+library(EML)
+
 eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
 eml <- read_eml(eml_path)
 es_access(eml)
