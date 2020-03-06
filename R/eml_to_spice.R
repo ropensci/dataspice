@@ -20,7 +20,6 @@ get_access_spice <- function(x){
             grepl("objectName", name) ~ "fileName",
             grepl("entityName", name) ~ "name",
             grepl("url", name) ~ "contentUrl",
-            grepl("formatName", name) ~ "fileFormat"
             grepl("formatName", name) ~ "encodingFormat"
         )) %>%
         stats::na.omit() %>%
