@@ -182,7 +182,7 @@ Here's a view of the `dataspice.json` file of the example data:
 
 * `build_site()` generates an index.html file in the repository `docs` folder, to create a website that shows a simple view of the dataset with the metadata and an interactive map. For example, this [repository](https://github.com/amoeba/dataspice-example) results in this [website](https://amoeba.github.io/dataspice-example/) 
 
-![dataspice-website](man/figures/index_webshot.png)
+![dataspice-website](man/figures/website_example.png)
 
 <br>
 
