@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="application/ld+json">
       {{{ jsonld }}}
     </script>
@@ -13,53 +14,93 @@
     <style>
       body {
         font-size: 16px;
-        font-family: sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         margin: 0 auto;
-        width: 800px;
+        padding: 1rem;
+        max-width: 800px;
       }
 
       #map {
-        width: 800px;
-        height: 300px;
+        height: 20rem;
       }
 
-      #attributes-wrapper {
-        height: 300px;
-        overflow-y: scroll;
-      }
-
+      #attributes-wrapper,
       #jsonld-wrapper {
-        height: 300px;
+        height: 20rem;
         overflow-y: scroll;
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+
+      th {
+        border-bottom: 1px solid black;
+      }
+
+      th, td {
+        padding: 0.25rem;
+      }
+
+      table.listing td {
+        border: 1px solid #CCC;
+      }
+
+      table.listing tr td:first-child {
+          background-color: #EEE;
+      }
+
+      table.listing ul {
+        margin: 0 0 0 1.5rem;
+        padding: 0;
       }
     </style>
   </head>
   <body>
     <h1>{{name}}</h1>
-    <p>{{description}}</p>
+    <p><strong>Description:</strong> {{description}}</p>
 
     <h2>Bibliographic</h2>
 
-    <ul>
-      <li>datePublished: {{datePublished}}</li>
-      <li>keywords
-      <ul>
-        {{#keywords}}
-        <li>{{.}}</li>
-        {{/keywords}}
-      </ul>
-      </li>
-      <li>funder: {{ funder }}</li>
-      <li>license: {{ license }}</li>
-    </ul>
+    <table class="listing">
+      <tr>
+        <td>Published</td>
+        <td>{{datePublished}}</td>
+      </tr>
+      <tr>
+        <td>Keywords</td>
+        <td>
+          <ul>
+          {{#keywords}}
+            <li>{{.}}</li>
+          {{/keywords}}
+        </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Funder</td>
+        <td>{{funder}}</td>
+      </tr>
+      <tr>
+        <td>License</td>
+        <td>{{license}}</td>
+      </tr>
+    </table>
 
     <h2>Coverage</h2>
 
     <h3>Temporal</h3>
-    <ul>
-      <li>beginDate: {{ beginDate }}</li>
-      <li>endDate: {{ endDate }}</li>
-    </ul>
+
+    <table class="listing">
+      <tr>
+        <td>Begin</td>
+        <td>{{beginDate}}</td>
+      </tr>
+      <tr>
+        <td>End</td>
+        <td>{{endDate}}</td>
+      </tr>
+    </table>
 
     <h3>Spatial</h3>
     <pre><code>{{ geographicCoverage }}</code></pre>
