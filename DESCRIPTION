@@ -20,7 +20,7 @@ Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 RoxygenNote: 7.0.2
-Imports: 
+Imports:
     purrr,
     fs,
     jsonlite,
@@ -37,7 +37,7 @@ Imports:
     ggplot2,
     magrittr,
     EML (>= 2.0.0)
-Suggests: 
+Suggests:
     testthat,
     knitr,
     rmarkdown,
