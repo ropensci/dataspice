@@ -5,6 +5,7 @@
 #' @param metadata_dir the directory containing the `dataspice` metadata `.csv` files. Defaults to
 #'   `data/metadata/` directory in **current project root**.
 #' @export
+#' @importFrom here here
 #' @examples
 #' \dontrun{
 #' edit_attributes()

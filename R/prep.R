@@ -15,6 +15,7 @@
 #' @return `prep_attributes()` updates the `attributes.csv` and writes to `attributes_path`.
 #' `validate_file_paths()` returns a vector of valid file_paths detected from `data_path`.
 #' @export
+#' @importFrom here here
 #' @examples
 #' \dontrun{
 #' create_spice()
