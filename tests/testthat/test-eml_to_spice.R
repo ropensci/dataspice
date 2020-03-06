@@ -99,11 +99,13 @@ test_that("Creators tabular format matches EML", {
   #                 na.rm = TRUE))
   # doesn't work if no orcids available
 
-  expect_true(all(stringr::str_detect(givenNames, eml_creators$givenName),
-                  na.rm = TRUE))
-
-  expect_true(all(stringr::str_detect(surNames, eml_creators$familyName),
-                  na.rm = TRUE))
+  expect_true(all(stringr::str_detect(
+    paste(
+      EML::eml_get(eml, "givenName"),
+      EML::eml_get(eml, "surName"),
+      collapse = " "),
+    eml_creators$name),
+    na.rm = TRUE))
 
   expect_true(all(stringr::str_detect(affiliations, eml_creators$affiliation),
                   na.rm = TRUE))

@@ -6,16 +6,14 @@
     {
       "type": "Person",
       "id": null,
-      "givenName": "Jeanette",
-      "familyName": "Clark",
+      "name": "Jeanette Clark",
       "email": "jclark@nceas.ucsb.edu",
       "affiliation": "National Center for Ecological Analysis and Synthesis"
     },
     {
       "type": "Person",
       "id": null,
-      "givenName": "Rich",
-      "familyName": "Brenner",
+      "name": "Rich Brenner",
       "email": "richard.brenner.alaska.gov",
       "affiliation": "Alaska Department of Fish and Game"
     }

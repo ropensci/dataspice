@@ -248,15 +248,18 @@ es_creators <- function(eml, path = NULL) {
       )) %>%
       stats::na.omit() %>%
       # merge fields together if duplicated (ex: givenName1 & givenName2)
-      group_by(name) %>%
+      dplyr::group_by(name) %>%
       dplyr::summarize(value = paste(value, collapse = " ")) %>%
-      tidyr::spread(name, value)
+      tidyr::spread(name, value) %>%
+      # Merge givenName and familyName into name
+      dplyr::mutate(name = paste(givenName, familyName)) %>%
+      dplyr::select(-givenName, -familyName)
   })
 
   out <- dplyr::bind_rows(people_parsed) %>%
     dplyr::distinct()
 
-  fields <- c("id", "givenName", "familyName", "affiliation", "email")
+  fields <- c("id", "name", "affiliation", "email")
   out <- out[, fields[fields %in% colnames(out)]]
 
   if(!is.null(path)){

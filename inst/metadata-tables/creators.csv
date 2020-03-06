@@ -1,1 +1,3 @@
-﻿id,givenName,familyName,affiliation,email,Jeanette,Clark,National Center for Ecological Analysis and Synthesis,jclark@nceas.ucsb.edu,Rich,Brenner,Alaska Department of Fish and Game,richard.brenner.alaska.gov
+﻿id,name,affiliation,email
+,"Jeanette Clark",National Center for Ecological Analysis and Synthesis,jclark@nceas.ucsb.edu
+,"Rich,Brenner",Alaska Department of Fish and Game,richard.brenner.alaska.gov
