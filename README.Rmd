@@ -1,9 +1,7 @@
 ---
-output: 
+output:
   md_document:
     variant: gfm
-editor_options:
-  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -24,13 +22,13 @@ library(stringr)
 
 [![Build Status](https://travis-ci.com/ropenscilabs/dataspice.svg?branch=master)](https://travis-ci.com/ropenscilabs/dataspice)
 
-The goal of dataspice is to make it easier for researchers to create basic, lightweight and concise metadata files for their datasets. These basic files can then be used to:
+The goal of `dataspice` is to make it easier for researchers to create basic, lightweight, and concise metadata files for their datasets by editing the kind of files they're probably most familiar with: CSVs. These metadata files can then be used to:
 
-- make useful information available during analysis.
-- create a helpful dataset README webpage.
-- produce more complex metadata formats to aid dataset discovery.
+- Make useful information available during analysis.
+- Create a helpful dataset README webpage for your data similar to how [pkgdown](https://pkgdown.r-lib.org/) creates websites for R packages.
+- Produce more complex metadata formats for richer description of your datasets and to aid dataset discovery.
 
-Metadata fields are based on [schema.org](http://schema.org/Dataset) and other [metadata standards](https://github.com/ropenscilabs/dataspice#resources).
+Metadata fields are based on [Schema.org/Dataset](http://schema.org/Dataset) and other [metadata standards](https://github.com/ropenscilabs/dataspice#resources) and represent a lowest common denominator which means converting between formats should be relatively straightforward.
 
 ## Example
 
@@ -44,76 +42,77 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/dataspice")
 ```
+
 ## Workflow
 
 ```{r example, eval=FALSE}
 create_spice()
-write_spice() 
-build_site()
+# Then fill in template CSV files
+write_spice()
+build_site() # Optional
 ```
 
 ![worfklowdiagram](man/figures/dataspice_workflow.png)
 
 ### Create spice
 
-* `create_spice()` creates template metadata spreadsheets in a folder (by default created in the `data` folder)
+`create_spice()` creates template metadata spreadsheets in a folder (by default created in the `data` folder in the current working directory).
 
 The template files are:
 
-* **attributes.csv** - explains each of the variables in the dataset
-* **biblio.csv** - for spatial and temporal coverage, dataset name, keywords, etc.
-* **access.csv** - for files and file types
+* **biblio.csv** - for title, abstract, spatial and temporal coverage, etc.
 * **creators.csv** - for data authors
+* **attributes.csv** - explains each of the variables in the dataset
+* **access.csv** - for files, file types, and download URLs (if appropriate)
 
 ### Fill in templates
 
-The user needs to fill in the details of the 4 template files. These csv files can be directly modified, or they can be edited using some helper functions and/or a shiny app. 
+The user needs to fill in the details of the four template files. These csv files can be directly modified, or they can be edited using either the associated helper function and/or [Shiny](https://shiny.rstudio.com/) app.
 
 #### Helper functions
 
-* `prep_attributes()` populates the **`fileName`** and **`variableName`** columns of the `attributes.csv` file using the header row of the data files. 
+* `prep_attributes()` populates the **`fileName`** and **`variableName`** columns of the `attributes.csv` file using the header row of the data files.
 
 * `prep_access()` populates the **`fileName`**, **`name`** and **`encodingFormat`** columns of the `access.csv` file from the files in the folder containing the data.
-
-
-<br>
 
 To see an example of how `prep_attributes()` works, load the data files that ship with the package:
 
 ```{r, eval=FALSE}
-data_files <- list.files(system.file("example-dataset/", 
-                                     package = "dataspice"), 
+data_files <- list.files(system.file("example-dataset/", package = "dataspice"),
                          pattern = ".csv",
-                        full.names = TRUE)
+                         full.names = TRUE)
 ```
 
 This function assumes that the metadata templates are in a folder called `metadata` within a `data` folder.
 
 ```{r, eval = FALSE}
-attributes_path <- here::here("data", "metadata",
- "attributes.csv")
+attributes_path <- here::here("data", "metadata", "attributes.csv")
 ```
 
 Using `purrr::map()`, this function can be applied over multiple files to populate the header names
 
 ```{r, eval=FALSE, message=FALSE}
-data_files %>% purrr::map(~prep_attributes(.x, attributes_path),
-                         attributes_path = attributes_path)
+data_files %>%
+  purrr::map(~ prep_attributes(.x, attributes_path),
+             attributes_path = attributes_path)
 ```
 
 The output of `prep_attributes()` has the first two columns filled out:
 
 ```{r, echo=FALSE, message=FALSE}
-readr::read_csv(system.file("metadata-tables/attributes_prepped.csv", package = "dataspice")) %>% head() %>% kable()
+readr::read_csv(
+  system.file(
+    "metadata-tables/attributes_prepped.csv",
+    package = "dataspice")) %>%
+  head() %>%
+  kable()
 ```
 
-<br>
+#### Shiny helper apps
 
-#### editable shiny apps
+Each of the metadata templates can be edited interactively using a [Shiny](https://shiny.rstudio.com/) app:
 
-Each of the metadata templates can be edited interactively using a shiny app
-
-* `edit_attributes()` opens a shiny app that can be used to edit `attributes.csv`. The shiny app displays the current `attributes` table and lets the user fill in an informative description and units (e.g. meters, hectares, etc.) for each variable. 
+* `edit_attributes()` opens a Shiny app that can be used to edit `attributes.csv`. The shiny app displays the current `attributes` table and lets the user fill in an informative description and units (e.g. meters, hectares, etc.) for each variable.
 * `edit_access()`: opens an editable version of `access.csv`
 * `edit_creators()`: opens an editable version of `creators.csv`
 * `edit_biblio()`: opens an editable version of `biblio.csv`
@@ -122,9 +121,7 @@ Each of the metadata templates can be edited interactively using a shiny app
 
 Remember to click on **Save** when finished editing.
 
-<br>
-
-#### completed metadata files
+#### Completed metadata files
 
 The first few rows of the completed metadata tables in this example will look like this:
 
@@ -134,61 +131,43 @@ The first few rows of the completed metadata tables in this example will look li
 readr::read_csv(system.file("metadata-tables/access.csv", package = "dataspice")) %>% head() %>% kable(format = "markdown")
 ```
 
-<br>
-
 `attributes.csv` has one row for each variable in each file
 
 ```{r, echo=FALSE, message=FALSE}
 readr::read_csv(system.file("metadata-tables/attributes.csv", package = "dataspice")) %>% head() %>% kable(format = "markdown")
 ```
 
-<br>
-
 `biblio.csv` is one row containing descriptors including spatial and temporal coverage
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-readr::read_csv(system.file("metadata-tables/biblio.csv", package = "dataspice")) %>% 
+readr::read_csv(system.file("metadata-tables/biblio.csv", package = "dataspice")) %>%
   dplyr::mutate(description = str_trunc(description, 200, side = "right")) %>%
   kable(format = "markdown")
 ```
 
-<br>
-
 `creators.csv` has one row for each of the dataset authors
 
 ```{r, echo=FALSE, message=FALSE}
-readr::read_csv(system.file("metadata-tables/creators.csv", package = "dataspice")) %>% 
-  kable(format = "markdown") 
+readr::read_csv(system.file("metadata-tables/creators.csv", package = "dataspice")) %>%
+  kable(format = "markdown")
 ```
 
-<br>
+### Save JSON-KD file
 
-***
-
-### Save json-ld file
-
-* `write_spice()` generates a json-ld file ("linked data") to aid in [dataset discovery](https://developers.google.com/search/docs/data-types/dataset), creation of more extensive metadata (e.g. [EML](https://knb.ecoinformatics.org/#api)), and creating a website. 
+`write_spice()` generates a json-ld file ("linked data") to aid in [dataset discovery](https://developers.google.com/search/docs/data-types/dataset), creation of more extensive metadata (e.g. [EML](https://eml.ecoinformatics.org)), and creating a website.
 
 Here's a view of the `dataspice.json` file of the example data:
 
 ![listviewer pack output showing an example dataspice JSON file](man/figures/listviewer.png)
 
-
-<br>
-
-***
-
 ### Build website
 
-* `build_site()` generates an index.html file in the repository `docs` folder, to create a website that shows a simple view of the dataset with the metadata and an interactive map. For example, this [repository](https://github.com/amoeba/dataspice-example) results in this [website](https://amoeba.github.io/dataspice-example/) 
+* `build_site()` creates a bare-bones `index.html` file in the repository `docs` folder with a simple view of the dataset with the metadata and an interactive map. For example, this [repository](https://github.com/amoeba/dataspice-example) results in this [website](https://amoeba.github.io/dataspice-example/)
 
 ![dataspice-website](man/figures/website_example.png)
 
-<br>
-
-***
-
 ## Resources
+
 A few existing tools & data standards to help users in specific domains:
 
 * [Darwin Core](http://rs.tdwg.org/dwc/)
@@ -197,7 +176,7 @@ A few existing tools & data standards to help users in specific domains:
 * [ISO 19139](https://www.iso.org/standard/32557.html) - Geographic Info Metadata XML schema
 * [Minimum Information for Biological and Biomedical Investigations](https://fairsharing.org/collection/MIBBI) (MIBBI)
 
-...And others indexed in [Fairsharing.org](https://fairsharing.org) & the [RDA metadata directory](http://rd-alliance.github.io/metadata-directory/standards/). 
+...And others indexed in [Fairsharing.org](https://fairsharing.org) & the [RDA metadata directory](http://rd-alliance.github.io/metadata-directory/standards/).
 
 ## Contributors
 
@@ -212,4 +191,3 @@ This package was developed at rOpenSci's 2018 unconf by (in alphabetical order):
 * [Maëlle Salmon](https://github.com/maelle)
 * [Kate Webbink](https://github.com/magpiedin)
 * [Kara Woo](https://github.com/karawoo)
-

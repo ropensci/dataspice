@@ -1,4 +1,3 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # dataspice
@@ -6,17 +5,23 @@
 [![Build
 Status](https://travis-ci.com/ropenscilabs/dataspice.svg?branch=master)](https://travis-ci.com/ropenscilabs/dataspice)
 
-The goal of dataspice is to make it easier for researchers to create
-basic, lightweight and concise metadata files for their datasets. These
-basic files can then be used to:
+The goal of `dataspice` is to make it easier for researchers to create
+basic, lightweight, and concise metadata files for their datasets by
+editing the kind of files they’re probably most familiar with: CSVs.
+These metadata files can then be used to:
 
-  - make useful information available during analysis.
-  - create a helpful dataset README webpage.
-  - produce more complex metadata formats to aid dataset discovery.
+  - Make useful information available during analysis.
+  - Create a helpful dataset README webpage for your data similar to how
+    [pkgdown](https://pkgdown.r-lib.org/) creates websites for R
+    packages.
+  - Produce more complex metadata formats for richer description of your
+    datasets and to aid dataset discovery.
 
-Metadata fields are based on [schema.org](http://schema.org/Dataset) and
-other [metadata
-standards](https://github.com/ropenscilabs/dataspice#resources).
+Metadata fields are based on
+[Schema.org/Dataset](http://schema.org/Dataset) and other [metadata
+standards](https://github.com/ropenscilabs/dataspice#resources) and
+represent a lowest common denominator which means converting between
+formats should be relatively straightforward.
 
 ## Example
 
@@ -40,30 +45,33 @@ devtools::install_github("ropenscilabs/dataspice")
 
 ``` r
 create_spice()
-write_spice() 
-build_site()
+# Then fill in template CSV files
+write_spice()
+build_site() # Optional
 ```
 
 ![worfklowdiagram](man/figures/dataspice_workflow.png)
 
 ### Create spice
 
-  - `create_spice()` creates template metadata spreadsheets in a folder
-    (by default created in the `data` folder)
+`create_spice()` creates template metadata spreadsheets in a folder (by
+default created in the `data` folder in the current working directory).
 
 The template files are:
 
-  - **attributes.csv** - explains each of the variables in the dataset
-  - **biblio.csv** - for spatial and temporal coverage, dataset name,
-    keywords, etc.
-  - **access.csv** - for files and file types
+  - **biblio.csv** - for title, abstract, spatial and temporal coverage,
+    etc.
   - **creators.csv** - for data authors
+  - **attributes.csv** - explains each of the variables in the dataset
+  - **access.csv** - for files, file types, and download URLs (if
+    appropriate)
 
 ### Fill in templates
 
-The user needs to fill in the details of the 4 template files. These csv
-files can be directly modified, or they can be edited using some helper
-functions and/or a shiny app.
+The user needs to fill in the details of the four template files. These
+csv files can be directly modified, or they can be edited using either
+the associated helper function and/or
+[Shiny](https://shiny.rstudio.com/) app.
 
 #### Helper functions
 
@@ -75,32 +83,29 @@ functions and/or a shiny app.
     **`encodingFormat`** columns of the `access.csv` file from the files
     in the folder containing the data.
 
-<br>
-
 To see an example of how `prep_attributes()` works, load the data files
 that ship with the package:
 
 ``` r
-data_files <- list.files(system.file("example-dataset/", 
-                                     package = "dataspice"), 
+data_files <- list.files(system.file("example-dataset/", package = "dataspice"),
                          pattern = ".csv",
-                        full.names = TRUE)
+                         full.names = TRUE)
 ```
 
 This function assumes that the metadata templates are in a folder called
 `metadata` within a `data` folder.
 
 ``` r
-attributes_path <- here::here("data", "metadata",
- "attributes.csv")
+attributes_path <- here::here("data", "metadata", "attributes.csv")
 ```
 
 Using `purrr::map()`, this function can be applied over multiple files
 to populate the header names
 
 ``` r
-data_files %>% purrr::map(~prep_attributes(.x, attributes_path),
-                         attributes_path = attributes_path)
+data_files %>%
+  purrr::map(~ prep_attributes(.x, attributes_path),
+             attributes_path = attributes_path)
 ```
 
 The output of `prep_attributes()` has the first two columns filled out:
@@ -313,14 +318,12 @@ NA
 
 </table>
 
-<br>
+#### Shiny helper apps
 
-#### editable shiny apps
+Each of the metadata templates can be edited interactively using a
+[Shiny](https://shiny.rstudio.com/) app:
 
-Each of the metadata templates can be edited interactively using a shiny
-app
-
-  - `edit_attributes()` opens a shiny app that can be used to edit
+  - `edit_attributes()` opens a Shiny app that can be used to edit
     `attributes.csv`. The shiny app displays the current `attributes`
     table and lets the user fill in an informative description and units
     (e.g. meters, hectares, etc.) for each variable.
@@ -332,9 +335,7 @@ app
 
 Remember to click on **Save** when finished editing.
 
-<br>
-
-#### completed metadata files
+#### Completed metadata files
 
 The first few rows of the completed metadata tables in this example will
 look like this:
@@ -347,10 +348,7 @@ look like this:
 | BroodTables.csv | BroodTables.csv | NA         | CSV            |
 | SourceInfo.csv  | SourceInfo.csv  | NA         | CSV            |
 
-<br>
-
-`attributes.csv` has one row for each variable in each
-file
+`attributes.csv` has one row for each variable in each file
 
 | fileName        | variableName | description                                      | unitText |
 | :-------------- | :----------- | :----------------------------------------------- | :------- |
@@ -361,59 +359,42 @@ file
 | BroodTables.csv | Region       | Region of stock                                  | NA       |
 | BroodTables.csv | Sub.Region   | Sub.Region of stock                              | NA       |
 
-<br>
-
 `biblio.csv` is one row containing descriptors including spatial and
-temporal
-coverage
+temporal coverage
 
 | title                                                                 | description                                                                                                                                                                                            | datePublished       | citation | keywords                   | license | funder | geographicDescription | northBoundCoord | eastBoundCoord | southBoundCoord | westBoundCoord | wktString | startDate           | endDate             |
 | :-------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------ | :------- | :------------------------- | :------ | :----- | :-------------------- | --------------: | -------------: | --------------: | -------------: | :-------- | :------------------ | :------------------ |
 | Compiled annual statewide Alaskan salmon escapement counts, 1921-2017 | The number of mature salmon migrating from the marine environment to freshwater streams is defined as escapement. Escapement data are the enumeration of these migrating fish as they pass upstream, … | 2018-02-12 08:00:00 | NA       | salmon, alaska, escapement | NA      | NA     | NA                    |              78 |          \-131 |              47 |          \-171 | NA        | 1921-01-01 08:00:00 | 2017-01-01 08:00:00 |
 
-<br>
-
-`creators.csv` has one row for each of the dataset
-authors
+`creators.csv` has one row for each of the dataset authors
 
 | id | givenName | familyName | affiliation                                           | email                      |
 | :- | :-------- | :--------- | :---------------------------------------------------- | :------------------------- |
 | NA | Jeanette  | Clark      | National Center for Ecological Analysis and Synthesis | <jclark@nceas.ucsb.edu>    |
 | NA | Rich      | Brenner    | Alaska Department of Fish and Game                    | richard.brenner.alaska.gov |
 
-<br>
+### Save JSON-KD file
 
------
-
-### Save json-ld file
-
-  - `write_spice()` generates a json-ld file (“linked data”) to aid in
-    [dataset
-    discovery](https://developers.google.com/search/docs/data-types/dataset),
-    creation of more extensive metadata (e.g.
-    [EML](https://knb.ecoinformatics.org/#api)), and creating a website.
+`write_spice()` generates a json-ld file (“linked data”) to aid in
+[dataset
+discovery](https://developers.google.com/search/docs/data-types/dataset),
+creation of more extensive metadata
+(e.g. [EML](https://eml.ecoinformatics.org)), and creating a website.
 
 Here’s a view of the `dataspice.json` file of the example data:
 
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" />
-
-<br>
-
------
+![listviewer pack output showing an example dataspice JSON
+file](man/figures/listviewer.png)
 
 ### Build website
 
-  - `build_site()` generates an index.html file in the repository `docs`
-    folder, to create a website that shows a simple view of the dataset
-    with the metadata and an interactive map. For example, this
+  - `build_site()` creates a bare-bones `index.html` file in the
+    repository `docs` folder with a simple view of the dataset with the
+    metadata and an interactive map. For example, this
     [repository](https://github.com/amoeba/dataspice-example) results in
     this [website](https://amoeba.github.io/dataspice-example/)
 
-![dataspice-website](man/figures/index_webshot.png)
-
-<br>
-
------
+![dataspice-website](man/figures/website_example.png)
 
 ## Resources
 
