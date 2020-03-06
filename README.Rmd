@@ -171,11 +171,7 @@ readr::read_csv(system.file("metadata-tables/creators.csv", package = "dataspice
 
 Here's a view of the `dataspice.json` file of the example data:
 
-```{r, echo = F}
-jsonlite::read_json(system.file("metadata-tables/dataspice.json", 
-                                     package = "dataspice")) %>% 
-  listviewer::jsonedit()
-```
+![listviewer pack output showing an example dataspice JSON file](man/figures/listviewer.png)
 
 
 <br>
