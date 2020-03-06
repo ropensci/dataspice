@@ -46,6 +46,13 @@ edit_creators <- function(metadata_dir = here::here("data", "metadata")) {
 edit_file <- function(metadata_dir = here::here("data", "metadata"),
                       file = c("attributes.csv", "biblio.csv", "access.csv", "creators.csv")){
 
+  filepath <- file.path(metadata_dir, file)
+
+  if (!file.exists(filepath)) {
+    stop("File '", filepath, "' does not exist. Run create_spice() first.",
+         call. = FALSE)
+  }
+
   file <- match.arg(file)
 
   ui <- shinyUI(
@@ -136,8 +143,6 @@ edit_file <- function(metadata_dir = here::here("data", "metadata"),
   )
 
   server <- shinyServer(function(input, output) {
-
-    filepath <- file.path(metadata_dir, file)
 
 
     ## bounding box map
