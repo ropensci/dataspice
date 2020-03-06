@@ -1,6 +1,8 @@
 ---
-output: github_document
-editor_options: 
+output: 
+  md_document:
+    variant: gfm
+editor_options:
   chunk_output_type: console
 ---
 
