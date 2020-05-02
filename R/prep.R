@@ -59,13 +59,13 @@ validate_file_paths <- function(data_path = here::here("data"), ...){
     if(is_dir(data_path)){
       file_paths <- list.files(data_path,
                                include.dirs = FALSE,
-                               full.names = T,
+                               full.names = TRUE,
                                ...)
     }else{
       file_paths <- data_path
     }}
     # remove any metadata folder files
-    file_paths <- grep("*metadata/*", file_paths, invert = T, value = T)
+    file_paths <- grep("*metadata/*", file_paths, invert = TRUE, value = TRUE)
     file_paths <- file_paths[!is_dir(file_paths)] %>%
       check_files_exist() %>%
       check_extensions()
