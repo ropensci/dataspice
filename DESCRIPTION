@@ -7,6 +7,8 @@ Description: The goal of dataspice is to make it easier for researchers to creat
    dataset README webpage and produce more complex metadata formats to aid dataset discovery. Metadata fields are based on schema.org and other metadata standards..
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 License: MIT + file LICENSE
+URL: https://github.com/ropenscilabs/dataspice
+BugReports: https://github.com/ropenscilabs/datspice/issues
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
