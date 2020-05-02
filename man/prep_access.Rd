@@ -4,11 +4,7 @@
 \alias{prep_access}
 \title{Prepare access}
 \usage{
-prep_access(
-  data_path = here::here("data"),
-  access_path = here::here("data", "metadata", "access.csv"),
-  ...
-)
+prep_access(data_path = "data", access_path = "data/metadata/access.csv", ...)
 }
 \arguments{
 \item{data_path}{character vector of either:

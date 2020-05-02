@@ -5,8 +5,8 @@
 \title{Prepare attributes}
 \usage{
 prep_attributes(
-  data_path = here::here("data"),
-  attributes_path = here::here("data", "metadata", "attributes.csv"),
+  data_path = "data",
+  attributes_path = "data/metadata/attributes.csv",
   ...
 )
 }

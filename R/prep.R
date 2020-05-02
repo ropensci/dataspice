@@ -34,9 +34,8 @@
 #' # get vector of valid (existing) file paths
 #' validate_file_paths(data_path)
 #' }
-prep_attributes <- function(data_path = here::here("data"),
-                            attributes_path = here::here("data", "metadata",
-                                                         "attributes.csv"),
+prep_attributes <- function(data_path = "data",
+                            attributes_path = "data/metadata/attributes.csv",
                             ...){
   # list and validate file paths
   file_paths <- validate_file_paths(data_path, ...)
@@ -54,7 +53,7 @@ prep_attributes <- function(data_path = here::here("data"),
 
 #' @inherit prep_attributes
 #' @export
-validate_file_paths <- function(data_path = here::here("data"), ...){
+validate_file_paths <- function(data_path = "data", ...){
   if(length(data_path) == 1){
     if(is_dir(data_path)){
       file_paths <- list.files(data_path,
