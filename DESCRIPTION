@@ -8,7 +8,7 @@ Description: The goal of dataspice is to make it easier for researchers to creat
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 License: MIT + file LICENSE
 URL: https://github.com/ropenscilabs/dataspice
-BugReports: https://github.com/ropenscilabs/datspice/issues
+BugReports: https://github.com/ropenscilabs/dataspice/issues
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
