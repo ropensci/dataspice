@@ -1,5 +1,5 @@
 Package: dataspice
-Version: 0.0.0.9000
+Version: 0.0.0.901
 Title: Create lightweight schema.org descriptions of dataset
 Description: The goal of dataspice is to make it easier for researchers to create basic, 
    lightweight and concise metadata files for their datasets. These basic files can 
