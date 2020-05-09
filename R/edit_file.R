@@ -15,7 +15,7 @@
 #' # Specifying a different dataspice metadata directory
 #' edit_attributes(metadata_dir = "analysis/data/metadata/"))
 #'}
-edit_attributes <- function(metadata_dir = here::here("data", "metadata")) {
+edit_attributes <- function(metadata_dir = "data/metadata") {
   edit_file(metadata_dir, "attributes.csv")
 }
 
@@ -43,7 +43,7 @@ edit_creators <- function(metadata_dir = here::here("data", "metadata")) {
 #' @import rhandsontable
 #' @import ggplot2
 #' @importFrom dplyr "%>%"
-edit_file <- function(metadata_dir = here::here("data", "metadata"),
+edit_file <- function(metadata_dir = "data/metadata",
                       file = c("attributes.csv", "biblio.csv", "access.csv", "creators.csv")){
 
   file <- match.arg(file)
@@ -142,7 +142,7 @@ edit_file <- function(metadata_dir = here::here("data", "metadata"),
 
 
     ## bounding box map
-    if (file == "biblio.csv"){
+    if (file == "biblio.csv" && requireNamespace("maps", quietly = TRUE)){
       output$bbmap <- renderPlot({
         world <- ggplot2::map_data("world")
         ggplot2::ggplot() +

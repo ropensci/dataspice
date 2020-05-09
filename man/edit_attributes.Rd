@@ -4,7 +4,7 @@
 \alias{edit_attributes}
 \title{Shinyapps for editing dataspice metadata tables}
 \usage{
-edit_attributes(metadata_dir = here::here("data", "metadata"))
+edit_attributes(metadata_dir = "data/metadata")
 }
 \arguments{
 \item{metadata_dir}{the directory containing the \code{dataspice} metadata \code{.csv} files. Defaults to
