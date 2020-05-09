@@ -1,9 +1,9 @@
 Package: dataspice
-Version: 0.0.0.901
+Version: 0.0.0.9001
 Title: Create lightweight schema.org descriptions of dataset
-Description: The goal of dataspice is to make it easier for researchers to create basic, 
-   lightweight and concise metadata files for their datasets. These basic files can 
-   then be used to make useful information available during analysis, create a helpful 
+Description: The goal of dataspice is to make it easier for researchers to create basic,
+   lightweight and concise metadata files for their datasets. These basic files can
+   then be used to make useful information available during analysis, create a helpful
    dataset README webpage and produce more complex metadata formats to aid dataset discovery. Metadata fields are based on schema.org and other metadata standards..
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 License: MIT + file LICENSE
@@ -13,7 +13,7 @@ Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 RoxygenNote: 7.1.0
-Imports: 
+Imports:
     purrr,
     fs,
     jsonlite,
@@ -29,7 +29,7 @@ Imports:
     ggplot2,
     magrittr,
     EML (>= 2.0.0)
-Suggests: 
+Suggests:
     testthat,
     knitr,
     rmarkdown,
