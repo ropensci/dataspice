@@ -142,7 +142,7 @@ edit_file <- function(metadata_dir = "data/metadata",
 
 
     ## bounding box map
-    if (file == "biblio.csv" & requireNamespace("maps", quietly = TRUE)){
+    if (file == "biblio.csv" && requireNamespace("maps", quietly = TRUE)){
       output$bbmap <- renderPlot({
         world <- ggplot2::map_data("world")
         ggplot2::ggplot() +
