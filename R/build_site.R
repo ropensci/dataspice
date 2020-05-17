@@ -2,6 +2,8 @@
 #'
 #' @param path (character) Path to a JSON+LD file with dataspice metadata
 #' @param template_path (character) Optional. Path to a template for \code{\link[whisker]{whisker.render}}
+#' @param out_path (character) Optional. Path to write the site's `index.html`
+#' to. Defaults to `docs/index.html`.
 #'
 #' @return Nothing. Creates/overwrites \code{docs/index.html}
 #' @export
@@ -14,7 +16,8 @@
 #' }
 build_site <- function(path = "data/metadata/dataspice.json",
                        template_path = system.file("template.html5",
-                                                   package = "dataspice")) {
+                                                   package = "dataspice"),
+                       out_path = "docs/index.html") {
   data <- jsonld_to_mustache(path)
 
     # Make docs dir if not present
@@ -27,5 +30,5 @@ build_site <- function(path = "data/metadata/dataspice.json",
     data)
 
   # Build site
-  writeLines(output, "docs/index.html")
+  writeLines(output, out_path)
 }

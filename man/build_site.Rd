@@ -6,13 +6,17 @@
 \usage{
 build_site(
   path = "data/metadata/dataspice.json",
-  template_path = system.file("template.html5", package = "dataspice")
+  template_path = system.file("template.html5", package = "dataspice"),
+  out_path = "docs/index.html"
 )
 }
 \arguments{
 \item{path}{(character) Path to a JSON+LD file with dataspice metadata}
 
 \item{template_path}{(character) Optional. Path to a template for \code{\link[whisker]{whisker.render}}}
+
+\item{out_path}{(character) Optional. Path to write the site's \code{index.html}
+to. Defaults to \code{docs/index.html}.}
 }
 \value{
 Nothing. Creates/overwrites \code{docs/index.html}
