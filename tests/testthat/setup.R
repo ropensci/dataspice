@@ -7,6 +7,6 @@ brood_attributes <- c("Stock.ID", "Species", "Stock", "Ocean.Region", "Region", 
 
 brood_info_attributes <- c(brood_attributes, "Source.ID", "Source")
 
-full_attributes <- c(brood_info_attributes, "X1", "Stock.ID", "Species", "Stock", "Date.data.obtained",
+full_attributes <- c(brood_info_attributes, "Stock.ID", "Species", "Stock", "Date.data.obtained",
                      "Date.data.incorporated", "Ocean.Region", "Region", "Sub.Region",
                      "Jurisdiction", "Lat", "Lon", "Source.ID", "Comment")
