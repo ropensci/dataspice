@@ -96,7 +96,7 @@ This function assumes that the metadata templates are in a folder called
 `metadata` within a `data` folder.
 
 ``` r
-attributes_path <- here::here("data", "metadata", "attributes.csv")
+attributes_path <- file.path("data", "metadata", "attributes.csv")
 ```
 
 Using `purrr::map()`, this function can be applied over multiple files

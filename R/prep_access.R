@@ -12,7 +12,6 @@
 #' @param ... parameters passed to `list.files()`. For example, use `recursive = TRUE`
 #' to list files in a folder recursively or use `pattern` to filter files for patterns.
 #' @return Updates `access.csv` and writes to `access_path`.
-#' @importFrom here here
 #' @export
 prep_access <- function(data_path = "data",
                         access_path = "data/metadata/access.csv",

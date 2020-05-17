@@ -5,7 +5,6 @@
 #' @param metadata_dir the directory containing the `dataspice` metadata `.csv` files. Defaults to
 #'   `data/metadata/` directory in **current project root**.
 #' @export
-#' @importFrom here here
 #' @examples
 #' \dontrun{
 #' edit_attributes()
@@ -22,19 +21,19 @@ edit_attributes <- function(metadata_dir = "data/metadata") {
 
 #' @inherit edit_attributes
 #' @export
-edit_biblio <- function(metadata_dir = here::here("data", "metadata")) {
+edit_biblio <- function(metadata_dir = file.path("data", "metadata")) {
   edit_file(metadata_dir, "biblio.csv")
 }
 
 #' @inherit edit_attributes
 #' @export
-edit_access <- function(metadata_dir = here::here("data", "metadata")) {
+edit_access <- function(metadata_dir = file.path("data", "metadata")) {
   edit_file(metadata_dir, "access.csv")
 }
 
 #' @inherit edit_attributes
 #' @export
-edit_creators <- function(metadata_dir = here::here("data", "metadata")) {
+edit_creators <- function(metadata_dir = file.path("data", "metadata")) {
   edit_file(metadata_dir, "creators.csv")
 }
 
