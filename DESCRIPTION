@@ -40,6 +40,7 @@ Imports:
     EML (>= 2.0.0)
 Suggests:
     testthat,
+    kableExtra,
     knitr,
     rmarkdown,
     servr,
