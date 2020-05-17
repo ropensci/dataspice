@@ -4,7 +4,7 @@
 \alias{validate_file_paths}
 \title{Prepare attributes}
 \usage{
-validate_file_paths(data_path = here::here("data"), ...)
+validate_file_paths(data_path = "data", ...)
 }
 \arguments{
 \item{data_path}{character vector of either:

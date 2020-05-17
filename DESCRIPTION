@@ -16,17 +16,18 @@ Authors@R: c(
     person("Kate", "Webbink", role = c("aut"), comment = "https://github.com/magpiedin"),
     person("Kara", "Woo", role = c("aut"), comment = "https://github.com/karawoo"))
 License: MIT + file LICENSE
+URL: https://github.com/ropenscilabs/dataspice
+BugReports: https://github.com/ropenscilabs/dataspice/issues
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Imports:
     purrr,
     fs,
     jsonlite,
     whisker,
     readr,
-    here,
     stringr,
     tools,
     tibble,
@@ -42,6 +43,7 @@ Suggests:
     knitr,
     rmarkdown,
     servr,
-    listviewer
+    listviewer,
+    maps
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

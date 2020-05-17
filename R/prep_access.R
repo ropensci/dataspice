@@ -14,9 +14,8 @@
 #' @return Updates `access.csv` and writes to `access_path`.
 #' @importFrom here here
 #' @export
-prep_access <- function(data_path = here::here("data"),
-                        access_path = here::here("data", "metadata",
-                                                 "access.csv"),
+prep_access <- function(data_path = "data",
+                        access_path = "data/metadata/access.csv",
                                                  ...){
   # check and load attributes
   if(!file.exists(access_path)){
