@@ -400,22 +400,22 @@ file](man/figures/listviewer.png)
 
 The metadata fields `dataspice` uses are based largely on their
 compatibility with terms from [Schema.org](https://schema.org). However,
-`dataspice` metadata can be converted to Ecological Metadata Language, a
-much richer schema. The conversion isn’t perfecet but `dataspice`
-provides a function to attemp to convert your `dataspice` metadata to
-EML.
+`dataspice` metadata can be converted to Ecological Metadata Language
+(EML), a much richer schema. The conversion isn’t perfect but
+`dataspice` will do its best to convert your `dataspice` metadata to
+EML:
 
 ``` r
 library(dataspice)
 
-# Load an examle dataspice JSON that comes installed with the package
+# Load an example dataspice JSON that comes installed with the package
 spice <- system.file(
   "examples", "annual-escapement.json",
   package = "dataspice")
 
-# And convert it to EML
+# Convert it to EML
 eml_doc <- as_eml(spice)
-#> Warning: variableMeasured not converted to EML because we don't have enough
+#> Warning: variableMeasured not crosswalked to EML because we don't have enough
 #> information. Use `crosswalk_variables` to create the start of an EML attributes
 #> table. See ?crosswalk_variables for help.
 #> You might want to run EML::eml_validate on the result at this point and fix what validations errors are produced.
@@ -441,9 +441,15 @@ eml_validate(eml_doc)
 #> [8] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."
 ```
 
-This is because some fields in `dataspice`/Schema.org store information
-in different formats and because EML requires many fields that
-`dataspice`/Schema.org doesn’t have fields for.
+This is because some fields in `dataspice`/[Schema.org](Schema.org)
+store information in different structures and because EML requires many
+fields that `dataspice`/[Schema.org](Schema.org) doesn’t have fields
+for. At this point, you should look over the validation errors produced
+by `EML::eml_validate` and fix those. Note that this will likely require
+familiarity with the [EML Schema](https://eml.ecoinformatics.org/) and
+the [EML package](https://github.com/ropensci/eml).
+
+Once you’re done, you can write out an EML XML file:
 
 ``` r
 out_path <- tempfile()
