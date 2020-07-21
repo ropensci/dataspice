@@ -2,7 +2,7 @@
 % Please edit documentation in R/as_eml.R
 \name{as_eml}
 \alias{as_eml}
-\title{Convert \code{dataspice} metadata to EML}
+\title{Crosswalk \code{dataspice} metadata to EML}
 \usage{
 as_eml(spice)
 }
@@ -10,7 +10,7 @@ as_eml(spice)
 \item{spice}{(list) Your \code{dataspice} metadata}
 }
 \value{
-(emld) The converted \code{emld} object
+(emld) The crosswalked \code{emld} object
 }
 \description{
 Performs an (imperfect) crosswalk of \code{dataspice} metadata to EML 2.2.0. It's
@@ -24,10 +24,10 @@ spice <- system.file(
   "examples", "annual-escapement.json",
   package = "dataspice")
 
-# And convert it to EML
+# And crosswalk it to EML
 as_eml(spice)
 
-# We can also create dataspice metadata from scratch and convert it to EML
+# We can also create dataspice metadata from scratch and crosswalk it to EML
 myspice <- list(
   name = "My example spice",
   creator = "Me",
