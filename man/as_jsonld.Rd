@@ -13,16 +13,17 @@ as_jsonld(
 )
 }
 \arguments{
-\item{x}{the object to be encoded}
+\item{x}{the object to be encoded.}
 
-\item{context}{JSON-LD context; "http://schema.org"}
+\item{context}{JSON-LD context; "http://schema.org".}
 
-\item{pretty}{adds indentation whitespace to JSON output. Can be TRUE/FALSE or a number specifying the number of spaces to indent. See \code{\link[jsonlite]{prettify}}}
+\item{pretty}{Whether or not to prettier output.
+See \code{\link[jsonlite]{toJSON}}.}
 
-\item{auto_unbox}{automatically \code{\link[jsonlite]{unbox}} all atomic vectors of length 1. It is usually safer to avoid this and instead use the \code{\link[jsonlite]{unbox}} function to unbox individual elements.
-An exception is that objects of class \code{AsIs} (i.e. wrapped in \code{I()}) are not automatically unboxed. This is a way to mark single values as length-1 arrays.}
+\item{auto_unbox}{Whether or not to automatically unbox output.
+See \code{\link[jsonlite]{toJSON}}.}
 
-\item{...}{arguments passed on to class specific \code{print} methods}
+\item{...}{Other arguments to be passed to \code{\link[jsonlite]{toJSON}}.}
 }
 \description{
 Convert a list object to JSON-LD

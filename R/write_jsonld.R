@@ -1,10 +1,13 @@
 
 #' Convert a list object to JSON-LD
 #'
-#' @param context JSON-LD context; "http://schema.org"
-#' @inheritParams jsonlite::toJSON
-#' @importFrom jsonlite toJSON write_json
-#'
+#' @param x the object to be encoded.
+#' @param context JSON-LD context; "http://schema.org".
+#' @param pretty Whether or not to prettier output.
+#' See \code{\link[jsonlite]{toJSON}}.
+#' @param auto_unbox Whether or not to automatically unbox output.
+#' See \code{\link[jsonlite]{toJSON}}.
+#' @param ... Other arguments to be passed to \code{\link[jsonlite]{toJSON}}.
 as_jsonld <-  function(x,
                        context = "http://schema.org",
                        pretty = TRUE,
@@ -12,6 +15,7 @@ as_jsonld <-  function(x,
                        ...){
 
   out <- c(setNames(context, "@context"), x)
+
   jsonlite::toJSON(out,
                    pretty = pretty,
                    auto_unbox = auto_unbox,
