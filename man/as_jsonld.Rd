@@ -17,13 +17,14 @@ as_jsonld(
 
 \item{context}{JSON-LD context; "http://schema.org".}
 
-\item{pretty}{Whether or not to prettier output.
-See \code{\link[jsonlite]{toJSON}}.}
+\item{pretty}{Whether or not to prettify output. See
+\code{\link[jsonlite]{toJSON}}.}
 
-\item{auto_unbox}{Whether or not to automatically unbox output.
-See \code{\link[jsonlite]{toJSON}}.}
+\item{auto_unbox}{Whether or not to automatically unbox output. See
+\code{\link[jsonlite]{toJSON}}.}
 
-\item{...}{Other arguments to be passed to \code{\link[jsonlite]{toJSON}}.}
+\item{...}{Other arguments to be passed to
+\code{\link[jsonlite]{toJSON}}.}
 }
 \description{
 Convert a list object to JSON-LD

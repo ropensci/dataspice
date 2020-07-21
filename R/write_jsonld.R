@@ -3,11 +3,12 @@
 #'
 #' @param x the object to be encoded.
 #' @param context JSON-LD context; "http://schema.org".
-#' @param pretty Whether or not to prettier output.
-#' See \code{\link[jsonlite]{toJSON}}.
-#' @param auto_unbox Whether or not to automatically unbox output.
-#' See \code{\link[jsonlite]{toJSON}}.
-#' @param ... Other arguments to be passed to \code{\link[jsonlite]{toJSON}}.
+#' @param pretty Whether or not to prettify output. See
+#'   \code{\link[jsonlite]{toJSON}}.
+#' @param auto_unbox Whether or not to automatically unbox output. See
+#'   \code{\link[jsonlite]{toJSON}}.
+#' @param ... Other arguments to be passed to
+#'   \code{\link[jsonlite]{toJSON}}.
 as_jsonld <-  function(x,
                        context = "http://schema.org",
                        pretty = TRUE,
