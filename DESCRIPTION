@@ -16,14 +16,15 @@ Authors@R: c(
     person("Bryce", "Mecum", role = c("aut", "cre"), email = "brycemecum@gmail.com", comment = "https://github.com/amoeba"),
     person("Maëlle", "Salmon", role = c("aut"), comment = "https://github.com/maelle"),
     person("Kate", "Webbink", role = c("aut"), comment = "https://github.com/magpiedin"),
-    person("Kara", "Woo", role = c("aut"), comment = "https://github.com/karawoo"))
+    person("Kara", "Woo", role = c("aut"), comment = "https://github.com/karawoo"),
+    person("Irene", "Steves", role = c("ctb"), comment = "https://github.com/isteves"))
 License: MIT + file LICENSE
 URL: https://github.com/ropenscilabs/dataspice
 BugReports: https://github.com/ropenscilabs/dataspice/issues
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Imports:
     purrr,
     fs,

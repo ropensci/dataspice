@@ -244,3 +244,4 @@ This package was developed at rOpenSci's 2018 unconf by (in alphabetical order):
 * [Maëlle Salmon](https://github.com/maelle)
 * [Kate Webbink](https://github.com/magpiedin)
 * [Kara Woo](https://github.com/karawoo)
+* [Irene Steves](https://github.com/isteves)
