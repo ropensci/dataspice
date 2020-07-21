@@ -58,8 +58,8 @@ edit_file <- function(metadata_dir = "data/metadata",
   ui <- shinyUI(
     fluidPage(
       titlePanel(paste0("Populate the ", file," table")),
-      helpText("Shiny app to read in the", code("dataspice"),
-               "metadata templates and populate with user supplied metadata"),
+      helpText("Interactive application to read in ", code("dataspice"),
+               "metadata templates and populate with your own metadata."),
 
       # Header panel
       wellPanel(
@@ -68,7 +68,6 @@ edit_file <- function(metadata_dir = "data/metadata",
                  uiOutput("message", inline=TRUE)
           ),
           column(4, align="right",
-                 h3("Save table"),
                  actionButton("save", "Save Changes"))
         )
       ),
@@ -78,56 +77,56 @@ edit_file <- function(metadata_dir = "data/metadata",
         sidebarPanel(
           if (file == "attributes.csv"){
             list(
-              h4("Variable attribute metadata"),
-              h6('fileName = the name of the input data file(s). Do Not Change.'),
-              h6("variableName = the name of the measured variable. Do Not Change."),
-              h6('Description = a written description of what that measured variable is'),
-              h6("unitText = the units the variable was measured in"),
-              helpText("use", code("prep_attributes()"), "to extract", strong("variableName"), "from data files")
+              h4("Variable metadata"),
+              h6("fileName: The name of the input data file(s). Don't change this."),
+              h6("variableName: The name of the measured variable. Don't change this."),
+              h6("description: A written description of the variable measured."),
+              h6("unitText: The units the variable was measured in."),
+              helpText("Use", code("prep_attributes()"), "to extract", strong("variableName"), " from data files.")
             )
           },
           if (file == "biblio.csv"){
             list(
               h4("Bibliographic metadata"),
-              h6('title = text: Title of the dataset(s) described.'),
-              h6("description = text: Description of the dataset(s) described"),
-              h6('datePublished = text: The date published in ISO 8601 format (YYYY-MM-DD)'),
-              h6("citation = text: citation for the dataset(s) described"),
-              h6("keywords = text: keywords, separated by commas, associated with the dataset(s) described"),
-              h6("license = text: license under which data are published"),
-              h6("funder = text: Name of funders associated with the work through which data where generated"),
+              h6("title: Title of the dataset(s) described."),
+              h6("description: Description of the dataset(s) described (aka abstract)."),
+              h6('datePublished: The date published in ISO 8601 format (YYYY-MM-DD).'),
+              h6("citation: Citation to a related work, such as a reference publication."),
+              h6("keywords: Keywords, separated by commas, associated with the dataset(s) described."),
+              h6("license: License under which (meta)data are published."),
+              h6("funder: Name of funders associated with the work through which data where generated."),
 
               br(),
               h4("Spatial Coverage metadata"),
-              h6('geographicDescription = text: Description of the area of study'),
-              h6("northBoundCoord = numeric or text: southern latitudinal boundary of the data coverage area. For example 37.42242 (WGS 84)"),
-              h6("eastBoundCoord = numeric or text: eastern longitudinal boundary of the data coverage area. For example -122.08585 (WGS 84)"),
-              h6("southBoundCoord = numeric or text: northern latitudinal boundary of the data coverage area."),
-              h6("westBoundCoord = numeric or text: western longitudinal boundary of the data coverage area."),
-              h6("wktString = text: string of Well-known Text (WKT) formatted representation of geometry. see:",
+              h6("geographicDescription: Description of the area of study. i.e., Crater Lake."),
+              h6("northBoundCoord: Southern latitudinal boundary of the data coverage area. For example 37.42242."),
+              h6("eastBoundCoord: Eastern longitudinal boundary of the data coverage area. For example -122.08585."),
+              h6("southBoundCoord: Northern latitudinal boundary of the data coverage area."),
+              h6("westBoundCoord: Western longitudinal boundary of the data coverage area."),
+              h6("wktString: Well-known Text (WKT) formatted representation of geometry. see:",
                  a(href="https://ropensci.org/tutorials/wellknown_tutorial/", "pkg", code("wellknown")), "for details."),
               helpText("To provide a single point to describe the spatial
                              aspect of the dataset, provide the same coordinates
-                             for east-west and north-south boundary definition"),
+                             for east-west and north-south boundary definition."),
               br(),
               h4("Temporal Coverage metadata"),
-              h6('startDate = text: The start date of the data temporal coverage in ISO 8601 format (YYYY-MM-DD)'),
-              h6("endDate = text: The end date of the data temporal coverage in ISO 8601 format (YYYY-MM-DD)"),
+              h6("startDate: The start date of the data temporal coverage in ISO 8601 format (YYYY-MM-DD)."),
+              h6("endDate: The end date of the data temporal coverage in ISO 8601 format (YYYY-MM-DD)."),
               br(),
               plotOutput("bbmap")
             )},
           if (file == "access.csv"){
             list(
-              h6('fileName = the filename of the input data file(s).'),
-              h6("name = the human readable name for the file."),
-              h6('contentUrl = a url to where the data is hosted, if applicable'),
-              h6("encodingFormat = the file format.")
+              h6("fileName: The filename of the input data file(s). Don't change this."),
+              h6("name: A human readable name for the file."),
+              h6('contentUrl: A url to where the data is hosted, if applicable'),
+              h6("encodingFormat: The file format, such as Excel, or CSV")
             )},
           if (file == "creators.csv"){
             list(
-              h6('ID = text: ORCID or another ID'),
-              h6("name = text: the name of the creator."),
-              h6("unitText = text: affiliation of the creator.'")
+              h6("id: ORCID or another ID."),
+              h6("name: The name of the creator."),
+              h6("affilitation: Affiliation of the creator.")
             )}
         ),
         mainPanel(
