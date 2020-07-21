@@ -45,7 +45,6 @@ get_access_spice <- function(x){
 #' eml <- read_eml(eml_path)
 #' es_access(eml)
 #' }
-
 es_access <- function(eml, path = NULL) {
     entities <- get_entities(eml)
     access_entities <- lapply(entities, get_access_spice)
@@ -132,7 +131,6 @@ get_attributes_spice <- function(x) {
 #' eml <- read_eml(eml_path)
 #' es_attributes(eml)
 #' }
-
 es_attributes <- function(eml, path = NULL) {
   entities <- get_entities(eml)
   attrTables <- lapply(entities, get_attributes_spice)
@@ -165,7 +163,6 @@ es_attributes <- function(eml, path = NULL) {
 #' eml <- read_eml(eml_path)
 #' es_biblio(eml)
 #' }
-
 es_biblio <- function(eml, path = NULL) {
   biblio_eml <- eml %>%
     unlist() %>%
@@ -227,7 +224,6 @@ es_biblio <- function(eml, path = NULL) {
 #' eml <- read_eml(eml_path)
 #' es_creators(eml)
 #' }
-
 es_creators <- function(eml, path = NULL) {
   people <- get_entities(eml,
                          entities = c("creator", "contact", "associatedParty", "metadataProvider"),
@@ -272,12 +268,13 @@ es_creators <- function(eml, path = NULL) {
   return(out)
 }
 
-#' Get dataspice tabular formats from EML
+#' Create dataspice metadata tables from EML
 #'
-#' Return EML in the dataspice dataframes.
+#' @param eml (emld) An EML object
+#' @param path (character) Folder path for saving the tables to disk
 #'
-#' @param eml (emld) an EML object
-#' @param path (character) folder path for saving the table to disk
+#' @return A list with names attributes, access, biblio, and creators.
+#' Optionally, if `path` is specified, saves four tables.
 #'
 #' @export
 #'
@@ -285,9 +282,10 @@ es_creators <- function(eml, path = NULL) {
 #' \dontrun{
 #' eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
 #' eml <- read_eml(eml_path)
+#'
+#'
 #' my_spice <- eml_to_spice(eml, ".")
 #' }
-
 eml_to_spice <- function(eml, path = NULL) {
   out <- list(attributes = es_attributes(eml, path),
               access = es_access(eml, path),
@@ -296,4 +294,3 @@ eml_to_spice <- function(eml, path = NULL) {
 
   invisible(out)
 }
-

@@ -2,22 +2,28 @@
 % Please edit documentation in R/eml_to_spice.R
 \name{eml_to_spice}
 \alias{eml_to_spice}
-\title{Get dataspice tabular formats from EML}
+\title{Create dataspice metadata tables from EML}
 \usage{
 eml_to_spice(eml, path = NULL)
 }
 \arguments{
-\item{eml}{(emld) an EML object}
+\item{eml}{(emld) An EML object}
 
-\item{path}{(character) folder path for saving the table to disk}
+\item{path}{(character) Folder path for saving the tables to disk}
+}
+\value{
+A list with names attributes, access, biblio, and creators.
+Optionally, if \code{path} is specified, saves four tables.
 }
 \description{
-Return EML in the dataspice dataframes.
+Create dataspice metadata tables from EML
 }
 \examples{
 \dontrun{
 eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
 eml <- read_eml(eml_path)
+
+
 my_spice <- eml_to_spice(eml, ".")
 }
 }

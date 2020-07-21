@@ -451,6 +451,24 @@ write_eml(eml_doc, out_path)
 #> NULL
 ```
 
+### Convert from EML
+
+Like converting `dataspice` to EML, we can convert an existing EML
+record to a set of `dataspice` metadata tables which we can then work
+from within `dataspice`:
+
+``` r
+library(EML)
+
+eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
+eml <- read_eml(eml_path)
+```
+
+``` r
+# Creates four CSVs files in the `data/metadata` directory
+my_spice <- eml_to_spice(eml, "data/metadata")
+```
+
 ## Resources
 
 A few existing tools & data standards to help users in specific domains:
