@@ -368,12 +368,12 @@ temporal coverage
 
 `creators.csv` has one row for each of the dataset authors
 
-| id | givenName | familyName | affiliation                                           | email                      |
-| :- | :-------- | :--------- | :---------------------------------------------------- | :------------------------- |
-| NA | Jeanette  | Clark      | National Center for Ecological Analysis and Synthesis | <jclark@nceas.ucsb.edu>    |
-| NA | Rich      | Brenner    | Alaska Department of Fish and Game                    | richard.brenner.alaska.gov |
+| id | name           | affiliation                                           | email                      |
+| :- | :------------- | :---------------------------------------------------- | :------------------------- |
+| NA | Jeanette Clark | National Center for Ecological Analysis and Synthesis | <jclark@nceas.ucsb.edu>    |
+| NA | Rich,Brenner   | Alaska Department of Fish and Game                    | richard.brenner.alaska.gov |
 
-### Save JSON-KD file
+### Save JSON-LD file
 
 `write_spice()` generates a json-ld file (“linked data”) to aid in
 [dataset
@@ -395,6 +395,61 @@ file](man/figures/listviewer.png)
     this [website](https://amoeba.github.io/dataspice-example/)
 
 ![dataspice-website](man/figures/website_example.png)
+
+### Convert to EML
+
+The metadata fields `dataspice` uses are based largely on their
+compatibility with terms from [Schema.org](https://schema.org). However,
+`dataspice` metadata can be converted to Ecological Metadata Language, a
+much richer schema. The conversion isn’t perfecet but `dataspice`
+provides a function to attemp to convert your `dataspice` metadata to
+EML.
+
+``` r
+library(dataspice)
+
+# Load an examle dataspice JSON that comes installed with the package
+spice <- system.file(
+  "examples", "annual-escapement.json",
+  package = "dataspice")
+
+# And convert it to EML
+eml_doc <- as_eml(spice)
+#> Warning: variableMeasured not converted to EML because we don't have enough
+#> information. Use `crosswalk_variables` to create the start of an EML attributes
+#> table. See ?crosswalk_variables for help.
+#> You might want to run EML::eml_validate on the result at this point and fix what validations errors are produced.
+```
+
+You may receive warnings depending on which `dataspice` fields you
+filled in and this process will very likely produce an invalid EML
+record which is totally fine:
+
+``` r
+library(EML)
+
+eml_validate(eml_doc)
+#> [1] FALSE
+#> attr(,"errors")
+#> [1] "Element '{https://eml.ecoinformatics.org/eml-2.2.0}eml': The attribute 'packageId' is required but missing."                                    
+#> [2] "Element '{https://eml.ecoinformatics.org/eml-2.2.0}eml': The attribute 'system' is required but missing."                                       
+#> [3] "Element 'pubDate': '2018-02-12 08:00:00' is not a valid value of the union type '{https://eml.ecoinformatics.org/resource-2.2.0}yearDate'."     
+#> [4] "Element 'calendarDate': '1921-01-01 08:00:00' is not a valid value of the union type '{https://eml.ecoinformatics.org/resource-2.2.0}yearDate'."
+#> [5] "Element 'calendarDate': '2017-01-01 08:00:00' is not a valid value of the union type '{https://eml.ecoinformatics.org/resource-2.2.0}yearDate'."
+#> [6] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."  
+#> [7] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."  
+#> [8] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."
+```
+
+This is because some fields in `dataspice`/Schema.org store information
+in different formats and because EML requires many fields that
+`dataspice`/Schema.org doesn’t have fields for.
+
+``` r
+out_path <- tempfile()
+write_eml(eml_doc, out_path)
+#> NULL
+```
 
 ## Resources
 

@@ -1,4 +1,7 @@
+#' Crosswalk functions for `as_eml`
 
+#' Crosswalk a Schema.org/Person
+#' @param creator (list) A creator
 crosswalk_Person <- function(creator) {
   list("individualName" = list(
     givenName = creator$givenName,
@@ -11,14 +14,19 @@ crosswalk_Person <- function(creator) {
   userId = creator$id # Will be invalid because we don't capture directory
   )
 }
-
+#' Crosswalk a Schema.org/Organization
+#' @param creator (list) A creator
 crosswalk_Organization <- function(creator) {
   list("organizationName" = creator$name)
 }
 
+#' Crosswalk a Schema.org/creator
+#' @param creator (list) A creator
 crosswalk_creator <- function(creator) {
   if (!("type" %in% names(creator))) {
-    warning("Failed to crosswalk creator", creator)
+    warning("Failed to crosswalk creator ",
+            creator,
+            " because it needs a type.")
     return(list())
   }
 
@@ -27,12 +35,16 @@ crosswalk_creator <- function(creator) {
   } else if (creator$type == "Organization") {
     crosswalk_Organization(creator)
   } else {
-    warning("Failed to crosswalk creator", creator)
+    warning("Failed to crosswalk creator ",
+            creator, "
+            because it needs a type of Person or Organization")
 
     list()
   }
 }
 
+#' Crosswalk a Schema.org/distribution
+#' @param distribution (list) A distribution
 crosswalk_distribution <- function(distribution) {
   list(entityName = distribution$name,
        physical = list(objectName = distribution$name,
@@ -43,12 +55,11 @@ crosswalk_distribution <- function(distribution) {
                        distribution = list(
                          online = list(
                            url = distribution$contentUrl
-                         )
-                       )))
+                         ))))
 }
 
 # Crosswalk mappings table for dataspice -> EML 2.2.0. Called by `crosswalk`
-# from inside `as_emld`.
+# from inside `as_eml`.
 mappings <- list(
   "name" = list(
     from = "name",
@@ -121,7 +132,7 @@ mappings <- list(
         return(list())
       }
 
-      parts <- coverage$geo$box
+      parts <- strsplit(coverage$geo$box, "[ ]+")
 
       if (length(parts) != 1 && length(parts[[1]]) != 4) {
         warning("Failed to parse spatialCoverage of '",
@@ -132,10 +143,10 @@ mappings <- list(
 
       list(geographicDescription = "Placeholder",
            boundingCoordinates = list(
-             westBoundingCoordinates = parts[[1]][4],
-             eastBoundingCoordinates = parts[[1]][2],
-             northBoundingCoordinates = parts[[1]][1],
-             southBoundingCoordinates = parts[[1]][3]))
+             westBoundingCoordinate = parts[[1]][4],
+             eastBoundingCoordinate = parts[[1]][2],
+             northBoundingCoordinate = parts[[1]][1],
+             southBoundingCoordinate = parts[[1]][3]))
     }
   ),
   "distribution" = list(
@@ -150,13 +161,11 @@ mappings <- list(
 #' Crosswalk a term
 #'
 #' @param doc (list) A `dataspice` document as a `list`
-#' @param term (character) The term to crosswalk
-#' @param verbose (logical) Whether or not to display extra information during
-#' conversion. Defaults to `FALSE`.
+#' @param term (character) The term to crosswalk.
 #'
 #' @return (list) The result of the crosswalk. May be an empty `list` on
 #' failure.
-crosswalk <- function(doc, term, verbose = FALSE) {
+crosswalk <- function(doc, term) {
   if (!(term %in% names(mappings))) {
     warning("The term '", term, "', was not found in mappings table ",
             "and won't be included in the output.")
@@ -164,10 +173,49 @@ crosswalk <- function(doc, term, verbose = FALSE) {
     return(list())
   }
 
-  if (verbose) {
-    message("Crosswalking '", term, "'")
-  }
-
   info <- mappings[[term]]
   info$transform(doc[[info$from]])
+}
+
+#' Crosswalk `dataspice` variables to EML
+#'
+#' See \code{\link[EML]{set_attributes}} for more information on what must be
+#' filled out after this is run in order to get a valid EML `attributeList`.
+#'
+#' @param spice (list) Your `dataspice` metadata
+#'
+#' @return (data.frame) A partial EML attributes table
+#' @export
+#'
+#' @examples
+#' # Load an example dataspice JSON that comes installed with the package
+#' spice <- system.file(
+#'   "examples", "annual-escapement.json",
+#'   package = "dataspice")
+#'
+#' # Convert it to EML (notice the warning)
+#' eml_doc <- suppressWarnings({as_eml(spice)})
+#' attributes <- crosswalk_variables(spice)
+#'
+#' # Now fill in the attributes data.frame. See `EML::set_attributes`.
+#'
+#' # And last, set the attributes on our EML document
+#' \dontrun{
+#'   eml_doc$dataset$dataTable[[1]]$attributeList <- EML::set_attributes(attributes)
+#' }
+crosswalk_variables <- function(spice) {
+  if (is.character(spice)) {
+    doc <- jsonlite::read_json(spice)
+  } else if (is.list(spice)) {
+    doc <- spice
+  }
+
+  if (!("variableMeasured" %in% names(doc))) {
+    stop("Input document contains no variables")
+  }
+
+  do.call(rbind, lapply(doc$variableMeasured, function(var) {
+    data.frame(attributeName = var$name,
+               attributeDefinition = var$description)
+  }))
 }

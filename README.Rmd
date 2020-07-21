@@ -152,7 +152,7 @@ readr::read_csv(system.file("metadata-tables/creators.csv", package = "dataspice
   kable(format = "markdown")
 ```
 
-### Save JSON-KD file
+### Save JSON-LD file
 
 `write_spice()` generates a json-ld file ("linked data") to aid in [dataset discovery](https://developers.google.com/search/docs/data-types/dataset), creation of more extensive metadata (e.g. [EML](https://eml.ecoinformatics.org)), and creating a website.
 
@@ -165,6 +165,43 @@ Here's a view of the `dataspice.json` file of the example data:
 * `build_site()` creates a bare-bones `index.html` file in the repository `docs` folder with a simple view of the dataset with the metadata and an interactive map. For example, this [repository](https://github.com/amoeba/dataspice-example) results in this [website](https://amoeba.github.io/dataspice-example/)
 
 ![dataspice-website](man/figures/website_example.png)
+
+### Convert to EML
+
+The metadata fields `dataspice` uses are based largely on their compatibility with terms from [Schema.org](https://schema.org).
+However, `dataspice` metadata can be converted to Ecological Metadata Language (EML), a much richer schema.
+The conversion isn't perfect but `dataspice` will do its best to convert your `dataspice` metadata to EML:
+
+```{r, as_eml}
+library(dataspice)
+
+# Load an example dataspice JSON that comes installed with the package
+spice <- system.file(
+  "examples", "annual-escapement.json",
+  package = "dataspice")
+
+# Convert it to EML
+eml_doc <- as_eml(spice)
+```
+
+You may receive warnings depending on which `dataspice` fields you filled in and this process will very likely produce an invalid EML record which is totally fine:
+
+```{r, eml_validate}
+library(EML)
+
+eml_validate(eml_doc)
+```
+
+This is because some fields in `dataspice`/[Schema.org](Schema.org) store information in different structures and because EML requires many fields that `dataspice`/[Schema.org](Schema.org) doesn't have fields for.
+At this point, you should look over the validation errors produced by `EML::eml_validate` and fix those.
+Note that this will likely require familiarity with the [EML Schema](https://eml.ecoinformatics.org/) and the [EML package](https://github.com/ropensci/eml).
+
+Once you're done, you can write out an EML XML file:
+
+```{r, write_eml}
+out_path <- tempfile()
+write_eml(eml_doc, out_path)
+```
 
 ## Resources
 

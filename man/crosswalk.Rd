@@ -4,15 +4,12 @@
 \alias{crosswalk}
 \title{Crosswalk a term}
 \usage{
-crosswalk(doc, term, verbose = FALSE)
+crosswalk(doc, term)
 }
 \arguments{
 \item{doc}{(list) A \code{dataspice} document as a \code{list}}
 
-\item{term}{(character) The term to crosswalk}
-
-\item{verbose}{(logical) Whether or not to display extra information during
-conversion. Defaults to \code{FALSE}.}
+\item{term}{(character) The term to crosswalk.}
 }
 \value{
 (list) The result of the crosswalk. May be an empty \code{list} on
