@@ -5,7 +5,8 @@
 #' but `spice_to_eml` is a good way to a richer metadata schema (EML) when
 #' you're already using `dataspice` but need a richer metadata schema.
 #'
-#' @param spice (list) Your `dataspice` metadata
+#' @param spice (list) Your `dataspice` metadata. Uses
+#' `data/metadata/dataspice.json` by default.
 #'
 #' @return (emld) The crosswalked `emld` object
 #' @export
@@ -25,7 +26,7 @@
 #'   creator = "Me",
 #'   contact = "Me")
 #' spice_to_eml(myspice)
-spice_to_eml <- function(spice) {
+spice_to_eml <- function(spice = file.path("data", "metadata", "dataspice.json")) {
   if (is.character(spice)) {
     if (!file.exists(spice)) {
       stop("Could not find dataspice JSON file at the path '", spice, "'")

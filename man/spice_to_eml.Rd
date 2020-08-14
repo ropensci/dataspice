@@ -4,10 +4,11 @@
 \alias{spice_to_eml}
 \title{Convert \code{dataspice} metadata to EML}
 \usage{
-spice_to_eml(spice)
+spice_to_eml(spice = file.path("data", "metadata", "dataspice.json"))
 }
 \arguments{
-\item{spice}{(list) Your \code{dataspice} metadata}
+\item{spice}{(list) Your \code{dataspice} metadata. Uses
+\code{data/metadata/dataspice.json} by default.}
 }
 \value{
 (emld) The crosswalked \code{emld} object
