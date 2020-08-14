@@ -2,7 +2,7 @@
 % Please edit documentation in R/spice_to_eml.R
 \name{spice_to_eml}
 \alias{spice_to_eml}
-\title{Crosswalk \code{dataspice} metadata to EML}
+\title{Convert \code{dataspice} metadata to EML}
 \usage{
 spice_to_eml(spice)
 }
@@ -13,10 +13,10 @@ spice_to_eml(spice)
 (emld) The crosswalked \code{emld} object
 }
 \description{
-Performs an (imperfect) crosswalk of \code{dataspice} metadata to EML 2.2.0. It's
+Performs an (imperfect) conversion of \code{dataspice} metadata to EML. It's
 very likely you will get validation errors and need to fix them afterwards
-but \code{as_emld} is a good way to a richer metadata schema (EML) when you're
-already using \code{dataspice}.
+but \code{spice_to_eml} is a good way to a richer metadata schema (EML) when
+you're already using \code{dataspice} but need a richer metadata schema.
 }
 \examples{
 # Load an example dataspice JSON that comes installed with the package
@@ -25,12 +25,12 @@ spice <- system.file(
   package = "dataspice")
 
 # And crosswalk it to EML
-as_eml(spice)
+spice_to_eml(spice)
 
 # We can also create dataspice metadata from scratch and crosswalk it to EML
 myspice <- list(
   name = "My example spice",
   creator = "Me",
   contact = "Me")
-as_eml(myspice)
+spice_to_eml(myspice)
 }
