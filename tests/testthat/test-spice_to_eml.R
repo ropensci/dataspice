@@ -1,7 +1,7 @@
-context("as_emld")
+context("spice_to_eml")
 
 test_that("an empty doc converts", {
-  expect_is(as_eml(list()), "list")
+  expect_is(spice_to_eml(list()), "list")
 })
 
 test_that("a simple document crosswalks", {
@@ -14,7 +14,7 @@ test_that("a simple document crosswalks", {
     creator = list(user),
     contact = (user))
 
-  eml <- as_eml(myspice)
+  eml <- spice_to_eml(myspice)
 
   expect_equal(eml$dataset$title, "My example spice")
   expect_equal(eml$dataset$creator[[1]]$individualName$givenName, "Example")

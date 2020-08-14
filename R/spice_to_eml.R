@@ -1,9 +1,9 @@
-#' Crosswalk `dataspice` metadata to EML
+#' Convert `dataspice` metadata to EML
 #'
-#' Performs an (imperfect) crosswalk of `dataspice` metadata to EML 2.2.0. It's
+#' Performs an (imperfect) conversion of `dataspice` metadata to EML. It's
 #' very likely you will get validation errors and need to fix them afterwards
-#' but `as_emld` is a good way to a richer metadata schema (EML) when you're
-#' already using `dataspice`.
+#' but `spice_to_eml` is a good way to a richer metadata schema (EML) when
+#' you're already using `dataspice` but need a richer metadata schema.
 #'
 #' @param spice (list) Your `dataspice` metadata
 #'
@@ -17,15 +17,15 @@
 #'   package = "dataspice")
 #'
 #' # And crosswalk it to EML
-#' as_eml(spice)
+#' spice_to_eml(spice)
 #'
 #' # We can also create dataspice metadata from scratch and crosswalk it to EML
 #' myspice <- list(
 #'   name = "My example spice",
 #'   creator = "Me",
 #'   contact = "Me")
-#' as_eml(myspice)
-as_eml <- function(spice) {
+#' spice_to_eml(myspice)
+spice_to_eml <- function(spice) {
   if (is.character(spice)) {
     if (!file.exists(spice)) {
       stop("Could not find dataspice JSON file at the path '", spice, "'")
@@ -61,7 +61,9 @@ as_eml <- function(spice) {
             "start of an EML attributes table. See ?crosswalk_variables for ",
             "help.", call. = FALSE)
     message("You might want to run EML::eml_validate on the result at ",
-            "this point and fix what validations errors are produced.")
+            "this point and fix what validations errors are produced.",
+            "You will commonly need to set `packageId`, `system`, and provide ",
+            "`attributeList` elements for each `dataTable`.")
   }
 
   EML::as_emld(out)
