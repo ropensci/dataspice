@@ -58,6 +58,49 @@ crosswalk_distribution <- function(distribution) {
                          ))))
 }
 
+#' Convert a date(time) of unknown format into EML
+#'
+#' A quick and dirty crosswalk of an unknown date(time) input to EML that really
+#' only works for ISO8601 input. All other formats will fail and be returned
+#' as-is as a `calendarDate`. From there the user will need to do a conversion
+#' themselves.
+#'
+#' @param input (character) Some unknown date(time) input
+#'
+#' @return (list) A `list` with members `calendarDate` and `time`. `time` will
+#' be `NULL` if parsing fails or if the time string inside `input` isn't
+#' ISO8601
+crosswalk_datetime <- function(input) {
+  match <- gregexpr("(\\d{4}-\\d{2}-\\d{2})[ T](\\d+:\\d+:\\d+.*)",
+                    input,
+                    perl = TRUE)[[1]]
+
+  # Fail by returning the result as a calendarDate
+  if (attr(match, "match.length") == -1) {
+    return(list(calendarDate = input, time = NULL))
+  }
+
+  result <- list(calendarDate = NULL,
+                 time = NULL)
+
+  capture_start <- attr(match, "capture.start")[1,]
+  capture_length <- attr(match, "capture.length")[1,]
+
+  if (capture_start[1] >= 1) {
+    result$calendarDate <- substr(input,
+                                  capture_start[1],
+                                  capture_start[1] + capture_length[1] - 1)
+  }
+
+  if (capture_start[2] >= 1) {
+    result$time <- substr(input,
+                          capture_start[2],
+                          capture_start[2] + capture_length[2] - 1)
+  }
+
+  result
+}
+
 # Crosswalk mappings table for dataspice -> EML 2.2.0. Called by `crosswalk`
 # from inside `as_eml`.
 mappings <- list(
@@ -79,7 +122,9 @@ mappings <- list(
     from = "datePublished",
     to = "pubDate",
     transform = function(pubDate) {
-      pubDate
+      out <- crosswalk_datetime(pubDate)
+
+      out$dateTime
     }
   ),
   "keywords" = list(
@@ -118,10 +163,8 @@ mappings <- list(
       }
 
       list(rangeOfDates = list(
-        beginDate = list(
-          calendarDate = parts[[1]][1]),
-        endDate = list(
-          calendarDate = parts[[1]][2])))
+        beginDate = crosswalk_datetime(parts[[1]][[1]]),
+        endDate = crosswalk_datetime(parts[[1]][[1]])))
     }
   ),
   "spatialCoverage" = list(
