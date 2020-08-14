@@ -23,7 +23,7 @@ spice <- system.file(
   package = "dataspice")
 
 # Convert it to EML (notice the warning)
-eml_doc <- suppressWarnings({as_eml(spice)})
+eml_doc <- suppressWarnings({spice_to_eml(spice)})
 attributes <- crosswalk_variables(spice)
 
 # Now fill in the attributes data.frame. See `EML::set_attributes`.

@@ -71,6 +71,10 @@ crosswalk_distribution <- function(distribution) {
 #' be `NULL` if parsing fails or if the time string inside `input` isn't
 #' ISO8601
 crosswalk_datetime <- function(input) {
+  if (!is.character(input) || nchar(input) < 0) {
+    return(list(calendarDate = NULL, time = NULL))
+  }
+
   match <- gregexpr("(\\d{4}-\\d{2}-\\d{2})[ T](\\d+:\\d+:\\d+.*)",
                     input,
                     perl = TRUE)[[1]]
@@ -237,7 +241,7 @@ crosswalk <- function(doc, term) {
 #'   package = "dataspice")
 #'
 #' # Convert it to EML (notice the warning)
-#' eml_doc <- suppressWarnings({as_eml(spice)})
+#' eml_doc <- suppressWarnings({spice_to_eml(spice)})
 #' attributes <- crosswalk_variables(spice)
 #'
 #' # Now fill in the attributes data.frame. See `EML::set_attributes`.

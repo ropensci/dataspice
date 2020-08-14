@@ -181,7 +181,7 @@ spice <- system.file(
   package = "dataspice")
 
 # Convert it to EML
-eml_doc <- as_eml(spice)
+eml_doc <- spice_to_eml(spice)
 ```
 
 You may receive warnings depending on which `dataspice` fields you filled in and this process will very likely produce an invalid EML record which is totally fine:
