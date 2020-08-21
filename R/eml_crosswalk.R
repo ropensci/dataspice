@@ -8,7 +8,7 @@ crosswalk_Person <- function(creator) {
     surName = creator$familyName
   ),
   organizationName = ifelse("affiliation" %in% names(creator),
-                            creator$affiliation$name,
+                            creator$affiliation,
                             list()),
   electronicMailAddress = creator$email,
   userId = creator$id # Will be invalid because we don't capture directory
