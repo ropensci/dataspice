@@ -17,6 +17,7 @@ See \code{\link[EML]{set_attributes}} for more information on what must be
 filled out after this is run in order to get a valid EML \code{attributeList}.
 }
 \examples{
+\dontrun{
 # Load an example dataspice JSON that comes installed with the package
 spice <- system.file(
   "examples", "annual-escapement.json",
@@ -29,7 +30,7 @@ attributes <- crosswalk_variables(spice)
 # Now fill in the attributes data.frame. See `EML::set_attributes`.
 
 # And last, set the attributes on our EML document
-\dontrun{
+
   eml_doc$dataset$dataTable[[1]]$attributeList <- EML::set_attributes(attributes)
 }
 }
