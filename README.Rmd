@@ -22,7 +22,7 @@ library(stringr)
 
 [![Build Status](https://travis-ci.com/ropenscilabs/dataspice.svg?branch=master)](https://travis-ci.com/ropenscilabs/dataspice)
 
-The goal of `dataspice` is to make it easier for researchers to create basic, lightweight, and concise metadata files for their datasets by editing the kind of files they're probably most familiar with: CSVs. These metadata files can then be used to:
+The goal of `dataspice` is to make it easier for researchers to create basic, lightweight, and concise metadata files for their datasets by editing the kind of files they're probably most familiar with: CSVs. To spice up their data with a dash of metadata. These metadata files can then be used to:
 
 - Make useful information available during analysis.
 - Create a helpful dataset README webpage for your data similar to how [pkgdown](https://pkgdown.r-lib.org/) creates websites for R packages.
@@ -47,7 +47,7 @@ devtools::install_github("ropenscilabs/dataspice")
 
 ```{r example, eval=FALSE}
 create_spice()
-# Then fill in template CSV files
+# Then fill in template CSV files, more on this below
 write_spice()
 build_site() # Optional
 ```
@@ -113,9 +113,9 @@ readr::read_csv(
 Each of the metadata templates can be edited interactively using a [Shiny](https://shiny.rstudio.com/) app:
 
 * `edit_attributes()` opens a Shiny app that can be used to edit `attributes.csv`. The shiny app displays the current `attributes` table and lets the user fill in an informative description and units (e.g. meters, hectares, etc.) for each variable.
-* `edit_access()`: opens an editable version of `access.csv`
-* `edit_creators()`: opens an editable version of `creators.csv`
-* `edit_biblio()`: opens an editable version of `biblio.csv`
+* `edit_access()` opens an editable version of `access.csv`
+* `edit_creators()` opens an editable version of `creators.csv`
+* `edit_biblio()` opens an editable version of `biblio.csv`
 
 ![edit_attributes shiny app](man/figures/edit_attributes.png)
 
@@ -192,7 +192,7 @@ library(EML)
 eml_validate(eml_doc)
 ```
 
-This is because some fields in `dataspice`/[Schema.org](Schema.org) store information in different structures and because EML requires many fields that `dataspice`/[Schema.org](Schema.org) doesn't have fields for.
+This is because some fields in `dataspice` store information in different structures and because EML requires many fields that `dataspice` doesn't have fields for.
 At this point, you should look over the validation errors produced by `EML::eml_validate` and fix those.
 Note that this will likely require familiarity with the [EML Schema](https://eml.ecoinformatics.org/) and the [EML package](https://github.com/ropensci/eml).
 
