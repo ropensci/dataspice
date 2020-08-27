@@ -34,8 +34,6 @@ get_access_spice <- function(x){
 #' @param eml (emld) an EML object
 #' @param path (character) folder path for saving the table to disk
 #'
-#' @import EML
-#'
 #' @examples
 #' \dontrun{
 #' library(EML)
