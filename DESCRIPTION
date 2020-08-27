@@ -40,7 +40,6 @@ Imports:
     tidyr,
     ggplot2,
     magrittr,
-    EML (>= 2.0.0)
 Suggests:
     testthat,
     kableExtra,
@@ -48,6 +47,7 @@ Suggests:
     rmarkdown,
     servr,
     listviewer,
-    maps
+    maps,
+    EML
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

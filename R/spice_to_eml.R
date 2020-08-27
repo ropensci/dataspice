@@ -27,6 +27,11 @@
 #'   contact = "Me")
 #' spice_to_eml(myspice)
 spice_to_eml <- function(spice = file.path("data", "metadata", "dataspice.json")) {
+  if (!requireNamespace("EML", quietly = TRUE)) {
+    stop("To convert to EML, please install the EML package first with install.packages(\"EML\")",
+         call. = FALSE)
+  }
+
   if (is.character(spice)) {
     if (!file.exists(spice)) {
       stop("Could not find dataspice JSON file at the path '", spice, "'")
