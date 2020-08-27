@@ -52,8 +52,8 @@ es_access <- function(eml, path = NULL) {
     fields <- c("fileName", "name", "contentUrl", "encodingFormat")
     out <- out[, fields[fields %in% colnames(out)]]
 
-    if(!is.null(path)){
-        if(!dir.exists(path)){
+    if (!is.null(path)) {
+        if (!dir.exists(path)) {
             dir.create(path)
         }
         readr::write_csv(out, file.path(path, "access.csv"))
@@ -71,7 +71,7 @@ get_attributes_spice <- function(x) {
 
   attrList <- EML::eml_get(x, "attributeList")
 
-  if(length(attrList) <= 1){
+  if (length(attrList) <= 1) {
     out <- dplyr::tibble(fileName = objName,
                          variableName = NA,
                          description = NA,
