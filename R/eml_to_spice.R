@@ -288,11 +288,6 @@ es_creators <- function(eml, path = NULL) {
 #' eml_to_spice(eml, ".")
 #' }
 eml_to_spice <- function(eml, path = NULL) {
-  if (!requireNamespace("EML", quietly = TRUE)) {
-    stop("To convert to EML, please install the EML package first with install.packages(\"EML\")",
-         call. = FALSE)
-  }
-
   out <- list(attributes = es_attributes(eml, path),
               access = es_access(eml, path),
               biblio = es_biblio(eml, path),

@@ -27,6 +27,7 @@ ByteCompile: true
 RoxygenNote: 7.1.1
 Imports:
     purrr,
+    EML,
     fs,
     jsonlite,
     whisker,
@@ -39,7 +40,7 @@ Imports:
     dplyr,
     tidyr,
     ggplot2,
-    magrittr,
+    magrittr
 Suggests:
     testthat,
     kableExtra,
@@ -47,7 +48,6 @@ Suggests:
     rmarkdown,
     servr,
     listviewer,
-    maps,
-    EML
+    maps
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
