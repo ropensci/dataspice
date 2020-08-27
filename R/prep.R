@@ -52,7 +52,6 @@ prep_attributes <- function(data_path = "data",
 }
 
 #' @inherit prep_attributes
-#' @export
 validate_file_paths <- function(data_path = "data", ...){
   if(length(data_path) == 1){
     if(is_dir(data_path)){

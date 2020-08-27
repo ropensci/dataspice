@@ -232,7 +232,6 @@ crosswalk <- function(doc, term) {
 #' @param spice (list) Your `dataspice` metadata
 #'
 #' @return (data.frame) A partial EML attributes table
-#' @export
 #'
 #' @examples
 #' # Load an example dataspice JSON that comes installed with the package

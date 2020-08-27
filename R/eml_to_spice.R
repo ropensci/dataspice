@@ -34,7 +34,6 @@ get_access_spice <- function(x){
 #' @param eml (emld) an EML object
 #' @param path (character) folder path for saving the table to disk
 #'
-#' @export
 #' @import EML
 #'
 #' @examples
@@ -120,8 +119,6 @@ get_attributes_spice <- function(x) {
 #' @param eml (emld) an EML object
 #' @param path (character) folder path for saving the table to disk
 #'
-#' @export
-#'
 #' @import dplyr
 #' @importFrom readr write_csv
 #'
@@ -154,8 +151,6 @@ es_attributes <- function(eml, path = NULL) {
 #'
 #' @param eml (emld) an EML object
 #' @param path (character) folder path for saving the table to disk
-#'
-#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -215,8 +210,6 @@ es_biblio <- function(eml, path = NULL) {
 #' @importFrom purrr discard
 #' @importFrom tibble enframe
 #' @importFrom tidyr spread
-#'
-#' @export
 #'
 #' @examples
 #' \dontrun{
