@@ -12,18 +12,28 @@ eml_to_spice(eml, path = NULL)
 \item{path}{(character) Folder path for saving the tables to disk}
 }
 \value{
-A list with names attributes, access, biblio, and creators.
-Optionally, if \code{path} is specified, saves four tables.
+A list with names \code{attributes}, \code{access}, \code{biblio}, and \code{creators}.
+Optionally, if \code{path} is specified, saves the four tables as \code{CSV} files.
 }
 \description{
 Create dataspice metadata tables from EML
 }
 \examples{
 \dontrun{
-eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
+# First, load up an example EML record
+library(EML)
+
+eml_path <- system.file(
+ file.path("example-dataset", "broodTable_metadata.xml"),
+ package = "dataspice")
 eml <- read_eml(eml_path)
 
 
-my_spice <- eml_to_spice(eml, ".")
+# Generate the four dataspice tables
+my_spice <- eml_to_spice(eml)
+
+# Or save them to disd
+# Generate the four dataspice tables
+eml_to_spice(eml, ".")
 }
 }

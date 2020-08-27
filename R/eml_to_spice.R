@@ -266,18 +266,28 @@ es_creators <- function(eml, path = NULL) {
 #' @param eml (emld) An EML object
 #' @param path (character) Folder path for saving the tables to disk
 #'
-#' @return A list with names attributes, access, biblio, and creators.
-#' Optionally, if `path` is specified, saves four tables.
+#' @return A list with names `attributes`, `access`, `biblio`, and `creators`.
+#' Optionally, if `path` is specified, saves the four tables as `CSV` files.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
+#' # First, load up an example EML record
+#' library(EML)
+#'
+#' eml_path <- system.file(
+#'  file.path("example-dataset", "broodTable_metadata.xml"),
+#'  package = "dataspice")
 #' eml <- read_eml(eml_path)
 #'
 #'
-#' my_spice <- eml_to_spice(eml, ".")
+#' # Generate the four dataspice tables
+#' my_spice <- eml_to_spice(eml)
+#'
+#' # Or save them to disd
+#' # Generate the four dataspice tables
+#' eml_to_spice(eml, ".")
 #' }
 eml_to_spice <- function(eml, path = NULL) {
   out <- list(attributes = es_attributes(eml, path),
