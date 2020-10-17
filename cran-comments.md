@@ -1,19 +1,12 @@
-## Tested on
+## Test environments
 
-- macOS 10.15.3, R 3.6.2
+On GitHub Actions:
+
+- windows (release)
+- macOS (release)
+- ubuntu-20.04 (release)
+- ubuntu-20.04 (devel)
 
 ## R CMD check
 
-0 errors, 0 warnings, 1 note
-
-```
-> checking R code for possible problems ... NOTE
-  es_creators : <anonymous>: no visible binding for global variable
-    ‘givenName’
-  es_creators : <anonymous>: no visible binding for global variable
-    ‘familyName’
-  Undefined global functions or variables:
-    familyName givenName
-```
-
-This is due to our use of dplyr in the package code and can safely be ignored.
+0 errors, 0 warnings, 0 notes
