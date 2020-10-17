@@ -28,7 +28,7 @@ The goal of `dataspice` is to make it easier for researchers to create basic, li
 - Create a helpful dataset README webpage for your data similar to how [pkgdown](https://pkgdown.r-lib.org/) creates websites for R packages.
 - Produce more complex metadata formats for richer description of your datasets and to aid dataset discovery.
 
-Metadata fields are based on [Schema.org/Dataset](http://schema.org/Dataset) and other [metadata standards](https://github.com/ropenscilabs/dataspice#resources) and represent a lowest common denominator which means converting between formats should be relatively straightforward.
+Metadata fields are based on [Schema.org/Dataset](https://schema.org/Dataset) and other [metadata standards](https://github.com/ropenscilabs/dataspice#resources) and represent a lowest common denominator which means converting between formats should be relatively straightforward.
 
 ## Example
 
