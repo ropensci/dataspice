@@ -3,8 +3,7 @@
 dataspice
 =========
 
-[![Build
-Status](https://travis-ci.com/ropenscilabs/dataspice.svg?branch=master)](https://travis-ci.com/ropenscilabs/dataspice)
+![R-CMD-check](https://github.com/ropenscilabs/dataspice/workflows/R-CMD-check/badge.svg)
 
 The goal of `dataspice` is to make it easier for researchers to create
 basic, lightweight, and concise metadata files for their datasets by
@@ -353,7 +352,6 @@ Once you’re done, you can write out an EML XML file:
 ``` r
 out_path <- tempfile()
 write_eml(eml_doc, out_path)
-#> NULL
 ```
 
 ### Convert from EML
