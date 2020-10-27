@@ -26,7 +26,6 @@ to list files in a folder recursively or use \code{pattern} to filter files for 
 }
 \value{
 \code{prep_attributes()} updates the \code{attributes.csv} and writes to \code{attributes_path}.
-\code{validate_file_paths()} returns a vector of valid file_paths detected from \code{data_path}.
 }
 \description{
 Extract \code{variableNames} from data file(s) and add them to \code{attributes.csv}. The
@@ -49,7 +48,5 @@ prep_attributes(data_path, pattern = "StockInfo")
 # extract from a folder using folder path
 data_path <- system.file("example-dataset", package = "dataspice")
 prep_attributes(data_path)
-# get vector of valid (existing) file paths
-validate_file_paths(data_path)
 }
 }

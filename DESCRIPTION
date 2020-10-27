@@ -1,11 +1,11 @@
 Package: dataspice
 Version: 1.0.0
 Title: Create Lightweight Schema.org Descriptions of Data
-Description: The goal of dataspice is to make it easier for researchers to 
-  create basic, lightweight, and concise metadata files for their datasets. 
-  These basic files can then be used to make useful information available during 
-  analysis, create a helpful dataset "README" webpage, and produce more complex 
-  metadata formats to aid dataset discovery. Metadata fields are based on 
+Description: The goal of 'dataspice' is to make it easier for researchers to
+  create basic, lightweight, and concise metadata files for their datasets.
+  These basic files can then be used to make useful information available during
+  analysis, create a helpful dataset "README" webpage, and produce more complex
+  metadata formats to aid dataset discovery. Metadata fields are based on
   the 'Schema.org' and 'Ecological Metadata Language' standards.
 Authors@R: c(
     person("Carl", "Boettiger", role = c("aut"), comment = "https://github.com/cboettig"),

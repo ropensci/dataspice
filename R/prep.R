@@ -13,7 +13,6 @@
 #' @param ... parameters passed to `list.files()`. For example, use `recursive = TRUE`
 #' to list files in a folder recursively or use `pattern` to filter files for patterns.
 #' @return `prep_attributes()` updates the `attributes.csv` and writes to `attributes_path`.
-#' `validate_file_paths()` returns a vector of valid file_paths detected from `data_path`.
 #' @export
 #' @examples
 #' \dontrun{
@@ -31,8 +30,6 @@
 #' # extract from a folder using folder path
 #' data_path <- system.file("example-dataset", package = "dataspice")
 #' prep_attributes(data_path)
-#' # get vector of valid (existing) file paths
-#' validate_file_paths(data_path)
 #' }
 prep_attributes <- function(data_path = "data",
                             attributes_path = "data/metadata/attributes.csv",

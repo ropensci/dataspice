@@ -14,10 +14,3 @@ es_attributes(eml, path = NULL)
 \description{
 Return EML attributes in the dataspice attributes.csv format.
 }
-\examples{
-\dontrun{
-eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
-eml <- read_eml(eml_path)
-es_attributes(eml)
-}
-}

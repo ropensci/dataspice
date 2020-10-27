@@ -33,15 +33,6 @@ get_access_spice <- function(x){
 #'
 #' @param eml (emld) an EML object
 #' @param path (character) folder path for saving the table to disk
-#'
-#' @examples
-#' \dontrun{
-#' library(EML)
-#'
-#' eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
-#' eml <- read_eml(eml_path)
-#' es_access(eml)
-#' }
 es_access <- function(eml, path = NULL) {
     entities <- get_entities(eml)
     access_entities <- lapply(entities, get_access_spice)
@@ -119,13 +110,6 @@ get_attributes_spice <- function(x) {
 #'
 #' @import dplyr
 #' @importFrom readr write_csv
-#'
-#' @examples
-#' \dontrun{
-#' eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
-#' eml <- read_eml(eml_path)
-#' es_attributes(eml)
-#' }
 es_attributes <- function(eml, path = NULL) {
   entities <- get_entities(eml)
   attrTables <- lapply(entities, get_attributes_spice)
@@ -149,13 +133,6 @@ es_attributes <- function(eml, path = NULL) {
 #'
 #' @param eml (emld) an EML object
 #' @param path (character) folder path for saving the table to disk
-#'
-#' @examples
-#' \dontrun{
-#' eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
-#' eml <- read_eml(eml_path)
-#' es_biblio(eml)
-#' }
 es_biblio <- function(eml, path = NULL) {
   biblio_eml <- eml %>%
     unlist() %>%
@@ -208,13 +185,6 @@ es_biblio <- function(eml, path = NULL) {
 #' @importFrom purrr discard
 #' @importFrom tibble enframe
 #' @importFrom tidyr spread
-#'
-#' @examples
-#' \dontrun{
-#' eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
-#' eml <- read_eml(eml_path)
-#' es_creators(eml)
-#' }
 es_creators <- function(eml, path = NULL) {
   people <- get_entities(eml,
                          entities = c("creator", "contact", "associatedParty", "metadataProvider"),

@@ -56,13 +56,6 @@ parse_GeoShape_points <- function(points) {
 #' @param path (character) Path to file on disk to convert
 #'
 #' @return (list) Mustache-appropriate list
-#'
-#' @examples
-#' \dontrun{
-#' json_path <- "myjson.json"
-#' data <- jsonld_to_mustache(json_path)
-#' whisker::whisker_render("{{ keywords }}", data)
-#' }
 jsonld_to_mustache <- function(path) {
   json <- jsonlite::read_json(path)
 

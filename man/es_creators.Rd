@@ -14,10 +14,3 @@ es_creators(eml, path = NULL)
 \description{
 Return EML creators in the dataspice creators.csv format.
 }
-\examples{
-\dontrun{
-eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
-eml <- read_eml(eml_path)
-es_creators(eml)
-}
-}

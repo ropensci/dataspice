@@ -14,10 +14,3 @@ es_biblio(eml, path = NULL)
 \description{
 Return EML biblio in the dataspice biblio.csv format.
 }
-\examples{
-\dontrun{
-eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
-eml <- read_eml(eml_path)
-es_biblio(eml)
-}
-}
