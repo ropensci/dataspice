@@ -38,7 +38,7 @@ prep_access <- function(data_path = "data",
                             encodingFormat = fileTypes)
 
 
-  readr::write_csv(access, path = access_path)
+  readr::write_csv(access, access_path)
   message("The following fileNames have been added to the access file: ",
           paste(basename(fileNames), collapse = ", "))
 }

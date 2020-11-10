@@ -178,7 +178,7 @@ edit_file <- function(metadata_dir = "data/metadata",
       finalDF <- hot_to_r(input$hot)
       # remove padding if none edited
       finalDF[!apply(is.na(finalDF) | finalDF == "", 1, all),] %>%
-        readr::write_csv(path = filepath)
+        readr::write_csv(filepath)
     })
 
 

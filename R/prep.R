@@ -45,7 +45,7 @@ prep_attributes <- function(data_path = "data",
                                  purrr::map_df(file_paths,
                                                ~extract_attributes(.x, attributes)))
 
-  readr::write_csv(attributes, file = attributes_path)
+  readr::write_csv(attributes, attributes_path)
 }
 
 #' @inherit prep_attributes
