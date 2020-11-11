@@ -20,7 +20,8 @@ library(stringr)
 ```
 # dataspice
 
-![R-CMD-check](https://github.com/ropenscilabs/dataspice/workflows/R-CMD-check/badge.svg)
+![CRAN Version](https://www.r-pkg.org/badges/version/dataspice)
+![CI](https://github.com/ropenscilabs/dataspice/workflows/R-CMD-check/badge.svg)
 
 The goal of `dataspice` is to make it easier for researchers to create basic, lightweight, and concise metadata files for their datasets by editing the kind of files they're probably most familiar with: CSVs. To spice up their data with a dash of metadata. These metadata files can then be used to:
 

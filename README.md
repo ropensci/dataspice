@@ -3,7 +3,8 @@
 dataspice
 =========
 
-![R-CMD-check](https://github.com/ropenscilabs/dataspice/workflows/R-CMD-check/badge.svg)
+![CRAN Version](https://www.r-pkg.org/badges/version/dataspice)
+![CI](https://github.com/ropenscilabs/dataspice/workflows/R-CMD-check/badge.svg)
 
 The goal of `dataspice` is to make it easier for researchers to create
 basic, lightweight, and concise metadata files for their datasets by
@@ -39,20 +40,16 @@ Installation
 You can install the development version from
 [GitHub](https://github.com/) with:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("ropenscilabs/dataspice")
-```
+    # install.packages("devtools")
+    devtools::install_github("ropenscilabs/dataspice")
 
 Workflow
 --------
 
-``` r
-create_spice()
-# Then fill in template CSV files, more on this below
-write_spice()
-build_site() # Optional
-```
+    create_spice()
+    # Then fill in template CSV files, more on this below
+    write_spice()
+    build_site() # Optional
 
 ![worfklowdiagram](man/figures/dataspice_workflow.png)
 
@@ -90,27 +87,21 @@ the associated helper function and/or
 To see an example of how `prep_attributes()` works, load the data files
 that ship with the package:
 
-``` r
-data_files <- list.files(system.file("example-dataset/", package = "dataspice"),
-                         pattern = ".csv",
-                         full.names = TRUE)
-```
+    data_files <- list.files(system.file("example-dataset/", package = "dataspice"),
+                             pattern = ".csv",
+                             full.names = TRUE)
 
 This function assumes that the metadata templates are in a folder called
 `metadata` within a `data` folder.
 
-``` r
-attributes_path <- file.path("data", "metadata", "attributes.csv")
-```
+    attributes_path <- file.path("data", "metadata", "attributes.csv")
 
 Using `purrr::map()`, this function can be applied over multiple files
 to populate the header names
 
-``` r
-data_files %>%
-  purrr::map(~ prep_attributes(.x, attributes_path),
-             attributes_path = attributes_path)
-```
+    data_files %>%
+      purrr::map(~ prep_attributes(.x, attributes_path),
+                 attributes_path = attributes_path)
 
 The output of `prep_attributes()` has the first two columns filled out:
 
@@ -269,10 +260,10 @@ temporal coverage
 
 `creators.csv` has one row for each of the dataset authors
 
-| id  | name           | affiliation                                           | email                      |
-|:----|:---------------|:------------------------------------------------------|:---------------------------|
-| NA  | Jeanette Clark | National Center for Ecological Analysis and Synthesis | <jclark@nceas.ucsb.edu>    |
-| NA  | Rich,Brenner   | Alaska Department of Fish and Game                    | richard.brenner.alaska.gov |
+| id  | name           | affiliation                                           | email                                                                          |
+|:----|:---------------|:------------------------------------------------------|:-------------------------------------------------------------------------------|
+| NA  | Jeanette Clark | National Center for Ecological Analysis and Synthesis | <a href="mailto:jclark@nceas.ucsb.edu" class="email">jclark@nceas.ucsb.edu</a> |
+| NA  | Rich,Brenner   | Alaska Department of Fish and Game                    | richard.brenner.alaska.gov                                                     |
 
 ### Save JSON-LD file
 
@@ -306,38 +297,34 @@ compatibility with terms from [Schema.org](https://schema.org). However,
 `dataspice` will do its best to convert your `dataspice` metadata to
 EML:
 
-``` r
-library(dataspice)
+    library(dataspice)
 
-# Load an example dataspice JSON that comes installed with the package
-spice <- system.file(
-  "examples", "annual-escapement.json",
-  package = "dataspice")
+    # Load an example dataspice JSON that comes installed with the package
+    spice <- system.file(
+      "examples", "annual-escapement.json",
+      package = "dataspice")
 
-# Convert it to EML
-eml_doc <- spice_to_eml(spice)
-#> Warning: variableMeasured not crosswalked to EML because we don't have enough
-#> information. Use `crosswalk_variables` to create the start of an EML attributes
-#> table. See ?crosswalk_variables for help.
-#> You might want to run EML::eml_validate on the result at this point and fix what validations errors are produced.You will commonly need to set `packageId`, `system`, and provide `attributeList` elements for each `dataTable`.
-```
+    # Convert it to EML
+    eml_doc <- spice_to_eml(spice)
+    #> Warning: variableMeasured not crosswalked to EML because we don't have enough
+    #> information. Use `crosswalk_variables` to create the start of an EML attributes
+    #> table. See ?crosswalk_variables for help.
+    #> You might want to run EML::eml_validate on the result at this point and fix what validations errors are produced.You will commonly need to set `packageId`, `system`, and provide `attributeList` elements for each `dataTable`.
 
 You may receive warnings depending on which `dataspice` fields you
 filled in and this process will very likely produce an invalid EML
 record which is totally fine:
 
-``` r
-library(EML)
+    library(EML)
 
-eml_validate(eml_doc)
-#> [1] FALSE
-#> attr(,"errors")
-#> [1] "Element '{https://eml.ecoinformatics.org/eml-2.2.0}eml': The attribute 'packageId' is required but missing."                                  
-#> [2] "Element '{https://eml.ecoinformatics.org/eml-2.2.0}eml': The attribute 'system' is required but missing."                                     
-#> [3] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."
-#> [4] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."
-#> [5] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."
-```
+    eml_validate(eml_doc)
+    #> [1] FALSE
+    #> attr(,"errors")
+    #> [1] "Element '{https://eml.ecoinformatics.org/eml-2.2.0}eml': The attribute 'packageId' is required but missing."                                  
+    #> [2] "Element '{https://eml.ecoinformatics.org/eml-2.2.0}eml': The attribute 'system' is required but missing."                                     
+    #> [3] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."
+    #> [4] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."
+    #> [5] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."
 
 This is because some fields in `dataspice` store information in
 different structures and because EML requires many fields that
@@ -349,10 +336,8 @@ package](https://github.com/ropensci/eml).
 
 Once you’re done, you can write out an EML XML file:
 
-``` r
-out_path <- tempfile()
-write_eml(eml_doc, out_path)
-```
+    out_path <- tempfile()
+    write_eml(eml_doc, out_path)
 
 ### Convert from EML
 
@@ -360,17 +345,13 @@ Like converting `dataspice` to EML, we can convert an existing EML
 record to a set of `dataspice` metadata tables which we can then work
 from within `dataspice`:
 
-``` r
-library(EML)
+    library(EML)
 
-eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
-eml <- read_eml(eml_path)
-```
+    eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
+    eml <- read_eml(eml_path)
 
-``` r
-# Creates four CSVs files in the `data/metadata` directory
-my_spice <- eml_to_spice(eml, "data/metadata")
-```
+    # Creates four CSVs files in the `data/metadata` directory
+    my_spice <- eml_to_spice(eml, "data/metadata")
 
 Resources
 ---------
