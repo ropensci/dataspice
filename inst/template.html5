@@ -114,7 +114,7 @@
         <tbody>
           {{#variableMeasured}}
           <tr>
-            <td>{{ name }}</td>
+            <td><code>{{ name }}</code></td>
             <td>{{ description }}</td>
             <td>{{ unitText }}</td>
           </tr>
@@ -135,8 +135,8 @@
       <tbody>
         {{#distribution}}
         <tr>
-          <td>{{ name }}</td>
-          <td>{{ encodingFormat }}</td>
+          <td><code>{{ name }}</code></td>
+          <td><code>{{ encodingFormat }}</code></td>
           <td><a href="{{ contentUrl }}">Download</a></td>
         </tr>
         {{/distribution}}
