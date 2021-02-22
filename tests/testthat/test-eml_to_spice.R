@@ -1,7 +1,8 @@
 context("test-eml_to_spice")
 library(dplyr)
 
-eml_path <- system.file("example-dataset/broodTable_metadata.xml", package = "dataspice")
+eml_path <- system.file("example-dataset/broodTable_metadata.xml",
+                        package = "dataspice")
 eml <- EML::read_eml(eml_path)
 
 test_that("Access tabular format matches EML", {
@@ -28,8 +29,10 @@ test_that("Attributes tabular format matches EML", {
 
   expect_true(all(stringr::str_detect(objectNames, eml_attributes$fileName),
                   na.rm = TRUE))
-  expect_true(all(stringr::str_detect(attributeNames, eml_attributes$variableName),
-                  na.rm = TRUE))
+  expect_true(all(stringr::str_detect(
+    attributeNames,
+    eml_attributes$variableName),
+    na.rm = TRUE))
 
   standardUnits <- EML::eml_get(eml, "standardUnit")
   customUnits <- EML::eml_get(eml, "customUnit")
@@ -62,8 +65,9 @@ test_that("Biblio tabular format matches EML", {
                eml_biblio$license)
 
   #funding/funder
-  expect_equal(paste(unlist(eml$dataset$project$funding), collapse = "; ") %>% nchar(),
-               eml_biblio$funder %>% nchar())
+  expect_equal(
+    paste(unlist(eml$dataset$project$funding), collapse = "; ") %>% nchar(),
+          eml_biblio$funder %>% nchar())
 
   #geographic coverage
   expect_equal(eml$dataset$coverage$geographicCoverage$geographicDescription,
@@ -80,10 +84,12 @@ test_that("Biblio tabular format matches EML", {
                  sum())
 
   #temporal coverage
-  expect_equal(eml$dataset$coverage$temporalCoverage$rangeOfDates$beginDate$calendarDate,
-               eml_biblio$startDate)
-  expect_equal(eml$dataset$coverage$temporalCoverage$rangeOfDates$endDate$calendarDate,
-               eml_biblio$endDate)
+  expect_equal(
+    eml$dataset$coverage$temporalCoverage$rangeOfDates$beginDate$calendarDate,
+    eml_biblio$startDate)
+  expect_equal(
+    eml$dataset$coverage$temporalCoverage$rangeOfDates$endDate$calendarDate,
+    eml_biblio$endDate)
 })
 
 test_that("Creators tabular format matches EML", {
@@ -92,8 +98,10 @@ test_that("Creators tabular format matches EML", {
   orcids <-  EML::eml_get(eml, "userId") %>% paste(collapse = " ")
   givenNames <- EML::eml_get(eml, "givenName") %>% paste(collapse = " ")
   surNames <- EML::eml_get(eml, "surName") %>% paste(collapse = " ")
-  affiliations <- EML::eml_get(eml, "organizationName") %>% paste(collapse = " ")
-  emails <- EML::eml_get(eml, "electronicMailAddress") %>% paste(collapse = " ")
+  affiliations <- EML::eml_get(eml, "organizationName") %>%
+    paste(collapse = " ")
+  emails <- EML::eml_get(eml, "electronicMailAddress") %>%
+    paste(collapse = " ")
 
   # expect_true(all(stringr::str_detect(orcids, eml_creators$id),
   #                 na.rm = TRUE))

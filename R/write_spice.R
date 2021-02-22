@@ -10,10 +10,18 @@
 #' @importFrom dplyr rename
 write_spice <- function(path = "data/metadata", ...) {
 
-  biblio <- readr::read_csv(file.path(path, "biblio.csv"), col_types = readr::cols())
-  attributes <- readr::read_csv(file.path(path, "attributes.csv"), col_types = readr::cols())
-  access <- readr::read_csv(file.path(path, "access.csv"), col_types = readr::cols())
-  creators <- readr::read_csv(file.path(path, "creators.csv"), col_types = readr::cols())
+  biblio <- readr::read_csv(
+    file.path(path, "biblio.csv"),
+    col_types = readr::cols())
+  attributes <- readr::read_csv(
+    file.path(path, "attributes.csv"),
+    col_types = readr::cols())
+  access <- readr::read_csv(
+    file.path(path, "access.csv"),
+    col_types = readr::cols())
+  creators <- readr::read_csv(
+    file.path(path, "creators.csv"),
+    col_types = readr::cols())
 
   # Validate the CSVs
   validate_biblio(biblio)
@@ -25,7 +33,7 @@ write_spice <- function(path = "data/metadata", ...) {
   access <- access[ !names(access)=="fileName" ]
 
   distribution <- purrr::pmap(access,
-    function(name = NULL, contentUrl = NULL, encodingFormat = NULL){
+    function(name = NULL, contentUrl = NULL, encodingFormat = NULL) {
     list(type = "DataDownload",
          name = name,
          contentUrl = contentUrl,
@@ -76,4 +84,3 @@ write_spice <- function(path = "data/metadata", ...) {
 
 
 }
-

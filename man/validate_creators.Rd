@@ -7,7 +7,8 @@
 validate_creators(creators)
 }
 \arguments{
-\item{creators}{(data.frame) A \code{data.frame} read in from \code{creators.csv}}
+\item{creators}{(data.frame) A \code{data.frame} read in from
+\code{creators.csv}}
 }
 \value{
 Nothing. Side-effect: Can \code{stop} execution if validation fails.

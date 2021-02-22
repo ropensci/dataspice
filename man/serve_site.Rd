@@ -7,7 +7,8 @@
 serve_site(path = "docs")
 }
 \arguments{
-\item{path}{(character) Optional. Directory to serve. Defaults to \code{docs}.}
+\item{path}{(character) Optional. Directory to serve. Defaults to
+\code{docs}.}
 }
 \value{
 Nothing.

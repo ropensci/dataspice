@@ -1,10 +1,20 @@
 get_entities <- function(eml,
-                         entities = c("dataTable", "spatialRaster", "spatialVector", "storedProcedure", "view", "otherEntity"),
-                         level_id = "entityName"){
+                         entities = c(
+                           "dataTable",
+                           "spatialRaster",
+                           "spatialVector",
+                           "storedProcedure",
+                           "view",
+                           "otherEntity"),
+                         level_id = "entityName") {
     entities <- entities[entities %in% names(eml$dataset)]
 
-    #look for specific fields to determine if the entity needs to be listed ("boxed") or not
-    level_cond <- paste0("~", paste(sprintf("!is.null(.x$%s)", level_id), collapse = " | "))
+    # look for specific fields to determine if the entity needs to be listed
+    # ("boxed") or not
+    level_cond <- paste0(
+      "~",
+      paste(sprintf("!is.null(.x$%s)", level_id),
+      collapse = " | "))
     purrr::map(entities, ~EML::eml_get(eml, .x)) %>%
         # restructure so that all entities are at the same level
         # use level id to determine if .x should be listed or not
@@ -12,7 +22,7 @@ get_entities <- function(eml,
         unlist(recursive = FALSE)
 }
 
-get_access_spice <- function(x){
+get_access_spice <- function(x) {
     x %>%
         unlist() %>%
         tibble::enframe() %>%
@@ -23,7 +33,7 @@ get_access_spice <- function(x){
             grepl("formatName", name) ~ "encodingFormat"
         )) %>%
         stats::na.omit() %>%
-        filter(value != "download") %>% #often also included as url
+        dplyr::filter(value != "download") %>% #often also included as url
         tidyr::spread(name, value)
 }
 
@@ -70,19 +80,22 @@ get_attributes_spice <- function(x) {
   } else {
     attr <- EML::get_attributes(attrList)
 
-    if(is.null(attr$attributes$unit)){
+    if(is.null(attr$attributes$unit)) {
       attr$attributes$unit <- NA
     }
 
     #set datetime format as unitText if available
-    if(!is.null(attr$attributes$formatString)){
+    if(!is.null(attr$attributes$formatString)) {
       na_units <- is.na(attr$attributes$unit)
       attr$attributes$unit[na_units] <- attr$attributes$formatString[na_units]
     }
 
     #get missing value info in text form:
-    missing_val <- dplyr::tibble(missingValueCode = c(attr$attributes$missingValueCode, "NA"),
-                                 missingValueCodeExplanation = c(attr$attributes$missingValueCodeExplanation, "NA")) %>%
+    missing_val <- dplyr::tibble(
+      missingValueCode = c(attr$attributes$missingValueCode, "NA"),
+      missingValueCodeExplanation = c(
+        attr$attributes$missingValueCodeExplanation,
+        "NA")) %>%
       dplyr::distinct() %>%
       stats::na.omit()
 
@@ -93,8 +106,10 @@ get_attributes_spice <- function(x) {
 
     out <- dplyr::tibble(fileName = objName,
                          variableName = attr$attributes$attributeName,
-                         description = paste0(attr$attributes$attributeDefinition,
-                                              "; missing values: ", missing_val_text),
+                         description = paste0(
+                           attr$attributes$attributeDefinition,
+                           "; missing values: ",
+                           missing_val_text),
                          unitText = attr$attributes$unit)
   }
 
@@ -108,17 +123,16 @@ get_attributes_spice <- function(x) {
 #' @param eml (emld) an EML object
 #' @param path (character) folder path for saving the table to disk
 #'
-#' @import dplyr
 #' @importFrom readr write_csv
 es_attributes <- function(eml, path = NULL) {
   entities <- get_entities(eml)
-  attrTables <- lapply(entities, get_attributes_spice)
+  attr_tables <- lapply(entities, get_attributes_spice)
 
-  out <- dplyr::bind_rows(attrTables) %>%
-    filter(!is.na(variableName))
+  out <- dplyr::bind_rows(attr_tables) %>%
+    dplyr::filter(!is.na(variableName))
 
-  if(!is.null(path)){
-    if(!dir.exists(path)){
+  if(!is.null(path)) {
+    if(!dir.exists(path)) {
       dir.create(path)
     }
     readr::write_csv(out, file.path(path, "attributes.csv"))
@@ -160,13 +174,27 @@ es_biblio <- function(eml, path = NULL) {
     tidyr::spread(name, value)
 
   #reorder
-  fields <- c("title", "description", "datePublished", "citation", "keywords", "license", "funder", "geographicDescription", "northBoundCoord", "eastBoundCoord", "southBoundCoord", "westBoundCoord", "wktString", "startDate", "endDate")
+  fields <- c("title",
+    "description",
+    "datePublished",
+    "citation",
+    "keywords",
+    "license",
+    "funder",
+    "geographicDescription",
+    "northBoundCoord",
+    "eastBoundCoord",
+    "southBoundCoord",
+    "westBoundCoord",
+    "wktString",
+    "startDate",
+    "endDate")
 
 
   out <- biblio_eml[, fields[fields %in% colnames(biblio_eml)]]
 
-  if(!is.null(path)){
-    if(!dir.exists(path)){
+  if(!is.null(path)) {
+    if(!dir.exists(path)) {
       dir.create(path)
     }
     readr::write_csv(out, file.path(path, "biblio.csv"))
@@ -187,13 +215,17 @@ es_biblio <- function(eml, path = NULL) {
 #' @importFrom tidyr spread
 es_creators <- function(eml, path = NULL) {
   people <- get_entities(eml,
-                         entities = c("creator", "contact", "associatedParty", "metadataProvider"),
+                         entities = c(
+                           "creator",
+                           "contact",
+                           "associatedParty",
+                           "metadataProvider"),
                          level_id = c("individualName", "organizationName"))
-  if(!is.null(names(people))){
+  if(!is.null(names(people))) {
     people <- people[names(people) == ""]
   }
 
-  people_parsed <- lapply(people, function(x){x %>%
+  people_parsed <- lapply(people, function(x) {x %>%
       unlist() %>%
       tibble::enframe() %>%
       dplyr::mutate(name = dplyr::case_when(
@@ -219,8 +251,8 @@ es_creators <- function(eml, path = NULL) {
   fields <- c("id", "name", "affiliation", "email")
   out <- out[, fields[fields %in% colnames(out)]]
 
-  if(!is.null(path)){
-    if(!dir.exists(path)){
+  if(!is.null(path)) {
+    if(!dir.exists(path)) {
       dir.create(path)
     }
     readr::write_csv(out, file.path(path, "creators.csv"))

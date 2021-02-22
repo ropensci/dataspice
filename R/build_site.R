@@ -1,7 +1,8 @@
 #' Build a dataspice site
 #'
 #' @param path (character) Path to a JSON+LD file with dataspice metadata
-#' @param template_path (character) Optional. Path to a template for \code{\link[whisker]{whisker.render}}
+#' @param template_path (character) Optional. Path to a template for
+#'  \code{\link[whisker]{whisker.render}}
 #' @param out_path (character) Optional. Path to write the site's `index.html`
 #' to. Defaults to `docs/index.html`.
 #'

@@ -13,7 +13,7 @@ as_jsonld <-  function(x,
                        context = "http://schema.org",
                        pretty = TRUE,
                        auto_unbox = TRUE,
-                       ...){
+                       ...) {
 
   out <- c(setNames(context, "@context"), x)
 
@@ -34,7 +34,7 @@ as_jsonld <-  function(x,
 #'
 #'
 write_jsonld <-  function(x, path, context = "http://schema.org",
-                          pretty = TRUE, auto_unbox = TRUE, ...){
+                          pretty = TRUE, auto_unbox = TRUE, ...) {
 
   out <- c(setNames(context, "@context"), x)
   jsonlite::write_json(out,
@@ -43,4 +43,3 @@ write_jsonld <-  function(x, path, context = "http://schema.org",
                        auto_unbox = auto_unbox,
                        ...)
 }
-

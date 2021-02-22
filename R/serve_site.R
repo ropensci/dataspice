@@ -1,6 +1,7 @@
 #' Serve site
 #'
-#' @param path (character) Optional. Directory to serve. Defaults to \code{docs}.
+#' @param path (character) Optional. Directory to serve. Defaults to
+#'  \code{docs}.
 #'
 #' @return Nothing.
 #' @export
@@ -16,7 +17,8 @@
 #' }
 serve_site <- function(path = "docs") {
   if (!requireNamespace("servr")) {
-    stop("Please install 'servr' to serve your site: install.packages('servr')", call. = FALSE)
+    stop("Please install 'servr' to serve your site: install.packages('servr')",
+         call. = FALSE)
   }
 
   servr::httd("docs")

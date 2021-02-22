@@ -13,7 +13,8 @@ build_site(
 \arguments{
 \item{path}{(character) Path to a JSON+LD file with dataspice metadata}
 
-\item{template_path}{(character) Optional. Path to a template for \code{\link[whisker]{whisker.render}}}
+\item{template_path}{(character) Optional. Path to a template for
+\code{\link[whisker]{whisker.render}}}
 
 \item{out_path}{(character) Optional. Path to write the site's \code{index.html}
 to. Defaults to \code{docs/index.html}.}

@@ -26,7 +26,9 @@
 #'   creator = "Me",
 #'   contact = "Me")
 #' spice_to_eml(myspice)
-spice_to_eml <- function(spice = file.path("data", "metadata", "dataspice.json")) {
+spice_to_eml <- function(spice = file.path("data",
+                                           "metadata",
+                                           "dataspice.json")) {
   if (is.character(spice)) {
     if (!file.exists(spice)) {
       stop("Could not find dataspice JSON file at the path '", spice, "'")

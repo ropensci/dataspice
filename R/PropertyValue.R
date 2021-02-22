@@ -17,7 +17,7 @@ valueReference = NULL,
  disambiguatingDescription = NULL,
  description = NULL,
  alternateName = NULL,
- additionalType = NULL){
+ additionalType = NULL) {
 Filter(Negate(is.null),
  list(
 type = "PropertyValue",

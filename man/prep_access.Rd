@@ -14,16 +14,19 @@ prep_access(data_path = "data", access_path = "data/metadata/access.csv", ...)
 Currently only tabular \code{.csv} and \code{.tsv} or \code{.rds} files are supported.
 }}
 
-\item{access_path}{path to the \code{access.csv} file. Defaults to "data/metadata/access.csv".}
+\item{access_path}{path to the \code{access.csv} file. Defaults to
+\code{data/metadata/access.csv}.}
 
-\item{...}{parameters passed to \code{list.files()}. For example, use \code{recursive = TRUE}
-to list files in a folder recursively or use \code{pattern} to filter files for patterns.}
+\item{...}{parameters passed to \code{list.files()}. For example, use
+\code{recursive = TRUE} to list files in a folder recursively or use \code{pattern} to
+filter files for patterns.}
 }
 \value{
 Updates \code{access.csv} and writes to \code{access_path}.
 }
 \description{
 Extract \code{fileNames} from data file(s) and add them to \code{access.csv}. The
-helper \code{\link{validate_file_paths}} can be used to create vectors of valid file paths
-that can be checked and then passed as \code{data_path} argument to \code{\link{prep_access}}.
+helper \code{\link{validate_file_paths}} can be used to create vectors of
+valid file paths that can be checked and then passed as \code{data_path} argument
+to \code{\link{prep_access}}.
 }

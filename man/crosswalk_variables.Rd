@@ -30,6 +30,7 @@ attributes <- crosswalk_variables(spice)
 # Now fill in the attributes data.frame. See `EML::set_attributes`.
 
 # And last, set the attributes on our EML document
-eml_doc$dataset$dataTable[[1]]$attributeList <- EML::set_attributes(attributes)
+eml_doc$dataset$dataTable[[1]]$attributeList <-
+  EML::set_attributes(attributes)
 }
 }

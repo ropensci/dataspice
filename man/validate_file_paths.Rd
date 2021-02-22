@@ -11,30 +11,36 @@ validate_file_paths(data_path = "data", ...)
 \enumerate{
 \item path(s) to the data file(s).
 \item single path to directory containing data file(s).
-Currently only tabular \code{.csv} and \code{.tsv} files are supported. Alternatively attributes
-returned using \code{names()} can be extracted from r object, stored as \code{.rds} files.
+Currently only tabular \code{.csv} and \code{.tsv} files are supported. Alternatively
+attributes returned using \code{names()} can be extracted from r object, stored as
+\code{.rds} files.
 }}
 
-\item{...}{parameters passed to \code{list.files()}. For example, use \code{recursive = TRUE}
-to list files in a folder recursively or use \code{pattern} to filter files for patterns.}
+\item{...}{parameters passed to \code{list.files()}. For example, use
+\code{recursive = TRUE} to list files in a folder recursively or use \code{pattern} to
+filter files for patterns.}
 }
 \value{
-\code{prep_attributes()} updates the \code{attributes.csv} and writes to \code{attributes_path}.
+\code{prep_attributes()} updates the \code{attributes.csv} and writes to
+\code{attributes_path}.
 }
 \description{
-Extract \code{variableNames} from data file(s) and add them to \code{attributes.csv}. The
-helper \code{\link{validate_file_paths}} can be used to create vectors of valid file paths
-that can be checked and then passed as \code{data_path} argument to \code{\link{prep_attributes}}.
+Extract \code{variableNames} from data file(s) and add them to \code{attributes.csv}.
+The helper \code{\link{validate_file_paths}} can be used to create vectors of
+valid file paths that can be checked and then passed as \code{data_path} argument
+to \code{\link{prep_attributes}}.
 }
 \examples{
 \dontrun{
 create_spice()
-# extract attributes from all `csv`, `tsv`, `rds` files in the data folder (non recursive)
+# extract attributes from all `csv`, `tsv`, `rds` files in the data folder
+# (non recursive)
 prep_attributes()
 # recursive
 prep_attributes(recursive = TRUE)
 # extract attributes from a single file using file path
-data_path <- system.file("example-dataset","BroodTables.csv", package = "dataspice")
+data_path <- system.file("example-dataset","BroodTables.csv",
+                         package = "dataspice")
 prep_attributes(data_path)
 # extract attributes from a single file by file path pattern matching
 data_path <- system.file("example-dataset", package = "dataspice")

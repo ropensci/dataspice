@@ -12,7 +12,8 @@ test_that("write spice creates a dataspice.json in the right place", {
                        full.names = TRUE)
 
   lapply(files_to_copy, function(path) {
-    file.copy(path, file.path(tmp, "metadata", basename(path)), overwrite = TRUE)
+    file.copy(path, file.path(tmp, "metadata", basename(path)),
+              overwrite = TRUE)
   })
 
   write_spice(file.path(tmp, "metadata"))

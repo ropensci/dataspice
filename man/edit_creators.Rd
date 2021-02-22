@@ -7,12 +7,13 @@
 edit_creators(metadata_dir = file.path("data", "metadata"))
 }
 \arguments{
-\item{metadata_dir}{the directory containing the \code{dataspice} metadata \code{.csv} files. Defaults to
-\verb{data/metadata/} directory in \strong{current project root}.}
+\item{metadata_dir}{the directory containing the \code{dataspice} metadata \code{.csv}
+files. Defaults to \verb{data/metadata/} directory in \strong{current project root}.}
 }
 \description{
-Launch Shiny app for editing individual \code{dataspice} metadata tables. Use \verb{edit_*()} where \code{*}
-is one of the four \code{dataspice} metadata tables \strong{\code{attributes}, \code{biblio}, \code{access} or \code{creators}}.
+Launch Shiny app for editing individual \code{dataspice} metadata tables. Use
+\verb{edit_*()} where \code{*} is one of the four \code{dataspice} metadata tables
+\strong{\code{attributes}, \code{biblio}, \code{access} or \code{creators}}.
 }
 \examples{
 \dontrun{

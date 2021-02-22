@@ -44,7 +44,8 @@ validate_access <- function(access) {
 
 #' Validate creators.csv
 #'
-#' @param creators (data.frame) A \code{data.frame} read in from \code{creators.csv}
+#' @param creators (data.frame) A \code{data.frame} read in from
+#'  \code{creators.csv}
 #'
 #' @return Nothing. Side-effect: Can \code{stop} execution if validation fails.
 validate_creators <- function(creators) {
