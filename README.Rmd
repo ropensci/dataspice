@@ -37,11 +37,10 @@ A fully worked example can be found [here](https://github.com/amoeba/dataspice-e
 
 ## Installation
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the latest version from [CRAN](https://cran.r-project.org):
 
-``` r
-# install.packages("devtools")
-devtools::install_github("ropenscilabs/dataspice")
+```r
+install.packages("dataspice")
 ```
 
 ## Workflow
