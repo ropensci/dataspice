@@ -1,6 +1,6 @@
-#' Shinyapps for editing dataspice metadata tables
+#' Shiny apps for editing dataspice metadata tables
 #'
-#' Launch shinyapp for editing individual `dataspice` metadata tables. Use `edit_*()` where `*`
+#' Launch Shiny app for editing individual `dataspice` metadata tables. Use `edit_*()` where `*`
 #' is one of the four `dataspice` metadata tables **`attributes`, `biblio`, `access` or `creators`**.
 #' @param metadata_dir the directory containing the `dataspice` metadata `.csv` files. Defaults to
 #'   `data/metadata/` directory in **current project root**.
@@ -38,7 +38,7 @@ edit_creators <- function(metadata_dir = file.path("data", "metadata")) {
 }
 
 
-# Shinyapps for editing dataspice metadata tables
+# Shiny apps for editing dataspice metadata tables
 #' @import shiny
 #' @import rhandsontable
 #' @import ggplot2

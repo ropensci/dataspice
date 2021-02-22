@@ -50,7 +50,8 @@ write_spice()
 build_site() # Optional
 ```
 
-![worfklowdiagram](man/figures/dataspice_workflow.png)
+![diagram showing a workflow for using
+dataspice](man/figures/dataspice_workflow.png)
 
 ### Create spice
 
@@ -221,14 +222,14 @@ Each of the metadata templates can be edited interactively using a
 [Shiny](https://shiny.rstudio.com/) app:
 
 -   `edit_attributes()` opens a Shiny app that can be used to edit
-    `attributes.csv`. The shiny app displays the current `attributes`
+    `attributes.csv`. The Shiny app displays the current `attributes`
     table and lets the user fill in an informative description and units
     (e.g. meters, hectares, etc.) for each variable.
 -   `edit_access()` opens an editable version of `access.csv`
 -   `edit_creators()` opens an editable version of `creators.csv`
 -   `edit_biblio()` opens an editable version of `biblio.csv`
 
-![edit\_attributes shiny app](man/figures/edit_attributes.png)
+![edit\_attributes Shiny app](man/figures/edit_attributes.png)
 
 Remember to click on **Save** when finished editing.
 
@@ -324,11 +325,6 @@ record which is totally fine:
 
 ``` r
 library(EML)
-#> 
-#> Attaching package: 'EML'
-#> The following object is masked from 'package:magrittr':
-#> 
-#>     set_attributes
 
 eml_validate(eml_doc)
 #> [1] FALSE

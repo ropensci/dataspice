@@ -2,7 +2,7 @@
 % Please edit documentation in R/edit_file.R
 \name{edit_creators}
 \alias{edit_creators}
-\title{Shinyapps for editing dataspice metadata tables}
+\title{Shiny apps for editing dataspice metadata tables}
 \usage{
 edit_creators(metadata_dir = file.path("data", "metadata"))
 }
@@ -11,7 +11,7 @@ edit_creators(metadata_dir = file.path("data", "metadata"))
 \verb{data/metadata/} directory in \strong{current project root}.}
 }
 \description{
-Launch shinyapp for editing individual \code{dataspice} metadata tables. Use \verb{edit_*()} where \code{*}
+Launch Shiny app for editing individual \code{dataspice} metadata tables. Use \verb{edit_*()} where \code{*}
 is one of the four \code{dataspice} metadata tables \strong{\code{attributes}, \code{biblio}, \code{access} or \code{creators}}.
 }
 \examples{
