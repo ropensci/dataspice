@@ -6,6 +6,7 @@
 ![CI](https://github.com/ropenscilabs/dataspice/workflows/R-CMD-check/badge.svg)
 [![Codecov test
 coverage](https://codecov.io/gh/ropenscilabs/dataspice/branch/main/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/dataspice?branch=main)
+[![](https://badges.ropensci.org/426_status.svg)](https://github.com/ropensci/software-review/issues/426)
 
 The goal of `dataspice` is to make it easier for researchers to create
 basic, lightweight, and concise metadata files for their datasets by
