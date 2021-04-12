@@ -29,11 +29,17 @@ formats should be relatively straightforward.
 
 ## Example
 
-A fully worked example can be found
-[here](https://github.com/amoeba/dataspice-example) and a live preview
-of the output [here](https://amoeba.github.io/dataspice-example/). An
-example of how Google sees this can be found
-[here](https://search.google.com/structured-data/testing-tool/u/0/#url=https%3A%2F%2Famoeba.github.io%2Fdataspice-example%2F).
+An basic example repository for demonstrating what using `dataspice`
+might look like can be found at
+<https://github.com/amoeba/dataspice-example>. From there, you can also
+check out a preview of the HTML `dataspice` generates at
+<https://amoeba.github.io/dataspice-example> and how Google sees it at
+<https://search.google.com/test/rich-results?url=https%3A%2F%2Famoeba.github.io%2Fdataspice-example%2F>.
+
+A much more detailed example has been created by [Anna
+Krystalli](https://annakrystalli.me) at
+<https://annakrystalli.me/dataspice-tutorial/> ([GitHub
+repo](https://github.com/annakrystalli/dataspice-tutorial)).
 
 ## Installation
 
