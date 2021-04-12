@@ -42,12 +42,7 @@ edit_creators <- function(metadata_dir = file.path("data", "metadata")) {
 
 # Shiny apps for editing dataspice metadata tables
 #' @importFrom dplyr "%>%"
-edit_file <- function(metadata_dir = "data/metadata",
-                      file = c(
-                        "attributes.csv",
-                        "biblio.csv",
-                        "access.csv",
-                        "creators.csv")) {
+edit_file <- function(metadata_dir = "data/metadata", file) {
 
   filepath <- file.path(metadata_dir, file)
 
