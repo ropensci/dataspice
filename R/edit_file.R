@@ -51,7 +51,12 @@ edit_file <- function(metadata_dir = "data/metadata", file) {
          call. = FALSE)
   }
 
-  file <- match.arg(file)
+  file_choices <- c(
+    "attributes.csv",
+    "biblio.csv",
+    "access.csv",
+    "creators.csv")
+  file <- match.arg(file, file_choices)
 
   ui <- shiny::shinyUI(
     shiny::fluidPage(
