@@ -65,7 +65,7 @@ spice_to_eml <- function(spice = file.path("data",
             "help.", call. = FALSE)
     message("You might want to run EML::eml_validate on the result at ",
             "this point and fix what validations errors are produced.",
-            "You will commonly need to set `packageId`, `system`, and provide ",
+            " You will commonly need to set `packageId`, `system`, and provide ",
             "`attributeList` elements for each `dataTable`.")
   }
 
