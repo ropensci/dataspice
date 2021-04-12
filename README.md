@@ -1,3 +1,9 @@
+---
+output:
+  md_document:
+    variant: gfm
+---
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # dataspice
@@ -23,9 +29,8 @@ then be used to:
 
 Metadata fields are based on
 [Schema.org/Dataset](https://schema.org/Dataset) and other [metadata
-standards](https://github.com/ropenscilabs/dataspice#resources) and
-represent a lowest common denominator which means converting between
-formats should be relatively straightforward.
+standards](#resources) and represent a lowest common denominator which
+means converting between formats should be relatively straightforward.
 
 ## Example
 
@@ -322,10 +327,9 @@ spice <- system.file(
 
 # Convert it to EML
 eml_doc <- spice_to_eml(spice)
-#> Warning: variableMeasured not crosswalked to EML because we don't have enough
-#> information. Use `crosswalk_variables` to create the start of an EML attributes
-#> table. See ?crosswalk_variables for help.
-#> You might want to run EML::eml_validate on the result at this point and fix what validations errors are produced.You will commonly need to set `packageId`, `system`, and provide `attributeList` elements for each `dataTable`.
+#> Warning: variableMeasured not crosswalked to EML because we don't have enough information. Use `crosswalk_variables` to create the start of an EML attributes table. See ?
+#> crosswalk_variables for help.
+#> You might want to run EML::eml_validate on the result at this point and fix what validations errors are produced. You will commonly need to set `packageId`, `system`, and provide `attributeList` elements for each `dataTable`.
 ```
 
 You may receive warnings depending on which `dataspice` fields you
@@ -334,6 +338,11 @@ record which is totally fine:
 
 ``` r
 library(EML)
+#> 
+#> Attaching package: 'EML'
+#> The following object is masked from 'package:magrittr':
+#> 
+#>     set_attributes
 
 eml_validate(eml_doc)
 #> [1] FALSE
@@ -358,6 +367,7 @@ Once you’re done, you can write out an EML XML file:
 ``` r
 out_path <- tempfile()
 write_eml(eml_doc, out_path)
+#> NULL
 ```
 
 ### Convert from EML
