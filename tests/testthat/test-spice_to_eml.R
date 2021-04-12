@@ -4,6 +4,11 @@ test_that("an empty doc converts", {
   expect_is(spice_to_eml(list()), "list")
 })
 
+test_that("you get an error when the file isn't found or the wrong type", {
+  expect_error(spice_to_eml())
+  expect_error(spice_to_eml(NULL))
+})
+
 test_that("a simple document crosswalks", {
   user <- list("type" = "Person",
                givenName = "Example",
