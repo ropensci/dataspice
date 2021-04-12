@@ -1,12 +1,11 @@
 ---
-title: "Creating Schema.org Metadata and README website with `dataspice`"
-author: "runconf18 metadatagroup"
-date: "`r Sys.Date()`"
+title: "dataspice Overview"
+author: "dataspice team"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Creating Schema.org Metadata and README website with `dataspice`}
+  %\VignetteIndexEntry{dataspice Overview}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}
 ---
 
 The goal of the `dataspice` package is to make it easier for researchers to create basic, lightweight, and concise metadata files for their datasets. These basic files can then be used to:
@@ -25,7 +24,13 @@ To start the user will have one or more datafiles in a common directory. We curr
 
 `create_spice()` reads in the files from that directory and creates a set of template metadata files for the user to populate. These metadata templates will include some data extracted from the user's datafiles, including things like file names and measured variable names to aid the user in populating the metadata files.
 
-Once these are created, the user needs to open each template, fill in the missing metadata (as completely as possible), and read the files back into R.
+Once these are created, the user needs to fill in each template file with the remaining metadata.
+Templates can be filled either:
+
+1. With the integrated [Shiny](https://shiny.rstudio.com/) applications (`edit_attributes()`, `edit_access()`, `edit_creators()`, `edit_biblio()`)
+2. Manually (i.e., with a text or CSV/spreadsheet editor)
+
+For new and even advanced users, option (1) is probably easier and more friendly.
 
 ### Metadata Files
 
@@ -34,18 +39,16 @@ Once these are created, the user needs to open each template, fill in the missin
 - `biblio.csv`: Citation information about the project, as much or as little data as possible can be included, but if things like bounding box coordinates are not included, then when the website is generated there will not be a bounding box map generated.
 - `access.csv`: Includes a row for each file that was read in, and documents the name of each file and its format.
 
-![](https://user-images.githubusercontent.com/6106733/40335756-444642e0-5d1a-11e8-8c33-0d3053441a79.png)
+<img style="width: 100%" src="https://user-images.githubusercontent.com/6106733/40335756-444642e0-5d1a-11e8-8c33-0d3053441a79.png" />
 
 ## Step 3 - Save metadata in JSON
 
-Once the populated the metadata files are read back R they can then be fed into `write_JSON()`, which converts those tabular metadata files into JSON files.
+Once the metadata templates are filled in, you can create a single JSON-LD metadata record for your metadata with `write_spice()`.
 
 ## Step 4 - Create a dataspice website
 
 A dataset README website is an interactive representation of the JSON information about the data. Assuming sufficient information is provided in the JSON it will include a map of the points and a bounding box of the area of study.
 
-The output from `write_JSON()` is fed into `build_site()` to create the website.
+The output from `write_spice()` is fed into `build_site()` to create the website.
 
-`serve_site()` ?
-
-![dataspice-website](../man/figures/website_example.png)
+<img style="width: 100%" src="../man/figures/website_example.png" />
