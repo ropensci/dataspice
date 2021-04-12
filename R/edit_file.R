@@ -85,7 +85,7 @@ edit_file <- function(metadata_dir = "data/metadata",
               shiny::h6("fileName: The name of the input data file(s). Don't change this."),
               shiny::h6("variableName: The name of the measured variable. Don't change this."),
               shiny::h6("description: A written description of the variable measured."),
-              shiny::h6("unitText: The units the variable was measured in."),
+              shiny::h6("unitText: The units in which the variable was measured."),
               shiny::helpText("Use", shiny::code("prep_attributes()"), "to extract", shiny::strong("variableName"), " from data files.")
             )
           },
