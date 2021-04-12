@@ -285,7 +285,7 @@ es_creators <- function(eml, path = NULL) {
 #' # Generate the four dataspice tables
 #' my_spice <- eml_to_spice(eml)
 #'
-#' # Or save them to disd
+#' # Or save them as a file
 #' # Generate the four dataspice tables
 #' eml_to_spice(eml, ".")
 #' }
