@@ -15,7 +15,8 @@
 #' # Load an example dataspice JSON that comes installed with the package
 #' spice <- system.file(
 #'   "examples", "annual-escapement.json",
-#'   package = "dataspice")
+#'   package = "dataspice"
+#' )
 #'
 #' # And crosswalk it to EML
 #' spice_to_eml(spice)
@@ -24,11 +25,14 @@
 #' myspice <- list(
 #'   name = "My example spice",
 #'   creator = "Me",
-#'   contact = "Me")
+#'   contact = "Me"
+#' )
 #' spice_to_eml(myspice)
-spice_to_eml <- function(spice = file.path("data",
-                                           "metadata",
-                                           "dataspice.json")) {
+spice_to_eml <- function(spice = file.path(
+                           "data",
+                           "metadata",
+                           "dataspice.json"
+                         )) {
   if (is.character(spice)) {
     if (!file.exists(spice)) {
       stop("Could not find dataspice JSON file at the path '", spice, "'")
@@ -55,18 +59,23 @@ spice_to_eml <- function(spice = file.path("data",
       dataTable = c(
         crosswalk(doc, "distribution")
       )
-    ))
+    )
+  )
 
   # Warn about variableMeasured not being crosswalked
   if ("variableMeasured" %in% names(doc)) {
     warning("variableMeasured not crosswalked to EML because we don't have ",
-            "enough information. Use `crosswalk_variables` to create the ",
-            "start of an EML attributes table. See ?crosswalk_variables for ",
-            "help.", call. = FALSE)
-    message("You might want to run EML::eml_validate on the result at ",
-            "this point and fix what validations errors are produced.",
-            " You will commonly need to set `packageId`, `system`, and provide ",
-            "`attributeList` elements for each `dataTable`.")
+      "enough information. Use `crosswalk_variables` to create the ",
+      "start of an EML attributes table. See ?crosswalk_variables for ",
+      "help.",
+      call. = FALSE
+    )
+    message(
+      "You might want to run EML::eml_validate on the result at ",
+      "this point and fix what validations errors are produced.",
+      " You will commonly need to set `packageId`, `system`, ",
+      "and provide `attributeList` elements for each `dataTable`."
+    )
   }
 
   EML::as_emld(out)

@@ -10,9 +10,9 @@ vignette: >
 
 The goal of the `dataspice` package is to make it easier for researchers to create basic, lightweight, and concise metadata files for their datasets. These basic files can then be used to:
 
- -  Make useful information available during analysis.
- -  Create a helpful dataset README webpage.
- -  Convert to more complex metadata formats to aid dataset discovery.
+ - Make useful information available during analysis.
+ - Create a helpful dataset README webpage.
+ - Convert to more complex metadata formats to aid dataset discovery.
 
 The `dataspice` metadata fields are based on [Schema.org](https://schema.org/) and and other, richer metadata standards such as [Ecological Metadata Language](https://eml.ecoinformatics.org/).
 
@@ -24,7 +24,7 @@ To start the user will have one or more datafiles in a common directory. We curr
 
 `create_spice()` reads in the files from that directory and creates a set of template metadata files for the user to populate. These metadata templates will include some data extracted from the user's datafiles, including things like file names and measured variable names to aid the user in populating the metadata files.
 
-Once these are created, the user needs to fill in each template file with the remaining metadata.
+Once these are created, the you need to fill in each template file with the remaining metadata.
 Templates can be filled either:
 
 1. With the integrated [Shiny](https://shiny.rstudio.com/) applications (`edit_attributes()`, `edit_access()`, `edit_creators()`, `edit_biblio()`)

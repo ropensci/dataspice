@@ -103,8 +103,9 @@ that ship with the package:
 
 ``` r
 data_files <- list.files(system.file("example-dataset/", package = "dataspice"),
-                         pattern = ".csv",
-                         full.names = TRUE)
+  pattern = ".csv",
+  full.names = TRUE
+)
 ```
 
 This function assumes that the metadata templates are in a folder called
@@ -120,7 +121,8 @@ to populate the header names
 ``` r
 data_files %>%
   purrr::map(~ prep_attributes(.x, attributes_path),
-             attributes_path = attributes_path)
+    attributes_path = attributes_path
+  )
 ```
 
 The output of `prep_attributes()` has the first two columns filled out:
@@ -323,12 +325,14 @@ library(dataspice)
 # Load an example dataspice JSON that comes installed with the package
 spice <- system.file(
   "examples", "annual-escapement.json",
-  package = "dataspice")
+  package = "dataspice"
+)
 
 # Convert it to EML
 eml_doc <- spice_to_eml(spice)
-#> Warning: variableMeasured not crosswalked to EML because we don't have enough information. Use `crosswalk_variables` to create the start of an EML attributes table. See ?
-#> crosswalk_variables for help.
+#> Warning: variableMeasured not crosswalked to EML because we don't have enough
+#> information. Use `crosswalk_variables` to create the start of an EML attributes
+#> table. See ?crosswalk_variables for help.
 #> You might want to run EML::eml_validate on the result at this point and fix what validations errors are produced. You will commonly need to set `packageId`, `system`, and provide `attributeList` elements for each `dataTable`.
 ```
 
