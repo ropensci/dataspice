@@ -245,6 +245,11 @@ A few existing tools & data standards to help users in specific domains:
 
 ...And others indexed in [Fairsharing.org](https://fairsharing.org) & the [RDA metadata directory](http://rd-alliance.github.io/metadata-directory/standards/).
 
+## Code of Conduct
+
+Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/).
+By contributing to this project, you agree to abide by its terms.
+
 ## Contributors
 
 This package was developed at rOpenSci's 2018 unconf by (in alphabetical order):
