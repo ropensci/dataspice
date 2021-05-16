@@ -1,9 +1,9 @@
 # dataspice
 
 ![CRAN Version](https://www.r-pkg.org/badges/version/dataspice)
-![CI](https://github.com/ropenscilabs/dataspice/workflows/R-CMD-check/badge.svg)
+![CI](https://github.com/ropensci/dataspice/workflows/R-CMD-check/badge.svg)
 [![Codecov test
-coverage](https://codecov.io/gh/ropenscilabs/dataspice/branch/main/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/dataspice?branch=main)
+coverage](https://codecov.io/gh/ropensci/dataspice/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/dataspice?branch=main)
 [![](https://badges.ropensci.org/426_status.svg)](https://github.com/ropensci/software-review/issues/426)
 
 The goal of `dataspice` is to make it easier for researchers to create

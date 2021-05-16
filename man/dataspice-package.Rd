@@ -16,8 +16,8 @@ The goal of 'dataspice' is to make it easier for researchers to
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/ropenscilabs/dataspice}
-  \item Report bugs at \url{https://github.com/ropenscilabs/dataspice/issues}
+  \item \url{https://github.com/ropensci/dataspice}
+  \item Report bugs at \url{https://github.com/ropensci/dataspice/issues}
 }
 
 }

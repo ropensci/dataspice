@@ -19,8 +19,8 @@ Authors@R: c(
     person("Kara", "Woo", role = c("aut"), comment = "https://github.com/karawoo"),
     person("Irene", "Steves", role = c("ctb"), comment = "https://github.com/isteves"))
 License: MIT + file LICENSE
-URL: https://github.com/ropenscilabs/dataspice
-BugReports: https://github.com/ropenscilabs/dataspice/issues
+URL: https://github.com/ropensci/dataspice
+BugReports: https://github.com/ropensci/dataspice/issues
 Encoding: UTF-8
 Language: en-US
 LazyData: true
