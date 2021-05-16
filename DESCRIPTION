@@ -1,5 +1,5 @@
 Package: dataspice
-Version: 1.0.0
+Version: 1.1.0
 Title: Create Lightweight Schema.org Descriptions of Data
 Description: The goal of 'dataspice' is to make it easier for researchers to
   create basic, lightweight, and concise metadata files for their datasets.
