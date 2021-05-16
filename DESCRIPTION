@@ -1,5 +1,5 @@
 Package: dataspice
-Version: 1.0.0
+Version: 1.1.0
 Title: Create Lightweight Schema.org Descriptions of Data
 Description: The goal of 'dataspice' is to make it easier for researchers to
   create basic, lightweight, and concise metadata files for their datasets.
@@ -19,11 +19,10 @@ Authors@R: c(
     person("Kara", "Woo", role = c("aut"), comment = "https://github.com/karawoo"),
     person("Irene", "Steves", role = c("ctb"), comment = "https://github.com/isteves"))
 License: MIT + file LICENSE
-URL: https://github.com/ropenscilabs/dataspice
-BugReports: https://github.com/ropenscilabs/dataspice/issues
+URL: https://github.com/ropensci/dataspice
+BugReports: https://github.com/ropensci/dataspice/issues
 Encoding: UTF-8
 Language: en-US
-LazyData: true
 ByteCompile: true
 RoxygenNote: 7.1.1
 Imports:

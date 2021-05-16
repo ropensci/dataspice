@@ -21,8 +21,8 @@ library(stringr)
 # dataspice
 
 ![CRAN Version](https://www.r-pkg.org/badges/version/dataspice)
-![CI](https://github.com/ropenscilabs/dataspice/workflows/R-CMD-check/badge.svg)
-[![Codecov test coverage](https://codecov.io/gh/ropenscilabs/dataspice/branch/main/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/dataspice?branch=main)
+![CI](https://github.com/ropensci/dataspice/workflows/R-CMD-check/badge.svg)
+[![Codecov test coverage](https://codecov.io/gh/ropensci/dataspice/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/dataspice?branch=main)
 [![](https://badges.ropensci.org/426_status.svg)](https://github.com/ropensci/software-review/issues/426)
 
 The goal of `dataspice` is to make it easier for researchers to create basic, lightweight, and concise metadata files for their datasets by editing the kind of files they're probably most familiar with: CSVs. To spice up their data with a dash of metadata. These metadata files can then be used to:
@@ -244,6 +244,11 @@ A few existing tools & data standards to help users in specific domains:
 * [Minimum Information for Biological and Biomedical Investigations](https://fairsharing.org/collection/MIBBI) (MIBBI)
 
 ...And others indexed in [Fairsharing.org](https://fairsharing.org) & the [RDA metadata directory](http://rd-alliance.github.io/metadata-directory/standards/).
+
+## Code of Conduct
+
+Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/).
+By contributing to this project, you agree to abide by its terms.
 
 ## Contributors
 
