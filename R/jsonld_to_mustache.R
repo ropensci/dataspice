@@ -1,4 +1,4 @@
-#' Parse spatialCoverge section for use in a Leaflet map
+#' Parse spatialCoverage section for use in a Leaflet map
 #'
 #' @param spatialCoverage (list) spatialCoverage section of the JSONLD
 #'
@@ -27,7 +27,7 @@ parse_spatialCoverage <- function(spatialCoverage) {
   json
 }
 
-#' Parse spatialCoverge$geo$box section for use in a Leaflet map
+#' Parse spatialCoverage$geo$box section for use in a Leaflet map
 #'
 #' @param box (list) spatialCoverage$geo$box section of the JSONLD
 #'

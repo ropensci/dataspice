@@ -22,6 +22,7 @@ License: MIT + file LICENSE
 URL: https://github.com/ropenscilabs/dataspice
 BugReports: https://github.com/ropenscilabs/dataspice/issues
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 ByteCompile: true
 RoxygenNote: 7.1.1

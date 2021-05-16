@@ -2,7 +2,7 @@
 % Please edit documentation in R/jsonld_to_mustache.R
 \name{parse_spatialCoverage}
 \alias{parse_spatialCoverage}
-\title{Parse spatialCoverge section for use in a Leaflet map}
+\title{Parse spatialCoverage section for use in a Leaflet map}
 \usage{
 parse_spatialCoverage(spatialCoverage)
 }
@@ -13,5 +13,5 @@ parse_spatialCoverage(spatialCoverage)
 (list) Template-specific variables for Leaflet
 }
 \description{
-Parse spatialCoverge section for use in a Leaflet map
+Parse spatialCoverage section for use in a Leaflet map
 }

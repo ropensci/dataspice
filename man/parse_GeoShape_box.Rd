@@ -2,7 +2,7 @@
 % Please edit documentation in R/jsonld_to_mustache.R
 \name{parse_GeoShape_box}
 \alias{parse_GeoShape_box}
-\title{Parse spatialCoverge$geo$box section for use in a Leaflet map}
+\title{Parse spatialCoverage$geo$box section for use in a Leaflet map}
 \usage{
 parse_GeoShape_box(box)
 }
@@ -13,5 +13,5 @@ parse_GeoShape_box(box)
 (list) Template-specific variables for Leaflet
 }
 \description{
-Parse spatialCoverge$geo$box section for use in a Leaflet map
+Parse spatialCoverage$geo$box section for use in a Leaflet map
 }

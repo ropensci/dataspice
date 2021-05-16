@@ -16,6 +16,14 @@
 #'  filter files for patterns.
 #' @return Updates `access.csv` and writes to `access_path`.
 #' @export
+#' @examples
+#' \dontrun{
+#' # First create the metadata tempaltes
+#' create_spice()
+#'
+#' # Then begin filling them in from your data files
+#' prep_access()
+#' }
 prep_access <- function(data_path = "data",
                         access_path = "data/metadata/access.csv",
                                                  ...) {

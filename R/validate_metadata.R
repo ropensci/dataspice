@@ -7,7 +7,6 @@ validate_biblio <- function(biblio) {
   stopifnot(is.data.frame(biblio))
 
   if (nrow(biblio) <= 0) {
-    print(biblio)
     stop(call. = FALSE,
          "biblio.csv must have at least one row of data")
   }

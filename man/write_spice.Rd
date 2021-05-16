@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_spice.R
 \name{write_spice}
 \alias{write_spice}
-\title{write_spice}
+\title{Write spice}
 \usage{
 write_spice(path = "data/metadata", ...)
 }
@@ -12,8 +12,19 @@ write_spice(path = "data/metadata", ...)
 \item{...}{additional arguments to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}}
 }
 \value{
-a json-ld file at the path specified
+A JSON-LD file at the path specified
 }
 \description{
-write_spice
+Write out your metadata as a dataspice JSON-LD document
+}
+\examples{
+\dontrun{
+# First create your metadata templates
+create_spice()
+
+# Then fill in the template files however you like
+
+# Then write out your dataspice file
+write_spice()
+}
 }

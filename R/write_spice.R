@@ -1,13 +1,25 @@
-#' write_spice
+#' Write spice
+#'
+#' Write out your metadata as a dataspice JSON-LD document
 #'
 #' @param path location of metadata files
 #' @param ... additional arguments to [jsonlite::toJSON()]
 #'
-#' @return a json-ld file at the path specified
+#' @return A JSON-LD file at the path specified
 #' @export
 #' @importFrom readr read_csv
 #' @importFrom purrr pmap
 #' @importFrom dplyr rename
+#' @examples
+#' \dontrun{
+#' # First create your metadata templates
+#' create_spice()
+#'
+#' # Then fill in the template files however you like
+#'
+#' # Then write out your dataspice file
+#' write_spice()
+#' }
 write_spice <- function(path = "data/metadata", ...) {
 
   biblio <- readr::read_csv(

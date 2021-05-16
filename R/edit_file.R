@@ -42,12 +42,7 @@ edit_creators <- function(metadata_dir = file.path("data", "metadata")) {
 
 # Shiny apps for editing dataspice metadata tables
 #' @importFrom dplyr "%>%"
-edit_file <- function(metadata_dir = "data/metadata",
-                      file = c(
-                        "attributes.csv",
-                        "biblio.csv",
-                        "access.csv",
-                        "creators.csv")) {
+edit_file <- function(metadata_dir = "data/metadata", file) {
 
   filepath <- file.path(metadata_dir, file)
 
@@ -56,14 +51,20 @@ edit_file <- function(metadata_dir = "data/metadata",
          call. = FALSE)
   }
 
-  file <- match.arg(file)
+  file_choices <- c(
+    "attributes.csv",
+    "biblio.csv",
+    "access.csv",
+    "creators.csv")
+  file <- match.arg(file, file_choices)
 
   ui <- shiny::shinyUI(
     shiny::fluidPage(
       shiny::titlePanel(paste0("Populate the ", file, " table")),
       shiny::helpText("Interactive application to read in ",
                       shiny::code("dataspice"),
-                      "metadata templates and populate with your own metadata."),
+                      "metadata templates and populate with your own ",
+                      "metadata."),
 
       # Header panel
       shiny::wellPanel(
@@ -82,49 +83,120 @@ edit_file <- function(metadata_dir = "data/metadata",
           if (file == "attributes.csv") {
             list(
               shiny::h4("Variable metadata"),
-              shiny::h6("fileName: The name of the input data file(s). Don't change this."),
-              shiny::h6("variableName: The name of the measured variable. Don't change this."),
-              shiny::h6("description: A written description of the variable measured."),
-              shiny::h6("unitText: The units the variable was measured in."),
-              shiny::helpText("Use", shiny::code("prep_attributes()"), "to extract", shiny::strong("variableName"), " from data files.")
+              shiny::h6(
+                "fileName: The name of the input data file(s). ",
+                "Don't change this."
+              ),
+              shiny::h6(
+                "variableName: The name of the measured variable. ",
+                "Don't change this."
+              ),
+              shiny::h6(
+                "description: A written description of the variable measured."
+              ),
+              shiny::h6(
+                "unitText: The units in which the variable was measured."
+              ),
+              shiny::helpText(
+                "Use",
+                shiny::code("prep_attributes()"),
+                "to extract",
+                shiny::strong("variableName"),
+                " from data files.")
             )
           },
           if (file == "biblio.csv") {
             list(
               shiny::h4("Bibliographic metadata"),
               shiny::h6("title: Title of the dataset(s) described."),
-              shiny::h6("description: Description of the dataset(s) described (aka abstract)."),
-              shiny::h6('datePublished: The date published in ISO 8601 format (YYYY-MM-DD).'),
-              shiny::h6("citation: Citation to a related work, such as a reference publication."),
-              shiny::h6("keywords: Keywords, separated by commas, associated with the dataset(s) described."),
-              shiny::h6("license: License under which (meta)data are published."),
-              shiny::h6("funder: Name of funders associated with the work through which data where generated."),
+              shiny::h6(
+                "description: Description of the dataset(s) ",
+                "described (aka abstract)."
+              ),
+              shiny::h6(
+                "datePublished: The date published in ISO 8601 format ",
+                "(YYYY-MM-DD)."
+              ),
+              shiny::h6(
+                "citation: Citation to a related work, such as a reference ",
+                "publication."
+              ),
+              shiny::h6(
+                "keywords: Keywords, separated by commas, associated with the ",
+                "dataset(s) described."
+              ),
+              shiny::h6(
+                "license: License under which (meta)data are published."
+              ),
+              shiny::h6(
+                "funder: Name of funders associated with the work through ",
+                "which data where generated."
+              ),
 
               shiny::br(),
-              shiny::h4("Spatial Coverage metadata"),
-              shiny::h6("geographicDescription: Description of the area of study. i.e., Crater Lake."),
-              shiny::h6("northBoundCoord: Southern latitudinal boundary of the data coverage area. For example 37.42242."),
-              shiny::h6("eastBoundCoord: Eastern longitudinal boundary of the data coverage area. For example -122.08585."),
-              shiny::h6("southBoundCoord: Northern latitudinal boundary of the data coverage area."),
-              shiny::h6("westBoundCoord: Western longitudinal boundary of the data coverage area."),
-              shiny::h6("wktString: Well-known Text (WKT) formatted representation of geometry. see:",
-                        shiny::a(href = "https://ropensci.org/tutorials/wellknown_tutorial/", "pkg", shiny::code("wellknown")), "for details."),
-              shiny::helpText("To provide a single point to describe the spatial
-                             aspect of the dataset, provide the same coordinates
-                             for east-west and north-south boundary definition."),
+              shiny::h4(
+                "Spatial Coverage metadata"
+              ),
+              shiny::h6(
+                "geographicDescription: Description of the area of study. ",
+                "i.e., Crater Lake."
+              ),
+              shiny::h6(
+                "northBoundCoord: Southern latitudinal boundary of the data ",
+                "coverage area. For example 37.42242."
+              ),
+              shiny::h6(
+                "eastBoundCoord: Eastern longitudinal boundary of the data ",
+                "coverage area. For example -122.08585."
+              ),
+              shiny::h6(
+                "southBoundCoord: Northern latitudinal boundary of the data ",
+                "coverage area."
+              ),
+              shiny::h6(
+                "westBoundCoord: Western longitudinal boundary of the data ",
+                "coverage area."
+              ),
+              shiny::h6(
+                "wktString: Well-known Text (WKT) formatted representation of ",
+                "geometry. see:",
+                shiny::a(
+                  href = "https://ropensci.org/tutorials/wellknown_tutorial/",
+                  "pkg",
+                  shiny::code("wellknown")
+                ),
+                "for details."),
+              shiny::helpText(
+                "To provide a single point to describe the spatial aspect of ",
+                "the dataset, provide the same coordinates for east-west and ",
+                "north-south boundary definition."),
               shiny::br(),
               shiny::h4("Temporal Coverage metadata"),
-              shiny::h6("startDate: The start date of the data temporal coverage in ISO 8601 format (YYYY-MM-DD)."),
-              shiny::h6("endDate: The end date of the data temporal coverage in ISO 8601 format (YYYY-MM-DD)."),
+              shiny::h6(
+                "startDate: The start date of the data temporal ",
+                "coverage in ISO 8601 format (YYYY-MM-DD)."
+              ),
+              shiny::h6(
+                "endDate: The end date of the data temporal coverage ",
+                "in ISO 8601 format (YYYY-MM-DD)."
+              ),
               shiny::br(),
               shiny::plotOutput("bbmap")
             )},
           if (file == "access.csv") {
             list(
-              shiny::h6("fileName: The filename of the input data file(s). Don't change this."),
+              shiny::h6(
+                "fileName: The filename of the input data file(s). ",
+                "Don't change this."
+                ),
               shiny::h6("name: A human readable name for the file."),
-              shiny::h6('contentUrl: A url to where the data is hosted, if applicable'),
-              shiny::h6("encodingFormat: The file format, such as Excel, or CSV")
+              shiny::h6(
+                "contentUrl: A url to where the data is hosted, ",
+                "if applicable"
+              ),
+              shiny::h6(
+                "encodingFormat: The file format, such as Excel, or CSV"
+              )
             )},
           if (file == "creators.csv") {
             list(
@@ -196,8 +268,9 @@ edit_file <- function(metadata_dir = "data/metadata",
                  "button.")
       }else{
         list(shiny::helpText("File saved at path:", shiny::code(filepath)),
-             shiny::helpText("Use", shiny::code(paste0("readr::read_csv('",filepath,"')")) ,
-                      "to read it."))
+             shiny::helpText("Use", shiny::code(
+               paste0("readr::read_csv('",filepath,"')")),
+              "to read it."))
       }
     })
 

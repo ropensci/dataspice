@@ -23,7 +23,8 @@ you're already using \code{dataspice} but need a richer metadata schema.
 # Load an example dataspice JSON that comes installed with the package
 spice <- system.file(
   "examples", "annual-escapement.json",
-  package = "dataspice")
+  package = "dataspice"
+)
 
 # And crosswalk it to EML
 spice_to_eml(spice)
@@ -32,6 +33,7 @@ spice_to_eml(spice)
 myspice <- list(
   name = "My example spice",
   creator = "Me",
-  contact = "Me")
+  contact = "Me"
+)
 spice_to_eml(myspice)
 }

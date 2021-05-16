@@ -61,7 +61,21 @@ prep_attributes <- function(data_path = "data",
   readr::write_csv(attributes, attributes_path)
 }
 
-#' @inherit prep_attributes
+#' Validate file paths
+#'
+#' Helper function to return a set of file paths for use in other functions
+#'
+#' @inheritParams prep_attributes
+#'
+#' @return One or more data file paths
+#' @examples
+#' \dontrun{
+#' # Assuming some data files in "./data"
+#' my_files <- validate_file_paths()
+#'
+#' # If your data files are in `another_folder`
+#' my_files <- validate_file_paths("another_folder")
+#' }
 validate_file_paths <- function(data_path = "data", ...) {
   if(length(data_path) == 1) {
     if(is_dir(data_path)) {

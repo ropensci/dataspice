@@ -30,3 +30,12 @@ helper \code{\link{validate_file_paths}} can be used to create vectors of
 valid file paths that can be checked and then passed as \code{data_path} argument
 to \code{\link{prep_access}}.
 }
+\examples{
+\dontrun{
+# First create the metadata tempaltes
+create_spice()
+
+# Then begin filling them in from your data files
+prep_access()
+}
+}

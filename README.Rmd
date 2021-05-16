@@ -31,11 +31,14 @@ The goal of `dataspice` is to make it easier for researchers to create basic, li
 - Create a helpful dataset README webpage for your data similar to how [pkgdown](https://pkgdown.r-lib.org/) creates websites for R packages.
 - Produce more complex metadata formats for richer description of your datasets and to aid dataset discovery.
 
-Metadata fields are based on [Schema.org/Dataset](https://schema.org/Dataset) and other [metadata standards](https://github.com/ropenscilabs/dataspice#resources) and represent a lowest common denominator which means converting between formats should be relatively straightforward.
+Metadata fields are based on [Schema.org/Dataset](https://schema.org/Dataset) and other [metadata standards](#resources) and represent a lowest common denominator which means converting between formats should be relatively straightforward.
 
 ## Example
 
-A fully worked example can be found [here](https://github.com/amoeba/dataspice-example) and a live preview of the output [here](https://amoeba.github.io/dataspice-example/). An example of how Google sees this can be found [here](https://search.google.com/structured-data/testing-tool/u/0/#url=https%3A%2F%2Famoeba.github.io%2Fdataspice-example%2F).
+An basic example repository for demonstrating what using `dataspice` might look like can be found at [https://github.com/amoeba/dataspice-example](https://github.com/amoeba/dataspice-example). From there, you can also check out a preview of the HTML `dataspice` generates at [https://amoeba.github.io/dataspice-example](https://amoeba.github.io/dataspice-example) and how Google sees it at [https://search.google.com/test/rich-results?url=https%3A%2F%2Famoeba.github.io%2Fdataspice-example%2F
+](https://search.google.com/test/rich-results?url=https%3A%2F%2Famoeba.github.io%2Fdataspice-example%2F).
+
+A much more detailed example has been created by [Anna Krystalli](https://annakrystalli.me) at [https://annakrystalli.me/dataspice-tutorial/](https://annakrystalli.me/dataspice-tutorial/) ([GitHub repo](https://github.com/annakrystalli/dataspice-tutorial)).
 
 ## Installation
 
@@ -81,8 +84,9 @@ To see an example of how `prep_attributes()` works, load the data files that shi
 
 ```{r, eval=FALSE}
 data_files <- list.files(system.file("example-dataset/", package = "dataspice"),
-                         pattern = ".csv",
-                         full.names = TRUE)
+  pattern = ".csv",
+  full.names = TRUE
+)
 ```
 
 This function assumes that the metadata templates are in a folder called `metadata` within a `data` folder.
@@ -96,7 +100,8 @@ Using `purrr::map()`, this function can be applied over multiple files to popula
 ```{r, eval=FALSE, message=FALSE}
 data_files %>%
   purrr::map(~ prep_attributes(.x, attributes_path),
-             attributes_path = attributes_path)
+    attributes_path = attributes_path
+  )
 ```
 
 The output of `prep_attributes()` has the first two columns filled out:
@@ -105,7 +110,9 @@ The output of `prep_attributes()` has the first two columns filled out:
 readr::read_csv(
   system.file(
     "metadata-tables/attributes_prepped.csv",
-    package = "dataspice")) %>%
+    package = "dataspice"
+  )
+) %>%
   head() %>%
   kable()
 ```
@@ -130,13 +137,17 @@ The first few rows of the completed metadata tables in this example will look li
 `access.csv` has one row for each file
 
 ```{r, echo=FALSE, message=FALSE}
-readr::read_csv(system.file("metadata-tables/access.csv", package = "dataspice")) %>% head() %>% kable(format = "markdown")
+readr::read_csv(system.file("metadata-tables/access.csv", package = "dataspice")) %>%
+  head() %>%
+  kable(format = "markdown")
 ```
 
 `attributes.csv` has one row for each variable in each file
 
 ```{r, echo=FALSE, message=FALSE}
-readr::read_csv(system.file("metadata-tables/attributes.csv", package = "dataspice")) %>% head() %>% kable(format = "markdown")
+readr::read_csv(system.file("metadata-tables/attributes.csv", package = "dataspice")) %>%
+  head() %>%
+  kable(format = "markdown")
 ```
 
 `biblio.csv` is one row containing descriptors including spatial and temporal coverage
@@ -180,7 +191,8 @@ library(dataspice)
 # Load an example dataspice JSON that comes installed with the package
 spice <- system.file(
   "examples", "annual-escapement.json",
-  package = "dataspice")
+  package = "dataspice"
+)
 
 # Convert it to EML
 eml_doc <- spice_to_eml(spice)

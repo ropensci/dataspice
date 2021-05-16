@@ -68,3 +68,11 @@ test_that("full-folder-attributes-prepped-correctly", {
   expect_equal(nrow(attributes), length(full_attributes))
 })
 
+test_that("check_extensions warns on unhandled file extensions", {
+  expect_warning(check_extensions(c("bar.ncdf")))
+})
+
+test_that("check_file_exists warns on missing files", {
+  expect_warning(check_extensions(c("bar.ncdf")))
+})
+
