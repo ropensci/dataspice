@@ -35,7 +35,7 @@ Metadata fields are based on [Schema.org/Dataset](https://schema.org/Dataset) an
 
 ## Example
 
-An basic example repository for demonstrating what using `dataspice` might look like can be found at [https://github.com/amoeba/dataspice-example](https://github.com/amoeba/dataspice-example). From there, you can also check out a preview of the HTML `dataspice` generates at [https://amoeba.github.io/dataspice-example](https://amoeba.github.io/dataspice-example) and how Google sees it at [https://search.google.com/test/rich-results?url=https%3A%2F%2Famoeba.github.io%2Fdataspice-example%2F
+An basic example repository for demonstrating what using `dataspice` might look like can be found at [https://github.com/amoeba/dataspice-example](https://github.com/amoeba/dataspice-example/). From there, you can also check out a preview of the HTML `dataspice` generates at [https://amoeba.github.io/dataspice-example](https://amoeba.github.io/dataspice-example/) and how Google sees it at [https://search.google.com/test/rich-results?url=https%3A%2F%2Famoeba.github.io%2Fdataspice-example%2F
 ](https://search.google.com/test/rich-results?url=https%3A%2F%2Famoeba.github.io%2Fdataspice-example%2F).
 
 A much more detailed example has been created by [Anna Krystalli](https://annakrystalli.me) at [https://annakrystalli.me/dataspice-tutorial/](https://annakrystalli.me/dataspice-tutorial/) ([GitHub repo](https://github.com/annakrystalli/dataspice-tutorial)).
@@ -175,7 +175,7 @@ Here's a view of the `dataspice.json` file of the example data:
 
 ### Build website
 
-* `build_site()` creates a bare-bones `index.html` file in the repository `docs` folder with a simple view of the dataset with the metadata and an interactive map. For example, this [repository](https://github.com/amoeba/dataspice-example) results in this [website](https://amoeba.github.io/dataspice-example/)
+* `build_site()` creates a bare-bones `index.html` file in the repository `docs` folder with a simple view of the dataset with the metadata and an interactive map. For example, this [repository](https://github.com/amoeba/dataspice-example/) results in this [website](https://amoeba.github.io/dataspice-example/)
 
 ![dataspice-website](man/figures/website_example.png)
 
