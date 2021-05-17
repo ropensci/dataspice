@@ -1,11 +1,3 @@
----
-output:
-  md_document:
-    variant: gfm
----
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # dataspice
 
 ![CRAN Version](https://www.r-pkg.org/badges/version/dataspice)
