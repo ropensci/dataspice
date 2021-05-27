@@ -42,7 +42,7 @@
 #' prep_attributes(data_path)
 #' }
 prep_attributes <- function(data_path = "data",
-                            attributes_path = "data/metadata/attributes.csv",
+                            attributes_path = file.path("data", "metadata", "attributes.csv"),
                             ...) {
   # list and validate file paths
   file_paths <- validate_file_paths(data_path, ...)

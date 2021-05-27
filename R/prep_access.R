@@ -25,7 +25,7 @@
 #' prep_access()
 #' }
 prep_access <- function(data_path = "data",
-                        access_path = "data/metadata/access.csv",
+                        access_path = file.path("data", "metadata", "access.csv"),
                                                  ...) {
   # check and load attributes
   if(!file.exists(access_path)) {
