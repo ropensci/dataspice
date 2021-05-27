@@ -4,7 +4,7 @@
 \alias{edit_attributes}
 \title{Shiny apps for editing dataspice metadata tables}
 \usage{
-edit_attributes(metadata_dir = "data/metadata")
+edit_attributes(metadata_dir = file.path("data", "metadata"))
 }
 \arguments{
 \item{metadata_dir}{the directory containing the \code{dataspice} metadata \code{.csv}

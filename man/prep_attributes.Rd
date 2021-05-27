@@ -6,7 +6,7 @@
 \usage{
 prep_attributes(
   data_path = "data",
-  attributes_path = "data/metadata/attributes.csv",
+  attributes_path = file.path("data", "metadata", "attributes.csv"),
   ...
 )
 }
