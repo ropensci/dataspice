@@ -22,7 +22,7 @@ build_site <- function(path = "data/metadata/dataspice.json",
   data <- jsonld_to_mustache(path)
 
     # Make docs dir if not present
-  if (!file.exists("docs")) {
+  if (dirname(out_path) == 'docs' & !file.exists("docs")) {
     dir.create("docs")
   }
 
