@@ -4,7 +4,7 @@
 \alias{write_spice}
 \title{Write spice}
 \usage{
-write_spice(path = "data/metadata", ...)
+write_spice(path = file.path("data", "metadata"), ...)
 }
 \arguments{
 \item{path}{location of metadata files}

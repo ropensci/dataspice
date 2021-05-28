@@ -5,9 +5,9 @@
 \title{Build a dataspice site}
 \usage{
 build_site(
-  path = "data/metadata/dataspice.json",
+  path = file.path("data", "metadata", "dataspice.json"),
   template_path = system.file("template.html5", package = "dataspice"),
-  out_path = "docs/index.html"
+  out_path = file.path("docs", "index.html")
 )
 }
 \arguments{

@@ -20,7 +20,7 @@
 #' # Then write out your dataspice file
 #' write_spice()
 #' }
-write_spice <- function(path = "data/metadata", ...) {
+write_spice <- function(path = file.path("data", "metadata"), ...) {
 
   biblio <- readr::read_csv(
     file.path(path, "biblio.csv"),
