@@ -28,3 +28,23 @@ test_that("build_site creates a docs dir if needed", {
 
   expect_true(dir.exists("docs"))
 })
+
+test_that("build_site accepts and creates a difference dir when provided", {
+  out_dir <- tempdir()
+  old_wd <- getwd()
+  on.exit(setwd(old_wd))
+  setwd(out_dir)
+
+  indexdir <- "public"
+  indexpath <- file.path(indexdir, "index.html")
+
+  build_site(
+    path = system.file(
+      file.path("examples", "annual-escapement.json"),
+      package = "dataspice"
+    ),
+    out_path = indexpath
+  )
+
+  expect_true(dir.exists(indexdir))
+})

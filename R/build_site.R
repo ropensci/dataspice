@@ -21,9 +21,10 @@ build_site <- function(path = file.path("data", "metadata", "dataspice.json"),
                        out_path = file.path("docs", "index.html")) {
   data <- jsonld_to_mustache(path)
 
-    # Make docs dir if not present
-  if (dirname(out_path) == 'docs' & !file.exists("docs")) {
-    dir.create("docs")
+  out_dir <- dirname(out_path)
+
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir, recursive = TRUE)
   }
 
   output <- whisker::whisker.render(
