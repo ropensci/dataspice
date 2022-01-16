@@ -17,6 +17,7 @@ valueReference = NULL,
  disambiguatingDescription = NULL,
  description = NULL,
  alternateName = NULL,
+ dataType = NULL,                        
  additionalType = NULL) {
 Filter(Negate(is.null),
  list(
@@ -39,4 +40,5 @@ identifier = identifier,
 disambiguatingDescription = disambiguatingDescription,
 description = description,
 alternateName = alternateName,
+dataType = dataType,
 additionalType = additionalType))}
