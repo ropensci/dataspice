@@ -245,7 +245,8 @@ edit_file <- function(metadata_dir = file.path("data", "metadata"), file) {
     output$hot <- rhandsontable::renderRHandsontable({
       rhandsontable::rhandsontable(dat,
                     useTypes = TRUE,
-                    stretchH = "all") %>%
+                    stretch = 'all',
+                    colWidths = '250px') %>%
         rhandsontable::hot_context_menu(allowColEdit = FALSE)
     })
 
