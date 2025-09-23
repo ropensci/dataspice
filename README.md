@@ -3,7 +3,7 @@
 ![CRAN Version](https://www.r-pkg.org/badges/version/dataspice)
 ![CI](https://github.com/ropensci/dataspice/workflows/R-CMD-check/badge.svg)
 [![Codecov test
-coverage](https://codecov.io/gh/ropensci/dataspice/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/dataspice?branch=main)
+coverage](https://codecov.io/gh/ropensci/dataspice/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/dataspice?branch=main)
 [![](https://badges.ropensci.org/426_status.svg)](https://github.com/ropensci/software-review/issues/426)
 
 The goal of `dataspice` is to make it easier for researchers to create
@@ -80,7 +80,7 @@ The template files are:
 The user needs to fill in the details of the four template files. These
 csv files can be directly modified, or they can be edited using either
 the associated helper function and/or
-[Shiny](https://shiny.rstudio.com/) app.
+[Shiny](https://shiny.posit.co/) app.
 
 #### Helper functions
 
@@ -229,7 +229,7 @@ NA
 #### Shiny helper apps
 
 Each of the metadata templates can be edited interactively using a
-[Shiny](https://shiny.rstudio.com/) app:
+[Shiny](https://shiny.posit.co/) app:
 
 -   `edit_attributes()` opens a Shiny app that can be used to edit
     `attributes.csv`. The Shiny app displays the current `attributes`
@@ -336,17 +336,17 @@ record which is totally fine:
 
 ``` r
 library(EML)
-#> 
+#>
 #> Attaching package: 'EML'
 #> The following object is masked from 'package:magrittr':
-#> 
+#>
 #>     set_attributes
 
 eml_validate(eml_doc)
 #> [1] FALSE
 #> attr(,"errors")
-#> [1] "Element '{https://eml.ecoinformatics.org/eml-2.2.0}eml': The attribute 'packageId' is required but missing."                                  
-#> [2] "Element '{https://eml.ecoinformatics.org/eml-2.2.0}eml': The attribute 'system' is required but missing."                                     
+#> [1] "Element '{https://eml.ecoinformatics.org/eml-2.2.0}eml': The attribute 'packageId' is required but missing."
+#> [2] "Element '{https://eml.ecoinformatics.org/eml-2.2.0}eml': The attribute 'system' is required but missing."
 #> [3] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."
 #> [4] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."
 #> [5] "Element 'dataTable': Missing child element(s). Expected is one of ( physical, coverage, methods, additionalInfo, annotation, attributeList )."

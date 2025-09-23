@@ -27,7 +27,7 @@ To start the user will have one or more datafiles in a common directory. We curr
 Once these are created, you need to fill in each template file with the remaining metadata.
 Templates can be filled either:
 
-1. With the integrated [Shiny](https://shiny.rstudio.com/) applications (`edit_attributes()`, `edit_access()`, `edit_creators()`, `edit_biblio()`)
+1. With the integrated [Shiny](https://shiny.posit.co/) applications (`edit_attributes()`, `edit_access()`, `edit_creators()`, `edit_biblio()`)
 2. Manually (i.e., with a text or CSV/spreadsheet editor)
 
 For new and even advanced users, option (1) is probably easier and more friendly.

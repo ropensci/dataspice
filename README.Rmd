@@ -72,7 +72,7 @@ The template files are:
 
 ### Fill in templates
 
-The user needs to fill in the details of the four template files. These csv files can be directly modified, or they can be edited using either the associated helper function and/or [Shiny](https://shiny.rstudio.com/) app.
+The user needs to fill in the details of the four template files. These csv files can be directly modified, or they can be edited using either the associated helper function and/or [Shiny](https://shiny.posit.co/) app.
 
 #### Helper functions
 
@@ -119,7 +119,7 @@ readr::read_csv(
 
 #### Shiny helper apps
 
-Each of the metadata templates can be edited interactively using a [Shiny](https://shiny.rstudio.com/) app:
+Each of the metadata templates can be edited interactively using a [Shiny](https://shiny.posit.co/) app:
 
 * `edit_attributes()` opens a Shiny app that can be used to edit `attributes.csv`. The Shiny app displays the current `attributes` table and lets the user fill in an informative description and units (e.g. meters, hectares, etc.) for each variable.
 * `edit_access()` opens an editable version of `access.csv`

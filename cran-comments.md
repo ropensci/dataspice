@@ -1,15 +1,15 @@
 # cran-comments
 
-This is a minor release submission and is largely made of changes to documentation and tests.
+This is a patch release submission and primarily updates tests to be compliant with new dependency versions.
 
 ## Test environments
 
 On GitHub Actions:
 
-- windows (release)
+- Windows (release)
 - macOS (release)
-- ubuntu-20.04 (release)
-- ubuntu-20.04 (devel)
+- ubuntu-24.04 (release)
+- ubuntu-24.04 (devel)
 
 ## R CMD check
 

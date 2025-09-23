@@ -1,5 +1,9 @@
 # NEWS
 
+## dataspice 1.1.1
+
+This release updates dataspice's tests to be compatible with the upcoming stringr 1.6.0 release.
+
 ## dataspice 1.1.0
 
 This release is for the version of the package after going through [rOpenSci Onboarding](https://github.com/ropensci/software-review/issues/426).
