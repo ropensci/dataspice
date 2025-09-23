@@ -76,6 +76,7 @@ write_spice <- function(path = file.path("data", "metadata"), ...) {
     creator = authors,
     description = biblio$description,
     datePublished = biblio$datePublished,
+    citation = biblio$citation,
     keywords = biblio_keywords,
     funder = biblio$funder,
     temporalCoverage = paste(biblio$startDate, biblio$endDate, sep="/"),

@@ -62,6 +62,10 @@
         <td>{{datePublished}}</td>
       </tr>
       <tr>
+        <td>Citation</td>
+        <td>{{citation}}</td>
+      </tr>
+      <tr>
         <td>Keywords</td>
         <td>
           <ul>
