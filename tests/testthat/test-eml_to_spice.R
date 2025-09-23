@@ -39,8 +39,8 @@ test_that("Attributes tabular format matches EML", {
   formatStrings <- EML::eml_get(eml, "formatString")
   unitText <- paste(standardUnits, customUnits, formatStrings, collapse = " ")
 
-  expect_true(all(stringr::str_detect(unitText, eml_attributes$unitText),
-                  na.rm = TRUE))
+  pattern <- eml_attributes$unitText[!is.na(eml_attributes$unitText)]
+  expect_true(all(stringr::str_detect(unitText, pattern)))
 
   #description = description + missing vals
 })
@@ -146,4 +146,3 @@ test_that("eml_to_spice returns a list of tibbles", {
   tbl_lgl <- spice_ex %>% purrr::map(class) %>% purrr::map(~"tbl" %in% .)
   expect_true(all(unlist(tbl_lgl)))
 })
-
