@@ -10,7 +10,7 @@ test_that("build_site generates an html file", {
   )
 
   expect_true(file.exists(out_file))
-  expect_equal(readLines(out_file)[1], "<html>")
+  expect_equal(readLines(out_file)[1], "<!DOCTYPE html>")
 })
 
 test_that("build_site creates a docs dir if needed", {
