@@ -28,8 +28,8 @@ and longitude graticules and an Equal Earth locator inset.}
 \item{static_map_method}{(character) Projection for the static map. Defaults
 to the built-in extent-aware method \code{"default"}. Other choices are
 \code{"crsuggest"}, \code{"projwiz"}, \code{"equalearth"}, or a custom
-PROJ string beginning with \code{"+proj="}. The default requires no
-projection-selection package.}
+PROJ string beginning with \code{"+proj="}. The default requires no projection-
+selection package.}
 }
 \value{
 Nothing. Creates/overwrites \code{out_path}.
