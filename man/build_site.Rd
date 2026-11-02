@@ -37,11 +37,6 @@ Nothing. Creates/overwrites \code{out_path}.
 \description{
 Build a dataspice site
 }
-\section{Lifecycle}{
-
-\code{static_map} is experimental. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-}
-
 \examples{
 \dontrun{
 # Create JSON+LD from a set of metadata templates
