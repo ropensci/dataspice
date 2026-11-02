@@ -4,6 +4,12 @@ utils::globalVariables(c("x", "y", "group", "label"))
 parse_static_map_box <- function(box) {
   if (inherits(box, "static_map_bbox")) return(box)
 
+  if (!is.character(box) || length(box) != 1L || is.na(box) ||
+      !nzchar(trimws(box))) {
+    stop("`box` must contain four finite values: north east south west.",
+         call. = FALSE)
+  }
+
   coordinates <- as.numeric(strsplit(trimws(box), "\\s+")[[1]])
   if (length(coordinates) != 4L || any(!is.finite(coordinates))) {
     stop("`box` must contain four finite values: north east south west.",

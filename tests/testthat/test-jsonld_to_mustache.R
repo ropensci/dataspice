@@ -17,6 +17,7 @@ test_that("spatial coverage properties are converted to table rows", {
                c("Name", "Geo / Type", "Geo / Box"))
   expect_equal(vapply(box$spatialCoverageRows, `[[`, character(1), "value"),
                c("Study area", "GeoShape", "-10 -20 10 20"))
+  expect_equal(box$mapbox, "-10 -20 10 20")
   expect_equal(box$mappolystring, "[[ -10, -20], [ 10, -20], [ 10, 20], [ -10, 20]]")
 
   coordinates <- parse_spatialCoverage(list(geo = list(

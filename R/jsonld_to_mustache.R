@@ -22,6 +22,7 @@ parse_spatialCoverage <- function(spatialCoverage) {
       stringr::str_split(stringr::str_trim(spatialCoverage$geo$box), "[[:space:]]+")[[1]]))
     if (length(coordinates) == 4L && all(is.finite(coordinates))) {
       map <- parse_GeoShape_box(spatialCoverage$geo$box)
+      result$mapbox <- map$mapbox
       result$mapcenterstring <- map$mapcenterstring
       result$mappolystring <- map$mappolystring
     }
