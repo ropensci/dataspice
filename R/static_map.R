@@ -185,10 +185,20 @@ static_map_data_uri <- function(box, method = "default",
   coverage <- data.frame(box_xy, group = 1)
 
   step <- 10
-  longitude_lines <- seq(ceiling(west / step) * step,
-                         floor(east_continuous / step) * step, by = step)
-  latitude_lines <- seq(ceiling(south / step) * step,
-                        floor(north / step) * step, by = step)
+  longitude_start <- ceiling(west / step) * step
+  longitude_end <- floor(east_continuous / step) * step
+  latitude_start <- ceiling(south / step) * step
+  latitude_end <- floor(north / step) * step
+  longitude_lines <- if (longitude_start <= longitude_end) {
+    seq(longitude_start, longitude_end, by = step)
+  } else {
+    numeric()
+  }
+  latitude_lines <- if (latitude_start <= latitude_end) {
+    seq(latitude_start, latitude_end, by = step)
+  } else {
+    numeric()
+  }
   graticule <- c(
     lapply(seq_along(longitude_lines), function(i) {
       data.frame(lon = rep(longitude_lines[i], 100),
@@ -222,7 +232,7 @@ static_map_data_uri <- function(box, method = "default",
   }
   longitude_labels <- data.frame(
     lon = longitude_lines,
-    lat = south,
+    lat = rep(south, length(longitude_lines)),
     label = vapply(longitude_lines, format_degrees, character(1),
                    axis = "longitude")
   )
@@ -232,7 +242,7 @@ static_map_data_uri <- function(box, method = "default",
   longitude_labels$y <- longitude_label_xy$y
 
   latitude_labels <- data.frame(
-    lon = west,
+    lon = rep(west, length(latitude_lines)),
     lat = latitude_lines,
     label = vapply(latitude_lines, format_degrees, character(1),
                    axis = "latitude")

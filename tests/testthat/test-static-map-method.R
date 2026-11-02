@@ -25,6 +25,11 @@ test_that("static-map projection methods return usable CRS definitions", {
   expect_false(is.na(sf::st_crs(custom)))
 })
 
+test_that("static maps render when the extent has no 10-degree graticule lines", {
+  uri <- static_map_data_uri("45.7 -122.6 45.4 -122.8")
+  expect_match(uri, "^data:image/png;base64,")
+})
+
 test_that("default method uses the built-in extent-aware projection rules", {
   alaska <- static_map_crs(
     "default", west = -171, east_continuous = -131, south = 47,
