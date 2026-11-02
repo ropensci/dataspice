@@ -9,7 +9,7 @@ write_spice(path = file.path("data", "metadata"), ...)
 \arguments{
 \item{path}{location of metadata files}
 
-\item{...}{additional arguments to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}}
+\item{...}{additional arguments to \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
 }
 \value{
 A JSON-LD file at the path specified

@@ -6,12 +6,7 @@
 \alias{dataspice-package}
 \title{dataspice: Create Lightweight Schema.org Descriptions of Data}
 \description{
-The goal of 'dataspice' is to make it easier for researchers to
-  create basic, lightweight, and concise metadata files for their datasets.
-  These basic files can then be used to make useful information available during
-  analysis, create a helpful dataset "README" webpage, and produce more complex
-  metadata formats to aid dataset discovery. Metadata fields are based on
-  the 'Schema.org' and 'Ecological Metadata Language' standards.
+The goal of 'dataspice' is to make it easier for researchers to create basic, lightweight, and concise metadata files for their datasets. These basic files can then be used to make useful information available during analysis, create a helpful dataset "README" webpage, and produce more complex metadata formats to aid dataset discovery. Metadata fields are based on the 'Schema.org' and 'Ecological Metadata Language' standards.
 }
 \seealso{
 Useful links:
@@ -26,6 +21,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Bryce Mecum \email{brycemecum@gmail.com} (https://github.com/amoeba)
   \item Carl Boettiger (https://github.com/cboettig)
   \item Scott Chamberlain (https://github.com/sckott)
   \item Auriel Fournier (https://github.com/aurielfournier)

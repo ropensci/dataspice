@@ -1,5 +1,7 @@
 set shell := ["bash", "-cu"]
 
+default: report
+
 version := `awk '$1 == "Version:" { print $2 }' DESCRIPTION`
 
 # Bootstrap the locked environment and install this local package.

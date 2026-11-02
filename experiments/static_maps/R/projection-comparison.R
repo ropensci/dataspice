@@ -1,7 +1,7 @@
 # Generate a self-contained tabbed HTML comparison for the bbox test cases.
 # Projection and figure helpers are scoped within the generator so package load
 # itself has no side effects.
-utils::globalVariables(c("x", "y", "group"))
+utils::globalVariables(c("x", "y", "group", "label", "xend", "yend"))
 
 generate_projection_comparison <- function(
     output_file = file.path("reports", "projection-method-comparison.html"),
@@ -19,6 +19,18 @@ generate_projection_comparison <- function(
 
   bbox_cases <- utils::read.csv(bbox_file, stringsAsFactors = FALSE)
   world_data <- ggplot2::map_data("world")
+  world_groups <- split(world_data, world_data$group)
+  world_polygons <- lapply(world_groups, function(part) {
+    coords <- as.matrix(part[c("long", "lat")])
+    if (nrow(coords) < 4L) return(NULL)
+    if (!all(coords[1, ] == coords[nrow(coords), ])) {
+      coords <- rbind(coords, coords[1, ])
+    }
+    sf::st_polygon(list(coords))
+  })
+  world_polygons <- world_polygons[!vapply(world_polygons, is.null, logical(1))]
+  world_sfc <- sf::st_sfc(world_polygons, crs = 4326)
+  clipped_world_cache <- new.env(parent = emptyenv())
   extent_count <- nrow(bbox_cases)
   extent_id_range <- paste0(bbox_cases$example_id[1], "\u2013",
                             bbox_cases$example_id[extent_count])
@@ -41,6 +53,61 @@ generate_projection_comparison <- function(
 
   shift_longitude <- function(lon, center) {
     center + ((lon - center + 180) %% 360) - 180
+  }
+
+  format_degrees <- function(value, axis) {
+    if (axis == "longitude") {
+      value <- ((value + 180) %% 360) - 180
+      suffix <- if (value < 0) "W" else if (value > 0) "E" else ""
+    } else {
+      suffix <- if (value < 0) "S" else if (value > 0) "N" else ""
+    }
+    paste0(format(abs(value), trim = TRUE, scientific = FALSE), "\u00b0", suffix)
+  }
+
+  clip_world_to_extent <- function(extent) {
+    bounds <- unname(extent[c("west", "east", "south", "north")])
+    key <- paste(format(bounds, digits = 12), collapse = ":")
+    if (exists(key, envir = clipped_world_cache, inherits = FALSE)) {
+      return(get(key, envir = clipped_world_cache, inherits = FALSE))
+    }
+
+    masks <- list()
+    west <- unname(extent["west"])
+    east <- unname(extent["east"])
+    south <- unname(extent["south"])
+    north <- unname(extent["north"])
+    cursor <- west
+    while (cursor < east - 1e-9) {
+      wrap <- floor((cursor + 180) / 360)
+      edge <- min(east, 180 + 360 * wrap)
+      left <- cursor - 360 * wrap
+      right <- edge - 360 * wrap
+      ring <- rbind(c(left, south), c(right, south), c(right, north),
+                    c(left, north), c(left, south))
+      masks[[length(masks) + 1L]] <- sf::st_polygon(list(ring))
+      cursor <- edge
+    }
+    mask <- sf::st_union(sf::st_sfc(masks, crs = 4326))
+    clipped <- suppressWarnings(sf::st_intersection(world_sfc, mask))
+    clipped <- suppressWarnings(
+      sf::st_collection_extract(clipped, "POLYGON", warn = FALSE))
+    assign(key, clipped, envir = clipped_world_cache)
+    clipped
+  }
+
+  project_clipped_world <- function(extent, center, crs) {
+    clipped <- clip_world_to_extent(extent)
+    coords <- sf::st_coordinates(clipped)
+    if (!nrow(coords)) {
+      return(data.frame(x = numeric(), y = numeric(), group = integer()))
+    }
+    group_cols <- grep("^L[0-9]+$", colnames(coords), value = TRUE)
+    group <- apply(coords[, group_cols, drop = FALSE], 1, paste,
+                   collapse = "_")
+    xy <- project_xy(shift_longitude(coords[, "X"], center),
+                     coords[, "Y"], crs)
+    data.frame(x = xy$x, y = xy$y, group = group)
   }
 
   method_crs <- function(method, row, extent) {
@@ -85,9 +152,12 @@ generate_projection_comparison <- function(
         select_west <- -span / 2
         select_east <- span / 2
       }
-      projection <- projWiz::proj_region(
-        c(xmin = select_west, xmax = select_east,
-          ymin = south, ymax = north), property = "Equal area")
+      projection <- NULL
+      utils::capture.output(suppressMessages(
+        projection <- projWiz::proj_region(
+          c(xmin = select_west, xmax = select_east,
+            ymin = south, ymax = north), property = "Equal area")
+      ))
       selected <- as.character(projection)[1]
       selected <- sub("\\+lon_0=[^ ]+", paste0("+lon_0=", center_lon), selected)
       if (!grepl("\\+lon_0=", selected)) {
@@ -99,17 +169,33 @@ generate_projection_comparison <- function(
     }
 
     if (method == "custom") {
-      # Extent-aware rule set: polar/global views use Equal Earth; compact extents
-      # use local LAEA; broad east-west mid-latitude regions use Albers; otherwise
-      # use LAEA centered on the bbox. Thresholds are explicit prototype choices.
+      # Extent-aware rule set: single-hemisphere polar extents use LAEA centered
+      # on the relevant pole; broad non-polar extents use Equal Earth; compact
+      # extents use local LAEA; wide mid-latitude regions use Albers. Thresholds
+      # are explicit prototype choices.
       width_km <- 111.195 * span * max(0.05, cos(center_lat * pi / 180))
       height_km <- 111.195 * latspan
       ratio <- width_km / height_km
-      if (span >= 160 || north >= 90 || south <= -90 || abs(center_lat) >= 88) {
+      polar_lat <- if (north >= 75 && south > -75) {
+        90
+      } else if (south <= -75 && north < 75) {
+        -90
+      } else if (abs(center_lat) >= 75) {
+        if (center_lat > 0) 90 else -90
+      } else {
+        NA_real_
+      }
+      if (!is.na(polar_lat)) {
+        selected <- sprintf(
+          paste0("+proj=laea +lon_0=%.8f +lat_0=%.8f ",
+                 "+datum=WGS84 +units=m +no_defs +over"),
+          shift_longitude(center_lon, 0), polar_lat)
+        why <- sprintf("Polar extent \u2192 LAEA centered at %.0f\u00b0", polar_lat)
+      } else if (span >= 160 || (north >= 75 && south <= -75)) {
         selected <- sprintf(
           "+proj=eqearth +lon_0=%.8f +datum=WGS84 +units=m +no_defs +over",
           shift_longitude(center_lon, 0))
-        why <- "Global/near-polar extent \u2192 Equal Earth"
+        why <- "Broad global extent \u2192 Equal Earth"
       } else if (max(width_km, height_km) < 1000) {
         selected <- sprintf(
           "+proj=laea +lon_0=%.8f +lat_0=%.8f +datum=WGS84 +units=m +no_defs +over",
@@ -168,41 +254,109 @@ generate_projection_comparison <- function(
     extent <- bbox_extent(row)
     choice <- method_crs(method, row, extent)
     center <- extent["center_lon"]
-    world <- world_data
-    world$lon <- shift_longitude(world$long, center)
-    # The world polygons are split at +/-180. After longitude wrapping,
-    # split any remaining discontinuities so projected fills do not bridge the
-    # whole map across the antimeridian.
-    segment <- stats::ave(world$lon, world$group, FUN = function(x) {
-      cumsum(c(0L, as.integer(abs(diff(x)) > 180))) + 1L
-    })
-    world$group <- interaction(world$group, segment, drop = TRUE)
-    world$lat0 <- world$lat
-    world_xy <- project_xy(world$lon, world$lat0, choice$crs)
-    world$x <- world_xy$x; world$y <- world_xy$y
+    world <- project_clipped_world(extent, center, choice$crs)
     box <- sampled_box(extent)
     box_xy <- project_xy(shift_longitude(box$lon, center), box$lat, choice$crs)
     box$x <- box_xy$x; box$y <- box_xy$y
     grid <- make_graticule(extent)
     grid_xy <- project_xy(shift_longitude(grid$lon, center), grid$lat, choice$crs)
     grid$x <- grid_xy$x; grid$y <- grid_xy$y
+
+    lon_lines <- seq(ceiling(extent["west"] / 10) * 10,
+                     floor(extent["east"] / 10) * 10, by = 10)
+    lat_lines <- seq(ceiling(extent["south"] / 10) * 10,
+                     floor(extent["north"] / 10) * 10, by = 10)
+    tick_height <- diff(range(c(box$y, grid$y), finite = TRUE)) * 0.02
+    tick_width <- diff(range(c(box$x, grid$x), finite = TRUE)) * 0.02
+
+    label_step <- if (extent["east"] - extent["west"] >= 300) {
+      60
+    } else if (extent["east"] - extent["west"] >= 80) {
+      30
+    } else if (extent["east"] - extent["west"] >= 60) {
+      20
+    } else {
+      10
+    }
+    lon_label_lines <- lon_lines[lon_lines %% label_step == 0]
+    lon_label_text <- vapply(
+      lon_label_lines, format_degrees, character(1), axis = "longitude")
+    keep_label <- !duplicated(lon_label_text)
+    lon_label_lines <- lon_label_lines[keep_label]
+    lon_label_text <- lon_label_text[keep_label]
+
+    lon_tick_xy <- project_xy(
+      shift_longitude(lon_lines, center), rep(extent["south"], length(lon_lines)),
+      choice$crs)
+    longitude_ticks <- data.frame(
+      x = lon_tick_xy$x, y = lon_tick_xy$y - tick_height / 2,
+      xend = lon_tick_xy$x, yend = lon_tick_xy$y + tick_height / 2
+    )
+    lon_label_xy <- project_xy(
+      shift_longitude(lon_label_lines, center),
+      rep(extent["south"], length(lon_label_lines)), choice$crs)
+    longitude_labels <- data.frame(
+      x = lon_label_xy$x, y = lon_label_xy$y, label = lon_label_text
+    )
+
+    # At an exact pole, all longitudes converge to one point and a latitude
+    # label would collide with the meridian labels there.
+    lat_label_lines <- lat_lines[abs(lat_lines) < 90]
+    lat_label_xy <- project_xy(
+      shift_longitude(rep(extent["west"], length(lat_label_lines)), center),
+      lat_label_lines, choice$crs)
+    latitude_labels <- data.frame(
+      x = lat_label_xy$x, y = lat_label_xy$y,
+      label = vapply(lat_label_lines, format_degrees, character(1),
+                     axis = "latitude")
+    )
+    latitude_ticks <- data.frame(
+      x = lat_label_xy$x - tick_width / 2, y = lat_label_xy$y,
+      xend = lat_label_xy$x + tick_width / 2, yend = lat_label_xy$y
+    )
+
     allx <- c(box$x, grid$x); ally <- c(box$y, grid$y)
     dx <- diff(range(allx, finite = TRUE)); dy <- diff(range(ally, finite = TRUE))
-    lim <- c(xmin = min(allx, na.rm = TRUE) - dx * 0.08,
+    left_pad <- max(dx * 0.16, dy * 0.20)
+    bottom_pad <- max(dy * 0.08, dx * 0.12)
+    lim <- c(xmin = min(allx, na.rm = TRUE) - left_pad,
              xmax = max(allx, na.rm = TRUE) + dx * 0.08,
-             ymin = min(ally, na.rm = TRUE) - dy * 0.08,
+             ymin = min(ally, na.rm = TRUE) - bottom_pad,
              ymax = max(ally, na.rm = TRUE) + dy * 0.08)
     p <- ggplot2::ggplot(world, ggplot2::aes(x, y, group = group)) +
       ggplot2::geom_polygon(fill = "grey92", colour = "grey65", linewidth = 0.2,
                             na.rm = TRUE) +
-      ggplot2::geom_path(data = grid,
-                         ggplot2::aes(x, y, group = group), inherit.aes = FALSE,
-                         colour = "#9aa4aa", linewidth = 0.35, alpha = 0.8,
-                         na.rm = TRUE) +
       ggplot2::geom_polygon(data = box,
                             ggplot2::aes(x, y, group = group), inherit.aes = FALSE,
                             fill = "#e6550d", alpha = 0.22,
                             colour = "#a63603", linewidth = 0.7, na.rm = TRUE) +
+      ggplot2::geom_path(data = grid,
+                         ggplot2::aes(x, y, group = group), inherit.aes = FALSE,
+                         colour = "#59666d", linewidth = 0.45, alpha = 0.9,
+                         na.rm = TRUE) +
+      ggplot2::geom_segment(
+        data = longitude_ticks,
+        ggplot2::aes(x = x, y = y, xend = xend, yend = yend),
+        inherit.aes = FALSE, colour = "black", linewidth = 0.8,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_segment(
+        data = latitude_ticks,
+        ggplot2::aes(x = x, y = y, xend = xend, yend = yend),
+        inherit.aes = FALSE, colour = "black", linewidth = 0.8,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_text(
+        data = longitude_labels,
+        ggplot2::aes(x, y, label = label), inherit.aes = FALSE,
+        colour = "black", size = 6, vjust = 1.5, na.rm = TRUE
+      ) +
+      ggplot2::geom_text(
+        data = latitude_labels,
+        ggplot2::aes(x, y, label = label), inherit.aes = FALSE,
+        colour = "black", size = 6, hjust = 1.15, vjust = 1,
+        na.rm = TRUE
+      ) +
       ggplot2::coord_fixed(xlim = lim[c("xmin", "xmax")],
                            ylim = lim[c("ymin", "ymax")], expand = FALSE) +
       ggplot2::theme_void() +
@@ -277,13 +431,14 @@ generate_projection_comparison <- function(
     "Equal Earth projection for the main map, centered on the bounding-box midpoint.",
     "The first projected CRS returned by crsuggest::suggest_crs() for the extent; the EPSG suggestion is used as returned.",
     "projWiz::proj_region(property = 'Equal area'); dateline extents are recentered for selection, and unsupported extents are marked with an Equal Earth fallback.",
-    "Prototype rule: Equal Earth for global/near-polar extents; local LAEA below 1,000 km; Albers equal-area conic for wide mid-latitude extents; local LAEA otherwise.")
+    "Prototype rule: pole-centered LAEA for single-hemisphere polar extents; Equal Earth for broad non-polar global extents; local LAEA below 1,000 km; Albers equal-area conic for wide mid-latitude extents; local LAEA otherwise.")
   method_table <- paste(vapply(seq_along(methods), function(j) sprintf(
     '<tr><th scope="row" class="identifier">%s</th><td>%s</td><td>%s</td></tr>',
     method_ids[j], htmltools::htmlEscape(method_labels[j]),
     htmltools::htmlEscape(method_descriptions[j])), character(1)), collapse = "")
   method_views <- vector("list", nrow(bbox_cases))
   grid_thumbs <- character(nrow(bbox_cases))
+  grid_projections <- character(nrow(bbox_cases))
   locator_uris <- character(nrow(bbox_cases))
 
   for (i in seq_len(nrow(bbox_cases))) {
@@ -298,16 +453,24 @@ generate_projection_comparison <- function(
     for (i in seq_len(nrow(bbox_cases))) {
       row <- bbox_cases[i, ]
       map_path <- tempfile(fileext = ".png")
-      map_uri <- NULL
-      note <- ""
-      tryCatch({
+      rendered <- tryCatch({
         result <- render_method_map(row, method, map_path)
-        map_uri <<- encode_png(map_path)
-        note <<- result$choice$detail
+        list(uri = encode_png(map_path), note = result$choice$detail,
+             crs = result$choice$crs)
       }, error = function(e) {
-        note <<- paste("Projection method could not handle this extent:",
-                       conditionMessage(e))
+        list(uri = NULL, note = paste(
+          "Projection method could not handle this extent:",
+          conditionMessage(e)), crs = NULL)
       })
+      map_uri <- rendered$uri
+      note <- rendered$note
+      projection_label <- if (is.null(map_uri)) {
+        "Equal Earth (visualization fallback)"
+      } else if (method == "crsuggest") {
+        note
+      } else {
+        rendered$crs
+      }
       if (file.exists(map_path)) unlink(map_path)
       if (is.null(map_uri)) {
         # Keep every case visible while clearly identifying unsupported extents.
@@ -317,26 +480,32 @@ generate_projection_comparison <- function(
         unlink(fallback)
         note <- paste(note, "Displayed map uses an Equal Earth visualization fallback.")
       }
-      if (j == 1) grid_thumbs[i] <- map_uri
+      if (j == 1) {
+        grid_thumbs[i] <- map_uri
+        grid_projections[i] <- projection_label
+      }
       active <- if (j == 1) " active" else ""
       method_views[[i]][j] <- sprintf(
-        '<div class="method-view%s" data-method="%s"><h3>Figure %s \u00b7 %s \u2014 %s</h3><p class="method-note">%s</p><div class="map-wrap"><img class="main-map" src="%s" alt="%s map for %s"><img class="inset" src="%s" alt="Equal Earth world locator"></div></div>',
+        '<div class="method-view%s" data-method="%s"><h3>Figure %s \u00b7 %s \u2014 %s</h3><p class="method-note">%s</p><div class="map-wrap"><img class="main-map" data-projection="%s" src="%s" alt="%s map for %s"><img class="inset" src="%s" alt="Equal Earth world locator"></div></div>',
         active, method_ids[j], row$example_id, method_ids[j],
-        htmltools::htmlEscape(method_labels[j]), htmltools::htmlEscape(note), map_uri,
+        htmltools::htmlEscape(method_labels[j]), htmltools::htmlEscape(note),
+        htmltools::htmlEscape(projection_label), map_uri,
         paste("Figure", row$example_id, method_ids[j], method_labels[j]),
         htmltools::htmlEscape(row$label), locator_uris[i])
     }
   }
 
   method_buttons <- vapply(seq_along(methods), function(j) sprintf(
-    '<button class="method-tab%s" data-method="%s"><span class="identifier">%s</span> %s</button>',
-    if (j == 1) " active" else "", method_ids[j], method_ids[j],
+    '<button class="method-tab%s" data-method="%s" data-label="%s"><span class="identifier">%s</span> %s</button>',
+    if (j == 1) " active" else "", method_ids[j],
+    htmltools::htmlEscape(method_labels[j]), method_ids[j],
     htmltools::htmlEscape(method_labels[j])), character(1))
 
   example_grid <- vapply(seq_len(nrow(bbox_cases)), function(i) sprintf(
-    '<a class="grid-item" href="#example-%s"><img data-example-id="%s" src="%s" alt=""><span><b class="identifier">%s</b> %s</span></a>',
+    '<a class="grid-item" href="#example-%s"><img data-example-id="%s" src="%s" alt=""><span><b class="identifier">%s</b> %s</span><span class="grid-projection">%s</span></a>',
     bbox_cases$example_id[i], bbox_cases$example_id[i], grid_thumbs[i],
-    bbox_cases$example_id[i], htmltools::htmlEscape(bbox_cases$label[i])), character(1))
+    bbox_cases$example_id[i], htmltools::htmlEscape(bbox_cases$label[i]),
+    htmltools::htmlEscape(grid_projections[i])), character(1))
 
   details <- vapply(seq_len(nrow(bbox_cases)), function(i) sprintf(
     '<article class="case-detail" id="example-%s" data-example-id="%s"><h2><span class="identifier">%s</span> \u2014 %s</h2><p class="bbox"><code>north=%s, east=%s, south=%s, west=%s</code> \u00b7 center %s\u00b0 \u00b7 %s</p><a class="back-to-grid" href="#example-grid">Back to example grid \u2191</a>%s</article>',
@@ -350,10 +519,10 @@ generate_projection_comparison <- function(
   # and all detailed figures. Grid links use native fragment navigation for Back.
   page <- paste0(
     '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Static map projection comparison for dataspice</title><style>',
-    'body{font:16px/1.55 system-ui,-apple-system,sans-serif;max-width:1120px;margin:2rem auto;padding:0 1.25rem;color:#20252b}h1,h2,h3{line-height:1.25;color:#152536}h1{font-size:2rem;margin-bottom:.2rem}.subtitle{color:#53616d;margin-top:0}.report-section{margin:1.8rem 0}.abstract{border-left:4px solid #315a78;background:#f4f7f9;padding:.9rem 1.1rem}.abstract h2{font-size:1.1rem;margin:.1rem 0 .35rem}.method-table{width:100%;border-collapse:collapse;margin:1rem 0}.method-table th,.method-table td{border:1px solid #d4dbe0;padding:.6rem .7rem;text-align:left;vertical-align:top}.method-table thead{background:#edf1f4}.method-table tbody th{white-space:nowrap}.identifier{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;color:#254f70}.example-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem;margin:1rem 0 2rem}.grid-item{display:flex;flex-direction:column;gap:.35rem;padding:.55rem;border:1px solid #d4dbe0;border-radius:4px;color:inherit;text-decoration:none;background:#fff}.grid-item:hover,.grid-item:focus{border-color:#567;background:#f7f9fb}.grid-item img{width:100%;height:120px;object-fit:contain;background:#fff}.grid-item span{font-size:.9rem}.method-tabs{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:.35rem;border-bottom:1px solid #aeb9c2;margin:1rem 0;padding:.5rem 0;background:#fff}.method-tab{border:1px solid #aeb9c2;background:#f3f5f6;border-radius:3px;padding:.55rem .8rem;cursor:pointer}.method-tab.active{background:#e5edf3;border-color:#315a78;font-weight:700}.method-view{display:none}.method-view.active{display:block}.case-detail{scroll-margin-top:5rem;padding:1.2rem 0 1.8rem;border-bottom:1px solid #d4dbe0}.case-detail h2{font-size:1.35rem;margin:.25rem 0}.method-view h3{font-size:1.05rem;font-weight:600;margin:.9rem 0 .4rem}.bbox,.figure-note{color:#45525e}.back-to-grid{display:inline-block;margin:.2rem 0 .7rem;font-size:.9rem}.method-note{font-size:.93rem;color:#333;background:#f4f6f7;padding:.65rem;border-left:3px solid #789;overflow-wrap:anywhere}.map-wrap{position:relative;min-height:420px;display:flex;align-items:center;justify-content:center;border:1px solid #d4dbe0;background:white}.main-map{max-width:100%;max-height:480px;width:auto;height:auto}.inset{position:absolute;right:.5rem;top:.5rem;width:24%;max-width:260px;border:1px solid #777;background:white}.small-note{font-size:.9rem;color:#53616d}.method-tabs-label{font-weight:600;margin-bottom:.2rem}',
+    'body{font:16px/1.55 system-ui,-apple-system,sans-serif;max-width:1120px;margin:2rem auto;padding:0 1.25rem;color:#20252b}h1,h2,h3{line-height:1.25;color:#152536}h1{font-size:2rem;margin-bottom:.2rem}.subtitle{color:#53616d;margin-top:0}.report-section{margin:1.8rem 0}.abstract{border-left:4px solid #315a78;background:#f4f7f9;padding:.9rem 1.1rem}.abstract h2{font-size:1.1rem;margin:.1rem 0 .35rem}.method-table{width:100%;border-collapse:collapse;margin:1rem 0}.method-table th,.method-table td{border:1px solid #d4dbe0;padding:.6rem .7rem;text-align:left;vertical-align:top}.method-table thead{background:#edf1f4}.method-table tbody th{white-space:nowrap}.identifier{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;color:#254f70}.example-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem;margin:1rem 0 2rem}.grid-item{display:flex;flex-direction:column;gap:.35rem;padding:.55rem;border:1px solid #d4dbe0;border-radius:4px;color:inherit;text-decoration:none;background:#fff}.grid-item:hover,.grid-item:focus{border-color:#567;background:#f7f9fb}.grid-item img{width:100%;height:120px;object-fit:contain;background:#fff}.grid-item span{font-size:.9rem}.grid-projection{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem!important;overflow-wrap:anywhere;color:#53616d}.method-tabs{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:.35rem;border-bottom:1px solid #aeb9c2;margin:1rem 0;padding:.5rem 0;background:#fff}.method-tab{border:1px solid #aeb9c2;background:#f3f5f6;border-radius:3px;padding:.55rem .8rem;cursor:pointer}.method-tab.active{background:#e5edf3;border-color:#315a78;font-weight:700}.method-view{display:none}.method-view.active{display:block}.case-detail{scroll-margin-top:5rem;padding:1.2rem 0 1.8rem;border-bottom:1px solid #d4dbe0}.case-detail h2{font-size:1.35rem;margin:.25rem 0}.method-view h3{font-size:1.05rem;font-weight:600;margin:.9rem 0 .4rem}.bbox,.figure-note{color:#45525e}.back-to-grid{display:inline-block;margin:.2rem 0 .7rem;font-size:.9rem}.method-note{font-size:.93rem;color:#333;background:#f4f6f7;padding:.65rem;border-left:3px solid #789;overflow-wrap:anywhere}.map-wrap{position:relative;min-height:420px;display:flex;align-items:center;justify-content:center;border:1px solid #d4dbe0;background:white}.main-map{max-width:100%;max-height:480px;width:auto;height:auto}.inset{position:absolute;right:.5rem;top:.5rem;width:24%;max-width:260px;border:1px solid #777;background:white}.small-note{font-size:.9rem;color:#53616d}.method-tabs-label{font-weight:600;margin-bottom:.2rem}',
     paste0('</style></head><body><header><h1>Static map projection comparison</h1><p class="subtitle">Dataspice metadata reports \u00b7 Projection-selection prototype \u00b7 ', extent_count, ' test extents</p></header>'),
     sprintf('<section class="abstract"><h2>Abstract</h2><p>Archived dataspice HTML reports can lose their interactive maps when browser restrictions or OpenStreetMap tile-policy blocks prevent Leaflet tiles from loading. This report compares four static-map projection strategies across %d bounding boxes, using a shared map background, coverage outline, graticule, and Equal Earth locator inset. This research addresses <a href="https://github.com/ropensci/dataspice/issues/123">dataspice issue #123</a>; map images are embedded for offline viewing.</p></section>', extent_count),
-    paste0('<section class="report-section"><h2>Methods</h2><p>Every main map uses the same world geometry, coverage box, and 10\u00b0 latitude/longitude graticule; the inset uses a fixed Equal Earth view. The selector below changes the grid previews and all detailed maps together. IDs <span class="identifier">', extent_id_range, '</span> identify test extents; <span class="identifier">m01\u2013m04</span> identify projection methods.</p><table class="method-table"><thead><tr><th>ID</th><th>Method</th><th>Selection rule</th></tr></thead><tbody>'),
+    paste0('<section class="report-section"><h2>Methods</h2><p>Every main map uses the same world geometry and coverage box, plus a 10\u00b0 latitude/longitude graticule with labeled ticks, with longitude labels thinned for broad extents and exact-pole labels omitted where meridians converge; the inset uses a fixed Equal Earth view. The selector below changes the grid previews and all detailed maps together. IDs <span class="identifier">', extent_id_range, '</span> identify test extents; <span class="identifier">m01\u2013m04</span> identify projection methods.</p><table class="method-table"><thead><tr><th>ID</th><th>Method</th><th>Selection rule</th></tr></thead><tbody>'),
     method_table,
     '</tbody></table></section>',
     '<p class="method-tabs-label">Select main-map projection method</p><nav class="method-tabs" aria-label="Projection method">',
@@ -362,7 +531,7 @@ generate_projection_comparison <- function(
     paste(example_grid, collapse = "\n"), '</div></section>',
     '<section class="report-section"><h2>Detailed figures</h2>',
     paste(details, collapse = "\n"), '</section>',
-    '<script>document.querySelectorAll(".method-tab").forEach(b=>b.addEventListener("click",()=>{const method=b.dataset.method;document.querySelectorAll(".method-tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".method-view").forEach(x=>x.classList.toggle("active",x.dataset.method===method));b.classList.add("active");document.querySelectorAll(".grid-item img").forEach(img=>{const detail=Array.from(document.querySelectorAll(".case-detail")).find(x=>x.dataset.exampleId===img.dataset.exampleId);const view=Array.from(detail.querySelectorAll(".method-view")).find(x=>x.dataset.method===method);img.src=view.querySelector(".main-map").src})}));</script>',
+    '<script>document.querySelectorAll(".method-tab").forEach(b=>b.addEventListener("click",()=>{const method=b.dataset.method;document.querySelectorAll(".method-tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".method-view").forEach(x=>x.classList.toggle("active",x.dataset.method===method));b.classList.add("active");document.querySelectorAll(".grid-item").forEach(item=>{const img=item.querySelector("img");const detail=Array.from(document.querySelectorAll(".case-detail")).find(x=>x.dataset.exampleId===img.dataset.exampleId);const view=Array.from(detail.querySelectorAll(".method-view")).find(x=>x.dataset.method===method);const map=view.querySelector(".main-map");img.src=map.src;item.querySelector(".grid-projection").textContent=map.dataset.projection})}));</script>',
     '</body></html>')
   dir.create(dirname(output_file), recursive = TRUE, showWarnings = FALSE)
   writeLines(page, output_file)

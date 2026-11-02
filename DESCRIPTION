@@ -24,7 +24,6 @@ BugReports: https://github.com/ropensci/dataspice/issues
 Encoding: UTF-8
 Language: en-US
 ByteCompile: true
-RoxygenNote: 7.1.1
 Imports:
     purrr,
     EML,
@@ -42,12 +41,19 @@ Imports:
     ggplot2,
     magrittr
 Suggests:
-    testthat,
+    base64enc,
+    crsuggest,
     kableExtra,
     knitr,
+    listviewer,
+    maps,
+    projWiz,
     rmarkdown,
     servr,
-    listviewer,
-    maps
+    sf,
+    testthat
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
+Remotes:
+    sToney239/projWiz
+Config/roxygen2/version: 8.1.0

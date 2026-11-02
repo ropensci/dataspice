@@ -13,13 +13,19 @@ export(prep_attributes)
 export(serve_site)
 export(spice_to_eml)
 export(write_spice)
-importFrom(dplyr,"%>%")
-importFrom(dplyr,rename)
+importFrom(dplyr,
+  "%>%",
+  rename
+)
 importFrom(magrittr,"%>%")
-importFrom(purrr,discard)
-importFrom(purrr,pmap)
-importFrom(readr,read_csv)
-importFrom(readr,write_csv)
+importFrom(purrr,
+  discard,
+  pmap
+)
+importFrom(readr,
+  read_csv,
+  write_csv
+)
 importFrom(stats,setNames)
 importFrom(tibble,enframe)
 importFrom(tidyr,spread)
