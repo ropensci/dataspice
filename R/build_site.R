@@ -7,12 +7,13 @@
 #' to. Defaults to `docs/index.html`.
 #' @param static_map (logical) Use a self-contained static map image instead of
 #'  the default Leaflet map. Defaults to `FALSE`. The image includes latitude
-#'  and longitude graticules and an Equal Earth locator inset.
+#'  and longitude graticules and an Equal Earth locator inset. This argument is
+#'  experimental and may change.
 #' @param static_map_method (character) Projection for the static map. Defaults
 #'  to the built-in extent-aware method `"default"`. Other choices are
 #'  `"crsuggest"`, `"projwiz"`, `"equalearth"`, or a custom
-#'  PROJ string beginning with `"+proj="`. The default requires no projection-
-#'  selection package.
+#'  PROJ string beginning with `"+proj="`. This argument is experimental and may
+#'  change.
 #'
 #' @return Nothing. Creates/overwrites `out_path`.
 #' @export
