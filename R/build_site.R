@@ -14,9 +14,6 @@
 #'  PROJ string beginning with `"+proj="`. The default requires no projection-
 #'  selection package.
 #'
-#' @section Lifecycle:
-#' `static_map` is experimental. `r lifecycle::badge("experimental")`
-#'
 #' @return Nothing. Creates/overwrites `out_path`.
 #' @export
 #'
