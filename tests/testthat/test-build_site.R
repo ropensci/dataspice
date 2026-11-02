@@ -39,6 +39,25 @@ test_that("build_site can create a self-contained static map", {
   ))
 })
 
+test_that("build_site preserves case in custom PROJ strings", {
+  out_file <- tempfile()
+  build_site(
+    path = system.file(
+      file.path("examples", "annual-escapement.json"),
+      package = "dataspice"
+    ),
+    out_path = out_file,
+    static_map = TRUE,
+    static_map_method = paste(
+      "+proj=laea +lat_0=62.5 +lon_0=-151 +datum=NAD83",
+      "+units=m +no_defs"
+    )
+  )
+
+  html <- paste(readLines(out_file), collapse = "\\n")
+  expect_match(html, '<img id="map" src="data:image/png;base64,')
+})
+
 test_that("build_site creates a docs dir if needed", {
   out_dir <- tempdir()
   old_wd <- getwd()

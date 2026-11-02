@@ -36,10 +36,13 @@ build_site <- function(
   stopifnot(is.logical(static_map))
   stopifnot(is.character(static_map_method))
 
-  static_map_method <- tolower(trimws(static_map_method))
-  if (!static_map_method %in% c(
+  static_map_method <- trimws(static_map_method)
+  method_key <- tolower(static_map_method)
+  if (method_key %in% c(
     "default", "crsuggest", "projwiz", "equalearth"
-  ) && !startsWith(static_map_method, "+proj=")) {
+  )) {
+    static_map_method <- method_key
+  } else if (!startsWith(method_key, "+proj=")) {
     stop(
       "`static_map_method` must be 'default', 'crsuggest', ",
       "'projwiz', 'equalearth', or a PROJ string beginning with '+proj='.",
