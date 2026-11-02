@@ -99,7 +99,16 @@
     </table>
 
     <h3>Spatial</h3>
-    <pre><code>{{ geographicCoverage }}</code></pre>
+    <table class="listing">
+      <tbody>
+        {{#spatialCoverageRows}}
+        <tr>
+          <td>{{label}}</td>
+          <td>{{value}}</td>
+        </tr>
+        {{/spatialCoverageRows}}
+      </tbody>
+    </table>
     <div id="map"></div>
 
     <h2>Attributes</h2>
