@@ -79,7 +79,11 @@ build_site <- function(
   data <- jsonld_to_mustache(path)
   bbox <- NULL
   if (static_map) {
-    if (isTRUE(data$isgeopoints)) {
+    geo_type <- data$spatialCoverage$geo$type
+    if (is.null(geo_type)) {
+      geo_type <- data$spatialCoverage$geo$`@type`
+    }
+    if (identical(geo_type, "GeoPoints")) {
       stop(
         paste0(
           "`static_map = TRUE` requires a four-coordinate GeoShape box; ",
