@@ -40,6 +40,10 @@ test_that("build_site can create a self-contained static map", {
 })
 
 test_that("build_site preserves case in custom PROJ strings", {
+  skip_if_not_installed("base64enc")
+  skip_if_not_installed("maps")
+  skip_if_not_installed("sf")
+
   out_file <- tempfile()
   build_site(
     path = system.file(
