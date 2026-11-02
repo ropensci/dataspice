@@ -8,9 +8,11 @@
 #' @param static_map (logical) Use a self-contained static map image instead of
 #'  the default Leaflet map. Defaults to `FALSE`. The image includes latitude
 #'  and longitude graticules and an Equal Earth locator inset.
-#' @param static_map_method (character) Projection for the static map: one of
-#'  `"crsuggest"` (Default), `"projwiz"`, or `"equalearth"` or a custom
-#'  PROJ string beginning with `"+proj="`.
+#' @param static_map_method (character) Projection for the static map. Defaults
+#'  to the built-in extent-aware method `"default"`. Other choices are
+#'  `"crsuggest"`, `"projwiz"`, `"equalearth"`, or a custom
+#'  PROJ string beginning with `"+proj="`. The default requires no projection-
+#'  selection package.
 #'
 #' @section Lifecycle:
 #' `static_map` is experimental. `r lifecycle::badge("experimental")`
@@ -29,18 +31,18 @@ build_site <- function(
   template_path = system.file("template.html5", package = "dataspice"),
   out_path = file.path("docs", "index.html"),
   static_map = FALSE,
-  static_map_method = "crsuggest"
+  static_map_method = "default"
 ) {
   stopifnot(is.logical(static_map))
   stopifnot(is.character(static_map_method))
 
   static_map_method <- tolower(trimws(static_map_method))
-  if (static_map_method %in% c("crsuggest", "projwiz", "equalearth")) {
-    static_map_method <- static_map_method
-  } else if (!startsWith(static_map_method, "+proj=")) {
+  if (!static_map_method %in% c(
+    "default", "crsuggest", "projwiz", "equalearth"
+  ) && !startsWith(static_map_method, "+proj=")) {
     stop(
-      "`static_map_method` must be 'crsuggest', 'projwiz', ",
-      "'equalearth', or a PROJ string beginning with '+proj='.",
+      "`static_map_method` must be 'default', 'crsuggest', ",
+      "'projwiz', 'equalearth', or a PROJ string beginning with '+proj='.",
       call. = FALSE
     )
   }

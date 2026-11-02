@@ -27,6 +27,52 @@ static_map_crs <- function(method, west, east_continuous, south, north,
       center))
   }
 
+  if (identical(method, "default")) {
+    center_lat <- (south + north) / 2
+    lat_span <- north - south
+    width_km <- 111.195 * span * max(0.05, cos(center_lat * pi / 180))
+    height_km <- 111.195 * lat_span
+    ratio <- width_km / height_km
+
+    polar_lat <- if (north >= 75 && south > -75) {
+      90
+    } else if (south <= -75 && north < 75) {
+      -90
+    } else if (abs(center_lat) >= 75) {
+      if (center_lat > 0) 90 else -90
+    } else {
+      NA_real_
+    }
+    if (!is.na(polar_lat)) {
+      return(sprintf(
+        paste0("+proj=laea +lon_0=%.8f +lat_0=%.8f ",
+               "+datum=WGS84 +units=m +no_defs +over"),
+        center, polar_lat))
+    }
+    if (span >= 160 || (north >= 75 && south <= -75)) {
+      return(sprintf(
+        "+proj=eqearth +lon_0=%.8f +datum=WGS84 +units=m +no_defs +over",
+        center))
+    }
+    if (max(width_km, height_km) < 1000) {
+      return(sprintf(
+        paste0("+proj=laea +lon_0=%.8f +lat_0=%.8f ",
+               "+datum=WGS84 +units=m +no_defs +over"),
+        center, center_lat))
+    }
+    if (ratio >= 1.25 && abs(center_lat) < 75 &&
+        !(south < 0 && north > 0)) {
+      return(sprintf(
+        paste0("+proj=aea +lon_0=%.8f +lat_0=%.8f +lat_1=%.8f ",
+               "+lat_2=%.8f +datum=WGS84 +units=m +no_defs +over"),
+        center, center_lat, south + lat_span / 6, north - lat_span / 6))
+    }
+    return(sprintf(
+      paste0("+proj=laea +lon_0=%.8f +lat_0=%.8f ",
+             "+datum=WGS84 +units=m +no_defs +over"),
+      center, center_lat))
+  }
+
   if (startsWith(method, "+proj=")) {
     if (is.na(sf::st_crs(method))) {
       stop("`static_map_method` is not a valid PROJ string.", call. = FALSE)
@@ -86,7 +132,7 @@ static_map_crs <- function(method, west, east_continuous, south, north,
   stop("Unknown static-map projection method: ", method, call. = FALSE)
 }
 
-static_map_data_uri <- function(box, method = "equalearth",
+static_map_data_uri <- function(box, method = "default",
                                 width = 8, height = 5, dpi = 110) {
   coordinates <- as.numeric(strsplit(trimws(box), "\\s+")[[1]])
   if (length(coordinates) != 4L || any(!is.finite(coordinates))) {

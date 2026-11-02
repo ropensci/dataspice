@@ -9,7 +9,7 @@ build_site(
   template_path = system.file("template.html5", package = "dataspice"),
   out_path = file.path("docs", "index.html"),
   static_map = FALSE,
-  static_map_method = "crsuggest"
+  static_map_method = "default"
 )
 }
 \arguments{
@@ -25,9 +25,11 @@ to. Defaults to \code{docs/index.html}.}
 the default Leaflet map. Defaults to \code{FALSE}. The image includes latitude
 and longitude graticules and an Equal Earth locator inset.}
 
-\item{static_map_method}{(character) Projection for the static map: one of
-\code{"crsuggest"} (Default), \code{"projwiz"}, or \code{"equalearth"} or a custom
-PROJ string beginning with \code{"+proj="}.}
+\item{static_map_method}{(character) Projection for the static map. Defaults
+to the built-in extent-aware method \code{"default"}. Other choices are
+\code{"crsuggest"}, \code{"projwiz"}, \code{"equalearth"}, or a custom
+PROJ string beginning with \code{"+proj="}. The default requires no
+projection-selection package.}
 }
 \value{
 Nothing. Creates/overwrites \code{out_path}.
