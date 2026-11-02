@@ -45,7 +45,6 @@ Suggests:
     crsuggest,
     kableExtra,
     knitr,
-    lifecycle,
     listviewer,
     maps,
     projWiz,
