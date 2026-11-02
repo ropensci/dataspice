@@ -79,6 +79,18 @@ build_site <- function(
   }
 
   data <- jsonld_to_mustache(path)
+  if (static_map) {
+    mapbox_tokens <- strsplit(trimws(data$mapbox), "\\s+")[[1]]
+    if (length(mapbox_tokens) != 4L) {
+      stop(
+        paste0(
+          "`static_map = TRUE` requires a four-coordinate GeoShape box; ",
+          "GeoPoints coverage cannot be rendered as a static map."
+        ),
+        call. = FALSE
+      )
+    }
+  }
   data$staticmap <- static_map
   if (static_map) {
     data$staticmapdatauri <- static_map_data_uri(
