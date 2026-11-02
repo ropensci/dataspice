@@ -79,9 +79,9 @@ build_site <- function(
   }
 
   data <- jsonld_to_mustache(path)
+  bbox <- NULL
   if (static_map) {
-    mapbox_tokens <- strsplit(trimws(data$mapbox), "\\s+")[[1]]
-    if (length(mapbox_tokens) != 4L) {
+    if (isTRUE(data$isgeopoints)) {
       stop(
         paste0(
           "`static_map = TRUE` requires a four-coordinate GeoShape box; ",
@@ -90,11 +90,12 @@ build_site <- function(
         call. = FALSE
       )
     }
+    bbox <- parse_static_map_box(data$mapbox)
   }
   data$staticmap <- static_map
   if (static_map) {
     data$staticmapdatauri <- static_map_data_uri(
-      data$mapbox,
+      bbox,
       method = static_map_method
     )
     place_name <- data$spatialCoverage$name
@@ -107,7 +108,6 @@ build_site <- function(
       place_name <- data$name
     }
 
-    box <- as.numeric(strsplit(trimws(data$mapbox), "\\s+")[[1]])
     format_latitude <- function(value) {
       paste0(
         format(abs(value), trim = TRUE, scientific = FALSE),
@@ -122,22 +122,22 @@ build_site <- function(
         if (value < 0) "W" else "E"
       )
     }
-    longitude_range <- if (box[4] <= box[2]) {
-      paste(format_longitude(box[4]), "to", format_longitude(box[2]))
+    longitude_range <- if (bbox$west <= bbox$east) {
+      paste(format_longitude(bbox$west), "to", format_longitude(bbox$east))
     } else {
       paste(
-        format_longitude(box[4]),
+        format_longitude(bbox$west),
         "eastward across the antimeridian to",
-        format_longitude(box[2])
+        format_longitude(bbox$east)
       )
     }
     data$staticmapalt <- paste0(
       "Map of ",
       place_name,
       ", covering ",
-      format_latitude(box[3]),
+      format_latitude(bbox$south),
       " to ",
-      format_latitude(box[1]),
+      format_latitude(bbox$north),
       " and ",
       longitude_range,
       "."

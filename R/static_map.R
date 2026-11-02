@@ -1,6 +1,40 @@
 # Transform longitude/latitude coordinate pairs using sf/PROJ.
 utils::globalVariables(c("x", "y", "group", "label"))
 
+parse_static_map_box <- function(box) {
+  if (inherits(box, "static_map_bbox")) return(box)
+
+  coordinates <- as.numeric(strsplit(trimws(box), "\\s+")[[1]])
+  if (length(coordinates) != 4L || any(!is.finite(coordinates))) {
+    stop("`box` must contain four finite values: north east south west.",
+         call. = FALSE)
+  }
+
+  north <- coordinates[1]
+  east <- coordinates[2]
+  south <- coordinates[3]
+  west <- coordinates[4]
+  if (north <= south || north > 90 || south < -90 ||
+      any(c(east, west) < -180 | c(east, west) > 180)) {
+    stop("`box` must have valid latitude and longitude bounds.", call. = FALSE)
+  }
+
+  span <- if (east < west) east + 360 - west else east - west
+  if (span <= 0 || span > 360) {
+    stop("`box` must have a positive longitude span no greater than 360 degrees.",
+         call. = FALSE)
+  }
+  structure(list(
+    north = north,
+    east = east,
+    south = south,
+    west = west,
+    span = span,
+    east_continuous = west + span,
+    center = ((west + span / 2 + 180) %% 360) - 180
+  ), class = "static_map_bbox")
+}
+
 project_map_coordinates <- function(lon, lat, crs) {
   x <- rep(NA_real_, length(lon))
   y <- rep(NA_real_, length(lat))
@@ -134,28 +168,14 @@ static_map_crs <- function(method, west, east_continuous, south, north,
 
 static_map_data_uri <- function(box, method = "default",
                                 width = 8, height = 5, dpi = 110) {
-  coordinates <- as.numeric(strsplit(trimws(box), "\\s+")[[1]])
-  if (length(coordinates) != 4L || any(!is.finite(coordinates))) {
-    stop("`box` must contain four finite values: north east south west.",
-         call. = FALSE)
-  }
-
-  north <- coordinates[1]
-  east <- coordinates[2]
-  south <- coordinates[3]
-  west <- coordinates[4]
-  if (north <= south || north > 90 || south < -90 ||
-      any(c(east, west) < -180 | c(east, west) > 180)) {
-    stop("`box` must have valid latitude and longitude bounds.", call. = FALSE)
-  }
-
-  span <- if (east < west) east + 360 - west else east - west
-  if (span <= 0 || span > 360) {
-    stop("`box` must have a positive longitude span no greater than 360 degrees.",
-         call. = FALSE)
-  }
-  east_continuous <- west + span
-  center <- ((west + span / 2 + 180) %% 360) - 180
+  bbox <- parse_static_map_box(box)
+  north <- bbox$north
+  east <- bbox$east
+  south <- bbox$south
+  west <- bbox$west
+  span <- bbox$span
+  east_continuous <- bbox$east_continuous
+  center <- bbox$center
   shift_longitude <- function(lon) {
     center + ((lon - center + 180) %% 360) - 180
   }
