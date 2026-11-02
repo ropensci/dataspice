@@ -1,6 +1,6 @@
 # cran-comments
 
-This is a patch release submission and primarily updates tests to be compliant with new dependency versions.
+This is a minor release that adds a new argument to an existing function.
 
 ## Test environments
 
