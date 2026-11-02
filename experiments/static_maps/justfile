@@ -1,0 +1,32 @@
+set shell := ["bash", "-cu"]
+
+version := `awk '$1 == "Version:" { print $2 }' DESCRIPTION`
+
+# Bootstrap the locked environment and install this local package.
+setup:
+    Rscript -e 'renv::restore()'
+    Rscript -e 'pak::pak(".")'
+
+# Install/update the local package into the renv library.
+install:
+    Rscript -e 'pak::pak(".")'
+
+# Generate the offline, self-contained projection comparison report.
+report: install
+    Rscript inst/scripts/projection-comparison.R
+
+# Run the package's testthat suite.
+test:
+    Rscript -e 'testthat::test_local()'
+
+# Build the source package tarball.
+build:
+    R CMD build . --no-build-vignettes
+
+# Build and run R CMD check on the source package.
+check: build
+    R CMD check --no-manual staticmaps_{{version}}.tar.gz
+
+# Remove generated package build/check artifacts.
+clean:
+    rm -rf staticmaps_{{version}}.tar.gz staticmaps.Rcheck

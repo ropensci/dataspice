@@ -1,0 +1,24 @@
+Package: staticmaps
+Title: Static Map Projection Experiment
+Version: 0.0.0.9000
+Authors@R: person("Bryce", "Mecum", email = "petridish@gmail.com", role = c("aut", "cre"))
+Description: Prototypes and comparison tools for generating self-contained static
+    maps from geographic bounding boxes, with projection selection delegated to
+    sf and PROJ.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Imports:
+    base64enc,
+    ggplot2,
+    sf
+Suggests:
+    pak,
+    crsuggest,
+    htmltools,
+    maps,
+    projWiz,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Remotes:
+    sToney239/projWiz
