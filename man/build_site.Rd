@@ -7,7 +7,9 @@
 build_site(
   path = file.path("data", "metadata", "dataspice.json"),
   template_path = system.file("template.html5", package = "dataspice"),
-  out_path = file.path("docs", "index.html")
+  out_path = file.path("docs", "index.html"),
+  static_map = FALSE,
+  static_map_method = "crsuggest"
 )
 }
 \arguments{
@@ -18,13 +20,26 @@ build_site(
 
 \item{out_path}{(character) Optional. Path to write the site's \code{index.html}
 to. Defaults to \code{docs/index.html}.}
+
+\item{static_map}{(logical) Use a self-contained static map image instead of
+the default Leaflet map. Defaults to \code{FALSE}. The image includes latitude
+and longitude graticules and an Equal Earth locator inset.}
+
+\item{static_map_method}{(character) Projection for the static map: one of
+\code{"crsuggest"} (Default), \code{"projwiz"}, or \code{"equalearth"} or a custom
+PROJ string beginning with \code{"+proj="}.}
 }
 \value{
-Nothing. Creates/overwrites \code{docs/index.html}
+Nothing. Creates/overwrites \code{out_path}.
 }
 \description{
 Build a dataspice site
 }
+\section{Lifecycle}{
+
+\code{static_map} is experimental. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+}
+
 \examples{
 \dontrun{
 # Create JSON+LD from a set of metadata templates

@@ -89,6 +89,7 @@ parse_GeoShape_box <- function(box) {
   }
 
   list(
+    mapbox = box,
     mapcenterstring =
       paste0(
         "[",

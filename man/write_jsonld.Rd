@@ -20,12 +20,12 @@ write_jsonld(
 
 \item{context}{JSON-LD context; "http://schema.org"}
 
-\item{pretty}{adds indentation whitespace to JSON output. Can be TRUE/FALSE or a number specifying the number of spaces to indent. See \code{\link[jsonlite]{prettify}}}
+\item{pretty}{adds indentation whitespace to JSON output. Can be TRUE/FALSE or a number specifying the number of spaces to indent (default is 2). Use a negative number for tabs instead of spaces.}
 
-\item{auto_unbox}{automatically \code{\link[jsonlite]{unbox}} all atomic vectors of length 1. It is usually safer to avoid this and instead use the \code{\link[jsonlite]{unbox}} function to unbox individual elements.
-An exception is that objects of class \code{AsIs} (i.e. wrapped in \code{I()}) are not automatically unboxed. This is a way to mark single values as length-1 arrays.}
+\item{auto_unbox}{automatically \code{\link[jsonlite:unbox]{unbox()}} all atomic vectors of length 1. It is usually safer to avoid this and instead use the \code{\link[jsonlite:unbox]{unbox()}} function to unbox individual elements.
+An exception is that objects of class \code{AsIs} (i.e. wrapped in \code{\link[=I]{I()}}) are not automatically unboxed. This is a way to mark single values as length-1 arrays.}
 
-\item{...}{additional conversion arguments, see also \link[jsonlite]{toJSON} or \link[jsonlite]{fromJSON}}
+\item{...}{additional conversion arguments, see also \code{\link[jsonlite:toJSON]{toJSON()}} or \code{\link[jsonlite:fromJSON]{fromJSON()}}}
 }
 \description{
 Write a list out as object to JSON-LD
