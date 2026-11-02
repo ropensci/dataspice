@@ -1,0 +1,4 @@
+^\.Rprofile$
+^renv$
+^renv\.lock$
+^reports$
