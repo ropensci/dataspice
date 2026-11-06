@@ -1,6 +1,7 @@
 # cran-comments
 
-This is a minor release that adds a new argument to an existing function.
+This patch release rolls the previous minor release up with a fix for our failed
+CRAN submission. i.e., this is 1.2.0 and 1.2.1.
 
 ## Test environments
 
