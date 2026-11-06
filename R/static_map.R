@@ -157,18 +157,6 @@ static_map_crs <- function(method, west, east_continuous, south, north,
     return(paste(selected, "+over"))
   }
 
-  if (identical(method, "projwiz")) {
-    projection <- projWiz::proj_region(
-      c(xmin = selection_west, xmax = selection_east,
-        ymin = south, ymax = north), property = "Equal area")
-    selected <- as.character(projection)[1]
-    selected <- sub("\\+lon_0=[^ ]+", paste0("+lon_0=", center), selected)
-    if (!grepl("\\+lon_0=", selected)) {
-      selected <- paste(selected, paste0("+lon_0=", center))
-    }
-    return(paste(selected, "+over"))
-  }
-
   stop("Unknown static-map projection method: ", method, call. = FALSE)
 }
 

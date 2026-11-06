@@ -11,7 +11,7 @@
 #'  experimental and may change.
 #' @param static_map_method (character) Projection for the static map. Defaults
 #'  to the built-in extent-aware method `"default"`. Other choices are
-#'  `"crsuggest"`, `"projwiz"`, `"equalearth"`, or a custom
+#'  `"crsuggest"`, `"equalearth"`, or a custom
 #'  PROJ string beginning with `"+proj="`. This argument is experimental and may
 #'  change.
 #'
@@ -37,13 +37,13 @@ build_site <- function(
   static_map_method <- trimws(static_map_method)
   method_key <- tolower(static_map_method)
   if (method_key %in% c(
-    "default", "crsuggest", "projwiz", "equalearth"
+    "default", "crsuggest", "equalearth"
   )) {
     static_map_method <- method_key
   } else if (!startsWith(method_key, "+proj=")) {
     stop(
       "`static_map_method` must be 'default', 'crsuggest', ",
-      "'projwiz', 'equalearth', or a PROJ string beginning with '+proj='.",
+      "'equalearth', or a PROJ string beginning with '+proj='.",
       call. = FALSE
     )
   }
@@ -52,8 +52,6 @@ build_site <- function(
     required_packages <- c("base64enc", "maps", "sf")
     if (identical(static_map_method, "crsuggest")) {
       required_packages <- c(required_packages, "crsuggest")
-    } else if (identical(static_map_method, "projwiz")) {
-      required_packages <- c(required_packages, "projWiz")
     }
     missing_packages <- required_packages[
       !vapply(required_packages, requireNamespace, logical(1), quietly = TRUE)

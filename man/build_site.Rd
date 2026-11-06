@@ -28,7 +28,7 @@ experimental and may change.}
 
 \item{static_map_method}{(character) Projection for the static map. Defaults
 to the built-in extent-aware method \code{"default"}. Other choices are
-\code{"crsuggest"}, \code{"projwiz"}, \code{"equalearth"}, or a custom
+\code{"crsuggest"}, \code{"equalearth"}, or a custom
 PROJ string beginning with \code{"+proj="}. This argument is experimental and may
 change.}
 }

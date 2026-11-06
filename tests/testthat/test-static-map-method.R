@@ -96,19 +96,4 @@ test_that("optional CRS selectors produce valid projections", {
     crossing$north, crossing$center, crossing$span
   )
   expect_match(crossing_crsuggest, "\\+lon_0=-180")
-
-  skip_if_not_installed("projWiz")
-  grDevices::pdf(NULL)
-  on.exit(grDevices::dev.off(), add = TRUE)
-  projwiz_crs <- static_map_crs(
-    "projwiz", bbox$west, bbox$east_continuous, bbox$south,
-    bbox$north, bbox$center, bbox$span
-  )
-  expect_false(is.na(sf::st_crs(projwiz_crs)))
-
-  crossing_projwiz <- static_map_crs(
-    "projwiz", crossing$west, crossing$east_continuous, crossing$south,
-    crossing$north, crossing$center, crossing$span
-  )
-  expect_match(crossing_projwiz, "\\+lon_0=-180")
 })
