@@ -47,13 +47,10 @@ Suggests:
     knitr,
     listviewer,
     maps,
-    projWiz,
     rmarkdown,
     servr,
     sf,
     testthat
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-Remotes:
-    sToney239/projWiz
 Config/roxygen2/version: 8.1.0
